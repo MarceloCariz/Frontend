@@ -1,14 +1,22 @@
 import React, { createContext, useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import clienteAxios from '../config/clienteAxios';
 
 const AuthContext = createContext();
 
 const AuthProvider = ({children}) => {
     const [auth, setAuth] = useState({})
+    const [carrito, setCarrito] = useState([])
     const [cargando, setCargando] = useState(true)
     const navigate = useNavigate()
+    const {pathname} = useLocation();
+
+    // if(carrito.length === 0){
+    //     setCarrito(JSON.parse(localStorage.getItem('carrito')))
+    // }
+    // setCarrito(localCarrito);
     useEffect(()=>{
+
         const autenticarUsuario = async () =>{
             const token = localStorage.getItem('token')
             if(!token){
@@ -24,9 +32,16 @@ const AuthProvider = ({children}) => {
             }
             try {
                 const {data} = await clienteAxios('/clientes/perfil', config)
-                console.log(data)
                 setAuth(data)
+                if(pathname !== '/inicio'){
+                setCarrito(JSON.parse(localStorage.getItem('carrito')));
+
+                    return
+                }else{
+                setCarrito(JSON.parse(localStorage.getItem('carrito')));
+
                 navigate('/inicio')
+                }
                 // console.log(data)
             } catch (error) {
                 console.log(error)
@@ -37,11 +52,10 @@ const AuthProvider = ({children}) => {
             }
         }
         autenticarUsuario();
-
-    },[navigate])
+    },[navigate, setCarrito, pathname])
 
   return (
-    <AuthContext.Provider value={{setAuth, auth, cargando}}> 
+    <AuthContext.Provider value={{setAuth, auth, cargando, carrito, setCarrito}}> 
     {children}
 </AuthContext.Provider>
   )
