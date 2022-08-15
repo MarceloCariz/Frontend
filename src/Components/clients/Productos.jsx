@@ -16,10 +16,10 @@ const Productos = ({productos}) => {
     }
 
   return (
-    <div className='mt-12 grid md:grid-cols-6 gap-7 '>
+    <div className='mt-12 grid md:grid-cols-6 sm:gap-7 justify-center  gap-2 grid-cols-2 sm:px-0 px-4'>
         {productos.length > 0 && 
             productos.map(({ID, NOMBRE, CANTIDAD, PRECIO})=>(
-                <div className='bg-gray-500 rounded-lg pb-4 shadow-lg text-white ' key={ID}>
+                <div className='bg-gray-500 rounded-lg pb-4 shadow-lg text-white sm:w-auto ' key={ID}>
                     <img className='object-cover rounded-lg  w-full h-32' src={fotoPrueba} alt="" />
 
                     <div className='px-4 text-lg capitalize'>

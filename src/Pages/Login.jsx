@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { login } from "../Helpers/getClientes";
 import useAuth from "../Hooks/useAuth";
 
@@ -72,8 +72,8 @@ const Login = () => {
         </div>
         <div className="">
         <input className=" text-center rounded-lg bg-blue-500 text-white px-8 py-4" type="submit" value="Ingresar" />
-
         </div>
+        <Link to="registrar">¿No tienes cuenta? Registrate Aqui</Link>
       </form>
     </div>
     </div>

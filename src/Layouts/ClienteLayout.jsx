@@ -11,16 +11,16 @@ const ClienteLayout = ({children}) => {
   return (
     <div>
         <nav className=' bg-stone-800'>
-          <div className='h-32 flex justify-between items-center  container mx-auto text-white'>
-            <Link to="/inicio"><h1 className='text-4xl text-white font-semibold '>MaipoGrande</h1></Link>
+          <div className='sm:h-32 h-12 flex sm:justify-between items-center  container mx-auto text-white'>
+            <Link to="/inicio"><h1 className='sm:text-4xl text-2xl text-white font-semibold '>MaipoGrande</h1></Link>
             
-            <p className='text-3xl capitalize'>{location}</p>
+            <p className='sm:text-3xl capitalize sm:block hidden'>{location}</p>
             <div className='flex items-center'>
                <p><span className='text-3xl '>&#9786;</span></p>
-                <p className='text-2xl capitalize'> {auth.NOMBRE}</p>
-                <div className='ml-4 flex '>
-                  <Link to="carrito "className='ml-4 flex '>
-                  <img className='w-10 h-10  ' src={carritoIcon} alt="" />
+                <p className='sm:text-2xl capitalize'> {auth.NOMBRE}</p>
+                <div className='sm:ml-4 flex '>
+                  <Link to="carrito "className='sm:ml-4 flex '>
+                  <img className='sm:w-10 sm:h-10 w-8 h-8 ' src={carritoIcon} alt="" />
                   <p className='pl-2 '>{carrito.length === 0 ? '0' : carrito.length}</p>
                   </Link>
                 </div>
