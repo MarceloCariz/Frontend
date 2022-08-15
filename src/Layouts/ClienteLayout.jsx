@@ -12,7 +12,8 @@ const ClienteLayout = ({children}) => {
     <div>
         <nav className=' bg-stone-800'>
           <div className='h-32 flex justify-between items-center  container mx-auto text-white'>
-            <h1 className='text-4xl text-white font-semibold'>MaipoGrande</h1>
+            <Link to="/inicio"><h1 className='text-4xl text-white font-semibold '>MaipoGrande</h1></Link>
+            
             <p className='text-3xl capitalize'>{location}</p>
             <div className='flex items-center'>
                <p><span className='text-3xl '>&#9786;</span></p>
@@ -20,7 +21,7 @@ const ClienteLayout = ({children}) => {
                 <div className='ml-4 flex '>
                   <Link to="carrito "className='ml-4 flex '>
                   <img className='w-10 h-10  ' src={carritoIcon} alt="" />
-                  <p className='pl-2 '>{carrito.length > 0 ? carrito.length : '0'}</p>
+                  <p className='pl-2 '>{carrito.length === 0 ? '0' : carrito.length}</p>
                   </Link>
                 </div>
             </div>
