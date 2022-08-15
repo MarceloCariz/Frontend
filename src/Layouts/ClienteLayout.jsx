@@ -1,13 +1,18 @@
 import React from 'react'
-import { useLocation, Link } from 'react-router-dom'
+import { useLocation, Link, useNavigate } from 'react-router-dom'
 import useAuth from '../Hooks/useAuth';
 import carritoIcon  from './icons/carrito.png'
 const ClienteLayout = ({children}) => {
 
   const {pathname}= useLocation();
+  const navigate = useNavigate();
   const location = (pathname.replace('/',''));
 
   const {auth, carrito} = useAuth();
+  const handleLogout = () =>{
+    localStorage.clear();
+    navigate('/')
+  }
   return (
     <div>
         <nav className=' bg-stone-800'>
@@ -24,11 +29,13 @@ const ClienteLayout = ({children}) => {
                   <p className='pl-2 '>{carrito.length === 0 ? '0' : carrito.length}</p>
                   </Link>
                 </div>
+                {/* <input type="text" onClick={handleLogout} value="Cerrar Sesion" /> */}
+                <button className='sm:ml-4 bg-red-500 text-white px-4 py-2 absolute sm:relative ml-20 mt-24 sm:mt-0'  onClick={handleLogout} >Cerrar Sesion</button>
             </div>
           </div>
         </nav>
         {/* CONTENIDO */}
-        <div className='container mx-auto'>
+        <div className='container mx-auto sm:mt-0 mt-12'>
 
         {children}
 
