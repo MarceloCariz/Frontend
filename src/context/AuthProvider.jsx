@@ -34,15 +34,19 @@ const AuthProvider = ({children}) => {
                 const local = JSON.parse(localStorage.getItem('carrito'))
                 const {data} = await clienteAxios('/clientes/perfil', config)
                 setAuth(data)
+                if(pathname === '/'){
+
+                    setCarrito(local ? local : '' );
+    
+                    navigate('/inicio')
+                }
                 if(pathname !== '/inicio'){
-                setCarrito(JSON.parse(localStorage.getItem('carrito')));
+                    setCarrito(JSON.parse(localStorage.getItem('carrito')));
 
                     return
-                }else{
-                setCarrito(local ? local : '' );
-
-                navigate('/inicio')
                 }
+          
+
                 // console.log(data)
             } catch (error) {
                 console.log(error)
