@@ -15,6 +15,7 @@ const AuthProvider = ({children}) => {
     //     setCarrito(JSON.parse(localStorage.getItem('carrito')))
     // }
     // setCarrito(localCarrito);
+
     useEffect(()=>{
 
         const autenticarUsuario = async () =>{
@@ -40,7 +41,7 @@ const AuthProvider = ({children}) => {
     
                     navigate('/inicio')
                 }
-                if(pathname !== '/inicio'){
+                if(pathname !== '/'){
                     setCarrito(JSON.parse(localStorage.getItem('carrito')));
 
                     return

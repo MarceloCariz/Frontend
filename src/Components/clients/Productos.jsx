@@ -10,7 +10,21 @@ const Productos = ({productos}) => {
     
     }, [carrito])
     const handleClick = (producto) =>{
-        setCarrito([...carrito, producto])
+        const existe = carrito.some(p => p.ID === producto.ID);
+        if(existe){
+            const nuevos = carrito.map(p =>{
+                if(p.ID ===producto.ID){
+                    p.unidad++;
+                    return p;
+                }else{
+                    return p
+                }
+            })
+            setCarrito([...nuevos])
+        }else{
+            setCarrito([...carrito, producto])
+
+        }
 
        
     }
@@ -28,7 +42,7 @@ const Productos = ({productos}) => {
                     <p>precio: {PRECIO}</p>
                     </div>
                     <div className='flex justify-center mt-4 '>
-                    <button onClick={(e) => handleClick({ID,NOMBRE, CANTIDAD, PRECIO},e)} className='bg-blue-600 px-2 py-2 rounded-md'>Agregar al carrito</button>
+                    <button onClick={(e) => handleClick({ID,NOMBRE, CANTIDAD, PRECIO, unidad: 1},e)} className='bg-blue-600 px-2 py-2 rounded-md'>Agregar al carrito</button>
 
                     </div>
 

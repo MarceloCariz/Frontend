@@ -7,7 +7,7 @@ const Carrito = () => {
   // const local = localStorage.getItem('carrito')
     useEffect(() => {
         localStorage.setItem('carrito',JSON.stringify(carrito))
-        const montoTotal = carrito.reduce((total, i)=>i.PRECIO + total, 0 );
+        const montoTotal = carrito.reduce((total, i)=>(i.PRECIO * i.unidad) + total, 0 );
         
         setTotal(montoTotal)
         if(carrito.length === 0){
@@ -16,12 +16,29 @@ const Carrito = () => {
    
 
     }, [carrito])
+
+
     const handleClick = (e) =>{
-        console.log(e.ID)
-       const filtrado = carrito.filter(({ID})=>{
-            return ID !== e.ID;
+      
+        // const existe = carrito.some(p => p.ID === e.ID);
+        // if(existe){
+        //     const nuevos = carrito.map(p =>{
+        //         if(p.ID ===e.ID && e.unidad === 1){
+        //            return carrito.filter(({ID})=>(ID !== e.ID))
+        //         }
+        //         else if(p.ID ===e.ID){
+        //             p.unidad--;
+        //             return p;
+        //         }else{
+        //             return p
+        //         }
+        //     })
+        //     setCarrito([...nuevos])
+        // }
+        const filtrado = carrito.filter(({ID})=>{
+            return  ID !== e.ID  ;
         })
-        console.log(filtrado)
+        // console.log(filtrado)
         setCarrito(filtrado)
         
     }
@@ -34,7 +51,8 @@ const Carrito = () => {
           <th>Nombre</th>
           <th>Stock</th>
           <th >Precio</th>
-          <th  >Eliminar</th>
+          <th>Unidad</th>
+          <th>Eliminar</th>
 
 
         </tr>
@@ -42,11 +60,15 @@ const Carrito = () => {
       <tbody >
 
       {carrito.length > 0
-        ? carrito.map(({ ID, NOMBRE, CANTIDAD, PRECIO }, indice) => (
+        ? carrito.map(({ ID, NOMBRE, CANTIDAD, PRECIO , unidad}, indice) => (
             <tr className="flex  justify-between mt-2" key={indice}>
                 <td>{NOMBRE}</td>
                 <td>{CANTIDAD}</td>
                 <td>{PRECIO}</td>
+                <td>
+                  {unidad}
+                  
+                  </td>
                 <td className="cursor-pointer bg-red-600 text-white rounde-sm px-2" onClick={(e)=>handleClick({ID},e)}>X</td>
             </tr>
           ))
