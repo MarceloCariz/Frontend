@@ -24,7 +24,7 @@ const Login = () => {
 
     try {
       const respuesta = await login(formValues);
-
+      console.log(respuesta)
       localStorage.setItem("token", respuesta.token);
       setAuth(respuesta);
       
