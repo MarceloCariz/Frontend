@@ -9,8 +9,12 @@ const ClienteLayout = ({children}) => {
   const location = (pathname.replace('/',''));
   const {auth, carrito} = useAuth();
   useEffect(() => {
-    const cantidad = carrito.reduce((sum, i)=>(sum + i.unidad ), 0);
-    setCantidadCarrito(cantidad)
+    if(auth.ID_ROL === 2){
+      const cantidad = carrito.reduce((sum, i)=>(sum + i.unidad ), 0);
+      setCantidadCarrito(cantidad)
+    }
+ 
+
   }, [carrito])
   const handleLogout = () =>{
     localStorage.clear();

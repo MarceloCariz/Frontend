@@ -41,6 +41,7 @@ const Productos = ({productos}) => {
         // setCarrito([...carrito, producto])
        
     }
+
     const handleHover = (e) =>{
 
         setActiveButton({activo: true, id: e.ID})

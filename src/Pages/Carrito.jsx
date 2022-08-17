@@ -20,7 +20,6 @@ const Carrito = () => {
 
     }, [carrito])
 
-
     const handleClick = (e) =>{
       
         // const existe = carrito.some(p => p.ID === e.ID);

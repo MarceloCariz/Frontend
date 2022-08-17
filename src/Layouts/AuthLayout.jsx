@@ -4,7 +4,7 @@ const AuthLayout = () => {
   return (
     <>
   <main className=" h-screen  fondo ">
-      <nav className="h-14 bg-black/50 px-12 container flex justify-end  items-center">
+      <nav className="h-14 bg-black/50 px-12  flex justify-end  items-center">
         <ul className="text-rigth">
           <Link to="productores" className="bg-green-600 px-4 py-2 text-white font-semibold">Acceso Productores</Link>
         </ul>

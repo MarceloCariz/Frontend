@@ -32,20 +32,27 @@ const AuthProvider = ({children}) => {
                 }
             }
             try {
-                const local = JSON.parse(localStorage.getItem('carrito'))
-                const {data} = await clienteAxios('/clientes/perfil', config)
+                const {data} = await clienteAxios('/usuario/perfil', config)
                 setAuth(data)
-                if(pathname === '/'){
-
-                    setCarrito(local ? local : '' );
-    
-                    navigate('/inicio')
-                }
-                if(pathname !== '/'){
+                console.log(data.ID_ROL)
+                if(pathname !== '/' && auth.ID_ROL !== 1){
                     setCarrito(JSON.parse(localStorage.getItem('carrito')));
 
                     return
                 }
+                if(pathname === '/' || pathname === '/productores'){
+
+                    if(auth.ID_ROL === 2){
+                       const local = JSON.parse(localStorage.getItem('carrito'))
+                        setCarrito(local ? local : '' );
+
+                        navigate('/inicio')
+                        return
+                    }
+                    navigate('/inicio-productor')
+                    return
+                }
+       
           
 
                 // console.log(data)
@@ -58,7 +65,7 @@ const AuthProvider = ({children}) => {
             }
         }
         autenticarUsuario();
-    },[navigate, setCarrito, pathname])
+    },[navigate, setCarrito, pathname, auth.ID_ROL])
 
   return (
     <AuthContext.Provider value={{setAuth, auth, cargando, carrito, setCarrito}}> 

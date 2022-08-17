@@ -2,8 +2,8 @@ import clienteAxios from "../config/clienteAxios"
 
 
 export const login = async(datos) =>{
-    
-        const {data} =  await clienteAxios.post('/clientes/login',datos)
+
+        const {data} =  await clienteAxios.post('/usuario/login',{...datos, rol: "clientes"})
         return data
 }
 

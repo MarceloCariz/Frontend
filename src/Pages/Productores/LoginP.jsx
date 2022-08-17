@@ -1,8 +1,44 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { login } from '../../Helpers/getProductores';
+import useAuth from '../../Hooks/useAuth';
 
 const LoginP = () => {
+  const [formValues, setFormValues] = useState({ correo: "", password: "" });
   const [alerta, setAlerta] = useState('')
+  const { setAuth } = useAuth();
+  const navigate = useNavigate();
+  const handleOnchange = ({ target }) => {
+    setFormValues({ ...formValues, [target.name]: target.value });
+    if (formValues.correo.length > 8){
+        setAlerta('')
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if ([formValues.correo, formValues.password].includes("")) {
+      setAlerta("Todos los campos son obligatorios");
+      return;
+    }
+
+    try {
+      const respuesta = await login(formValues);
+      console.log(respuesta)
+      localStorage.setItem("token", respuesta.token);
+
+      setAuth(respuesta);
+      
+      navigate('/inicio-productor')
+        
+      
+
+
+    } catch (error) {
+      setAlerta(error.response.data.msg);
+    }
+
+  };
 
   return (
     <div className="text-xl">
@@ -10,7 +46,7 @@ const LoginP = () => {
  
     <div className="border border-1 shadow-lg bg-white border-gray-300 rounded-lg flex justify-center items-center mt-4">
 
-      <form  className="flex justify-center items-center   gap-8 flex-col px-8 py-6 ">
+      <form  onSubmit={handleSubmit} className="flex justify-center items-center   gap-8 flex-col px-8 py-6 ">
       {
       alerta && (
         <p className="text-sm font-bold relative bg-red-500 text-white px-2">{alerta}</p>
@@ -22,8 +58,8 @@ const LoginP = () => {
             name="correo"
             type="text"
             placeholder="correo"
-            // value={formValues.correo}
-            // onChange={handleOnchange}/
+            value={formValues.correo}
+            onChange={handleOnchange}
           />
         </div>
         <div>
@@ -32,8 +68,8 @@ const LoginP = () => {
             name="password"
             type="password"
             placeholder="password"
-            // value={formValues.password}
-            // onChange={handleOnchange}
+            value={formValues.password}
+            onChange={handleOnchange}
           />
         </div>
         <div className="">
