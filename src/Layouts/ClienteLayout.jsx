@@ -1,14 +1,17 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useLocation, Link, useNavigate } from 'react-router-dom'
 import useAuth from '../Hooks/useAuth';
 import carritoIcon  from './icons/carrito.png'
 const ClienteLayout = ({children}) => {
-
+  const [cantidadCarrito, setCantidadCarrito] = useState(0)
   const {pathname}= useLocation();
   const navigate = useNavigate();
   const location = (pathname.replace('/',''));
-
   const {auth, carrito} = useAuth();
+  useEffect(() => {
+    const cantidad = carrito.reduce((sum, i)=>(sum + i.unidad ), 0);
+    setCantidadCarrito(cantidad)
+  }, [carrito])
   const handleLogout = () =>{
     localStorage.clear();
     navigate('/')
@@ -26,7 +29,7 @@ const ClienteLayout = ({children}) => {
                 <div className='sm:ml-4 flex '>
                   <Link to="carrito "className='sm:ml-4 flex '>
                   <img className='sm:w-10 sm:h-10 w-8 h-8 ' src={carritoIcon} alt="" />
-                  <p className='pl-2 '>{carrito.length === 0 ? '0' : carrito.length}</p>
+                  <p className='pl-2 '>{cantidadCarrito}</p>
                   </Link>
                 </div>
                 {/* <input type="text" onClick={handleLogout} value="Cerrar Sesion" /> */}

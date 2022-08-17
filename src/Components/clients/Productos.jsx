@@ -11,8 +11,10 @@ const Productos = ({productos}) => {
     }, [carrito])
     const handleClick = (producto) =>{
         const existe = carrito.some(p => p.ID === producto.ID);
+
         if(existe){
             const nuevos = carrito.map(p =>{
+                // console.log(p.unidad)
                 if(p.ID ===producto.ID){
                     p.unidad++;
                     return p;
@@ -23,9 +25,9 @@ const Productos = ({productos}) => {
             setCarrito([...nuevos])
         }else{
             setCarrito([...carrito, producto])
-
         }
 
+        // setCarrito([...carrito, producto])
        
     }
 

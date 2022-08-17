@@ -10,6 +10,9 @@ const Carrito = () => {
         const montoTotal = carrito.reduce((total, i)=>(i.PRECIO * i.unidad) + total, 0 );
         
         setTotal(montoTotal)
+      
+
+
         if(carrito.length === 0){
             return
         }
