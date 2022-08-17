@@ -17,7 +17,7 @@ const ClienteLayout = ({children}) => {
     navigate('/')
   }
   return (
-    <div>
+    <div className='#d4d8dd'>
         <nav className=' bg-stone-800'>
           <div className='sm:h-32 h-12 flex sm:justify-between items-center  container mx-auto text-white'>
             <Link to="/inicio"><h1 className='sm:text-4xl text-2xl text-white font-semibold '>MaipoGrande</h1></Link>
@@ -38,8 +38,8 @@ const ClienteLayout = ({children}) => {
           </div>
         </nav>
         {/* CONTENIDO */}
-        <div className='container mx-auto sm:mt-0 mt-12'>
-
+        <div className='container mx-auto sm:mt-0 mt-12 '>
+        
         {children}
 
 
