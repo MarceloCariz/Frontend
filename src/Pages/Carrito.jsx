@@ -46,7 +46,10 @@ const Carrito = () => {
     }
   return (
     <div className=" mt-12 flex justify-center flex-col items-center">
+
       <p className="text-center text-2xl font-semibold">Resumen del Pedido</p>
+      {carrito.length > 0 ? 
+
       <table className="mt-4 w-1/2 flex flex-col  capitalize" >
       <thead className="" >
         <tr className=" flex  justify-between ">
@@ -62,7 +65,7 @@ const Carrito = () => {
       <tbody >
 
       {carrito.length > 0
-        ? carrito.map(({ ID, NOMBRE, CANTIDAD, PRECIO , unidad}, indice) => (
+        && carrito.map(({ ID, NOMBRE, CANTIDAD, PRECIO , unidad}, indice) => (
             <tr className="flex  justify-between mt-2" key={indice}>
                 <td>{NOMBRE}</td>
                 <td>{CANTIDAD}</td>
@@ -74,18 +77,20 @@ const Carrito = () => {
                 <td className="cursor-pointer bg-red-600 text-white rounde-sm px-2" onClick={(e)=>handleClick({ID},e)}>X</td>
             </tr>
           ))
-        : "Agrega productos a tu carrito"}
+        }
         </tbody>
    
 
 
     </table>
+   : 'Agrega Productos'}
     <div className="w-1/2 flex flex-row bg-gray-300 mt-4 px-4 rounded-sm mb-4">
             <p className="w-full">Total</p>
             <p className="text-right font-semibold"> ${total}</p>
     </div>
+    
             <button className="bg-green-500 px-4 py-2 rounded-sm text-white font-semibold">Hacer Pedido</button>
-
+         
 
     </div>
   );

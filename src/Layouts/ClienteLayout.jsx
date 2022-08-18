@@ -30,7 +30,7 @@ const ClienteLayout = ({children}) => {
             <div className='flex items-center'>
                <p><span className='text-3xl '>&#9786;</span></p>
                 <p className='sm:text-2xl capitalize'> {auth.NOMBRE}</p>
-                <div className='sm:ml-4 flex '>
+                <div className='sm:ml-4 flex sm:block hidden '>
                   <Link to="carrito "className='sm:ml-4 flex '>
                   <img className='sm:w-10 sm:h-10 w-8 h-8 ' src={carritoIcon} alt="" />
                   <p className='pl-2 '>{cantidadCarrito}</p>
@@ -51,8 +51,22 @@ const ClienteLayout = ({children}) => {
 
         </div>
         {/* CONTENIDO FIN */}
-        <footer className='min-h-screen'>
-
+        <footer className=' fixed bottom-0 text-center  flex justify-center w-full  sm:hidden '>
+          <div className='flex  flex-row  justify-center h-16 w-2/3 border-2 '>
+          <div className='bg-white border-b-0 w-full h-full pt-4 '>
+                  <p className=''>Usuario</p>
+            </div>
+            <div className='bg-white border-b-0 w-full h-full pt-4'>
+                  <p>Pedidos</p>
+            </div>
+            <div className='bg-white border-b-0 w-full h-full pt-4'>
+            <Link to="carrito "className=' flex items-center justify-center'>
+                  <img className='sm:w-10 sm:h-10 w-8 h-8 ' src={carritoIcon} alt="" />
+                  <p className='pl-2 '>{cantidadCarrito}</p>
+                  </Link>
+            </div>
+          </div>
+       
         </footer>
     </div>
   )
