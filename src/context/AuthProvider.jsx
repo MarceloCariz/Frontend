@@ -34,17 +34,20 @@ const AuthProvider = ({children}) => {
             try {
                 const {data} = await clienteAxios('/usuario/perfil', config)
                 setAuth(data)
-                console.log(data.ID_ROL)
-                if(pathname !== '/' && auth.ID_ROL !== 1){
-                    setCarrito(JSON.parse(localStorage.getItem('carrito')));
+                // console.log(data.ID_ROL)
+                const local = JSON.parse(localStorage.getItem('carrito'))
+                // console.log(local.length > 0)
+                if(pathname !== '/' && auth.ID_ROL !== 1 && local.length > 0){
+                    setCarrito(local);
 
                     return
                 }
                 if(pathname === '/' || pathname === '/productores'){
 
                     if(auth.ID_ROL === 2){
-                       const local = JSON.parse(localStorage.getItem('carrito'))
-                        setCarrito(local ? local : '' );
+                       
+
+                        setCarrito(local);
 
                         navigate('/inicio')
                         return

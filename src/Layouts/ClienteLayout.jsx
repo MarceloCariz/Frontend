@@ -7,17 +7,19 @@ const ClienteLayout = ({children}) => {
   const {pathname}= useLocation();
   const navigate = useNavigate();
   const location = (pathname.replace('/',''));
-  const {auth, carrito} = useAuth();
+  const {auth, carrito, setCarrito, } = useAuth();
   useEffect(() => {
-    if(auth.ID_ROL === 2){
+    if(auth.ID_ROL === 2 ){
       const cantidad = carrito.reduce((sum, i)=>(sum + i.unidad ), 0);
       setCantidadCarrito(cantidad)
     }
  
 
-  }, [carrito])
+  }, [carrito, auth])
   const handleLogout = () =>{
     localStorage.clear();
+    setCarrito([])
+
     navigate('/')
   }
   return (
@@ -30,7 +32,7 @@ const ClienteLayout = ({children}) => {
             <div className='flex items-center'>
                <p><span className='text-3xl '>&#9786;</span></p>
                 <p className='sm:text-2xl capitalize'> {auth.NOMBRE}</p>
-                <div className='sm:ml-4 flex sm:block hidden '>
+                <div className='sm:ml-4  sm:flex hidden '>
                   <Link to="carrito "className='sm:ml-4 flex '>
                   <img className='sm:w-10 sm:h-10 w-8 h-8 ' src={carritoIcon} alt="" />
                   <p className='pl-2 '>{cantidadCarrito}</p>

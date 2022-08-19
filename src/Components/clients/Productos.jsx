@@ -7,8 +7,13 @@ const Productos = ({productos}) => {
     const {carrito, setCarrito} = useAuth();
     const [agregando, setAgregando] = useState({cargando: false, id: ''})    
     const [activeButton, setActiveButton] = useState({activo: false,  id: ''})
+    const {auth} = useAuth();
     useEffect(() => {
+
         localStorage.setItem('carrito',JSON.stringify(carrito))
+
+
+
     
     }, [carrito])
     const handleClick = (producto) =>{
@@ -31,8 +36,10 @@ const Productos = ({productos}) => {
                 }
             })
             setCarrito([...nuevos])
+
         }else{
             setCarrito([...carrito, producto])
+
         }
         setTimeout(() => {
             setAgregando({cargando:false,

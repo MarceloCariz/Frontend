@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import {  useNavigate } from 'react-router-dom'
 import { login } from '../../Helpers/getProductores';
 import useAuth from '../../Hooks/useAuth';
 
@@ -75,7 +75,6 @@ const LoginP = () => {
         <div className="">
         <input className=" text-center rounded-lg bg-green-600 text-white px-8 py-4" type="submit" value="Ingresar" />
         </div>
-        <Link to="/registrar-productores">¿No tienes cuenta? Registrate Aqui</Link>
       </form>
     </div>
     </div>
