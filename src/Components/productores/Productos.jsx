@@ -1,12 +1,10 @@
 import React from 'react'
-import { obtenerProductos } from '../../Helpers/getProducts'
-import useAuth from '../../Hooks/useAuth'
 
-const Productos = ({productos}) => {
-    console.log(productos)
- const {CANTIDAD, NOMBRE, PRECIO, ID} = productos;
+
+const Productos = ({producto}) => {
+ const {CANTIDAD, NOMBRE, PRECIO} = producto;
   return (
-    <div key={ID}>
+    <div>
         <p>{NOMBRE}</p>
         <p>{CANTIDAD}</p>
         <p>{PRECIO}</p>

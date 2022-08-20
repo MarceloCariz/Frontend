@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import useAuth from '../Hooks/useAuth'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faShop, faUser, faLongArrowRight, faRightFromBracket, faTruck, faBars } from '@fortawesome/free-solid-svg-icons'
+import { faShop, faUser,  faRightFromBracket, faTruck, faBars } from '@fortawesome/free-solid-svg-icons'
 const ProductorLayout = ({children}) => {
     const {auth} = useAuth();
     const navigate = useNavigate();
@@ -45,6 +45,9 @@ const ProductorLayout = ({children}) => {
                     <span className='font-bold '>Cerrar Sesion</span>
                     </button>
             </div>
+   
+
+        
             {/* Responsive */}
             <div className='sm:hidden flex justify-between items-center gap-2 w-1/5  ml-28'>
             <button className='  bg-red-500  text-white px-2 ml-4    '  onClick={handleLogout} >
@@ -58,6 +61,7 @@ const ProductorLayout = ({children}) => {
             {/* fin responsive */}
           </div>
         </nav>
+ 
         {/* Menu responsive */}
         {
             activeMenu &&

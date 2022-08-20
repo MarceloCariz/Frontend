@@ -3,11 +3,13 @@ import React, { useEffect } from 'react'
 import useAuth from '../../Hooks/useAuth'
 import fotoPrueba from './img/FrenteAVaras.png'
 import {useState} from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCartPlus } from '@fortawesome/free-solid-svg-icons'
 const Productos = ({productos}) => {
     const {carrito, setCarrito} = useAuth();
     const [agregando, setAgregando] = useState({cargando: false, id: ''})    
     const [activeButton, setActiveButton] = useState({activo: false,  id: ''})
-    const {auth} = useAuth();
+    
     useEffect(() => {
 
         localStorage.setItem('carrito',JSON.stringify(carrito))
@@ -75,8 +77,12 @@ const Productos = ({productos}) => {
                     {
                         activeButton.activo &&  activeButton.id === ID  &&(
 
-                            <button onClick={(e) => handleClick({ID,NOMBRE, CANTIDAD, PRECIO, unidad: 1},e)} className=' text-white bg-green-500 px-2 py-2 rounded-md'>
+                            <button onClick={(e) => handleClick({ID,NOMBRE, CANTIDAD, PRECIO, unidad: 1},e)} className='font-bold text-white bg-green-500 px-2 py-2 rounded-md'>
+                            <FontAwesomeIcon icon={faCartPlus} className="pr-1"/>
+                            
                             {agregando.cargando && agregando.id === ID    ? "Agregando...": "Agregar al carrito"}
+                        
+                        
                         </button>
                         )
                     }
