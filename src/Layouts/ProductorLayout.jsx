@@ -88,7 +88,7 @@ const ProductorLayout = ({children}) => {
             {/* fin responsive */}
 
         {/* CONTENIDO */}
-        <div className='container mx-auto sm:mt-0 mt-4  '>
+        <div className='min-h-screen mx-auto sm:mt-0 mt-4 bg-gray-100 '>
             {children}
         </div>
         {/* CONTENIDO FIN */}

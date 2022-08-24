@@ -6,7 +6,7 @@ const RutaProtegidaProductor = () => {
     const {auth, cargando} = useAuth();
 
     if(cargando) return 'Cargando...' /// bloquea el codigo si esta true, false sigue con el return del componente
-    console.log(auth)
+    // console.log(auth)
   return (
     <ProductorLayout>
       {auth.ID  && auth.ID_ROL === 1 ?  '' : <Navigate to="/" />}

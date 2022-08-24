@@ -10,3 +10,4 @@ export const obtenerProductos = async()=>{
         console.log(error)
     }
 }
+
