@@ -31,9 +31,9 @@ export const actualizarProducto = async (producto, configt) =>{
     }
 }
 
-export const eliminarProducto = async(id) =>{
+export const eliminarProducto = async(id, configt) =>{
     try {
-        const {data} = await clienteAxios.delete(`/productores/productos/eliminar/${id}`, config)
+        const {data} = await clienteAxios.delete(`/productores/productos/eliminar/${id}`, configt)
         return data
     } catch (error) {
         console.log(error)
