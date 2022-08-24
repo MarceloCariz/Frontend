@@ -10,6 +10,7 @@ const AuthProvider = ({children}) => {
     const [cargando, setCargando] = useState(true)
     const navigate = useNavigate()
     const {pathname} = useLocation();
+    const [productos, setProductos] = useState({})
 
     // if(carrito.length === 0){
     //     setCarrito(JSON.parse(localStorage.getItem('carrito')))
@@ -71,7 +72,7 @@ const AuthProvider = ({children}) => {
     },[navigate, setCarrito, pathname, auth.ID_ROL])
 
   return (
-    <AuthContext.Provider value={{setAuth, auth, cargando, carrito, setCarrito}}> 
+    <AuthContext.Provider value={{setAuth, auth, cargando, carrito, setCarrito, productos, setProductos}}> 
     {children}
 </AuthContext.Provider>
   )

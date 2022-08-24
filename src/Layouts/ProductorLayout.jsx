@@ -4,15 +4,18 @@ import useAuth from '../Hooks/useAuth'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShop, faUser,  faRightFromBracket, faTruck, faBars } from '@fortawesome/free-solid-svg-icons'
 const ProductorLayout = ({children}) => {
-    const {auth} = useAuth();
+    const {auth, setAuth, setProductos, productos} = useAuth();
     const navigate = useNavigate();
     const [activeMenu, setActiveMenu] = useState(false)
 
     const handleLogout = () =>{
         localStorage.clear();
-        navigate('/')
+        setAuth({});
+        setProductos({});
+        navigate('/productores')
       }
 
+      
 
       const handleMenu = () =>{
         setActiveMenu(!activeMenu)

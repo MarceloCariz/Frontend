@@ -2,12 +2,14 @@ import React, { useEffect, useState } from 'react'
 import ModalProducto from '../../Components/productores/ModalProducto';
 import Productos from '../../Components/productores/Productos'
 import { obtenerProductos } from '../../Helpers/getProductores';
+import useAuth from '../../Hooks/useAuth';
 
 
 const InicioP = () => {
-  const [productos, setProductos] = useState({})
+
   const [activeModal, setActiveModal] = useState(false)
-  const [reload, setReload] = useState(false)
+  const [reload, setReload] = useState(false);
+  const {setAuth,productos, setProductos} = useAuth();
   useEffect(() => {
       const cargarProductos= async()=>{
          const resultado =  await obtenerProductos()
@@ -15,7 +17,7 @@ const InicioP = () => {
       }
       console.log('1')
       cargarProductos();
-  },[ activeModal, reload])
+  },[ activeModal, reload, setAuth, setProductos])
 
   const handleModal = () =>{
     setActiveModal(!activeModal)
