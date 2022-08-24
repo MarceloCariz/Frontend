@@ -1,3 +1,5 @@
+import {  faCirclePlus } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from 'react'
 import ModalProducto from '../../Components/productores/ModalProducto';
 import Productos from '../../Components/productores/Productos'
@@ -26,15 +28,17 @@ const InicioP = () => {
 
       // }
   },[ activeModal, reload, setAuth])
-  
+  console.log('1')
   const handleModal = () =>{
     setActiveModal(!activeModal)
   }
   return (
     <div className='container mx-auto '>
-      <div className='pt-4 flex  justify-between'>
-        <p className='text-center font-bold text-3xl '>Mis Productos</p>
-        <button onClick={handleModal} className='bg-blue-500 text-white text-xl py-2 px-4 rounded-lg font-semibold'>+ Agregar Producto</button>
+      <div className='pt-4 flex sm:ml-0 ml-20  sm:flex-row sm:justify-between  gap-2 sm:gap-0 justify-center'>
+        <p className='text-center font-bold sm:text-3xl text-2xl '>Mis Productos</p>
+        <button onClick={handleModal} className='bg-blue-500 sm:w-auto w-32 sm:h-auto h-12 flex items-center gap-1 text-white sm:text-xl py-2 px-4 rounded-lg font-semibold'>
+          <FontAwesomeIcon className='sm:mt-1 sm:text-2xl text-2xl' icon={faCirclePlus}/>
+           Agregar Producto</button>
       </div>
     {activeModal &&
     

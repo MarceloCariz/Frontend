@@ -34,13 +34,13 @@ const handleSubmit = async(e) =>{
   return (
     <>
    
-    <div className="absolute w-1/4 h-auto text-center px-4 py-4 bg-white border-1 border border-black rounded-xl right-0 left-0 mr-auto ml-auto">
-        <p className="font-semibold text-xl mb-4">Agrega tu Producto</p>
+    <div className="absolute sm:w-1/4 w-5/6 h-auto top-32 sm:top-40 text-center px-4 py-4 bg-white border-1 border border-gray-500 rounded-xl right-0 left-0 mr-auto ml-auto">
+        <p className="font-bold text-xl mb-4 mt-4 font-sans">Agrega tu Producto</p>
         {
             alerta && (<p className="px-4 py-1 bg-green-500 text-white font-semibold text-lg rounded-lg">{alerta}</p>)
         }
-        <button onClick={handleModal} className="bg-red-500 absolute top-1 left-1 rounded-md  px-2 py-1 text-white ">
-            <FontAwesomeIcon className="mr-1" icon={faClose}/>
+        <button onClick={handleModal} className="bg-red-500 sm:w-auto w-16 text-sm absolute top-1 left-1 rounded-md  px-2 py-1 text-white ">
+            <FontAwesomeIcon className="sm:mr-1 " icon={faClose}/>
             Cerrar
         </button>
 

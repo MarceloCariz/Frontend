@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import useAuth from '../Hooks/useAuth'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faShop, faUser,  faRightFromBracket, faTruck, faBars } from '@fortawesome/free-solid-svg-icons'
+import { faShop, faUser,  faRightFromBracket, faTruck, faBars, faSeedling } from '@fortawesome/free-solid-svg-icons'
 import { obtenerProductos } from '../Helpers/getProductores';
 const ProductorLayout = ({children}) => {
     const {auth, setAuth, setProductos} = useAuth();
@@ -38,7 +38,9 @@ const ProductorLayout = ({children}) => {
     <div className='#d4d8dd'>
         <nav className=' bg-stone-800'>
           <div className='sm:h-32 h-24 flex sm:justify-between items-center  container mx-auto text-white'>
-            <Link to="/inicio"><h1 className='sm:text-4xl text-2xl text-white font-semibold '>MaipoGrande</h1></Link>
+            <Link to="/inicio"><h1 className='sm:text-4xl text-2xl text-white font-semibold flex items-center gap-1 '>
+                <FontAwesomeIcon icon={faSeedling}/>
+                MaipoGrande</h1></Link>
             {/* Desktop */}
             <div className='sm:flex hidden items-center justify-end  w-1/2 gap-8 '>
                 <div className='flex cursor-pointer'>
@@ -109,8 +111,11 @@ const ProductorLayout = ({children}) => {
             {children}
         </div>
         {/* CONTENIDO FIN */}
-        <footer className=' fixed bottom-0 text-center  items-center flex justify-center w-full  sm:hidden  h-32 bg-stone-800'>
-            <Link to="/inicio"><h1 className='sm:text-4xl text-2xl text-white font-semibold '>MaipoGrande</h1></Link>
+        <footer className=' bottom-0 text-center  items-center flex justify-center w-full    h-32 bg-stone-800'>
+            <Link to="/inicio"><h1 className='sm:text-4xl text-2xl text-white font-semibold flex items-center gap-1 '>
+            <FontAwesomeIcon icon={faSeedling}/>
+                
+                MaipoGrande</h1></Link>
 
         </footer>
     </div>
