@@ -2,6 +2,7 @@ import { faPencil, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
 import { actualizarProducto, eliminarProducto } from "../../Helpers/getProductores";
+import useAuth from "../../Hooks/useAuth";
 
 const Productos = ({ producto, setReload ,reload}) => {
   const {
@@ -14,6 +15,7 @@ const Productos = ({ producto, setReload ,reload}) => {
     CALIDAD
   } = producto;
   const [activeEditar, setActiveEditar] = useState('bg-blue-500');
+  const {auth,productos,  config} = useAuth();
   const [alerta, setAlerta] = useState('')
   const [productoActualizado, setProductoActualizado] = useState({
     cantidad : CANTIDAD,
@@ -36,7 +38,7 @@ const Productos = ({ producto, setReload ,reload}) => {
   const handleEditar = async(e) => {
     e.preventDefault();
     setActiveEditar('bg-blue-500')
-    const resultado = await actualizarProducto(productoActualizado)
+    const resultado = await actualizarProducto(productoActualizado, config)
     setAlerta(resultado.msg)
     setTimeout(() => {
         setAlerta('')
@@ -45,7 +47,7 @@ const Productos = ({ producto, setReload ,reload}) => {
     }, 2000);
   };
   const handleDelete = async() => {
-    const respuesta = await eliminarProducto(ID_PRODUCTO)
+    const respuesta = await eliminarProducto(ID_PRODUCTO, config)
     setAlerta(respuesta.msg)
     setTimeout(() => {
       setAlerta('')

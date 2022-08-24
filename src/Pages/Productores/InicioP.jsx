@@ -6,19 +6,27 @@ import useAuth from '../../Hooks/useAuth';
 
 
 const InicioP = () => {
-
   const [activeModal, setActiveModal] = useState(false)
   const [reload, setReload] = useState(false);
-  const {setAuth,productos, setProductos} = useAuth();
+  const {auth,productos,setProductos,  config, setAuth} = useAuth();
+// console.log(auth)
+
   useEffect(() => {
       const cargarProductos= async()=>{
-         const resultado =  await obtenerProductos()
+         const resultado =  await obtenerProductos(config)
           setProductos(resultado)
       }
-      console.log('1')
-      cargarProductos();
-  },[ activeModal, reload, setAuth, setProductos])
 
+      
+      cargarProductos();
+      // cargarProductos();
+      // console.log(auth)
+      // if(productos[0].ID_ !== auth.ID){
+          // cargarProductos();
+
+      // }
+  },[ activeModal, reload, setAuth])
+  
   const handleModal = () =>{
     setActiveModal(!activeModal)
   }
@@ -36,11 +44,9 @@ const InicioP = () => {
     <div className='flex justify-center gap-12 mt-12 flex-wrap'>
       
       {
-        productos.length > 0 ? productos.map((producto, i)=>(
-          <Productos key={i}   producto={producto} setReload={setReload} reload={reload}/>
-
-      
-        )):''
+        productos.length > 0 && auth.ID === productos[0].ID_PRODUCTOR ? productos.map((producto, i)=>(
+          <Productos key={i}   producto={producto} setReload={setReload} reload={reload}/>      
+        )):'Cargando...'
       }
     </div>
     </div>

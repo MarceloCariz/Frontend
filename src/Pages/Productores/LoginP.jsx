@@ -6,7 +6,7 @@ import useAuth from '../../Hooks/useAuth';
 const LoginP = () => {
   const [formValues, setFormValues] = useState({ correo: "", password: "" });
   const [alerta, setAlerta] = useState('')
-  const { setAuth } = useAuth();
+  const { setAuth, auth, productos } = useAuth();
   const navigate = useNavigate();
   const handleOnchange = ({ target }) => {
     setFormValues({ ...formValues, [target.name]: target.value });
@@ -14,7 +14,6 @@ const LoginP = () => {
         setAlerta('')
     }
   };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     if ([formValues.correo, formValues.password].includes("")) {
@@ -29,7 +28,7 @@ const LoginP = () => {
 
       setAuth(respuesta);
       
-      navigate('/inicio-productor')
+      navigate('/productor')
         
       
 

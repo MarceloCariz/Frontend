@@ -14,15 +14,16 @@ export const login = async(datos) =>{
 }
 
 
-export const obtenerProductos = async() =>{
-    const {data} = await clienteAxios.get('/productores/productos', config);
+export const obtenerProductos = async(configt) =>{
+
+    const {data} = await clienteAxios.get('/productores/productos', configt);
     return data;
 }
 
-export const actualizarProducto = async (producto) =>{
+export const actualizarProducto = async (producto, configt) =>{
     console.log(producto)
     try {
-        const {data} = await clienteAxios.put('/productores/productos/editar', producto,config)
+        const {data} = await clienteAxios.put('/productores/productos/editar', producto,configt)
         console.log(data)
         return data
     } catch (error) {
@@ -39,9 +40,9 @@ export const eliminarProducto = async(id) =>{
     }
 }
 
-export const agregarProducto = async(producto) =>{
+export const agregarProducto = async(producto, configt) =>{
     try {
-        const {data} = await clienteAxios.post('/productores/productos/nuevo', producto, config)
+        const {data} = await clienteAxios.post('/productores/productos/nuevo', producto, configt)
         return data
     } catch (error) {
         console.log(error)

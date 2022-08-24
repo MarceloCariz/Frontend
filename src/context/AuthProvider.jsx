@@ -1,6 +1,7 @@
 import React, { createContext, useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom';
 import clienteAxios from '../config/clienteAxios';
+import { obtenerProductos } from '../Helpers/getProductores';
 
 const AuthContext = createContext();
 
@@ -11,6 +12,7 @@ const AuthProvider = ({children}) => {
     const navigate = useNavigate()
     const {pathname} = useLocation();
     const [productos, setProductos] = useState({})
+    const [config, setConfig] = useState({})
 
     // if(carrito.length === 0){
     //     setCarrito(JSON.parse(localStorage.getItem('carrito')))
@@ -32,9 +34,12 @@ const AuthProvider = ({children}) => {
                     Authorization: `Bearer ${token}`
                 }
             }
+            
             try {
                 const {data} = await clienteAxios('/usuario/perfil', config)
                 setAuth(data)
+                setConfig(config)
+
                 // console.log(data.ID_ROL)
                 const local = JSON.parse(localStorage.getItem('carrito'))
                 // console.log(local.length > 0)
@@ -43,6 +48,8 @@ const AuthProvider = ({children}) => {
 
                     return
                 }
+ 
+
                 if(pathname === '/' || pathname === '/productores'){
 
                     if(auth.ID_ROL === 2){
@@ -53,7 +60,8 @@ const AuthProvider = ({children}) => {
                         navigate('/inicio')
                         return
                     }
-                    navigate('/inicio-productor')
+
+                    navigate('/productor')
                     return
                 }
        
@@ -63,6 +71,9 @@ const AuthProvider = ({children}) => {
             } catch (error) {
                 console.log(error)
                 setAuth({})
+                setProductos({})
+                // localStorage.clear();
+                setCarrito({})
             } finally{
                 setCargando(false)
 
@@ -72,7 +83,7 @@ const AuthProvider = ({children}) => {
     },[navigate, setCarrito, pathname, auth.ID_ROL])
 
   return (
-    <AuthContext.Provider value={{setAuth, auth, cargando, carrito, setCarrito, productos, setProductos}}> 
+    <AuthContext.Provider value={{setAuth, auth, cargando, carrito, setCarrito, productos, setProductos, config}}> 
     {children}
 </AuthContext.Provider>
   )

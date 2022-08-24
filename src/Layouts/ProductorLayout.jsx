@@ -1,17 +1,31 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import useAuth from '../Hooks/useAuth'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShop, faUser,  faRightFromBracket, faTruck, faBars } from '@fortawesome/free-solid-svg-icons'
+import { obtenerProductos } from '../Helpers/getProductores';
 const ProductorLayout = ({children}) => {
-    const {auth, setAuth, setProductos, productos} = useAuth();
+    const {auth, setAuth, setProductos} = useAuth();
     const navigate = useNavigate();
     const [activeMenu, setActiveMenu] = useState(false)
 
+    // useEffect(() => {
+    //     const cargarProductos= async()=>{
+    //         const resultado =  await obtenerProductos()
+    //          setProductos(resultado)
+    //      }
+    //      cargarProductos();
+    //      console.log('1')
+    // }, [setProductos, auth])
+
+
+
     const handleLogout = () =>{
-        localStorage.clear();
-        setAuth({});
         setProductos({});
+
+        setAuth({});
+        
+        localStorage.clear();
         navigate('/productores')
       }
 

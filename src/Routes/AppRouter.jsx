@@ -31,9 +31,9 @@ const AppRouter = () => {
         </Route>
 
         {/* PRODUCTORES */}
-        <Route path='/inicio-productor' element={<RutaProtegidaProductor/>}>
+        <Route path='/productor' element={<RutaProtegidaProductor/>}>
               <Route index element={<InicioP/>}/>
-              <Route path='*' element={<InicioP />} />
+              {/* <Route path='*' element={<InicioP />} /> */}
         </Route>
         </Routes>
 

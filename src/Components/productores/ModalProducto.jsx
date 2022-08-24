@@ -2,6 +2,7 @@ import { faClose } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
 import { agregarProducto } from "../../Helpers/getProductores";
+import useAuth from "../../Hooks/useAuth";
 
 const ModalProducto = ({handleModal, setActiveModal,}) => {
 
@@ -12,7 +13,7 @@ const ModalProducto = ({handleModal, setActiveModal,}) => {
     precio_ext: '',
     calidad: ''
  })
-
+const {config} = useAuth();
  const {nombre, calidad, precio_local, precio_ext, cantidad} = formValues;
  const [alerta, setAlerta] = useState('')
  const handleOnChange = ({target}) =>{
@@ -24,7 +25,7 @@ const handleSubmit = async(e) =>{
     e.preventDefault();
 
 
-    const resultado = await agregarProducto(formValues);
+    const resultado = await agregarProducto(formValues, config);
     setAlerta(resultado)
     setTimeout(() => {
         setActiveModal(false)    
