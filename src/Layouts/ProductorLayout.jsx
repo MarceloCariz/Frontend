@@ -38,7 +38,7 @@ const ProductorLayout = ({children}) => {
     <div className='#d4d8dd'>
         <nav className=' bg-stone-800'>
           <div className='sm:h-32 h-24 flex sm:justify-between items-center  container mx-auto text-white'>
-            <Link to="/inicio"><h1 className='sm:text-4xl text-2xl text-white font-semibold flex items-center gap-1 '>
+            <Link to="/productor"><h1 className='sm:text-4xl text-2xl text-white font-semibold flex items-center gap-1 '>
                 <FontAwesomeIcon icon={faSeedling}/>
                 MaipoGrande</h1></Link>
             {/* Desktop */}

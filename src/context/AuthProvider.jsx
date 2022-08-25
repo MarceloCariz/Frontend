@@ -72,7 +72,7 @@ const AuthProvider = ({children}) => {
                 console.log(error)
                 setAuth({})
                 setProductos({})
-                // localStorage.clear();
+                localStorage.clear();
                 setCarrito({})
             } finally{
                 setCargando(false)
