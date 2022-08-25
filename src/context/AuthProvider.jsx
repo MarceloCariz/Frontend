@@ -71,8 +71,6 @@ const AuthProvider = ({children}) => {
             } catch (error) {
                 console.log(error)
                 setAuth({})
-                setProductos({})
-                localStorage.clear();
                 setCarrito({})
             } finally{
                 setCargando(false)
