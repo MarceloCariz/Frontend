@@ -5,7 +5,7 @@ import ProductorLayout from './ProductorLayout';
 const RutaProtegidaProductor = () => {
     const {auth, cargando} = useAuth();
 
-    if(cargando) return 'Cargando...' /// bloquea el codigo si esta true, false sigue con el return del componente
+    if(cargando) return '' /// bloquea el codigo si esta true, false sigue con el return del componente
     // console.log(auth)
   return (
     <ProductorLayout>
