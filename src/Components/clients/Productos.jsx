@@ -63,9 +63,9 @@ const Productos = ({productos}) => {
   return (
     <div  className='mt-12 grid md:grid-cols-6 sm:gap-7 justify-center  gap-2 grid-cols-2 sm:px-0 px-4 '>
         {productos.length > 0 && 
-            productos.map(({ID_PRODUCTO:ID, NOMBRE, CANTIDAD, PRECIO_LOCAL})=>(
-                <div onMouseEnter={(e)=> handleHover({ID},e)} onMouseLeave={handleLeave} className= 'h-72 bg-white rounded-lg pb-4 shadow-xl text-black sm:w-auto ' key={ID}>
-                    <img className='object-cover rounded-lg  w-full h-32' src={fotoPrueba} alt="" />
+            productos.map(({ID_PRODUCTO:ID, NOMBRE, CANTIDAD, PRECIO_LOCAL, IMAGE_URL})=>(
+                <div onMouseEnter={(e)=> handleHover({ID},e)} onMouseLeave={handleLeave} className= 'h-auto bg-white rounded-lg pb-4 shadow-xl text-black sm:w-auto ' key={ID}>
+                    <img className='object-contain rounded-lg  w-52 h-52' src={IMAGE_URL} alt="imagen" />
 
                     <div className='px-4 text-lg capitalize'>
                     <p className='font-semibold text-2xl'>{NOMBRE}</p>
@@ -76,7 +76,7 @@ const Productos = ({productos}) => {
                     {
                         activeButton.activo &&  activeButton.id === ID  &&(
 
-                            <button onClick={(e) => handleClick({ID,NOMBRE, CANTIDAD, PRECIO_LOCAL, unidad: 1},e)} className='font-bold text-white bg-green-500 px-2 py-2 rounded-md'>
+                            <button onClick={(e) => handleClick({ID,NOMBRE, CANTIDAD, PRECIO_LOCAL,IMAGE_URL, unidad: 1},e)} className='font-bold text-white bg-green-500 px-2 py-2 rounded-md'>
                             <FontAwesomeIcon icon={faCartPlus} className="pr-1"/>
                             
                             {agregando.cargando && agregando.id === ID    ? "Agregando...": "Agregar al carrito"}

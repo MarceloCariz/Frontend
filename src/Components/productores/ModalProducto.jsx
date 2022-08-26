@@ -15,17 +15,37 @@ const ModalProducto = ({handleModal, setActiveModal,}) => {
  })
 const {config} = useAuth();
  const {nombre, calidad, precio_local, precio_ext, cantidad} = formValues;
- const [alerta, setAlerta] = useState('')
+ const [alerta, setAlerta] = useState('');
+ const [selectedFile, setSelectedFile] = useState(null);
+//  const [fileInputTitle, setFileInputTitle] = useState("");
  const handleOnChange = ({target}) =>{
     setFormValues({...formValues,
         [target.name]: target.value
     })
  }
+
+ const onChangeInpuFile = (e) => {
+  setSelectedFile(e.target.files[0]);
+  // const inputTitle = e.target.files[0].name;
+//   setFileInputTitle(inputTitle);
+
+//   console.log(inputTitle);
+// }
+ }
 const handleSubmit = async(e) =>{
     e.preventDefault();
+    const formData = new FormData();
+    formData.append('image', selectedFile);
+    formData.set('nombre', formValues.nombre);
+    formData.set('cantidad', formValues.cantidad);
+    formData.set('precio_local', formValues.precio_local);
+    formData.set('precio_ext', formValues.precio_ext);
+    formData.set('calidad', formValues.calidad);
 
 
-    const resultado = await agregarProducto(formValues, config);
+
+
+    const resultado = await agregarProducto(formData, config);
     setAlerta(resultado)
     setTimeout(() => {
         setActiveModal(false)    
@@ -45,6 +65,12 @@ const handleSubmit = async(e) =>{
         </button>
 
       <div className="flex flex-col gap-8 items-center">
+      <div className="flex flex-col ">
+          <label className="text-left">Iamgen</label>
+          <input
+        className='file-input' type="file" onChange={onChangeInpuFile} placeholder="Agregar Imagen"
+          />
+        </div>
         <div className="flex flex-col ">
           <label className="text-left">Nombre</label>
           <input

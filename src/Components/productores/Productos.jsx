@@ -12,7 +12,8 @@ const Productos = ({ producto, setReload ,reload}) => {
     PRECIO_LOCAL,
     ID_PRODUCTO,
     ID_PRODUCTOR,
-    CALIDAD
+    CALIDAD,
+    IMAGE_URL
   } = producto;
   const [activeEditar, setActiveEditar] = useState('bg-blue-500');
   const {auth,productos,  config} = useAuth();
@@ -59,7 +60,7 @@ const Productos = ({ producto, setReload ,reload}) => {
       {alerta && (<p className="px-4 py-1 bg-green-500 text-white font-semibold text-lg rounded-lg">{alerta}</p>)}
       
       <div className="flex flex-col gap-4">
-
+        <img className="object-contain w-52 h-52" src={IMAGE_URL} alt="imagen" />
         <div className="flex flex-col ">
           <label className="text-left" htmlFor={`${nombre}`}>Nombre</label>
           <input name='nombre' onChange={handleOnchange} className="bg-gray-50 border-1 pl-1 border-gray-500 border rounded-sm" id={`${nombre}`} value={nombre} />

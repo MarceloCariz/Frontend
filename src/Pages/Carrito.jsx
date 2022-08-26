@@ -19,7 +19,7 @@ const Carrito = () => {
    
 
     }, [carrito])
-
+    console.log(carrito)
     const handleClick = (e) =>{
       
         // const existe = carrito.some(p => p.ID === e.ID);
@@ -53,6 +53,7 @@ const Carrito = () => {
       <table className="mt-4 w-1/2 flex flex-col  capitalize" >
       <thead className="" >
         <tr className=" flex  justify-between ">
+          <th>Imagen</th>
           <th>Nombre</th>
           <th>Stock</th>
           <th >Precio</th>
@@ -65,8 +66,11 @@ const Carrito = () => {
       <tbody >
 
       {carrito.length > 0
-        && carrito.map(({ ID, NOMBRE, CANTIDAD, PRECIO_LOCAL , unidad}, indice) => (
-            <tr className="flex  justify-between mt-2" key={indice}>
+        && carrito.map(({ ID, NOMBRE, CANTIDAD, PRECIO_LOCAL , unidad, IMAGE_URL}, indice) => (
+            <tr className="flex  justify-between mt-2 items-center" key={indice}>
+                <th>
+                  <img className="object-contain w-16 h-16" src={IMAGE_URL} alt="imagen" />
+                </th>
                 <td>{NOMBRE}</td>
                 <td>{CANTIDAD}</td>
                 <td>{PRECIO_LOCAL}</td>

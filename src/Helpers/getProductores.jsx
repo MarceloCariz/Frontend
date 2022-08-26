@@ -1,3 +1,4 @@
+import axios from "axios"
 import clienteAxios from "../config/clienteAxios"
 
 export const login = async(datos) =>{
@@ -35,7 +36,14 @@ export const eliminarProducto = async(id, configt) =>{
 
 export const agregarProducto = async(producto, configt) =>{
     try {
-        const {data} = await clienteAxios.post('/productores/productos/nuevo', producto, configt)
+        const {headers} = configt;
+   
+        const {data}= await axios({
+            method: "post",
+            url:  "http://168.138.133.24:4000/api/productores/productos/nuevo",
+            data: producto,
+            headers: headers, 
+          });
         return data
     } catch (error) {
         console.log(error)
