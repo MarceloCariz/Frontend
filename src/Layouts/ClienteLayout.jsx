@@ -17,7 +17,7 @@ const ClienteLayout = ({ children }) => {
   const navigate = useNavigate();
   const { auth, carrito, setCarrito } = useAuth();
   useEffect(() => {
-    if (auth.ID_ROL === 2) {
+    if (auth.ID_ROL === 5) {
       const cantidad = carrito.reduce((sum, i) => sum + i.unidad, 0);
       setCantidadCarrito(cantidad);
     }

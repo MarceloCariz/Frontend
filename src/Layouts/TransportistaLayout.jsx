@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
+import React, {  useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import useAuth from '../Hooks/useAuth'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faShop, faUser,  faRightFromBracket, faTruck, faBars, faSeedling } from '@fortawesome/free-solid-svg-icons'
-const ProductorLayout = ({children}) => {
-    const {auth, setAuth, setProductos} = useAuth();
+import {  faUser,  faRightFromBracket, faTruck, faBars, faSeedling, faGavel } from '@fortawesome/free-solid-svg-icons'
+const TransportistaLayout = ({children}) => {
+    const {auth, setAuth} = useAuth();
     const navigate = useNavigate();
     const [activeMenu, setActiveMenu] = useState(false)
 
@@ -20,12 +20,11 @@ const ProductorLayout = ({children}) => {
 
 
     const handleLogout = () =>{
-        setProductos({});
 
         setAuth({});
         
         localStorage.clear();
-        navigate('/productores')
+        navigate('/transportistas')
       }
 
       
@@ -37,18 +36,18 @@ const ProductorLayout = ({children}) => {
     <div className='#d4d8dd'>
         <nav className=' bg-stone-800'>
           <div className='sm:h-32 h-24 flex sm:justify-between items-center  container mx-auto text-white'>
-            <Link to="/productor"><h1 className='sm:text-4xl text-2xl text-white font-semibold flex items-center gap-1 '>
+            <Link to="/transportista"><h1 className='sm:text-4xl text-2xl text-white font-semibold flex items-center gap-1 '>
                 <FontAwesomeIcon icon={faSeedling}/>
                 MaipoGrande</h1></Link>
             {/* Desktop */}
-            <div className='sm:flex hidden items-center justify-end  w-1/2 gap-8 '>
+            <div className='sm:flex hidden items-center justify-end  w-2/3 gap-8 '>
                 <div className='flex cursor-pointer'>
                     <FontAwesomeIcon icon={faTruck} className="text-2xl mr-2 mt-1"/>
                     <p className='text-2xl  '>Mis Envios</p>
                 </div>
                 <div className='flex cursor-pointer'>
-                    <FontAwesomeIcon icon={faShop} className="text-2xl mr-2 mt-1"/>
-                    <p className='text-2xl  '>Mis Productos</p>
+                    <FontAwesomeIcon icon={faGavel} className="text-2xl mr-2 mt-1"/>
+                    <p className='text-2xl  '>Subastas</p>
                 </div>
                 <div className='flex cursor-pointer' >
                 <FontAwesomeIcon icon={faUser} className="text-2xl mr-2 mt-1"/>
@@ -90,8 +89,8 @@ const ProductorLayout = ({children}) => {
                     <p className='text-xl  '>Mis Envios</p>
                 </div>
                 <div className='flex cursor-pointer'>
-                    <FontAwesomeIcon icon={faShop} className="text-xl mr-2 mt-1"/>
-                    <Link to={'/inicio-productor'} className='text-xl  '>Mis Productos</Link>
+                    <FontAwesomeIcon icon={faGavel} className="text-xl mr-2 mt-1"/>
+                    <Link to={'/inicio-productor'} className='text-xl  '>Subastas</Link>
                 </div>
                 <div className='flex cursor-pointer' >
                 <FontAwesomeIcon icon={faUser} className="text-xl mr-2 mt-1"/>
@@ -106,7 +105,7 @@ const ProductorLayout = ({children}) => {
             {/* fin responsive */}
 
         {/* CONTENIDO */}
-        <div className='min-h-screen mx-auto sm:mt-0 mt-4 bg-gray-100 '>
+        <div className='min-h-screen mx-auto  sm:mt-0 mt-4 bg-gray-100 '>
             {children}
         </div>
         {/* CONTENIDO FIN */}
@@ -121,4 +120,4 @@ const ProductorLayout = ({children}) => {
   )
 }
 
-export default ProductorLayout
+export default TransportistaLayout

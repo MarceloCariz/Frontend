@@ -7,7 +7,7 @@ const Carrito = () => {
   // const local = localStorage.getItem('carrito')
     useEffect(() => {
         localStorage.setItem('carrito',JSON.stringify(carrito))
-        const montoTotal = carrito.reduce((total, i)=>(i.PRECIO * i.unidad) + total, 0 );
+        const montoTotal = carrito.reduce((total, i)=>(i.PRECIO_LOCAL * i.unidad) + total, 0 );
         
         setTotal(montoTotal)
       
@@ -65,11 +65,11 @@ const Carrito = () => {
       <tbody >
 
       {carrito.length > 0
-        && carrito.map(({ ID, NOMBRE, CANTIDAD, PRECIO , unidad}, indice) => (
+        && carrito.map(({ ID, NOMBRE, CANTIDAD, PRECIO_LOCAL , unidad}, indice) => (
             <tr className="flex  justify-between mt-2" key={indice}>
                 <td>{NOMBRE}</td>
                 <td>{CANTIDAD}</td>
-                <td>{PRECIO}</td>
+                <td>{PRECIO_LOCAL}</td>
                 <td>
                   {unidad}
                   

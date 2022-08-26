@@ -1,7 +1,6 @@
 import React, { createContext, useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom';
 import clienteAxios from '../config/clienteAxios';
-import { obtenerProductos } from '../Helpers/getProductores';
 
 const AuthContext = createContext();
 
@@ -43,16 +42,18 @@ const AuthProvider = ({children}) => {
                 // console.log(data.ID_ROL)
                 const local = JSON.parse(localStorage.getItem('carrito'))
                 // console.log(local.length > 0)
-                if(pathname !== '/' && auth.ID_ROL !== 1 && local.length > 0){
-                    setCarrito(local);
+                // console.log(auth.ID_ROL)
+                setCarrito(local); // no tocar
 
+                if(pathname !== '/' && auth.ID_ROL === 5 && local.length > 0){
+                    setCarrito(local);
                     return
                 }
  
 
                 if(pathname === '/' || pathname === '/productores'){
 
-                    if(auth.ID_ROL === 2){
+                    if(auth.ID_ROL === 5){
                        
 
                         setCarrito(local);
@@ -60,9 +61,17 @@ const AuthProvider = ({children}) => {
                         navigate('/inicio')
                         return
                     }
-
-                    navigate('/productor')
-                    return
+                    if(auth.ID_ROL === 3){
+                       
+                        navigate('/transportista')
+                        return
+                    }
+                    if(auth.ID_ROL === 1){
+                       
+                        navigate('/productor')
+                        return
+                    }
+              
                 }
        
           
@@ -71,7 +80,7 @@ const AuthProvider = ({children}) => {
             } catch (error) {
                 console.log(error)
                 setAuth({})
-                setCarrito({})
+                // setCarrito({})
             } finally{
                 setCargando(false)
 

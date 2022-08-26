@@ -1,17 +1,16 @@
-import React, { useEffect } from 'react'
-import { Outlet, Navigate, useNavigate } from 'react-router-dom'
+import { Outlet, Navigate } from 'react-router-dom'
 import useAuth from '../Hooks/useAuth'
 import ClienteLayout from './ClienteLayout';
 const RutaProtegida = () => {
 
-  const {auth, cargando, setCargando} = useAuth();
-  const navigate = useNavigate()
+  const {auth, cargando} = useAuth();
 
   if(cargando) return ''
   return (
     <>
       <ClienteLayout>
-        {auth.ID  && auth.ID_ROL === 2 ? '' : <Navigate to={ auth.ID_ROL === 1 ? "/inicio-productor" : '/'} />}
+      {auth.ID  && auth.ID_ROL === 5 ?  '' : <Navigate to="/" />}
+
 
         <Outlet/>
         </ClienteLayout>
