@@ -47,10 +47,10 @@ const ClienteLayout = ({ children }) => {
               <FontAwesomeIcon icon={faBagShopping} className="text-2xl mt-1" />
               <p className="sm:text-2xl capitalize">pedidos</p>
             </div>
-            <div className="flex gap-1">
+            <Link to={'perfil'} className="flex gap-1 cursor-pointer">
               <FontAwesomeIcon icon={faUser} className="text-2xl  mt-1" />
               <p className="sm:text-2xl capitalize"> {auth.NOMBRE}</p>
-            </div>
+            </Link>
 
             <div className=" sm:flex gap-2 hidden ">
               <Link to="carrito " className=" flex ">

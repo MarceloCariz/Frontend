@@ -13,3 +13,13 @@ export const registrar = async(datos) =>{
     const {data} = await clienteAxios.post('/clientes/nuevo',{...datos, tipo: 'Local'})
     console.log(data)
 }
+
+export const traerDatos = async(config)=>{
+    const {data} = await clienteAxios('/clientes/informacion', config);
+    return data
+}
+
+export const actualizarDatos = async(datos,config)=>{
+    const {data} = await clienteAxios.put('/clientes/informacion/actualizar',datos, config);
+    return data
+}
