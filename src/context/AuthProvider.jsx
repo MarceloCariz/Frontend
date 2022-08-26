@@ -43,7 +43,10 @@ const AuthProvider = ({children}) => {
                 const local = JSON.parse(localStorage.getItem('carrito'))
                 // console.log(local.length > 0)
                 // console.log(auth.ID_ROL)
-                setCarrito(local); // no tocar
+                if(local){
+                    setCarrito(local); // no tocar
+
+                }
 
                 if(pathname !== '/' && auth.ID_ROL === 5 && local.length > 0){
                     setCarrito(local);
