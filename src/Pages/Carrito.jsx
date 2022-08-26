@@ -45,15 +45,15 @@ const Carrito = () => {
         
     }
   return (
-    <div className=" mt-12 flex justify-center flex-col items-center">
+    <div className=" mt-12 flex justify-center flex-col items-center sm:mb-0 mb-60">
 
       <p className="text-center text-2xl font-semibold">Resumen del Pedido</p>
       {carrito.length > 0 ? 
 
-      <table className="mt-4 w-1/2 flex flex-col  capitalize" >
+      <table className="mt-4 sm:w-1/2 flex flex-col  capitalize" >
       <thead className="" >
-        <tr className=" flex  justify-between ">
-          <th>Imagen</th>
+        <tr className=" flex  justify-between   ml-4  text-sm gap-3 sm:gap-6 ">
+          <th className="text-right">Imagen</th>
           <th>Nombre</th>
           <th>Stock</th>
           <th >Precio</th>
@@ -67,9 +67,9 @@ const Carrito = () => {
 
       {carrito.length > 0
         && carrito.map(({ ID, NOMBRE, CANTIDAD, PRECIO_LOCAL , unidad, IMAGE_URL}, indice) => (
-            <tr className="flex  justify-between mt-2 items-center" key={indice}>
+            <tr className="flex  sm:justify-between justify-between  mt-2 items-center" key={indice}>
                 <th>
-                  <img className="object-contain w-16 h-16" src={IMAGE_URL} alt="imagen" />
+                  <img className="object-contain sm:w-16 w-12 sm:h-16 h-12" src={IMAGE_URL} alt="imagen" />
                 </th>
                 <td>{NOMBRE}</td>
                 <td>{CANTIDAD}</td>

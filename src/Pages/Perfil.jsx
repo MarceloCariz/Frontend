@@ -5,7 +5,6 @@ import useAuth from '../Hooks/useAuth'
 const Perfil = () => {
     const {auth, config} = useAuth();
     const {CORREO, NOMBRE} =auth;
-    const [informacion, setInformacion] = useState({})
     const [formValues, setFormValues] = useState(
         {
             direccion: '',
@@ -23,9 +22,9 @@ const Perfil = () => {
                 pais: resp.PAIS || ''
             })
         } 
-
+        console.log('1')
         cargarDatos();
-    }, [])
+    }, [config])
 
     const handleInputchange = ({target})=>{
         setFormValues({
@@ -42,28 +41,28 @@ const Perfil = () => {
         console.log(resp)
     }
   return (
-    <div className='flex flex-col justify-center items-center pt-4'>
+    <div className='flex flex-col justify-center items-center pt-4 mb-56 '>
         <h2 className='text-2xl mb-8 font-bold'>Informacion Personal</h2>
-        <form onSubmit={handleSubmit} className='bg-white shadow-lg px-12 py-4 flex flex-col '> 
+        <form onSubmit={handleSubmit} className='bg-white shadow-lg px-12 py-4 flex flex-col sm:w-auto w-6/7 gap-4 '> 
         {/* 4 */}
             <div className='flex gap-6 items-center'>
-                <label htmlFor="correo" className='text-xl font-bold'>Nombre :</label>
+                <label htmlFor="correo" className='sm:text-xl font-bold'>Nombre :</label>
                 <p className='bg-gray-100 px-2'>{NOMBRE}</p>
             </div>
-            <div className='flex gap-9 items-center'>
-                <label htmlFor="correo" className='text-xl font-bold'>Correo :</label>
-                <p className='bg-gray-100 px-2'>{CORREO}</p>
+            <div className='flex gap-9 items-center w-32'>
+                <label htmlFor="correo" className='sm:text-xl  text-sm font-bold'>Correo:   </label>
+                <p className='bg-gray-100 px-2 text-sm '>{CORREO}</p>
             </div>
             <div className='flex gap-3 items-center'>
-                <label htmlFor="correo" className='text-xl font-bold'>Direccion :</label>
-                <input name='direccion' onChange={handleInputchange} className='bg-gray-100 px-2' value={formValues.direccion}/>
+                <label htmlFor="correo" className='sm:text-xl font-bold'>Direccion :</label>
+                <input name='direccion' onChange={handleInputchange} className='bg-gray-100 px-2 ' value={formValues.direccion}/>
             </div>
             <div className='flex gap-10 items-center'>
-                <label htmlFor="correo" className='text-xl font-bold'>Ciudad:</label>
+                <label htmlFor="correo" className='sm:text-xl font-bold'>Ciudad:</label>
                 <input name='ciudad' onChange={handleInputchange}  className='bg-gray-100 px-2' value={formValues.ciudad}/>
             </div>
             <div className='flex gap-1 items-center'>
-                <label htmlFor="correo" className='text-xl font-bold'>Pais:</label>
+                <label htmlFor="correo" className='sm:text-xl font-bold'>Pais:</label>
                 <input name='pais' onChange={handleInputchange}  className='ml-16 bg-gray-100 px-2' value={formValues.pais}/>
             </div>
             <button type="submit" className='text-white bg-blue-500 px-4 py-2 mt-2 w-1/2 ml-24'>Actualizar</button>

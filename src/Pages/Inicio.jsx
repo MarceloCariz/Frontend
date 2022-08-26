@@ -15,7 +15,7 @@ const Inicio = () => {
   },[])
   return (
     <div className="mt-8">
-        <h2 className='text-left text-3xl font-semibold'>Nuestros Productos</h2>
+        <h2 className='text-left text-3xl font-semibold ml-4 sm:ml-0'>Nuestros Productos</h2>
 
         <Productos productos={productos}/>
     </div>

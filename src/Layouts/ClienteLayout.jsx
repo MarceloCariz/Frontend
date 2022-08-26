@@ -4,12 +4,12 @@ import {
   faCartShopping,
   faRightFromBracket,
   faUser,
+  faSeedling
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
 import {  Link, useNavigate } from "react-router-dom";
 import useAuth from "../Hooks/useAuth";
-import carritoIcon from "./icons/carrito.png";
 const ClienteLayout = ({ children }) => {
   const [cantidadCarrito, setCantidadCarrito] = useState(0);
   const [activeMenu, setActiveMenu] = useState(false);
@@ -35,9 +35,9 @@ const ClienteLayout = ({ children }) => {
   return (
     <div className="#d4d8dd">
       <nav className=" bg-stone-800">
-        <div className="sm:h-32 h-24 flex sm:justify-between items-center  container mx-auto text-white">
+        <div className="sm:h-32 h-24 flex sm:justify-between items-center   sm:container  mx-auto text-white">
           <Link to="/inicio">
-            <h1 className="sm:text-4xl text-2xl text-white font-semibold ">
+            <h1 className="sm:text-4xl text-2xl text-white font-semibold sm:pl-0 pl-2  ">
               MaipoGrande
             </h1>
           </Link>
@@ -70,7 +70,7 @@ const ClienteLayout = ({ children }) => {
           </div>
           {/* Responsive */}
 
-          <div className="sm:hidden flex justify-between items-center gap-2 w-1/4 ml-24  ">
+          <div className="sm:hidden flex justify-between items-center gap-2 w-1/4 ml-20  ">
                <div className=' flex gap-2  '>
                   <Link to="carrito "className=' flex '>
                   <FontAwesomeIcon icon={faCartShopping} className="text-2xl "/>
@@ -87,7 +87,7 @@ const ClienteLayout = ({ children }) => {
             <FontAwesomeIcon
               onClick={handleMenu}
               icon={faBars}
-              className="text-6xl font-bold"
+              className="text-6xl font-bold "
             />
           </div>
         </div>
@@ -95,7 +95,7 @@ const ClienteLayout = ({ children }) => {
       {/* Menu responsive */}
       {activeMenu && (
         <div className=" flex justify-end  text-white text-center">
-          <nav className="bg-stone-800 h-40 w-auto px-4 py-4 flex flex-col justify-between">
+          <nav className="bg-stone-800 h-auto w-auto px-4 py-4 flex flex-col justify-between gap-4">
             <div className="flex cursor-pointer">
               <FontAwesomeIcon
                 icon={faBagShopping}
@@ -103,17 +103,17 @@ const ClienteLayout = ({ children }) => {
               />
               <p className="text-xl  ">Mis Pedidos</p>
             </div>
-            <div className="flex cursor-pointer">
+            {/* <div className="flex cursor-pointer">
               <FontAwesomeIcon icon={faUser} className="text-xl mr-2 mt-1" />
               <Link to={"/inicio-productor"} className="text-xl  ">
                 ALgo
               </Link>
-            </div>
-            <div className="flex cursor-pointer">
+            </div> */}
+            <Link to="perfil" className="flex cursor-pointer">
               <FontAwesomeIcon icon={faUser} className="text-xl mr-2 mt-1" />
 
               <p className="sm:text-2xl text-xl capitalize"> {auth.NOMBRE}</p>
-            </div>
+            </Link>
           </nav>
         </div>
       )}
@@ -131,9 +131,18 @@ const ClienteLayout = ({ children }) => {
       </div> */}
       {/* fin responsive */}
       {/* CONTENIDO */}
-      <div className="container mx-auto sm:mt-0 mt-12 ">{children}</div>
+      <div className="container mx-auto sm:mt-0 mt-12 ">
+        {children}
+        </div>
       {/* CONTENIDO FIN */}
-      <footer className=" fixed bottom-0 text-center  flex justify-center w-full  sm:hidden ">
+      <footer className=' mt-12 bottom-0 sm:fixed static  text-center  items-center flex justify-center w-full    h-32 bg-stone-800'>
+            <Link to="/inicio"><h1 className='sm:text-4xl text-2xl text-white font-semibold flex items-center gap-1 '>
+            <FontAwesomeIcon icon={faSeedling }/>
+                
+                MaipoGrande</h1></Link>
+
+        </footer>
+      {/* <footer className=" fixed bottom-0 text-center  flex justify-center w-full  sm:hidden ">
         <div className="flex  flex-row  justify-center h-16 w-2/3 border-2 ">
           <div className="bg-white border-b-0 w-full h-full pt-4 ">
             <p className="">Usuario</p>
@@ -152,7 +161,7 @@ const ClienteLayout = ({ children }) => {
             </Link>
           </div>
         </div>
-      </footer>
+      </footer> */}
     </div>
   );
 };
