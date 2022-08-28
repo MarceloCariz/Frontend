@@ -37,7 +37,10 @@ const ClienteLayout = ({ children }) => {
       <nav className=" bg-stone-800">
         <div className="sm:h-32 h-24 flex sm:justify-between items-center   sm:container  mx-auto text-white">
           <Link to="/inicio">
-            <h1 className="sm:text-4xl text-2xl text-white font-semibold sm:pl-0 pl-2  ">
+
+            <h1 className="sm:text-4xl text-2xl text-white font-semibold sm:pl-0 pl-2 flex sm:gap-2 items-center ">
+            <FontAwesomeIcon icon={faSeedling }/>
+
               MaipoGrande
             </h1>
           </Link>
@@ -70,7 +73,13 @@ const ClienteLayout = ({ children }) => {
           </div>
           {/* Responsive */}
 
-          <div className="sm:hidden flex justify-between items-center gap-2 w-1/4 ml-20  ">
+          <div className="sm:hidden flex justify-between items-center gap-2 w-1/4 ml-12  ">
+          <button
+              className="  bg-red-500  text-white px-2    "
+              onClick={handleLogout}
+            >
+              <FontAwesomeIcon icon={faRightFromBracket} className=" " />
+            </button>
                <div className=' flex gap-2  '>
                   <Link to="carrito "className=' flex '>
                   <FontAwesomeIcon icon={faCartShopping} className="text-2xl "/>
@@ -78,12 +87,7 @@ const ClienteLayout = ({ children }) => {
 
                 </div>
                 <p className='mb-8'>{cantidadCarrito}</p>
-            <button
-              className="  bg-red-500  text-white px-2    "
-              onClick={handleLogout}
-            >
-              <FontAwesomeIcon icon={faRightFromBracket} className=" " />
-            </button>
+      
             <FontAwesomeIcon
               onClick={handleMenu}
               icon={faBars}
@@ -135,7 +139,7 @@ const ClienteLayout = ({ children }) => {
         {children}
         </div>
       {/* CONTENIDO FIN */}
-      <footer className=' mt-12 bottom-0 sm:fixed static  text-center  items-center flex justify-center w-full    h-32 bg-stone-800'>
+      <footer className=' mt-12 bottom-0  static  text-center  items-center flex justify-center w-full    h-32 bg-stone-800'>
             <Link to="/inicio"><h1 className='sm:text-4xl text-2xl text-white font-semibold flex items-center gap-1 '>
             <FontAwesomeIcon icon={faSeedling }/>
                 

@@ -12,6 +12,7 @@ import Perfil from '../Pages/Perfil'
 import InicioP from '../Pages/Productores/InicioP'
 import LoginP from '../Pages/Productores/LoginP'
 import RegistrarP from '../Pages/Productores/RegistrarP'
+import Subastas from '../Pages/Productores/Subastas'
 import Registrar from '../Pages/Registrar'
 import InicioTransportista from '../Pages/Transportistas/InicioTransportista'
 import LoginTransportista from '../Pages/Transportistas/LoginTransportista'
@@ -39,6 +40,7 @@ const AppRouter = () => {
         {/* PRODUCTORES */}
         <Route path='/productor' element={<RutaProtegidaProductor/>}>
               <Route index element={<InicioP/>}/>
+              <Route path='subastas' element={<Subastas/>}/>
               {/* <Route path='*' element={<InicioP />} /> */}
         </Route>
 
@@ -46,6 +48,7 @@ const AppRouter = () => {
         <Route path='/transportista' element={<RutaProtegidaTransportista/>}>
           {/* <Route index element={<LoginTransportista/>}/> */}
           <Route index element={<InicioTransportista/>}/>
+
         </Route>
 
 

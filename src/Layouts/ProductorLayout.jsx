@@ -42,14 +42,14 @@ const ProductorLayout = ({children}) => {
                 MaipoGrande</h1></Link>
             {/* Desktop */}
             <div className='sm:flex hidden items-center justify-end  w-1/2 gap-8 '>
-                <div className='flex cursor-pointer'>
+                <Link to="subastas" className='flex cursor-pointer'>
                     <FontAwesomeIcon icon={faTruck} className="text-2xl mr-2 mt-1"/>
                     <p className='text-2xl  '>Mis Envios</p>
-                </div>
-                <div className='flex cursor-pointer'>
+                </Link>
+                <Link to="/productor" className='flex cursor-pointer'>
                     <FontAwesomeIcon icon={faShop} className="text-2xl mr-2 mt-1"/>
                     <p className='text-2xl  '>Mis Productos</p>
-                </div>
+                </Link>
                 <div className='flex cursor-pointer' >
                 <FontAwesomeIcon icon={faUser} className="text-2xl mr-2 mt-1"/>
 

@@ -28,7 +28,6 @@ const InicioP = () => {
 
       // }
   },[ activeModal, reload, setAuth])
-  console.log('1')
   const handleModal = () =>{
     setActiveModal(!activeModal)
   }
