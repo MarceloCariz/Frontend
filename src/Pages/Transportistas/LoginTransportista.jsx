@@ -40,7 +40,7 @@ const LoginTransportista= () => {
   };
 
   return (
-    <div className="text-xl  w-3/5 ">
+    <div className="text-xl  sm:w-3/5 ">
     <h1 className="flex justify-center items-center  bg-gray-600 text-center text-white h-14">Inicia Sesion</h1>
  
     <div className="border border-1 shadow-lg bg-white border-gray-300 rounded-lg flex justify-center items-center mt-4">

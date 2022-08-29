@@ -36,7 +36,7 @@ const TransportistaLayout = ({children}) => {
     <div className='#d4d8dd'>
         <nav className=' bg-stone-800'>
           <div className='sm:h-32 h-24 flex sm:justify-between items-center  container mx-auto text-white'>
-            <Link to="/transportista"><h1 className='sm:text-4xl text-2xl text-white font-semibold flex items-center gap-1 '>
+            <Link to="/transportista"><h1 className='sm:text-4xl text-2xl text-white font-semibold flex items-center gap-1 ml-2 '>
                 <FontAwesomeIcon icon={faSeedling}/>
                 MaipoGrande</h1></Link>
             {/* Desktop */}
@@ -66,7 +66,7 @@ const TransportistaLayout = ({children}) => {
 
         
             {/* Responsive */}
-            <div className='sm:hidden flex justify-between items-center gap-2 w-1/5  ml-28'>
+            <div className='sm:hidden flex justify-between items-center gap-2 w-1/5  ml-20'>
             <button className='  bg-red-500  text-white px-2 ml-4    '  onClick={handleLogout} >
                     <FontAwesomeIcon icon={faRightFromBracket} className=" "/>
             </button>

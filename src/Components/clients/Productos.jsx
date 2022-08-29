@@ -68,7 +68,7 @@ const Productos = ({productos}) => {
                     <img className='object-contain rounded-lg  w-52 h-52' src={IMAGE_URL} alt="imagen" />
 
                     <div className='px-4 text-lg capitalize'>
-                    <p className='font-semibold text-2xl'>{NOMBRE}</p>
+                    <p className='font-semibold text-2xl'>{NOMBRE} Kg</p>
                     <p>stock: {CANTIDAD}</p>
                     <p>precio: {PRECIO_LOCAL}</p>
                     </div>

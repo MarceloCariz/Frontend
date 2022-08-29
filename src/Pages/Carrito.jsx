@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { traerDatos } from "../Helpers/getClientes";
+import { enviaPedidoExt, traerDatos } from "../Helpers/getClientes";
 import useAuth from "../Hooks/useAuth";
 
 const Carrito = () => {
@@ -32,22 +32,6 @@ const Carrito = () => {
 
     }, [carrito, config])
     const handleClick = (e) =>{
-      
-        // const existe = carrito.some(p => p.ID === e.ID);
-        // if(existe){
-        //     const nuevos = carrito.map(p =>{
-        //         if(p.ID ===e.ID && e.unidad === 1){
-        //            return carrito.filter(({ID})=>(ID !== e.ID))
-        //         }
-        //         else if(p.ID ===e.ID){
-        //             p.unidad--;
-        //             return p;
-        //         }else{
-        //             return p
-        //         }
-        //     })
-        //     setCarrito([...nuevos])
-        // }
         const filtrado = carrito.filter(({ID})=>{
             return  ID !== e.ID  ;
         })
@@ -55,6 +39,17 @@ const Carrito = () => {
         setCarrito(filtrado)
         
     }
+
+
+
+  const handleEnviarPedido = async() =>{
+    enviaPedidoExt(carrito, formValues.direccion, config);
+    setCarrito([]);
+    setTimeout(() => {
+      window.location.reload();
+    }, 2000);
+
+  }
   return (
     <div className=" mt-12 flex justify-center flex-col items-center sm:mb-0 mb-60">
 
@@ -68,7 +63,7 @@ const Carrito = () => {
           <th className="sm:mr-10 mr-10">Nombre</th>
           {/* <th>Stock</th> */}
           <th className="sm:mr-0 mr-2">Precio</th>
-          <th className="sm:mr-0 mr-2">Cantidad</th>
+          <th className="sm:mr-0 mr-2">Cantidad (kg)</th>
           <th className="">Eliminar</th>
 
 
@@ -86,7 +81,7 @@ const Carrito = () => {
                 {/* <td>{CANTIDAD}</td> */}
                 <td>{PRECIO_LOCAL}</td>
                 <td>
-                  {unidad}
+                  {unidad}  <span className="text-sm">kg</span> 
                   
                   </td>
                 <td className="cursor-pointer bg-red-600 text-white rounde-sm px-2" onClick={(e)=>handleClick({ID},e)}>X</td>
@@ -114,10 +109,10 @@ const Carrito = () => {
        <Link to="/inicio/perfil"  className='text-white bg-blue-500 px-4 py-2 mt-2 text-sm'>Actualizar Informacion</Link>
     </div>
     
-    <button disabled={carrito.length === 0 ? true : false} className={ carrito.length === 0 ? "bg-red-500 px-4 py-2 rounded-sm text-white font-semibold text-xl" :
+    <button   onClick={handleEnviarPedido} disabled={carrito.length === 0 ? true : false} className={ carrito.length === 0 ? "bg-red-500 px-4 py-2 rounded-sm text-white font-semibold text-xl" :
   "bg-green-500 px-4 py-2 rounded-sm text-white font-semibold text-xl"
   }>
-      {carrito.length > 0 ? "Hacer Pedido" : "Agrega Productos al Carrito"}
+      {carrito.length > 0 ? "Enviar Pedido" : "Agrega Productos al Carrito"}
       </button>
          
 

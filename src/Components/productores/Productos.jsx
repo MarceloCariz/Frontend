@@ -56,7 +56,7 @@ const Productos = ({ producto, setReload ,reload}) => {
   }, 2000);
   };
   return (
-    <div className="w-auto px-2 py-4 rounded-md shadow-xl  flex flex-col items-center justify-center bg-white">
+    <div className="sm:w-auto  px-2 py-4 rounded-md shadow-xl  flex flex-col items-center justify-center bg-white">
       {alerta && (<p className="px-4 py-1 bg-green-500 text-white font-semibold text-lg rounded-lg">{alerta}</p>)}
       
       <div className="flex flex-col gap-4">

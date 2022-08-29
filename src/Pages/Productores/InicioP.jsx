@@ -44,7 +44,7 @@ const InicioP = () => {
       <ModalProducto handleModal={handleModal} setActiveModal={setActiveModal}/>
     }
 
-    <div className='flex justify-center gap-12 mt-12 flex-wrap'>
+    <div className='flex justify-center  gap-12 mt-12 flex-wrap'>
       
       {
         productos.length > 0 && auth.ID === productos[0].ID_PRODUCTOR ? productos.map((producto, i)=>(

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import useAuth from '../Hooks/useAuth'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faShop, faUser,  faRightFromBracket, faTruck, faBars, faSeedling } from '@fortawesome/free-solid-svg-icons'
+import { faShop, faUser,  faRightFromBracket, faTruck, faBars, faSeedling, faGavel } from '@fortawesome/free-solid-svg-icons'
 const ProductorLayout = ({children}) => {
     const {auth, setAuth, setProductos} = useAuth();
     const navigate = useNavigate();
@@ -37,12 +37,17 @@ const ProductorLayout = ({children}) => {
     <div className='#d4d8dd'>
         <nav className=' bg-stone-800'>
           <div className='sm:h-32 h-24 flex sm:justify-between items-center  container mx-auto text-white'>
-            <Link to="/productor"><h1 className='sm:text-4xl text-2xl text-white font-semibold flex items-center gap-1 '>
+            <Link to="/productor"><h1 className='sm:text-4xl text-2xl text-white font-semibold flex items-center gap-1 ml-2'>
                 <FontAwesomeIcon icon={faSeedling}/>
                 MaipoGrande</h1></Link>
             {/* Desktop */}
-            <div className='sm:flex hidden items-center justify-end  w-1/2 gap-8 '>
+            <div className='sm:flex hidden items-center justify-end  w-2/3 gap-8 '>
+     
                 <Link to="subastas" className='flex cursor-pointer'>
+                    <FontAwesomeIcon icon={faGavel} className="text-2xl mr-2 mt-1"/>
+                    <p className='text-2xl  '>Subastas</p>
+                </Link>
+                <Link to="envios" className='flex cursor-pointer'>
                     <FontAwesomeIcon icon={faTruck} className="text-2xl mr-2 mt-1"/>
                     <p className='text-2xl  '>Mis Envios</p>
                 </Link>
@@ -67,7 +72,7 @@ const ProductorLayout = ({children}) => {
 
         
             {/* Responsive */}
-            <div className='sm:hidden flex justify-between items-center gap-2 w-1/5  ml-28'>
+            <div className='sm:hidden flex justify-between items-center gap-2 w-1/5  ml-20'>
             <button className='  bg-red-500  text-white px-2 ml-4    '  onClick={handleLogout} >
                     <FontAwesomeIcon icon={faRightFromBracket} className=" "/>
             </button>
@@ -88,6 +93,10 @@ const ProductorLayout = ({children}) => {
                 <div className='flex cursor-pointer'>
                     <FontAwesomeIcon icon={faTruck} className="text-xl mr-2 mt-1"/>
                     <p className='text-xl  '>Mis Envios</p>
+                </div>
+                <div className='flex cursor-pointer'>
+                    <FontAwesomeIcon icon={faGavel} className="text-xl mr-2 mt-1"/>
+                    <Link to={'/inicio-productor'} className='text-xl  '>Subastas</Link>
                 </div>
                 <div className='flex cursor-pointer'>
                     <FontAwesomeIcon icon={faShop} className="text-xl mr-2 mt-1"/>
