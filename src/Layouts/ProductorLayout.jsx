@@ -96,11 +96,11 @@ const ProductorLayout = ({children}) => {
                 </div>
                 <div className='flex cursor-pointer'>
                     <FontAwesomeIcon icon={faGavel} className="text-xl mr-2 mt-1"/>
-                    <Link to={'/inicio-productor'} className='text-xl  '>Subastas</Link>
+                    <Link to={'subastas'} className='text-xl  '>Subastas</Link>
                 </div>
                 <div className='flex cursor-pointer'>
                     <FontAwesomeIcon icon={faShop} className="text-xl mr-2 mt-1"/>
-                    <Link to={'/inicio-productor'} className='text-xl  '>Mis Productos</Link>
+                    <Link to={'/productor'} className='text-xl  '>Mis Productos</Link>
                 </div>
                 <div className='flex cursor-pointer' >
                 <FontAwesomeIcon icon={faUser} className="text-xl mr-2 mt-1"/>

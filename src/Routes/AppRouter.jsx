@@ -8,6 +8,7 @@ import RutaProtegidaTransportista from '../Layouts/RutaProtegidaTransportista'
 import Carrito from '../Pages/Carrito'
 import Inicio from '../Pages/Inicio'
 import Login from '../Pages/Login'
+import Pedidos from '../Pages/Pedidos'
 import Perfil from '../Pages/Perfil'
 import InicioP from '../Pages/Productores/InicioP'
 import LoginP from '../Pages/Productores/LoginP'
@@ -35,6 +36,7 @@ const AppRouter = () => {
           <Route index element={<Inicio/>}/>
           <Route path='carrito' element={<Carrito/>}/>
           <Route path='perfil' element={<Perfil/>}/>
+          <Route path='pedidos' element={<Pedidos/>}/>
         </Route>
 
         {/* PRODUCTORES */}

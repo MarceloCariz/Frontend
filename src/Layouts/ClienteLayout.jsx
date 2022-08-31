@@ -46,10 +46,10 @@ const ClienteLayout = ({ children }) => {
           </Link>
 
           <div className="sm:flex hidden items-center gap-4 ">
-            <div className="flex gap-2">
+            <Link to="pedidos" className="flex gap-2 cursor-pointer">
               <FontAwesomeIcon icon={faBagShopping} className="text-2xl mt-1" />
               <p className="sm:text-2xl capitalize">pedidos</p>
-            </div>
+            </Link>
             <Link to={'perfil'} className="flex gap-1 cursor-pointer">
               <FontAwesomeIcon icon={faUser} className="text-2xl  mt-1" />
               <p className="sm:text-2xl capitalize"> {auth.NOMBRE}</p>
@@ -135,11 +135,11 @@ const ClienteLayout = ({ children }) => {
       </div> */}
       {/* fin responsive */}
       {/* CONTENIDO */}
-      <div className="container mx-auto sm:mt-0 mt-12 ">
+      <div className=" min-h-screen mx-auto sm:mt-0 mt-4 bg-gray-100 mb-0 ">
         {children}
         </div>
       {/* CONTENIDO FIN */}
-      <footer className=' mt-12 bottom-0 sm:h-64 sm:mt-28 static  text-center  items-center flex justify-center w-full    h-32 bg-stone-800'>
+      <footer className='  bottom-0 sm:h-64 static  text-center  items-center flex justify-center w-full    h-32 bg-stone-800'>
             <Link to="/inicio"><h1 className='sm:text-4xl text-2xl text-white font-semibold flex items-center gap-1 '>
             <FontAwesomeIcon icon={faSeedling }/>
                 

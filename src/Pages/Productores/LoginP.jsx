@@ -66,7 +66,7 @@ const LoginP = () => {
           className="h-12 border px-2 rounded-md" 
             name="password"
             type="password"
-            placeholder="password"
+            placeholder="contraseña"
             value={formValues.password}
             onChange={handleOnchange}
           />

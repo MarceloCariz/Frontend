@@ -52,7 +52,7 @@ const Login = () => {
     }
         <div className="">
           <input
-            className="h-12 border px-2 rounded-md"
+            className="h-12 border px-2 rounded-md lowercase"
             name="correo"
             type="text"
             placeholder="correo"
@@ -65,7 +65,7 @@ const Login = () => {
           className="h-12 border px-2 rounded-md" 
             name="password"
             type="password"
-            placeholder="password"
+            placeholder="contraseña"
             value={formValues.password}
             onChange={handleOnchange}
           />

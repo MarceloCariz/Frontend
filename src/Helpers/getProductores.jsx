@@ -53,8 +53,6 @@ export const agregarProducto = async(producto, configt) =>{
 export const obtenerSubastasActivas = async()=>{
     try {
         const {data} = await clienteAxios('/productores/subastas');
-        console.log(data)
-        const unicos = [new Set(data)];
         
         return data
     } catch (error) {

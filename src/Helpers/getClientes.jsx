@@ -33,7 +33,7 @@ export const enviaPedidoExt = async(productos, direccion, config) =>{
   
     for(const  p  in productos){
         const {CANTIDAD, NOMBRE, unidad} = productos[p];
-        const productoFinal = { cantidad: CANTIDAD,nombre_producto: NOMBRE, peso: unidad, direccion, fecha_compra:fecha, id_referencia}
+        const productoFinal = { cantidad: unidad,nombre_producto: NOMBRE, peso: unidad, direccion, fecha_compra:fecha, id_referencia}
         console.log(fecha)
         console.log(productoFinal)
         promises.push(
@@ -44,4 +44,38 @@ export const enviaPedidoExt = async(productos, direccion, config) =>{
 
     const data =  await Promise.all(promises)
     return data;
+}
+
+
+export const obtenerPedidos = async(config)=>{
+    try {
+        const {data} = await clienteAxios('/clientes/pedidos', config)
+        let nuevoObjeto = [];
+        // data.forEach(x=>{
+        //     if(!nuevoObjeto.hasOwnProperty(x.REFERENCIA_COMPRA)){
+        //         nuevoObjeto[x.REFERENCIA_COMPRA]={
+        //             activos: []
+        //         }
+        //     }
+
+        //     nuevoObjeto[x.REFERENCIA_COMPRA].activos.push({
+        //         nombre: x.NOMBRE_PRODUCTO
+        //     })
+        // });
+        // console.log(nuevoObjeto)
+        const obj = data.reduce((acc, product)=>{
+            if(!acc[product.REFERENCIA_COMPRA]){
+              acc[product.REFERENCIA_COMPRA] = []
+            }
+            // console.log(product)
+            acc[product.REFERENCIA_COMPRA].push(product)
+      
+            return acc
+          },[]);
+         
+
+        return obj
+    } catch (error) {
+        console.log(error)
+    }
 }
