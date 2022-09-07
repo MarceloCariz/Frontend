@@ -86,7 +86,7 @@ export const pagarPedido = async(productos, direccion, config, total)=>{
         const {id_referencia} = await enviaPedidoExt(productos, direccion, config);
         console.log(id_referencia);
         console.log(total)
-        const {data} = await  clienteAxios.post("http://localhost:4000/api/transbank/pagar", {total, id_referencia} ,config);
+        const {data} = await  clienteAxios.post("/transbank/pagar", {total, id_referencia} ,config);
          return data
 
 
@@ -95,7 +95,7 @@ export const pagarPedido = async(productos, direccion, config, total)=>{
 export const validarPedido = async(token) =>{
 
     try {
-        const {data} = await  clienteAxios(`http://localhost:4000/api/transbank/validar/${token}`);
+        const {data} = await  clienteAxios(`/transbank/validar/${token}`);
         console.log(data)
         return data
     } catch (error) {
