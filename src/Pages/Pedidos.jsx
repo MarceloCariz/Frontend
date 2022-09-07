@@ -10,7 +10,7 @@ const Pedidos = () => {
         const cargarPedidos = async()=>{
             const resultado = await obtenerPedidos(config);
             resultado.map((ele,i)=>(console.log(ele.activos)))
-            
+            console.log(resultado)
             setPedidos(resultado);
         }
 
@@ -27,7 +27,9 @@ const Pedidos = () => {
           <div className='w-2/5 flex flex-col text-left justify-center items-center mb-4 rounded-lg bg-white shadow-xl px-4 py-4'>
             <div className='flex gap-2 text-xl capitalize font-semibold items-center '>
               <p>Numero pedido <span className='text-black font-bold'>#{i}</span> </p>
-              <p className='bg-gray-200 px-2 py-2 rounded-lg'>{ele[0].ESTADO_ENVIO}</p>
+              <p className='bg-gray-200 px-2 py-2 rounded-lg lowercase'>{ ele[0].ESTADO_PAGO === 'RECHAZADO' ? 'Estado de envio: CANCELADO' :`Estado de envio: ${ele[0].ESTADO_ENVIO}`}</p>
+              <p className='bg-gray-200 px-2 py-2 rounded-lg lowercase'>{ `Estado de pago: ${ele[0].ESTADO_PAGO}`}</p>
+
               
             </div>
             <p className='font-semibold   '>Fecha de compra: {ele[0].FECHA_COMPRA}</p>

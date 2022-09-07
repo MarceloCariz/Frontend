@@ -40,10 +40,11 @@ export const enviaPedidoExt = async(productos, direccion, config) =>{
           clienteAxios.post('/clientes/ingresar/orden', productoFinal, config)
         )
     }
+
+    Promise.all(promises);
     console.log('termine')
 
-    const data =  await Promise.all(promises)
-    return data;
+    return {id_referencia};
 }
 
 
@@ -78,4 +79,27 @@ export const obtenerPedidos = async(config)=>{
     } catch (error) {
         console.log(error)
     }
+}
+
+
+export const pagarPedido = async(productos, direccion, config, total)=>{
+        const {id_referencia} = await enviaPedidoExt(productos, direccion, config);
+        console.log(id_referencia);
+        console.log(total)
+        const {data} = await axios.post("http://localhost:4000/api/transbank/pagar", {total, id_referencia} ,config);
+         return data
+
+
+}
+
+export const validarPedido = async(token) =>{
+
+    try {
+        const {data} = await   axios.get(`http://localhost:4000/api/transbank/validar/${token}`);
+        console.log(data)
+        return data
+    } catch (error) {
+        console.log(error)
+    }
+
 }
