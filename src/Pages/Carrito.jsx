@@ -65,7 +65,9 @@ const Carrito = () => {
       // }
       // consolde.log()
       e.preventDefault();
-      const respuesta =  await pagarPedido(carrito, formValues.direccion, config, total);
+      const id_referencia = await enviaPedidoExt(carrito, formValues.direccion, config);
+
+      const respuesta =  await pagarPedido(id_referencia , config, total);
       const { token, url} = respuesta;
       // console.log(respuesta)
       // inputtbk.current.value

@@ -44,7 +44,7 @@ export const enviaPedidoExt = async(productos, direccion, config) =>{
     Promise.all(promises);
     console.log('termine')
 
-    return {id_referencia};
+    return id_referencia
 }
 
 
@@ -82,12 +82,15 @@ export const obtenerPedidos = async(config)=>{
 }
 
 
-export const pagarPedido = async(productos, direccion, config, total)=>{
-        const {id_referencia} = await enviaPedidoExt(productos, direccion, config);
-        console.log(id_referencia);
-        console.log(total)
+export const pagarPedido = async(id_referencia , config, total)=>{
+        
+        const obj = {
+            total,
+            id_referencia
+        }
+
         const {data} = await  clienteAxios.post("/transbank/pagar", {total, id_referencia} ,config);
-         return data
+        return data
 
 
 }
