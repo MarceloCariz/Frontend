@@ -1,7 +1,7 @@
 
 import React, { useEffect } from 'react'
 import useAuth from '../../Hooks/useAuth'
-import fotoPrueba from './img/FrenteAVaras.png'
+// import fotoPrueba from './img/FrenteAVaras.png'
 import {useState} from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCartPlus } from '@fortawesome/free-solid-svg-icons'

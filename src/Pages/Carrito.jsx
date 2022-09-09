@@ -1,6 +1,8 @@
+import { faHandPointRight } from "@fortawesome/free-regular-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
 import { useRef } from "react";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link,  } from "react-router-dom";
 import { enviaPedidoExt, pagarPedido, traerDatos } from "../Helpers/getClientes";
 import useAuth from "../Hooks/useAuth";
 
@@ -15,7 +17,7 @@ const Carrito = () => {
         pais: '',
     }
   )
- 
+    console.log('1')
     useEffect(() => {
         localStorage.setItem('carrito',JSON.stringify(carrito))
         const montoTotal = carrito.reduce((total, i)=>(i.PRECIO_LOCAL * i.unidad) + total, 0 );
@@ -44,7 +46,6 @@ const Carrito = () => {
     }
 
 
-    const navigate = useNavigate();
   // const handleEnviarPedido = async() =>{
   //   enviaPedidoExt(carrito, formValues.direccion, config);
   //   setCarrito([]);
@@ -56,9 +57,7 @@ const Carrito = () => {
     const inputtbk = useRef();
     const formAction = useRef();
 
-  const onChange = ({target})=>{
-    console.log(target.value)
-  }
+
   const handleEnviarPedido = async(e) =>{
       // if(!inputtbk.current.value){
       //   return
@@ -87,9 +86,9 @@ const Carrito = () => {
   }
   return (
     <div className=" mt-12 flex justify-center flex-col items-center sm:mb-0 mb-60">
-
+      {carrito.length > 0 ? (
+       <>
       <p className="text-center text-3xl font-semibold">Resumen del Pedido</p>
-      {carrito.length > 0 ? 
 
       <table className="mt-10 sm:w-1/2 w-5/6 flex flex-col  capitalize" >
       <thead className="" >
@@ -107,7 +106,7 @@ const Carrito = () => {
       <tbody >
 
       {carrito.length > 0
-        && carrito.map(({ ID, NOMBRE, CANTIDAD, PRECIO_LOCAL , unidad, IMAGE_URL}, indice) => (
+        && carrito.map(({ ID, NOMBRE,  PRECIO_LOCAL , unidad, IMAGE_URL}, indice) => (
             <tr className="flex  sm:justify-between justify-between  mt-2 items-center" key={indice}>
                 <th>
                   <img className="object-contain sm:w-16 w-12 sm:h-16 h-12" src={IMAGE_URL} alt="imagen" />
@@ -128,12 +127,11 @@ const Carrito = () => {
 
 
     </table>
-   : 'Agrega Productos'}
     <div className="w-1/2 flex flex-row bg-gray-300 mt-4 px-4 rounded-sm mb-4">
             <p className="w-full">Total</p>
             <p className="text-right font-semibold"> ${total}</p>
     </div>
-    {/* INFROMACION DESPACHO */}
+
     <div className="mt-4 mb-8 sm:w-1/2 flex flex-col items-center border border-1 border-gray-500 py-2 px-4 sm:px-2 rounded-md">
        <h2 className="text-xl font-semibold text-center">INFORMACION DESPACHO</h2>
        <div className="flex flex-col gap-2 mt-2 text-lg sm:w-1/3">
@@ -155,6 +153,15 @@ const Carrito = () => {
     </form>
 
          
+    </>): 
+      <div className="flex flex-col gap-4 items-center">
+        <h3 className="text-3xl">Agrega productos a tu carrito</h3>
+        <Link  className="px-4 py-2 text-white bg-slate-600 text-lg" to={'/inicio'}>
+          <FontAwesomeIcon className="mr-2" icon={faHandPointRight}/>
+          Volver al Inicio
+        </Link>
+      </div>
+    }
 
     </div>
   );

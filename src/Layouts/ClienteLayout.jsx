@@ -4,7 +4,8 @@ import {
   faCartShopping,
   faRightFromBracket,
   faUser,
-  faSeedling
+  faSeedling,
+  faHome
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
@@ -55,7 +56,7 @@ const ClienteLayout = ({ children }) => {
               <p className="sm:text-2xl capitalize"> {auth.NOMBRE}</p>
             </Link>
 
-            <div className=" sm:flex gap-2 hidden ">
+            <div className=" sm:flex gap-2 hidden  transition ease-in duration-300  hover:-translate-y-1">
               <Link to="carrito " className=" flex ">
                 <FontAwesomeIcon icon={faCartShopping} className="text-3xl " />
               </Link>
@@ -98,22 +99,24 @@ const ClienteLayout = ({ children }) => {
       </nav>
       {/* Menu responsive */}
       {activeMenu && (
-        <div className=" flex justify-end  text-white text-center">
-          <nav className="bg-stone-800 h-auto w-auto px-4 py-4 flex flex-col justify-between gap-4">
-            <div className="flex cursor-pointer">
+        <div className="right-0  text-white text-center z-1 absolute animate__animated animate__fadeIn animate__faster">
+          <nav className="bg-stone-800 h-auto w-auto px-4 py-4 flex flex-col justify-between gap-4  " >
+          <Link onClick={()=> setActiveMenu(false)} to={'/inicio'} className="flex cursor-pointer">
+              <FontAwesomeIcon
+                icon={faHome}
+                className="text-xl mr-2 mt-1"
+              />
+              <p className="text-xl  ">Inicio</p>
+            </Link>
+            <Link  onClick={()=> setActiveMenu(false)} to={'pedidos'} className="flex cursor-pointer">
               <FontAwesomeIcon
                 icon={faBagShopping}
                 className="text-xl mr-2 mt-1"
               />
               <p className="text-xl  ">Mis Pedidos</p>
-            </div>
-            {/* <div className="flex cursor-pointer">
-              <FontAwesomeIcon icon={faUser} className="text-xl mr-2 mt-1" />
-              <Link to={"/inicio-productor"} className="text-xl  ">
-                ALgo
-              </Link>
-            </div> */}
-            <Link to="perfil" className="flex cursor-pointer">
+            </Link>
+
+            <Link  onClick={()=> setActiveMenu(false)} to="perfil" className="flex cursor-pointer">
               <FontAwesomeIcon icon={faUser} className="text-xl mr-2 mt-1" />
 
               <p className="sm:text-2xl text-xl capitalize"> {auth.NOMBRE}</p>
@@ -135,7 +138,7 @@ const ClienteLayout = ({ children }) => {
       </div> */}
       {/* fin responsive */}
       {/* CONTENIDO */}
-      <div className=" min-h-screen mx-auto sm:mt-0 mt-4 bg-gray-100 mb-0 ">
+      <div className=" min-h-screen mx-auto sm:mt-0 pt-4 bg-gray-100 mb-0 ">
         {children}
         </div>
       {/* CONTENIDO FIN */}
