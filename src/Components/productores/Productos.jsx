@@ -11,12 +11,11 @@ const Productos = ({ producto, setReload ,reload}) => {
     PRECIO_EXP,
     PRECIO_LOCAL,
     ID_PRODUCTO,
-    ID_PRODUCTOR,
     CALIDAD,
     IMAGE_URL
   } = producto;
   const [activeEditar, setActiveEditar] = useState('bg-blue-500');
-  const {auth,productos,  config} = useAuth();
+  const {  config} = useAuth();
   const [alerta, setAlerta] = useState('')
   const [productoActualizado, setProductoActualizado] = useState({
     cantidad : CANTIDAD,
@@ -52,7 +51,8 @@ const Productos = ({ producto, setReload ,reload}) => {
     setAlerta(respuesta.msg)
     setTimeout(() => {
       setAlerta('')
-      setReload(!reload)
+      // setReload(!reload)
+      window.location.reload();
   }, 2000);
   };
   return (
@@ -82,13 +82,37 @@ const Productos = ({ producto, setReload ,reload}) => {
         </div>
         <div className="flex flex-col ">
           <label className="text-left"htmlFor={`${CALIDAD}`}>Calidad</label>
-          <input name="calidad" onChange={handleOnchange} className="bg-gray-50 border-1 pl-1 border-gray-500 border rounded-sm" id={`${CALIDAD}`} value={calidad} />
+          {/* <input name="calidad" onChange={handleOnchange} className="bg-gray-50 border-1 pl-1 border-gray-500 border rounded-sm" id={`${CALIDAD}`} value={calidad} /> */}
+        
+          <select className="mr-12" name="calidad" id="calidad" onChange={handleOnchange}>
+            <option value="">{calidad}</option>
+            {calidad === 'baja' && 
+                      <>
+                        <option value="media">Media</option>
+                        <option value="alta">Alta</option>
+                      </>
+            }
+            {calidad === 'media' && 
+                      <>
+                        <option value="baja">Baja</option>
+                        <option value="alta">Alta</option>
+                      </>
+            }
+             {calidad === 'alta' && 
+                      <>
+                        <option value="baja">Baja</option>
+                        <option value="media">Media</option>
+
+                      </>
+            }
+
+          </select>
         </div>
 
       </div>
       <div className="flex gap-4 mt-4">
             <form onSubmit={handleEditar}>
-            <button className={`  px-4 py-2 text-white flex gap-1 items-center justify-center rounded-lg ${activeEditar}`} onClick={handleEditar}>
+            <button className={` hover:-translate-y-1 hover:bg-blue-600 px-4 py-2 text-white flex gap-1 items-center justify-center rounded-lg ${activeEditar}`} onClick={handleEditar}>
             <FontAwesomeIcon className="text-white" icon={faPencil}/>
             Editar</button>
             </form>
@@ -98,7 +122,7 @@ const Productos = ({ producto, setReload ,reload}) => {
   
 
 
-        <button  className="bg-red-500 px-4 py-2 text-white flex gap-2 items-center justify-center rounded-lg" onClick={handleDelete}>
+        <button  className="hover:-translate-y-1 hover:bg-red-600 bg-red-500 px-4 py-2 text-white flex gap-2 items-center justify-center rounded-lg" onClick={handleDelete}>
         <FontAwesomeIcon className="text-white" icon={faTrash}/>
           
           Eliminar</button>

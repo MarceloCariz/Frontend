@@ -76,6 +76,7 @@ const Login = () => {
         <Link to="registrar">¿No tienes cuenta? Registrate Aqui</Link>
       </form>
     </div>
+
     </div>
   );
 };

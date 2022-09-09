@@ -43,19 +43,20 @@ const ProductorLayout = ({children}) => {
             {/* Desktop */}
             <div className='sm:flex hidden items-center justify-end  w-2/3 gap-8 '>
      
-                <Link to="subastas" className='flex cursor-pointer'>
+                <Link to="subastas" className='flex cursor-pointer hover:text-gray-50'>
                     <FontAwesomeIcon icon={faGavel} className="text-2xl mr-2 mt-1"/>
                     <p className='text-2xl  '>Subastas</p>
                 </Link>
-                <Link to="envios" className='flex cursor-pointer'>
-                    <FontAwesomeIcon icon={faTruck} className="text-2xl mr-2 mt-1"/>
+                <Link to="envios" className='flex cursor-pointer hover:text-gray-50'>
+                    <FontAwesomeIcon icon={faTruck} className="text-2xl mr-2 mt-1 "/>
                     <p className='text-2xl  '>Mis Envios</p>
                 </Link>
-                <Link to="/productor" className='flex cursor-pointer'>
-                    <FontAwesomeIcon icon={faShop} className="text-2xl mr-2 mt-1"/>
+                <Link to="/productor" className='flex cursor-pointer hover:text-gray-50'>
+                    <FontAwesomeIcon icon={faShop} className="text-2xl mr-2 mt-1 "/>
                     <p className='text-2xl  '>Mis Productos</p>
+
                 </Link>
-                <div className='flex cursor-pointer' >
+                <div className='flex cursor-pointer hover:text-gray-50' >
                 <FontAwesomeIcon icon={faUser} className="text-2xl mr-2 mt-1"/>
 
                     <p className='sm:text-2xl capitalize'> {auth.NOMBRE}</p>

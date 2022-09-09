@@ -1,12 +1,10 @@
 import React, { useState } from 'react'
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { registrar } from '../Helpers/getClientes';
-import useAuth from '../Hooks/useAuth';
 
 const Registrar = () => {
   const [formValues, setFormValues] = useState({ correo: "", password: "", password2:"", nombre: "" });
   const [alerta, setAlerta] = useState('')
-  const { setAuth } = useAuth();
   const navigate = useNavigate();
   const handleOnchange = ({ target }) => {
     setFormValues({ ...formValues, [target.name]: target.value });
@@ -24,7 +22,7 @@ const Registrar = () => {
     }
     console.log(formValues)
     if(formValues.password !== formValues.password2){
-      setAlerta("Los passwords deben ser iguales")
+      setAlerta("Las contraseñas deben ser iguales")
       return
     }
 
@@ -35,7 +33,7 @@ const Registrar = () => {
         nombre: formValues.nombre
 
       }
-      const respuesta = await registrar(datos);
+      await registrar(datos);
 
  
       
@@ -86,7 +84,7 @@ const Registrar = () => {
           className="h-12 border px-2 rounded-md" 
             name="password"
             type="password"
-            placeholder="password"
+            placeholder="Contraseña"
             value={formValues.password}
             onChange={handleOnchange}
           />
@@ -96,7 +94,7 @@ const Registrar = () => {
           className="h-12 border px-2 rounded-md" 
             name="password2"
             type="password"
-            placeholder="Repetir password"
+            placeholder="Repetir Contraseña"
             value={formValues.password2}
             onChange={handleOnchange}
           />

@@ -60,7 +60,8 @@ const Subastas = () => {
         
 
         <div className='flex justify-center mt-12 gap-2'>
-          <div className='border border-1 border-red-600 flex-1 '>
+
+          <div className=' flex-1 flex gap-2 items-start flex-wrap '>
             {
               subastas.length > 0 ?  
                     subastas.map((subasta)=>(
@@ -68,7 +69,7 @@ const Subastas = () => {
                       
 
                   ))
-                : 'no hay subastas disponibles'
+                : <p className='text-center mx-auto pl-16 capitalize font-semibold'>no hay subastas disponibles</p>
             }
               
           </div>
@@ -78,14 +79,17 @@ const Subastas = () => {
 
 
           <aside>
-            <p>Mis productos</p>
+            <p className='text-lg font-semibold'>Mis productos</p>
             <hr className='h-2'/>        
             {
               productos.length > 0 ? productos.map((producto)=>(
-                  <div key={producto.ID_PRODUCTO} className="flex gap-2 capitalize">
+                  <div key={producto.ID_PRODUCTO} className="flex gap-4 mb-4 capitalize items-center">
                     <img className='object-contain w-12 h-12' src={producto.IMAGE_URL} alt="" />
-                      <p>{producto.NOMBRE}</p>
-                      <p>{producto.CANTIDAD}</p>
+                    <div className='flex flex-col text-left'>
+                        <p>{producto.NOMBRE}</p>
+                        <p> Cantidad: {producto.CANTIDAD}</p>
+                    </div>
+
 
                       {/* <button onClick={(e)=>handleClick(producto,e)}>Enviar</button> */}
                   </div>
