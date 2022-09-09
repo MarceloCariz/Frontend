@@ -14,7 +14,8 @@ const Pedidos = () => {
     const cargarPedidos = async () => {
       const resultado = await obtenerPedidos(config);
       // resultado.map((ele,i)=>(console.log(ele.activos)))
-      setPedidos(resultado);
+      // console.log(resultado.sort())
+      setPedidos(resultado.sort());
     };
 
     cargarPedidos();
@@ -34,11 +35,11 @@ const Pedidos = () => {
       <div className="flex justify-center flex-col items-center mx-auto pt-12">
         {pedidos.length > 0
           ? pedidos.map((ele, i) => (
-              <div key={i} className="sm:w-2/5 flex flex-col text-left justify-center items-center mb-4 rounded-lg bg-white shadow-xl px-4 py-4">
+              <div key={ele[0].REFERENCIA_COMPRA} className="sm:w-2/5 flex flex-col text-left justify-center items-center mb-4 rounded-lg bg-white shadow-xl px-4 py-4">
                 <div className="flex gap-2 sm:text-xl capitalize font-semibold items-center ">
                   <p>
                     Numero pedido{" "}
-                    <span className="text-black font-bold">#{i}</span>{" "}
+                    <span className="text-black font-bold">#{ele[0].REFERENCIA_COMPRA}</span>{" "}
                   </p>
 
                   <div
