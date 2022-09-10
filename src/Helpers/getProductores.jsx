@@ -59,3 +59,24 @@ export const obtenerSubastasActivas = async()=>{
         console.log(error)
     }
 }
+
+
+export const obtenerEnvios = async(config) =>{
+    try {
+        const {data} = await clienteAxios('/productores/envios', config);
+        const obj = data.reduce((acc, product)=>{
+            if(!acc[product.REFERENCIA_COMPRA]){
+              acc[product.REFERENCIA_COMPRA] = []
+            }
+            // console.log(product)
+            acc[product.REFERENCIA_COMPRA].push(product)
+      
+            return acc
+          },[]);
+         
+
+        return obj
+    } catch (error) {
+        console.log(error)
+    }
+}

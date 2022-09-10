@@ -11,7 +11,9 @@ const Perfil = () => {
             ciudad: '',
             pais: '',
         }
-    )
+    );
+    const [activeActualizar, setActiveActualizar] = useState(false)
+    const [mensaje, setMensaje] = useState('')
 
     useEffect(() => {
         const cargarDatos = async() =>{
@@ -22,7 +24,6 @@ const Perfil = () => {
                 pais: resp.PAIS || ''
             })
         } 
-        console.log('1')
         cargarDatos();
     }, [config])
 
@@ -31,18 +32,23 @@ const Perfil = () => {
             ...formValues,
             [target.name]: target.value
         })
-        console.log(formValues)
+        setActiveActualizar(true)
     }
 
     const handleSubmit = async(e) =>{
         e.preventDefault();
-        console.log(formValues)
         const resp = await actualizarDatos(formValues, config);
-        console.log(resp)
+        setMensaje(resp.msg);
+        setActiveActualizar(false)
+        setTimeout(() => {
+            setMensaje('')
+        }, 2000);
+
     }
   return (
     <div className='flex flex-col justify-center items-center pt-4 mb-56 '>
         <h2 className='text-2xl mb-8 font-bold'>Informacion Personal</h2>
+        { mensaje ? <p className='bg-green-500 py-2 px-4 text-white font-semibold mb-2 w-1/4 text-center'>{mensaje}</p> : ''}
         <form onSubmit={handleSubmit} className='bg-white shadow-lg px-12 py-4 flex flex-col sm:w-auto w-6/7 gap-4 '> 
         {/* 4 */}
             <div className='flex gap-6 items-center'>
@@ -65,7 +71,8 @@ const Perfil = () => {
                 <label htmlFor="correo" className='sm:text-xl font-bold'>Pais:</label>
                 <input name='pais' onChange={handleInputchange}  className='ml-16 bg-gray-100 px-2' value={formValues.pais}/>
             </div>
-            <button type="submit" className='text-white bg-blue-500 px-4 py-2 mt-2 w-1/2 ml-24'>Actualizar</button>
+            <button type="submit" className={ activeActualizar ? 'text-white bg-green-500 px-4 py-2 mt-2 w-auto '  : 'text-white bg-blue-500 px-4 py-2 mt-2 w-1/2 ml-24'}>
+               {activeActualizar ? "Guardar Cambios" : "Actualizar"}</button>
         </form>
     </div>
   )

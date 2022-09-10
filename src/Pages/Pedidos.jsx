@@ -52,12 +52,12 @@ const Pedidos = () => {
                     {ele[0].ESTADO_PAGO === "RECHAZADO" ? (
                       "Estado de envio: CANCELADO"
                     ) : (
-                      <p>
+                      <p className="flex   sm:flex-row sm:gap-0 flex-col gap-1">
                         Estado de envio:{" "}
                         <span
                           className={
                             (ele[0].ESTADO_ENVIO === "pendiente" &&
-                              "bg-yellow-400 px-1 py-1 rounded-lg") ||
+                              "bg-yellow-400 px-1 py-1 sm:h-10 rounded-lg ") ||
                             (ele[0].ESTADO_ENVIO === "asignado" &&
                               "bg-green-600")
                           }
@@ -83,7 +83,7 @@ const Pedidos = () => {
                     onClick={(e) => onClick({ i }, e)}
                   >
                     {show && Number(idPedido.current.id) === i ? (
-                      <p className="text-lg">
+                      <p className="text-lg ">
                         <FontAwesomeIcon
                           className="text-2xl transition ease-in duration-300  hover:-translate-y-1"
                           icon={faEye}

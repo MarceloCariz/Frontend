@@ -11,6 +11,7 @@ import Login from '../Pages/Login'
 import Pago from '../Pages/Pago'
 import Pedidos from '../Pages/Pedidos'
 import Perfil from '../Pages/Perfil'
+import Envios from '../Pages/Productores/Envios'
 import InicioP from '../Pages/Productores/InicioP'
 import LoginP from '../Pages/Productores/LoginP'
 import RegistrarP from '../Pages/Productores/RegistrarP'
@@ -45,6 +46,7 @@ const AppRouter = () => {
         <Route path='/productor' element={<RutaProtegidaProductor/>}>
               <Route index element={<InicioP/>}/>
               <Route path='subastas' element={<Subastas/>}/>
+              <Route path='envios' element={<Envios/>}/>
               {/* <Route path='*' element={<InicioP />} /> */}
         </Route>
 
