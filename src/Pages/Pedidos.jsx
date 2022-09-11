@@ -17,8 +17,8 @@ const Pedidos = () => {
       // console.log(resultado.sort())
       setPedidos(resultado.sort());
     };
-
     cargarPedidos();
+
   }, [config]);
 
   const onClick = (e) => {
@@ -62,7 +62,10 @@ const Pedidos = () => {
                               "bg-green-600")
                           }
                         >
-                          {ele[0].ESTADO_ENVIO}
+                     {  
+                        ele[0].ESTADO_ENVIO
+                     }
+                            
                         </span>
                       </p>
                     )}
@@ -107,21 +110,23 @@ const Pedidos = () => {
 
                 {show &&
                   Number(idPedido.current.id) === i &&
-                 ( <div className="flex gap-12 mt-4  sm:ml-32 animate__animated animate__fadeIn ">
+                 ( <div className="flex gap-12 mt-4  sm:ml-16 animate__animated animate__fadeIn ">
                    <table className="flex flex-col gap-2 table-auto ">
                    <thead >
                           <tr className="flex text-xl  justify-between gap-12  text-center    items-center">
                             <th className="">Nombre Producto </th>
                             <th className="">Cantidad </th>
+                            <th>Estado</th>
                             {/* <th>Fecha Compra </th> */}
                           </tr>
                     </thead>
                     {ele.map((e, i) => (
 
                         <tbody key={i}>
-                          <tr className="flex capitalize justify-between  text-center    items-center text-sm">
-                            <th>{e.NOMBRE_PRODUCTO}</th>
-                            <th>{e.CANTIDAD} kg</th>
+                          <tr className="flex capitalize sm:gap-32 justify-between sm:justify-start  sm:text-rigth   items-center text-sm">
+                            <th className="w-32">{e.NOMBRE_PRODUCTO}</th>
+                            <th >{e.CANTIDAD} kg</th>
+                            <th>{e.ESTADO_ENVIO}</th>
                           </tr>
                         </tbody>
                       ))}

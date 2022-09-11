@@ -21,7 +21,7 @@ const Envios = () => {
         {envios.length > 0 ? 
             envios.map((ele)=>(
 
-                <CardEnvio key={ele[0]} ele={ele}/>
+                <CardEnvio key={ele[0]} ele={ele} config={config}/>
 
             ))
             

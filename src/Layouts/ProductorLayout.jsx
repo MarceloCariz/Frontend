@@ -89,21 +89,21 @@ const ProductorLayout = ({children}) => {
         {/* Menu responsive */}
         {
             activeMenu &&
-            <div className=' flex justify-end  text-white text-center'>
-                <nav className='bg-stone-800 h-40 w-auto px-4 py-4 flex flex-col justify-between'>
-                <div className='flex cursor-pointer'>
+            <div className='right-0  text-white text-center  absolute animate__animated animate__fadeIn animate__faster'>
+                <nav className='bg-stone-800  h-48 w-auto px-4 py-4 flex flex-col justify-between'>
+                <Link  onClick={()=> setActiveMenu(false)} to={'envios'} className='flex cursor-pointer'>
                     <FontAwesomeIcon icon={faTruck} className="text-xl mr-2 mt-1"/>
                     <p className='text-xl  '>Mis Envios</p>
-                </div>
-                <div className='flex cursor-pointer'>
+                </Link>
+                <div  onClick={()=> setActiveMenu(false)} className='flex cursor-pointer'>
                     <FontAwesomeIcon icon={faGavel} className="text-xl mr-2 mt-1"/>
                     <Link to={'subastas'} className='text-xl  '>Subastas</Link>
                 </div>
-                <div className='flex cursor-pointer'>
+                <div  onClick={()=> setActiveMenu(false)} className='flex cursor-pointer'>
                     <FontAwesomeIcon icon={faShop} className="text-xl mr-2 mt-1"/>
                     <Link to={'/productor'} className='text-xl  '>Mis Productos</Link>
                 </div>
-                <div className='flex cursor-pointer' >
+                <div   className='flex cursor-pointer' >
                 <FontAwesomeIcon icon={faUser} className="text-xl mr-2 mt-1"/>
 
                     <p className='sm:text-2xl text-xl capitalize'> {auth.NOMBRE}</p>
@@ -116,7 +116,7 @@ const ProductorLayout = ({children}) => {
             {/* fin responsive */}
 
         {/* CONTENIDO */}
-        <div className='min-h-screen mx-auto sm:mt-0 mt-4 bg-gray-100 '>
+        <div className='min-h-screen mx-auto sm:mt-0 pt-4 bg-gray-100 '>
             {children}
         </div>
         {/* CONTENIDO FIN */}

@@ -80,3 +80,15 @@ export const obtenerEnvios = async(config) =>{
         console.log(error)
     }
 }
+
+export const confirmarEnvioBodega = async(referencia_compra, config) =>{
+    // referencia_compra = (referencia_compra.toString());
+    // console.log(referencia_compra)
+    console.log(config)
+    try {
+        const {data} =await  axios.put(`http://localhost:4000/api/productores/envios/bodega/confirmar`, {referencia_compra},config);
+        return data;
+    } catch (error) {
+        console.log(error.response.data.msg)
+    }
+}
