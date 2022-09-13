@@ -9,7 +9,8 @@ import useAuth from "../Hooks/useAuth";
 const Carrito = () => {
   const { carrito, setCarrito, config } = useAuth();
   const [tokentbk, setTokentbk] = useState({token: '', url:''});
-  const [total, setTotal] = useState(0)
+  const [total, setTotal] = useState(0);
+  const [cargando, setCargando] = useState(false)
   const [formValues, setFormValues] = useState(
     {
         direccion: '',
@@ -17,7 +18,6 @@ const Carrito = () => {
         pais: '',
     }
   )
-    console.log('1')
     useEffect(() => {
         localStorage.setItem('carrito',JSON.stringify(carrito))
         const montoTotal = carrito.reduce((total, i)=>(i.PRECIO_LOCAL * i.unidad) + total, 0 );
@@ -64,7 +64,11 @@ const Carrito = () => {
       // }
       // consolde.log()
       e.preventDefault();
+      setCargando(true)
+      // return
       const id_referencia = await enviaPedidoExt(carrito, formValues.direccion, config);
+      
+
 
       const respuesta =  await pagarPedido(id_referencia , config, total);
       const { token, url} = respuesta;
@@ -78,6 +82,7 @@ const Carrito = () => {
       // console.log(formAction.current.action)
       // console.log(inputtbk.current.value)
       setCarrito([]);
+      setCargando(false)
 
       formAction.current.submit();
 
@@ -85,7 +90,7 @@ const Carrito = () => {
       // console.log(inputtbk.current)
   }
   return (
-    <div className=" mt-12 flex justify-center flex-col items-center sm:mb-0 mb-60">
+    <div className=" mt-12 flex justify-center flex-col items-center sm:mb-4 mb-60  ">
       {carrito.length > 0 ? (
        <>
       <p className="text-center text-3xl font-semibold">Resumen del Pedido</p>
@@ -141,15 +146,31 @@ const Carrito = () => {
        </div>
        <Link to="/inicio/perfil"  className='text-white bg-blue-500 px-4 py-2 mt-2 text-sm'>Actualizar Informacion</Link>
     </div>
-
     <form   ref={formAction} onSubmit={handleEnviarPedido}    >
 
       <input ref={inputtbk} type="hidden"  name="token_ws"   value={`${tokentbk.token}`}/>
+     
 
-      <input type="submit" disabled={carrito.length === 0 ? true : false} className={ carrito.length === 0 ? "bg-red-500 px-4 py-2 rounded-sm text-white font-semibold text-xl" :
-  "bg-green-500 px-20 py-4 rounded-sm text-white font-semibold text-xl cursor-pointer"}
+      {/* <input type="submit" disabled={carrito.length === 0 ? true : false} className={ carrito.length === 0 ? "bg-red-500 px-4 py-2 rounded-sm text-white font-semibold text-xl" :
+  "bg-green-500 px-20 py-4 rounded-sm text-white font-semibold text-xl cursor-pointer animate-spin "}
       value={carrito.length > 0 ? "Enviar Pedido" : "Agrega Productos al Carrito"}
-      />
+      /> */}
+      <button  type="submit" disabled={carrito.length === 0 ? true : false} className={ carrito.length === 0 ? "bg-red-500 px-4 py-2 rounded-sm text-white font-semibold text-xl" :
+  "bg-green-500 px-20 py-4 rounded-sm text-white font-semibold text-xl cursor-pointer  "}>
+        <div className="flex items-center">
+        {cargando && 
+                <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
+        }
+
+
+        {(carrito.length > 0 ? (cargando  ? "Enviando..." : 'Enviar Pedido' ) : "Agrega Productos al Carrito" )}
+
+        </div>
+
+      </button>
     </form>
 
          
@@ -168,3 +189,4 @@ const Carrito = () => {
 };
 
 export default Carrito;
+<circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>

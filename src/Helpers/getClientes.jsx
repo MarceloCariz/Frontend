@@ -26,24 +26,22 @@ export const actualizarDatos = async(datos,config)=>{
 }
 
 
-export const enviaPedidoExt = async(productos, direccion, config) =>{
+export const enviaPedidoExt = async (productos, direccion, config) =>{
     const id_referencia = Math.floor(Math.random() * 1000000);
     const fecha = new Date().toLocaleDateString();
-    let promises = [];
-  
-    for(const  p  in productos){
-        const {CANTIDAD, NOMBRE, unidad} = productos[p];
-        const productoFinal = { cantidad: unidad,nombre_producto: NOMBRE, peso: unidad, direccion, fecha_compra:fecha, id_referencia}
-        console.log(fecha)
-        console.log(productoFinal)
-        promises.push(
-          clienteAxios.post('/clientes/ingresar/orden', productoFinal, config)
-        )
-    }
 
-    Promise.all(promises);
-    console.log('termine')
+    let formData = new FormData();
 
+    formData.append('products', JSON.stringify(productos));
+    formData.append('fecha', fecha);
+    formData.append('id_referencia', id_referencia);
+    formData.append('direccion',direccion);
+
+
+
+
+    const {data} = await clienteAxios.post('/clientes/ingresar/orden', formData, config)
+    console.log(data)
     return id_referencia
 }
 
@@ -51,19 +49,7 @@ export const enviaPedidoExt = async(productos, direccion, config) =>{
 export const obtenerPedidos = async(config)=>{
     try {
         const {data} = await clienteAxios('/clientes/pedidos', config)
-        let nuevoObjeto = [];
-        // data.forEach(x=>{
-        //     if(!nuevoObjeto.hasOwnProperty(x.REFERENCIA_COMPRA)){
-        //         nuevoObjeto[x.REFERENCIA_COMPRA]={
-        //             activos: []
-        //         }
-        //     }
 
-        //     nuevoObjeto[x.REFERENCIA_COMPRA].activos.push({
-        //         nombre: x.NOMBRE_PRODUCTO
-        //     })
-        // });
-        // console.log(nuevoObjeto)
         const obj = data.reduce((acc, product)=>{
             if(!acc[product.REFERENCIA_COMPRA]){
               acc[product.REFERENCIA_COMPRA] = []
@@ -84,10 +70,7 @@ export const obtenerPedidos = async(config)=>{
 
 export const pagarPedido = async(id_referencia , config, total)=>{
         
-        const obj = {
-            total,
-            id_referencia
-        }
+
 
         const {data} = await  clienteAxios.post("/transbank/pagar", {total, id_referencia} ,config);
         return data

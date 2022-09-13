@@ -62,9 +62,7 @@ const Pedidos = () => {
                               "bg-green-600")
                           }
                         >
-                     {  
-                        ele[0].ESTADO_ENVIO
-                     }
+                      {ele[0].ESTADO_ENVIO}
                             
                         </span>
                       </p>
