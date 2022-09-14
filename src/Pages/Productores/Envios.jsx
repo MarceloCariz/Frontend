@@ -9,7 +9,7 @@ const Envios = () => {
     useEffect(() => {
         const cargarEnvios = async() =>{
             const respuesta = await obtenerEnvios(config);
-            setEnvios(respuesta)
+            setEnvios(respuesta.sort())
         }
 
         cargarEnvios();
@@ -17,11 +17,11 @@ const Envios = () => {
     
 
   return (
-    <div className='mx-auto flex items-center justify-center pt-12'>
+    <div className='mx-auto flex flex-col items-center justify-center pt-12'>
         {envios.length > 0 ? 
             envios.map((ele)=>(
 
-                <CardEnvio key={ele[0]} ele={ele} config={config}/>
+                <CardEnvio key={ele[0].REFERENCIA_COMPRA} ele={ele} config={config}/>
 
             ))
             
