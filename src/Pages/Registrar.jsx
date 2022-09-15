@@ -18,6 +18,9 @@ const Registrar = () => {
     e.preventDefault();
     if ([formValues.correo, formValues.password, formValues.password2, formValues.nombre].includes("")) {
       setAlerta("Todos los campos son obligatorios");
+      setTimeout(() => {
+        setAlerta('')
+      }, 2000);
       return;
     }
     console.log(formValues)
@@ -64,7 +67,7 @@ const Registrar = () => {
             className="h-12 border px-2 rounded-md"
             name="correo"
             type="email"
-            placeholder="correo"
+            placeholder="Correo"
             value={formValues.correo}
             onChange={handleOnchange}
           />
@@ -74,7 +77,7 @@ const Registrar = () => {
             className="h-12 border px-2 rounded-md"
             name="nombre"
             type="text"
-            placeholder="nombre"
+            placeholder="Nombre"
             value={formValues.nombre}
             onChange={handleOnchange}
           />
@@ -100,7 +103,7 @@ const Registrar = () => {
           />
         </div>
         <div className="">
-        <input className=" text-center rounded-lg bg-blue-500 text-white px-8 py-4" type="submit" value="Ingresar" />
+        <input className="cursor-pointer hover:bg-blue-600  text-center rounded-lg bg-blue-500 text-white px-8 py-4" type="submit" value="Registrar" />
         </div>
       </form>
     </div>

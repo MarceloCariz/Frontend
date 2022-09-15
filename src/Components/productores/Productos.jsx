@@ -28,7 +28,7 @@ const Productos = ({ producto, setReload ,reload}) => {
   const {nombre, precio_ext, calidad, precio_local, cantidad} = productoActualizado;
   const handleOnchange = ({target})=>{
     setProductoActualizado({...productoActualizado,
-      [target.name]: target.value
+      [target.name]: target.value.toLowerCase() 
     })
     
     setActiveEditar('bg-green-500')

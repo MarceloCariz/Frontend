@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import {  useNavigate } from 'react-router-dom'
+import CardBienvenido from '../../Components/login/ui/CardBienvenido';
+import { TituloLogin } from '../../Components/login/ui/TituloLogin';
 import { login } from '../../Helpers/getTransportista';
 import useAuth from '../../Hooks/useAuth';
 
@@ -40,12 +42,12 @@ const LoginTransportista= () => {
   };
 
   return (
-    <div className="text-xl  sm:w-3/5 ">
-    <h1 className="flex justify-center items-center  bg-gray-600 text-center text-white h-14">Inicia Sesion</h1>
- 
-    <div className="border border-1 shadow-lg bg-white border-gray-300 rounded-lg flex justify-center items-center mt-4">
+    <div  className="text-xl flex sm:flex-row  justify-center sm:w-auto  r   mt-4 h-96">
+      <CardBienvenido/>
+    <div className="    shadow-lg sm:rounded-r-lg  sm:rounded-none  rounded-lg bg-white   flex justify-center items-center ">
 
-      <form  onSubmit={handleSubmit} className="flex justify-center items-center   gap-8 flex-col px-8 py-6 ">
+      <form onSubmit={handleSubmit} className="flex justify-center items-center sm:w-96   gap-8 flex-col px-4 py-6  ">
+      <TituloLogin acceso={'transportistas'}/>
       {
       alerta && (
         <p className="text-sm font-bold relative bg-red-500 text-white px-2">{alerta}</p>
@@ -72,7 +74,7 @@ const LoginTransportista= () => {
           />
         </div>
         <div className="">
-        <input className=" text-center rounded-lg bg-gray-600 text-white px-8 py-4" type="submit" value="Ingresar" />
+        <input className=" cursor-pointer hover:bg-gray-700  text-center rounded-lg bg-gray-600 text-white px-8 py-4" type="submit" value="Ingresar" />
         </div>
       </form>
     </div>

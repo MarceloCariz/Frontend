@@ -49,7 +49,7 @@ const handleSubmit = async(e) =>{
 
     const formData = new FormData();
     formData.append('image', selectedFile);
-    formData.set('nombre', formValues.nombre);
+    formData.set('nombre', formValues.nombre.toLowerCase() );
     formData.set('cantidad', formValues.cantidad);
     formData.set('precio_local', formValues.precio_local);
     formData.set('precio_ext', formValues.precio_ext);
