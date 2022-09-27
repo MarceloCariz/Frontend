@@ -40,7 +40,7 @@ export const agregarProducto = async(producto, configt) =>{
    
         const {data}= await axios({
             method: "post",
-            url:  "http://168.138.133.24:4000/api/productores/productos/nuevo",
+            url:  `${process.env.REACT_APP_BACKEND_URL}/productores/productos/nuevo`,
             data: producto,
             headers: headers, 
           });
@@ -90,5 +90,13 @@ export const confirmarEnvioBodega = async(referencia_compra, config) =>{
         return data;
     } catch (error) {
         console.log(error.response.data.msg)
+    }
+}
+export const obtenerContrato = async(config) =>{
+    try {
+        const {data} = await clienteAxios.get('/productores/contrato', config);
+        return data;
+    } catch (error) {
+        console.log(error)
     }
 }

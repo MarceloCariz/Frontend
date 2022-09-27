@@ -3,12 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import { registrar } from '../Helpers/getClientes';
 
 const Registrar = () => {
-  const [formValues, setFormValues] = useState({ correo: "", password: "", password2:"", nombre: "" });
+  const [formValues, setFormValues] = useState({ correo: "", password: "", password2:"", nombre: "", tipo: '' });
   const [alerta, setAlerta] = useState('')
   const navigate = useNavigate();
+
+
   const handleOnchange = ({ target }) => {
     setFormValues({ ...formValues, [target.name]: target.value });
-    console.log(formValues)
     if (formValues.correo.length > 8){
         setAlerta('')
     }
@@ -16,7 +17,8 @@ const Registrar = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if ([formValues.correo, formValues.password, formValues.password2, formValues.nombre].includes("")) {
+
+    if ([formValues.correo, formValues.password, formValues.password2, formValues.nombre, formValues.tipo].includes("")) {
       setAlerta("Todos los campos son obligatorios");
       setTimeout(() => {
         setAlerta('')
@@ -33,7 +35,8 @@ const Registrar = () => {
       const datos ={
         correo: formValues.correo,
         password: formValues.password,
-        nombre: formValues.nombre
+        nombre: formValues.nombre,
+        tipo : formValues.tipo
 
       }
       await registrar(datos);
@@ -101,6 +104,19 @@ const Registrar = () => {
             value={formValues.password2}
             onChange={handleOnchange}
           />
+        </div>
+        <div>
+          <p>Indique si es un cliente extranjero o nacional</p>
+          <div className='flex justify-center text-sm gap-8' >
+            <div className='flex items-center gap-2'>
+                <p>Local</p>
+                <input name='tipo' type="radio" value="local"  onChange={handleOnchange} checked={formValues.tipo === "local"}/>
+            </div>
+            <div className='flex items-center gap-2'>
+                <p>Externo</p>
+                <input name='tipo' type="radio" value="externo" onChange={handleOnchange}  checked={formValues.tipo === "externo" }/>
+            </div>
+          </div>
         </div>
         <div className="">
         <input className="cursor-pointer hover:bg-blue-600  text-center rounded-lg bg-blue-500 text-white px-8 py-4" type="submit" value="Registrar" />

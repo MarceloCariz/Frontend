@@ -60,17 +60,20 @@ const Perfil = () => {
                 <p className='bg-gray-100 px-2 text-sm '>{CORREO}</p>
             </div>
             <div className='flex gap-3 items-center'>
-                <label htmlFor="correo" className='sm:text-xl font-bold'>Direccion :</label>
+                <label htmlFor="direccion" className='sm:text-xl font-bold'>Direccion :</label>
                 <input name='direccion' onChange={handleInputchange} className='bg-gray-100 px-2 ' value={formValues.direccion}/>
             </div>
             <div className='flex gap-10 items-center'>
-                <label htmlFor="correo" className='sm:text-xl font-bold'>Ciudad:</label>
+                <label htmlFor="ciudad" className='sm:text-xl font-bold'>Ciudad:</label>
                 <input name='ciudad' onChange={handleInputchange}  className='bg-gray-100 px-2' value={formValues.ciudad}/>
             </div>
-            <div className='flex gap-1 items-center'>
-                <label htmlFor="correo" className='sm:text-xl font-bold'>Pais:</label>
-                <input name='pais' onChange={handleInputchange}  className='ml-16 bg-gray-100 px-2' value={formValues.pais}/>
-            </div>
+            {auth.TIPO_CLIENTE === 'externo' && (
+                <div className='flex gap-1 items-center'>
+                    <label htmlFor="pais" className='sm:text-xl font-bold'>Pais:</label>
+                    <input name='pais' onChange={handleInputchange}  className='ml-16 bg-gray-100 px-2' value={formValues.pais}/>
+                </div>
+            )}
+
             <button type="submit" className={ activeActualizar ? 'text-white bg-green-500 px-4 py-2 mt-2 w-auto '  : 'text-white bg-blue-500 px-4 py-2 mt-2 w-1/2 ml-24'}>
                {activeActualizar ? "Guardar Cambios" : "Actualizar"}</button>
         </form>

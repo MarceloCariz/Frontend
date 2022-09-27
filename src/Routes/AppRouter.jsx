@@ -14,6 +14,7 @@ import Perfil from '../Pages/Perfil'
 import Envios from '../Pages/Productores/Envios'
 import InicioP from '../Pages/Productores/InicioP'
 import LoginP from '../Pages/Productores/LoginP'
+import PerfilP from '../Pages/Productores/Perfil'
 import RegistrarP from '../Pages/Productores/RegistrarP'
 import Subastas from '../Pages/Productores/Subastas'
 import Registrar from '../Pages/Registrar'
@@ -47,7 +48,7 @@ const AppRouter = () => {
               <Route index element={<InicioP/>}/>
               <Route path='subastas' element={<Subastas/>}/>
               <Route path='envios' element={<Envios/>}/>
-              {/* <Route path='*' element={<InicioP />} /> */}
+              <Route path='perfil' element={<PerfilP/> } />
         </Route>
 
         {/* TRANSPORTISTA */}

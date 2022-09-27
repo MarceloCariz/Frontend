@@ -56,11 +56,11 @@ const ProductorLayout = ({children}) => {
                     <p className='text-2xl  '>Mis Productos</p>
 
                 </Link>
-                <div className='flex cursor-pointer hover:text-gray-50' >
-                <FontAwesomeIcon icon={faUser} className="text-2xl mr-2 mt-1"/>
+                <Link to={'perfil'} className='flex cursor-pointer hover:text-gray-50' >
+                    <FontAwesomeIcon icon={faUser} className="text-2xl mr-2 mt-1"/>
 
                     <p className='sm:text-2xl capitalize'> {auth.NOMBRE}</p>
-                </div>
+                </Link>
       
     
                 {/* <input type="text" onClick={handleLogout} value="Cerrar Sesion" /> */}
@@ -103,11 +103,10 @@ const ProductorLayout = ({children}) => {
                     <FontAwesomeIcon icon={faShop} className="text-xl mr-2 mt-1"/>
                     <Link to={'/productor'} className='text-xl  '>Mis Productos</Link>
                 </div>
-                <div   className='flex cursor-pointer' >
-                <FontAwesomeIcon icon={faUser} className="text-xl mr-2 mt-1"/>
-
+                <Link to="perfil"   className='flex cursor-pointer' >
+                    <FontAwesomeIcon icon={faUser} className="text-xl mr-2 mt-1"/>
                     <p className='sm:text-2xl text-xl capitalize'> {auth.NOMBRE}</p>
-                </div>
+                </Link>
       
                 </nav>
             </div>

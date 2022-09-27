@@ -10,7 +10,7 @@ export const login = async(datos) =>{
 
 export const registrar = async(datos) =>{
     console.log(datos)
-    const {data} = await clienteAxios.post('/clientes/nuevo',{...datos, tipo: 'Local'})
+    const {data} = await clienteAxios.post('/clientes/nuevo',{...datos})
     console.log(data)
 }
 
@@ -36,13 +36,27 @@ export const enviaPedidoExt = async (productos, direccion, config) =>{
     formData.append('id_referencia', id_referencia);
     formData.append('direccion',direccion);
 
-
-
-
     const {data} = await clienteAxios.post('/clientes/ingresar/orden', formData, config)
     console.log(data)
     return id_referencia
 }
+export const enviaPedidoLocal = async (productos, direccion, config) =>{
+
+    const id_referencia = Math.floor(Math.random() * 1000000);
+    const fecha = new Date().toLocaleDateString();
+
+    let formData = new FormData();
+
+    formData.append('products', JSON.stringify(productos));
+    formData.append('fecha', fecha);
+    formData.append('id_referencia', id_referencia);
+    formData.append('direccion',direccion);
+
+    const {data} = await clienteAxios.post('/clientes/ingresar/orden/local', formData, config)
+    console.log(data)
+    return id_referencia
+}
+
 
 
 export const obtenerPedidos = async(config)=>{
@@ -87,4 +101,13 @@ export const validarPedido = async(token) =>{
         console.log(error)
     }
 
+}
+
+export const obtenerTransportistas = async() =>{
+    try {
+        const {data} = await clienteAxios('/transportista/');
+        return data
+    } catch (error) {
+        console.log(error)
+    }
 }

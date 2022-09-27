@@ -3,91 +3,88 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
 import { useRef } from "react";
 import { Link,  } from "react-router-dom";
-import { enviaPedidoExt, pagarPedido, traerDatos } from "../Helpers/getClientes";
+import { CardTransportistas } from "../Components/clients/carrito/CardTransportistas";
+import { enviaPedidoExt, enviaPedidoLocal, obtenerTransportistas, pagarPedido, traerDatos } from "../Helpers/getClientes";
 import useAuth from "../Hooks/useAuth";
 
 const Carrito = () => {
-  const { carrito, setCarrito, config } = useAuth();
+  const { carrito, setCarrito, config, auth } = useAuth();
   const [tokentbk, setTokentbk] = useState({token: '', url:''});
   const [total, setTotal] = useState(0);
   const [cargando, setCargando] = useState(false)
-  const [formValues, setFormValues] = useState(
-    {
-        direccion: '',
-        ciudad: '',
-        pais: '',
-    }
-  )
-    useEffect(() => {
+  const [formValues, setFormValues] = useState({direccion: '',ciudad: '',pais: '', id_transportista: null });
+  const [transportistas, setTransportistas] = useState([])
+
+  const {TIPO_CLIENTE} = auth;
+
+  useEffect(() => {
         localStorage.setItem('carrito',JSON.stringify(carrito))
-        const montoTotal = carrito.reduce((total, i)=>(i.PRECIO_LOCAL * i.unidad) + total, 0 );
+        const montoTotal = carrito.reduce((total, i)=>(i.PRECIO * i.unidad) + total, 0 );
         setTotal(montoTotal)
         if(carrito.length === 0){
             return
         }
         const cargarDatos = async() =>{
-          const resp = await traerDatos(config);
-          setFormValues({
-              direccion: resp.DIRECCION || '',
-              ciudad: resp.CIUDAD || '',
-              pais: resp.PAIS || ''
-          })
+            const resp = await traerDatos(config);
+            setFormValues({
+                direccion: resp.DIRECCION || '',
+                ciudad: resp.CIUDAD || '',
+                pais: resp.PAIS || ''
+            })
+            const transports = await  obtenerTransportistas();
+            setTransportistas(transports);
         } 
       cargarDatos();
 
-    }, [carrito, config])
-    const handleClick = (e) =>{
+  }, [carrito, config, auth.TIPO_CLIENTE])
+
+  const handleClick = (e) =>{
         const filtrado = carrito.filter(({ID})=>{
             return  ID !== e.ID  ;
         })
-        // console.log(filtrado)
         setCarrito(filtrado)
         
     }
 
 
-  // const handleEnviarPedido = async() =>{
-  //   enviaPedidoExt(carrito, formValues.direccion, config);
-  //   setCarrito([]);
-  //   setTimeout(() => {
-  //     window.location.reload();
-  //   }, 2000);
 
-  // }
-    const inputtbk = useRef();
-    const formAction = useRef();
+  const inputtbk = useRef();
+  const formAction = useRef();
 
 
   const handleEnviarPedido = async(e) =>{
-      // if(!inputtbk.current.value){
-      //   return
-      // }
-      // consolde.log()
+
       e.preventDefault();
+
+      if(formValues.id_transportista === undefined && TIPO_CLIENTE === 'local'){
+        console.log('Seleccione un transportista')
+        return
+      }
+
       setCargando(true)
-      // return
-      const id_referencia = await enviaPedidoExt(carrito, formValues.direccion, config);
-      
 
-
+      // const id_referencia = TIPO_CLIENTE=== 'local' ? await enviaPedidoLocal(carrito, formValues.direccion, config) : await enviaPedidoExt(carrito, formValues.direccion, config);
+      // return;
+      if(TIPO_CLIENTE === 'externo'){
+        await enviaPedidoExt(carrito, formValues.direccion, config);
+        setCarrito([]);
+        setCargando(false)
+        return;
+      }
+      const id_referencia = await enviaPedidoLocal(carrito, formValues.direccion, config)
       const respuesta =  await pagarPedido(id_referencia , config, total);
       const { token, url} = respuesta;
-      // console.log(respuesta)
-      // inputtbk.current.value
+
       formAction.current.action = url;
       formAction.current.method= "POST";
 
       inputtbk.current.value = token;
       setTokentbk({token: token, url: url});
-      // console.log(formAction.current.action)
-      // console.log(inputtbk.current.value)
+
       setCarrito([]);
       setCargando(false)
 
       formAction.current.submit();
-
-      // console.log(formAction.current)
-      // console.log(inputtbk.current)
   }
   return (
     <div className=" mt-12 flex justify-center flex-col items-center sm:mb-4 mb-60  ">
@@ -111,14 +108,14 @@ const Carrito = () => {
       <tbody >
 
       {carrito.length > 0
-        && carrito.map(({ ID, NOMBRE,  PRECIO_LOCAL , unidad, IMAGE_URL}, indice) => (
+        && carrito.map(({ ID, NOMBRE,  PRECIO , unidad, IMAGE_URL}, indice) => (
             <tr className="flex  sm:justify-between justify-between  mt-2 items-center" key={indice}>
                 <th>
                   <img className="object-contain sm:w-16 w-12 sm:h-16 h-12" src={IMAGE_URL} alt="imagen" />
                 </th>
                 <td>{NOMBRE}</td>
                 {/* <td>{CANTIDAD}</td> */}
-                <td>{PRECIO_LOCAL}</td>
+                <td>{PRECIO}</td>
                 <td>
                   {unidad}  <span className="text-sm">kg</span> 
                   
@@ -136,8 +133,8 @@ const Carrito = () => {
             <p className="w-full">Total</p>
             <p className="text-right font-semibold"> ${total}</p>
     </div>
-
-    <div className="mt-4 mb-8 sm:w-1/2 flex flex-col items-center border border-1 border-gray-500 py-2 px-4 sm:px-2 rounded-md">
+    {/* INFORMACION DESPACHO */}
+    <div className="mt-4 mb-4 sm:w-1/2 flex flex-col items-center border border-1 border-gray-500 py-2 px-4 sm:px-2 rounded-md">
        <h2 className="text-xl font-semibold text-center">INFORMACION DESPACHO</h2>
        <div className="flex flex-col gap-2 mt-2 text-lg sm:w-1/3">
           <p className="font-medium">Direccion: <span className="capitalize font-normal">{formValues.direccion}</span> </p>
@@ -146,30 +143,25 @@ const Carrito = () => {
        </div>
        <Link to="/inicio/perfil"  className='text-white bg-blue-500 px-4 py-2 mt-2 text-sm'>Actualizar Informacion</Link>
     </div>
+    {/* SELECCIONAR TRANSPORTISTA */}
+    {TIPO_CLIENTE === 'local' && (
+        <CardTransportistas transportistas={transportistas} setFormValues={setFormValues} formValues={formValues} />
+
+    )}
+    {/* FORM TBK */}
     <form   ref={formAction} onSubmit={handleEnviarPedido}    >
-
       <input ref={inputtbk} type="hidden"  name="token_ws"   value={`${tokentbk.token}`}/>
-     
-
-      {/* <input type="submit" disabled={carrito.length === 0 ? true : false} className={ carrito.length === 0 ? "bg-red-500 px-4 py-2 rounded-sm text-white font-semibold text-xl" :
-  "bg-green-500 px-20 py-4 rounded-sm text-white font-semibold text-xl cursor-pointer animate-spin "}
-      value={carrito.length > 0 ? "Enviar Pedido" : "Agrega Productos al Carrito"}
-      /> */}
       <button  type="submit" disabled={carrito.length === 0 ? true : false} className={ carrito.length === 0 ? "bg-red-500 px-4 py-2 rounded-sm text-white font-semibold text-xl" :
-  "bg-green-500 px-20 py-4 rounded-sm text-white font-semibold text-xl cursor-pointer  "}>
+                "bg-green-500 px-20 py-4 rounded-sm text-white font-semibold text-xl cursor-pointer  "}>
         <div className="flex items-center">
-        {cargando && 
-                <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-              </svg>
-        }
-
-
-        {(carrito.length > 0 ? (cargando  ? "Enviando..." : 'Enviar Pedido' ) : "Agrega Productos al Carrito" )}
-
+          {cargando && 
+                  <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+          }
+          {(carrito.length > 0 ? (cargando  ? "Enviando..." : 'Enviar Pedido' ) : "Agrega Productos al Carrito" )}
         </div>
-
       </button>
     </form>
 
