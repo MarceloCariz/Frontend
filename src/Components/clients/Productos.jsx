@@ -20,7 +20,7 @@ const Productos = ({productos, tipo}) => {
         localStorage.setItem('carrito',JSON.stringify(carrito))
     }, [carrito])
 
-    console.log(productos)
+
     const handleClick = (producto) =>{        
         setAgregando({cargando:true,id: producto.ID})
         const existe = carrito.some(p => p.ID === producto.ID);

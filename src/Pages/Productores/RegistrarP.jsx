@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 const RegistrarP = () => {
-  const [alerta, setAlerta] = useState('')
+  const [alerta] = useState('')
 
   return (
     <div className="text-xl">

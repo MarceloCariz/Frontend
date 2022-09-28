@@ -71,7 +71,7 @@ const Carrito = () => {
         setCargando(false)
         return;
       }
-      const id_referencia = await enviaPedidoLocal(carrito, formValues.direccion, config)
+      const id_referencia = await enviaPedidoLocal(carrito, formValues.id_transportista ,formValues.direccion, config);
       const respuesta =  await pagarPedido(id_referencia , config, total);
       const { token, url} = respuesta;
 
@@ -139,7 +139,9 @@ const Carrito = () => {
        <div className="flex flex-col gap-2 mt-2 text-lg sm:w-1/3">
           <p className="font-medium">Direccion: <span className="capitalize font-normal">{formValues.direccion}</span> </p>
           <p className="font-medium">Ciudad: <span className="capitalize font-normal">{formValues.ciudad}</span></p>
-          <p className="font-medium">Pais: <span className="capitalize font-normal">{formValues.pais}</span></p>
+          {TIPO_CLIENTE === 'externo' && (
+            <p className="font-medium">Pais: <span className="capitalize font-normal">{formValues.pais}</span></p>
+          )}
        </div>
        <Link to="/inicio/perfil"  className='text-white bg-blue-500 px-4 py-2 mt-2 text-sm'>Actualizar Informacion</Link>
     </div>

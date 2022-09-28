@@ -1,8 +1,9 @@
-import { faEye, faEyeSlash } from "@fortawesome/free-regular-svg-icons";
-import { faClipboardList } from "@fortawesome/free-solid-svg-icons";
+import { faEye, faEyeSlash} from "@fortawesome/free-regular-svg-icons";
+import { faClipboardList, faFileArrowDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import jsPDF from "jspdf";
 import React, { useEffect, useRef, useState } from "react";
-import { obtenerPedidos } from "../Helpers/getClientes";
+import { obtenerBoleta, obtenerPedidos } from "../Helpers/getClientes";
 import useAuth from "../Hooks/useAuth";
 
 const Pedidos = () => {
@@ -30,6 +31,22 @@ const Pedidos = () => {
     idPedido.current.id = e.i;
     setShow(!show);
   };
+
+  const  generarBoleta = async(e) =>{
+    const doc = new jsPDF();
+    // 1 - x 200  /////  2- y
+   const id = (e[0].REFERENCIA_COMPRA);
+    // return;
+    const total = await obtenerBoleta(id);
+    console.log(total);
+    doc.text('MAIPOGRANDE',10, 10);
+    doc.text(`Boleta #${e[0].REFERENCIA_COMPRA}`, 150, 10);
+    doc.text(`Monto Pagado: $${total}`, 50, 40 );
+    doc.text(`Fecha Compra: ${e[0].FECHA_COMPRA}`, 50, 60);
+    doc.text(`Total compra: ${total}`,50,70);
+
+    doc.save(`Boleta-${e[0].REFERENCIA_COMPRA}`);
+  }
   return (
     <div className="">
       <p className="sm:text-3xl text-2xl text-center font-semibold">
@@ -109,7 +126,7 @@ const Pedidos = () => {
                     )}
                   </button>
                 </div>
-                <p className="font-semibold sm:ml-40 ">
+                <p className="font-semibold sm:mt-4 ">
                   Fecha de compra: {ele[0].FECHA_COMPRA}
                 </p>
 
@@ -139,6 +156,10 @@ const Pedidos = () => {
                     </div>
 
                   )}
+                  <button onClick={(e)=> generarBoleta(ele,e)} className="mt-2 px-4 py-2 bg-blue-500 text-white flex  items-center gap-2">
+                    <FontAwesomeIcon  className="text-xl" icon={faFileArrowDown}  />
+                    Descargar Boleta
+                  </button>
               </div>
             ))
           : "Aun no hay pedidos"}

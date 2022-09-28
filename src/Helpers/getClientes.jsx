@@ -40,7 +40,8 @@ export const enviaPedidoExt = async (productos, direccion, config) =>{
     console.log(data)
     return id_referencia
 }
-export const enviaPedidoLocal = async (productos, direccion, config) =>{
+export const enviaPedidoLocal = async (productos,id_transportista ,direccion, config) =>{
+
 
     const id_referencia = Math.floor(Math.random() * 1000000);
     const fecha = new Date().toLocaleDateString();
@@ -51,6 +52,7 @@ export const enviaPedidoLocal = async (productos, direccion, config) =>{
     formData.append('fecha', fecha);
     formData.append('id_referencia', id_referencia);
     formData.append('direccion',direccion);
+    formData.append('id_transportista', id_transportista);
 
     const {data} = await clienteAxios.post('/clientes/ingresar/orden/local', formData, config)
     console.log(data)
@@ -95,7 +97,6 @@ export const validarPedido = async(token) =>{
 
     try {
         const {data} = await  clienteAxios(`/transbank/validar/${token}`);
-        console.log(data)
         return data
     } catch (error) {
         console.log(error)
@@ -107,6 +108,15 @@ export const obtenerTransportistas = async() =>{
     try {
         const {data} = await clienteAxios('/transportista/');
         return data
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export const obtenerBoleta = async(id) =>{
+    try {
+        const {data} = await clienteAxios(`/clientes/boleta/${id}`);
+        return data.MONTO_PAGADO;
     } catch (error) {
         console.log(error)
     }
