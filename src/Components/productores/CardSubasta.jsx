@@ -5,7 +5,7 @@ const CardSubasta = ({subasta, minutos, resultado, alerta, handleClick, hora}) =
   const {ID, NOMBRE_PRODUCTO, REFERENCIA_COMPRA,FECHA_ACTIVACION, } = subasta
   return (
     <div className="w-auto bg-white px-4 pt-8 rounded-lg shadow-md">
-      {alerta && alerta.id === ID && <p className="bg-red-500 text-white capitalize">{alerta.msg}</p>}
+      {alerta && alerta.id === ID &&   <p className={alerta.tipo ? "bg-green-500 text-white capitalize" : "bg-red-500 text-white capitalize"}>{alerta.msg}</p>}
       <p className="text-left font-bold">Numero de Orden #{REFERENCIA_COMPRA}</p>
       <p className="">Productos Necesarios : </p>
       <p className="capitalize font-semibold">{NOMBRE_PRODUCTO}</p>

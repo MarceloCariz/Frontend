@@ -22,7 +22,9 @@ const useTime = (finalHora, socket, activo, auth, referenciaCompra) => {
          
        
         }
-        if(minutos.time !== null && minutos.time.toFixed(1) <= 0.0 ){
+        // if(minutos.time !== null && minutos.time.toFixed(1) <= 0.0 ){
+        if(new Date(finalHora).getTime() - new Date().getTime() < 0){
+
           setMinutos({time: null,estado: true});
           console.log('stop')
           socket.emit('subasta:finalizar',true,referenciaCompra)

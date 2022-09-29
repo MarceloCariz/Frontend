@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import useAuth from '../Hooks/useAuth'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShop, faUser,  faRightFromBracket, faTruck, faBars, faSeedling, faGavel } from '@fortawesome/free-solid-svg-icons'
@@ -43,24 +43,29 @@ const ProductorLayout = ({children}) => {
             {/* Desktop */}
             <div className='sm:flex hidden items-center justify-end  w-2/3 gap-8 '>
      
-                <Link to="subastas" className='flex cursor-pointer hover:text-gray-50'>
+                <NavLink to="subastas" className={({isActive})=> isActive ? 'flex cursor-pointer hover:text-gray-50 underline decoration-2 underline-offset-8' : 'flex cursor-pointer hover:text-gray-50'}>
                     <FontAwesomeIcon icon={faGavel} className="text-2xl mr-2 mt-1"/>
                     <p className='text-2xl  '>Subastas</p>
-                </Link>
-                <Link to="envios" className='flex cursor-pointer hover:text-gray-50'>
+                </NavLink>
+                <NavLink to="envios" className={({isActive})=> isActive ? 'flex cursor-pointer hover:text-gray-50 underline decoration-2 underline-offset-8' : 'flex cursor-pointer hover:text-gray-50'}>
                     <FontAwesomeIcon icon={faTruck} className="text-2xl mr-2 mt-1 "/>
                     <p className='text-2xl  '>Mis Envios</p>
-                </Link>
-                <Link to="/productor" className='flex cursor-pointer hover:text-gray-50'>
+                </NavLink>
+                <NavLink to={ "/productor/" }  className={({isActive})=> isActive ? 'flex cursor-pointer hover:text-gray-50 underline decoration-2 underline-offset-8' : 'flex cursor-pointer hover:text-gray-50'}>
                     <FontAwesomeIcon icon={faShop} className="text-2xl mr-2 mt-1 "/>
                     <p className='text-2xl  '>Mis Productos</p>
 
-                </Link>
-                <Link to={'perfil'} className='flex cursor-pointer hover:text-gray-50' >
+                </NavLink>
+                {/* <Link to={'perfil'} className='flex cursor-pointer hover:text-gray-50' >
                     <FontAwesomeIcon icon={faUser} className="text-2xl mr-2 mt-1"/>
 
                     <p className='sm:text-2xl capitalize'> {auth.NOMBRE}</p>
-                </Link>
+                </Link> */}
+                <NavLink to={'perfil'}   className={({isActive})=> isActive ? 'flex cursor-pointer hover:text-gray-50 underline decoration-2 underline-offset-8' : 'flex cursor-pointer hover:text-gray-50'}>
+                    <FontAwesomeIcon icon={faUser} className="text-2xl mr-2 mt-1"/>
+
+                    <p className='sm:text-2xl capitalize'> {auth.NOMBRE}</p>
+                </NavLink>
       
     
                 {/* <input type="text" onClick={handleLogout} value="Cerrar Sesion" /> */}
