@@ -9,7 +9,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
-import {  Link, useNavigate } from "react-router-dom";
+import {  Link, NavLink, useNavigate } from "react-router-dom";
 import useAuth from "../Hooks/useAuth";
 const ClienteLayout = ({ children }) => {
   const [cantidadCarrito, setCantidadCarrito] = useState(0);
@@ -47,19 +47,19 @@ const ClienteLayout = ({ children }) => {
           </Link>
 
           <div className="sm:flex hidden items-center gap-4 ">
-            <Link to="pedidos" className="flex gap-2 cursor-pointer">
+            <NavLink to="pedidos"  className={({isActive})=> isActive ? 'flex gap-1 cursor-pointer hover:text-gray-50 underline decoration-2 underline-offset-8' : 'flex gap-1 cursor-pointer hover:text-gray-50'}>
               <FontAwesomeIcon icon={faBagShopping} className="text-2xl mt-1" />
               <p className="sm:text-2xl capitalize">pedidos</p>
-            </Link>
-            <Link to={'perfil'} className="flex gap-1 cursor-pointer">
+            </NavLink>
+            <NavLink to={'perfil'} className={({isActive})=> isActive ? 'flex gap-1 cursor-pointer hover:text-gray-50 underline decoration-2 underline-offset-8' : 'flex gap-1 cursor-pointer hover:text-gray-50'}>
               <FontAwesomeIcon icon={faUser} className="text-2xl  mt-1" />
               <p className="sm:text-2xl capitalize"> {auth.NOMBRE}</p>
-            </Link>
+            </NavLink>
 
             <div className=" sm:flex gap-2 hidden  transition ease-in duration-300  hover:-translate-y-1">
-              <Link to="carrito " className=" flex ">
+              <NavLink to="carrito" className={({isActive})=> isActive ? 'flex gap-1 cursor-pointer hover:text-gray-50 underline decoration-2 underline-offset-8' : 'flex gap-1 cursor-pointer hover:text-gray-50'}>
                 <FontAwesomeIcon icon={faCartShopping} className="text-3xl " />
-              </Link>
+              </NavLink>
             </div>
             <p className="mb-8">{cantidadCarrito}</p>
 

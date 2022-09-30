@@ -156,10 +156,13 @@ const Pedidos = () => {
                     </div>
 
                   )}
-                  <button onClick={(e)=> generarBoleta(ele,e)} className="mt-2 px-4 py-2 bg-blue-500 text-white flex  items-center gap-2">
-                    <FontAwesomeIcon  className="text-xl" icon={faFileArrowDown}  />
-                    Descargar Boleta
-                  </button>
+                  { ele[0].ESTADO_PAGO !== "RECHAZADO" && (
+                      <button onClick={(e)=> generarBoleta(ele,e)} className="mt-2 px-4 py-2 bg-blue-500 text-white flex  items-center gap-2">
+                      <FontAwesomeIcon  className="text-xl" icon={faFileArrowDown}  />
+                      Descargar Boleta
+                    </button>
+                  )}
+
               </div>
             ))
           : "Aun no hay pedidos"}
