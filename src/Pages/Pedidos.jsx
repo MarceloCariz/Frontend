@@ -35,7 +35,6 @@ const Pedidos = () => {
   const  generarBoleta = async(e) =>{
     const doc = new jsPDF();
     console.log(e)
-      return;
     // 1 - x 200  /////  2- y
    const id = (e[0].REFERENCIA_COMPRA);
     // return;

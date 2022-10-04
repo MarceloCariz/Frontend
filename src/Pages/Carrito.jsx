@@ -2,7 +2,7 @@ import { faHandPointRight } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
 import { useRef } from "react";
-import { Link,  } from "react-router-dom";
+import { Link, useLocation,  } from "react-router-dom";
 import { CardTransportistas } from "../Components/clients/carrito/CardTransportistas";
 import { enviaPedidoExt, enviaPedidoLocal, obtenerTransportistas, pagarPedido, traerDatos } from "../Helpers/getClientes";
 import useAuth from "../Hooks/useAuth";
@@ -16,7 +16,7 @@ const Carrito = () => {
   const [transportistas, setTransportistas] = useState([])
 
   const {TIPO_CLIENTE} = auth;
-
+  const location = useLocation();
   useEffect(() => {
         localStorage.setItem('carrito',JSON.stringify(carrito))
         const montoTotal = carrito.reduce((total, i)=>(i.PRECIO * i.unidad) + total, 0 );
@@ -143,7 +143,7 @@ const Carrito = () => {
             <p className="font-medium">Pais: <span className="capitalize font-normal">{formValues.pais}</span></p>
           )}
        </div>
-       <Link to="/inicio/perfil"  className='text-white bg-blue-500 px-4 py-2 mt-2 text-sm'>Actualizar Informacion</Link>
+       <Link to="/inicio/perfil"  state={location.pathname} className='text-white bg-blue-500 px-4 py-2 mt-2 text-sm'>Actualizar Informacion</Link>
     </div>
     {/* SELECCIONAR TRANSPORTISTA */}
     {TIPO_CLIENTE === 'local' && (

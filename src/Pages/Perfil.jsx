@@ -1,4 +1,7 @@
+import { faCircleChevronLeft } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from 'react'
+import { Link, useLocation } from 'react-router-dom';
 import { actualizarDatos, traerDatos } from '../Helpers/getClientes';
 import useAuth from '../Hooks/useAuth'
 
@@ -13,7 +16,8 @@ const Perfil = () => {
         }
     );
     const [activeActualizar, setActiveActualizar] = useState(false)
-    const [mensaje, setMensaje] = useState('')
+    const [mensaje, setMensaje] = useState('');
+    const location = useLocation();
 
     useEffect(() => {
         const cargarDatos = async() =>{
@@ -73,10 +77,17 @@ const Perfil = () => {
                     <input name='pais' onChange={handleInputchange}  className='ml-16 bg-gray-100 px-2' value={formValues.pais}/>
                 </div>
             )}
-
-            <button type="submit" className={ activeActualizar ? 'text-white bg-green-500 px-4 py-2 mt-2 w-auto '  : 'text-white bg-blue-500 px-4 py-2 mt-2 w-1/2 ml-24'}>
-               {activeActualizar ? "Guardar Cambios" : "Actualizar"}</button>
+            <div className='flex justify-center'>
+                <button type="submit" className={ activeActualizar ? 'text-white bg-green-500 px-4 py-2 mt-2 w-auto '  : 'text-white bg-blue-500 px-4 py-2 mt-2 w-1/2 '}>
+                {activeActualizar ? "Guardar Cambios" : "Actualizar"}</button>
+            </div>
         </form>
+        {
+            location.state === '/inicio/carrito' &&
+            (<Link to={'/inicio/carrito'} className="bg-green-500 flex items-center gap-2 px-4 py-2 mt-2 text-white font-semibold"> 
+            <FontAwesomeIcon icon={faCircleChevronLeft}/>
+            Volver al Carrito</Link>)
+        }
     </div>
   )
 }
