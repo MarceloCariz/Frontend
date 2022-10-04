@@ -14,16 +14,14 @@ const Pago = () => {
   useEffect(() => {
 
     const validar = async()=>{
-      if(tokenTBK){
         const respuesta = await validarPedido(tokenTBK);
         setVoucher(respuesta)
-        return;
-      }
-    };
+      };
+    console.log('pan')
     // return
     validar();
     // console.log(voucherF.map((v)=>(console.log(v))))
-  }, [tokenTBK])
+  }, [])
   // console.log(voucherF.map((v)=>(console.log(v))))
   const {vci, amount, status, session_id,transaction_date} = voucherF; 
   

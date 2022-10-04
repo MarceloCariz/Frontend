@@ -156,7 +156,7 @@ const Pedidos = () => {
                     </div>
 
                   )}
-                  { ele[0].ESTADO_PAGO !== "RECHAZADO" && (
+                  { ele[0].ESTADO_PAGO === "PAGADO"  && (
                       <button onClick={(e)=> generarBoleta(ele,e)} className="mt-2 px-4 py-2 bg-blue-500 text-white flex  items-center gap-2">
                       <FontAwesomeIcon  className="text-xl" icon={faFileArrowDown}  />
                       Descargar Boleta
