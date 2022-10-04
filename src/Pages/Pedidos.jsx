@@ -34,6 +34,8 @@ const Pedidos = () => {
 
   const  generarBoleta = async(e) =>{
     const doc = new jsPDF();
+    console.log(e)
+      return;
     // 1 - x 200  /////  2- y
    const id = (e[0].REFERENCIA_COMPRA);
     // return;
@@ -42,6 +44,7 @@ const Pedidos = () => {
     doc.text('MAIPOGRANDE',10, 10);
     doc.text(`Boleta #${e[0].REFERENCIA_COMPRA}`, 150, 10);
     doc.text(`Monto Pagado: $${total}`, 50, 40 );
+    doc.text(`Porductos ${e[0].REFERENCIA_COMPRA}`, 150, 10)
     doc.text(`Fecha Compra: ${e[0].FECHA_COMPRA}`, 50, 60);
     doc.text(`Total compra: ${total}`,50,70);
 
