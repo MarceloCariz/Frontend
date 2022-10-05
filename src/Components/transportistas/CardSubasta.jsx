@@ -6,7 +6,7 @@ const CardSubasta = ({subasta,  socket,  auth, productos, perfil  }) => {
   const [alerta, setAlerta] = useState({msg:'', id: 0, tipo:null});
   const {ID, NOMBRE_PRODUCTO, REFERENCIA_COMPRA,FECHA_ACTIVACION, CANTIDAD } = subasta;
   console.log(perfil.CARGA)
-  const {minutos, hora, resultado, } = useTimeT( new Date(FECHA_ACTIVACION), socket,  auth, REFERENCIA_COMPRA, CANTIDAD);
+  const {minutos, hora, } = useTimeT( new Date(FECHA_ACTIVACION), socket,  auth, REFERENCIA_COMPRA, CANTIDAD);
   const handleClick = (e) =>{
     // console.log(REFERENCIA_COMPRA);
     // console.log();
