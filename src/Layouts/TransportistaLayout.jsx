@@ -1,5 +1,5 @@
 import React, {  useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import useAuth from '../Hooks/useAuth'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {  faUser,  faRightFromBracket, faTruck, faBars, faSeedling, faGavel } from '@fortawesome/free-solid-svg-icons'
@@ -45,10 +45,10 @@ const TransportistaLayout = ({children}) => {
                     <FontAwesomeIcon icon={faTruck} className="text-2xl mr-2 mt-1"/>
                     <p className='text-2xl  '>Mis Envios</p>
                 </div>
-                <div className='flex cursor-pointer'>
+                <NavLink to={'subastas'} className='flex cursor-pointer'>
                     <FontAwesomeIcon icon={faGavel} className="text-2xl mr-2 mt-1"/>
                     <p className='text-2xl  '>Subastas</p>
-                </div>
+                </NavLink>
                 <div className='flex cursor-pointer' >
                 <FontAwesomeIcon icon={faUser} className="text-2xl mr-2 mt-1"/>
 
@@ -106,7 +106,9 @@ const TransportistaLayout = ({children}) => {
 
         {/* CONTENIDO */}
         <div className='min-h-screen mx-auto  sm:mt-0 mt-4 bg-gray-100 '>
-            {children}
+            <div className='container mx-auto'>
+                {children}
+            </div>
         </div>
         {/* CONTENIDO FIN */}
         <footer className=' bottom-0 text-center  items-center flex justify-center w-full    h-32 bg-stone-800'>

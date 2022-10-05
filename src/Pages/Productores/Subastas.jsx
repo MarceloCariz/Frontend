@@ -4,25 +4,20 @@ import io from 'socket.io-client'
 import CardSubasta from '../../Components/productores/CardSubasta';
 import { obtenerContrato, obtenerProductos, obtenerSubastasActivas } from '../../Helpers/getProductores';
 import useAuth from '../../Hooks/useAuth';
-import useTime from '../../Hooks/useTime';
 
 const Subastas = () => {
   const { auth, config} = useAuth();
   // const [hora, setHora] = useState('')
-  const [finalHora, setFinalHora] = useState('');
-  const [subastas, setSubastas] = useState([])
-  const [referenciaCompra, setReferenciaCompra] = useState(null)
-  const [alerta, setAlerta] = useState({msg:'', id: 0, tipo:null});
+
   const [productos, setProductos] = useState([])
   const [contrato, setContrato] = useState({})
+  const [subastas, setSubastas] = useState([])
   // const [minutos, setMinutos] = useState(0)
 
     let activo = true;
     // let  socket;
     const  socket = activo && io('http://168.138.133.24:4000', {reconnection: false});
     // const  socket = activo && io('http://localhost:4000', {reconnection: false});
-
-    const {minutos, hora, resultado, } = useTime(finalHora, socket, activo, auth, referenciaCompra);
 
   useEffect(() => {
    
@@ -33,10 +28,6 @@ const Subastas = () => {
       const products = await obtenerProductos(config);
       setProductos(products);
       const resultado = await  obtenerSubastasActivas();
-      let fecha = new Date(resultado[0].FECHA_ACTIVACION || "");
-      setReferenciaCompra(resultado[0].REFERENCIA_COMPRA)
-      console.log(resultado[0].REFERENCIA_COMPRA)
-      setFinalHora(fecha)
       setSubastas(resultado);
     }
     cargarDatos();
@@ -45,18 +36,7 @@ const Subastas = () => {
   console.log('1')
 
  
-  const handleClick = (e) =>{
-    const {NOMBRE_PRODUCTO, ID} = e;
-    console.log(NOMBRE_PRODUCTO)
-    const existe  = productos.some(({NOMBRE})=>(NOMBRE === NOMBRE_PRODUCTO));
-    if(!existe){
-      setAlerta({msg: 'no tienes este producto', id: ID, tipo: false});
-      return
-    }
-    setAlerta({msg: 'Postulacion  exitosa', id: ID, tipo: true});
 
-    socket && socket.emit('postular', productos, finalHora, referenciaCompra);
-  }
   // console.log(minutos)
   return (
     <div className="mx-auto container text-center pt-10 ">
@@ -71,11 +51,10 @@ const Subastas = () => {
                 <CardSubasta
                   key={subasta.ID}
                   subasta={subasta}
-                  minutos={minutos}
-                  alerta={alerta}
-                  resultado={resultado}
-                  handleClick={handleClick}
-                  hora={hora}
+                  socket={socket}
+                  activo={activo}
+                  auth={auth}
+                  productos={productos}
                 />
               ))
             ) : (

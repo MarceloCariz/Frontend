@@ -2,21 +2,20 @@
 
 import  { useEffect, useState } from 'react'
 
-const useTime = (finalHora, socket, activo, auth, referenciaCompra) => {
+const useTime = (finalHora, socket,  auth, referenciaCompra) => {
   const [hora, setHora] = useState('')
   const [minutos, setMinutos] = useState({time:null, estado: false})
   const [resultado, setResultado] = useState([])
    
 
-
     useEffect(() => {
         if(referenciaCompra === null) return
-        console.log(referenciaCompra)
         const cargarHora = ()=>{
           const horaActual = new Date();
           setHora(horaActual.toLocaleTimeString())
             if(finalHora - horaActual > 0){
               const minutosF = (finalHora  - horaActual)/(1000*60)
+              console.log(minutosF);
               setMinutos({...minutos, time: minutosF})
             }
          
@@ -34,12 +33,10 @@ const useTime = (finalHora, socket, activo, auth, referenciaCompra) => {
             ))
           setResultado(seleccionados)
           })
-          activo = false
           return
        }
        
        if(resultado.length > 0 ){
-          activo = false
          return
        } 
     
