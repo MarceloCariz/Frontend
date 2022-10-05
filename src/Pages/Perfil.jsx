@@ -6,6 +6,7 @@ import { actualizarDatos, traerDatos } from '../Helpers/getClientes';
 import useAuth from '../Hooks/useAuth'
 
 const Perfil = () => {
+    const  transt = [{id:1, carga:3 , precio: 1580},{id:2, carga:4 , precio: 1600}];
     const {auth, config} = useAuth();
     const {CORREO, NOMBRE} =auth;
     const [formValues, setFormValues] = useState(
@@ -29,6 +30,18 @@ const Perfil = () => {
             })
         } 
         cargarDatos();
+        const cantidad = 3;
+        const seleccionado = [];
+        for(const t in transt){
+            console.log(transt[t].carga);
+            if(transt[t].carga >= cantidad){
+                seleccionado.push(transt[t]);
+            }
+        }
+        console.log(seleccionado)
+        const precio = seleccionado.sort((a, b) => a.precio - b.precio);
+        console.log(precio[0]);
+
     }, [config])
 
     const handleInputchange = ({target})=>{

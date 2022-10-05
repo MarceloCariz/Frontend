@@ -45,12 +45,14 @@ const TransportistaLayout = ({children}) => {
                     <FontAwesomeIcon icon={faTruck} className="text-2xl mr-2 mt-1"/>
                     <p className='text-2xl  '>Mis Envios</p>
                 </div>
-                <div className='flex cursor-pointer'>
+                <NavLink to={'subastas'} className='flex cursor-pointer'>
                     <FontAwesomeIcon icon={faGavel} className="text-2xl mr-2 mt-1"/>
                     <p className='text-2xl  '>Subastas</p>
-                </div>
+                </NavLink>
+                
                 <NavLink to={'perfil'} className='flex cursor-pointer' >
-                <FontAwesomeIcon icon={faUser} className="text-2xl mr-2 mt-1"/>
+
+                    <FontAwesomeIcon icon={faUser} className="text-2xl mr-2 mt-1"/>
 
                     <p className='sm:text-2xl capitalize'> {auth.NOMBRE}</p>
                 </NavLink>
@@ -106,7 +108,9 @@ const TransportistaLayout = ({children}) => {
 
         {/* CONTENIDO */}
         <div className='min-h-screen mx-auto  sm:mt-0 mt-4 bg-gray-100 '>
-            {children}
+            <div className='container mx-auto'>
+                {children}
+            </div>
         </div>
         {/* CONTENIDO FIN */}
         <footer className=' bottom-0 text-center  items-center flex justify-center w-full    h-32 bg-stone-800'>
