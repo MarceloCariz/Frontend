@@ -5,11 +5,15 @@ import jsPDF from "jspdf";
 import React, { useEffect, useRef, useState } from "react";
 import { obtenerBoleta, obtenerPedidos } from "../Helpers/getClientes";
 import useAuth from "../Hooks/useAuth";
+import autoTable from "jspdf-autotable";
+import { info } from "autoprefixer";
+
+
 
 const Pedidos = () => {
   const [pedidos, setPedidos] = useState([]);
   const [show, setShow] = useState(false);
-  const { config } = useAuth();
+  const { config,auth } = useAuth();
   const idPedido = useRef();
   useEffect(() => {
     const cargarPedidos = async () => {
@@ -34,21 +38,50 @@ const Pedidos = () => {
 
   const  generarBoleta = async(e) =>{
     const doc = new jsPDF();
-    console.log(e)
+    console.log();
+    var col = [["Nombre producto", "Cantidad", "Precio" ,]];
+   
+    info = []
+   e.forEach((element,index,Array)  => {      
+   info.push([element.NOMBRE_PRODUCTO,element.CANTIDAD,element.PRECIO])
+
+   
+
+});        
     // 1 - x 200  /////  2- y
    const id = (e[0].REFERENCIA_COMPRA);
     // return;
     const total = await obtenerBoleta(id);
     console.log(total);
-    doc.text('MAIPOGRANDE',10, 10);
-    doc.text(`Boleta #${e[0].REFERENCIA_COMPRA}`, 150, 10);
-    doc.text(`Monto Pagado: $${total}`, 50, 40 );
-    doc.text(`Porductos ${e[0].REFERENCIA_COMPRA}`, 150, 10)
-    doc.text(`Fecha Compra: ${e[0].FECHA_COMPRA}`, 50, 60);
-    doc.text(`Total compra: ${total}`,50,70);
-
+    doc.setFontSize(20);
+    doc.text(`fecha compra ${e[0].FECHA_COMPRA}`, 115, 207,);
+    doc.text(`Total compra: $${total}`,115,215,);
+    doc.text(`n°: ${e[0].REFERENCIA_COMPRA}`,130,40,);
+    doc.text('Maipo Grande' ,15 ,10)
+    doc.text('Contacto:' ,0 ,280)
+    doc.text('http://www.maipogrande.ml' ,30 ,280)
+    doc.rect(100, 200, 100, 20); 
+    doc.rect(125, 5, 80, 40); 
+    doc.rect(15, 23, 100, 50); 
+    doc.text('R.U.T: 99.999.999-9' ,130 ,11)
+    doc.text('Factura Electronica' ,130 ,25)
+    doc.autoTable({
+      columnStyles: { 0: { halign: 'center', } }, 
+      margin: { top: 80 },
+      head: col,
+      body: info
+   
+     } );
+  doc.setFontSize(15);
+  doc.text(`señor : ${auth.NOMBRE}` ,16 ,30)
+  doc.text(`Direccion :${e[0].DIRECCION}` ,16 ,40)
+  doc.text(`Tipo venta : ${e[0].TIPO_VENTA}` ,16 ,50)
+  doc.text(`Ciudad : ${auth.CIUDAD}` ,16 ,60)
+  doc.text(`Correo : ${auth.CORREO}` ,16 ,70 )
     doc.save(`Boleta-${e[0].REFERENCIA_COMPRA}`);
+
   }
+
   return (
     <div className="">
       <p className="sm:text-3xl text-2xl text-center font-semibold">
@@ -158,7 +191,7 @@ const Pedidos = () => {
                     </div>
 
                   )}
-                  { ele[0].ESTADO_PAGO === "PAGADO"  && (
+                  { ele[0].ESTADO_PAGO !== "RECHAZADO" && (
                       <button onClick={(e)=> generarBoleta(ele,e)} className="mt-2 px-4 py-2 bg-blue-500 text-white flex  items-center gap-2">
                       <FontAwesomeIcon  className="text-xl" icon={faFileArrowDown}  />
                       Descargar Boleta
