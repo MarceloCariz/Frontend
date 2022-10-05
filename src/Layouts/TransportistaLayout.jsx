@@ -49,11 +49,13 @@ const TransportistaLayout = ({children}) => {
                     <FontAwesomeIcon icon={faGavel} className="text-2xl mr-2 mt-1"/>
                     <p className='text-2xl  '>Subastas</p>
                 </NavLink>
-                <div className='flex cursor-pointer' >
-                <FontAwesomeIcon icon={faUser} className="text-2xl mr-2 mt-1"/>
+                
+                <NavLink to={'perfil'} className='flex cursor-pointer' >
+
+                    <FontAwesomeIcon icon={faUser} className="text-2xl mr-2 mt-1"/>
 
                     <p className='sm:text-2xl capitalize'> {auth.NOMBRE}</p>
-                </div>
+                </NavLink>
       
     
                 {/* <input type="text" onClick={handleLogout} value="Cerrar Sesion" /> */}
@@ -92,11 +94,11 @@ const TransportistaLayout = ({children}) => {
                     <FontAwesomeIcon icon={faGavel} className="text-xl mr-2 mt-1"/>
                     <Link to={'/inicio-productor'} className='text-xl  '>Subastas</Link>
                 </div>
-                <div className='flex cursor-pointer' >
+                <NavLink to={'perfil'} className='flex cursor-pointer' >
                 <FontAwesomeIcon icon={faUser} className="text-xl mr-2 mt-1"/>
 
                     <p className='sm:text-2xl text-xl capitalize'> {auth.NOMBRE}</p>
-                </div>
+                </NavLink>
       
                 </nav>
             </div>
