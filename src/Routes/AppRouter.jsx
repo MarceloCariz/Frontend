@@ -20,6 +20,7 @@ import Subastas from '../Pages/Productores/Subastas'
 import Registrar from '../Pages/Registrar'
 import InicioTransportista from '../Pages/Transportistas/InicioTransportista'
 import LoginTransportista from '../Pages/Transportistas/LoginTransportista'
+import Subasta from '../Pages/Transportistas/Subasta'
 
 const AppRouter = () => {
   return (
@@ -55,6 +56,7 @@ const AppRouter = () => {
         <Route path='/transportista' element={<RutaProtegidaTransportista/>}>
           {/* <Route index element={<LoginTransportista/>}/> */}
           <Route index element={<InicioTransportista/>}/>
+          <Route path='subastas' element={<Subasta/>}/>
 
         </Route>
 

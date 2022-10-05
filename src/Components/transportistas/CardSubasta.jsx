@@ -1,23 +1,25 @@
 import React, {  useState } from "react";
-import useTime from "../../Hooks/useTime";
+import useTimeT from "../../Hooks/useTimeT";
 
-const CardSubasta = ({subasta,  socket,  auth, productos  }) => {
+const CardSubasta = ({subasta,  socket,  auth, productos, perfil  }) => {
+  
   const [alerta, setAlerta] = useState({msg:'', id: 0, tipo:null});
-
-  const {ID, NOMBRE_PRODUCTO, REFERENCIA_COMPRA,FECHA_ACTIVACION, } = subasta;
-
-  const {minutos, hora, resultado, } = useTime( new Date(FECHA_ACTIVACION), socket,  auth, REFERENCIA_COMPRA);
+  const {ID, NOMBRE_PRODUCTO, REFERENCIA_COMPRA,FECHA_ACTIVACION, CANTIDAD } = subasta;
+  console.log(perfil.CARGA)
+  const {minutos, hora, resultado, } = useTimeT( new Date(FECHA_ACTIVACION), socket,  auth, REFERENCIA_COMPRA, CANTIDAD);
   const handleClick = (e) =>{
-    console.log(REFERENCIA_COMPRA);
-    const existe  = productos.some(({NOMBRE})=>(NOMBRE === NOMBRE_PRODUCTO));
-    if(!existe){
-      setAlerta({msg: 'no tienes este producto', id: ID, tipo: false});
-      return
-    }
+    // console.log(REFERENCIA_COMPRA);
+    // console.log();
+  //   const existe  = productos.some(({NOMBRE})=>(NOMBRE === NOMBRE_PRODUCTO));
+  //   if(!existe){
+  //     setAlerta({msg: 'no tienes este producto', id: ID, tipo: false});
+  //     return
+  //   }
     setAlerta({msg: 'Postulacion  exitosa', id: ID, tipo: true});
 
-    socket && socket.emit('postular', productos, new Date(FECHA_ACTIVACION), REFERENCIA_COMPRA);
+    socket && socket.emit('postularT', perfil);
   }
+
 
 
   return (
@@ -48,17 +50,16 @@ const CardSubasta = ({subasta,  socket,  auth, productos  }) => {
           : minutos.toFixed(0) + " minutos para finalizar"}{" "}
       </p>
       <p className="bg-gray-400 px-2 ">Tus productos Seleccionados</p>
-      <div className="flex flex-col  ">
+      {/* <div className="flex flex-col  ">
         {resultado.length > 0 &&
           resultado.map((producto) => (
             <div className="  mb-2 ">
               <p className="bg-green-500 text-white text-center px-2  rounded-lg"> {producto.NOMBRE === NOMBRE_PRODUCTO ? 
               
                producto.NOMBRE : ''}</p>
-              {/* <p>Precio_exp: {producto.PRECIO_EXP}</p> */}
             </div>
           ))}
-      </div>
+      </div> */}
     </div>
   );
 };
