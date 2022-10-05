@@ -1,7 +1,5 @@
-import { faCircleChevronLeft } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 import React, { useEffect, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
 import {traerDatos, perfilTransportista} from '../../Helpers/getTransportista';
 import useAuth from '../../Hooks/useAuth';
 
@@ -19,7 +17,6 @@ const PerfilT = () => {
     );
     const [activeActualizarT, setActiveActualizarT] = useState(false)
     const [mensaje, setMensaje] = useState('');
-    const location = useLocation();
 
 
     useEffect(() => {

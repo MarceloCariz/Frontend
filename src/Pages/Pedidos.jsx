@@ -5,7 +5,6 @@ import jsPDF from "jspdf";
 import React, { useEffect, useRef, useState } from "react";
 import { obtenerBoleta, obtenerPedidos } from "../Helpers/getClientes";
 import useAuth from "../Hooks/useAuth";
-import autoTable from "jspdf-autotable";
 import { info } from "autoprefixer";
 
 
