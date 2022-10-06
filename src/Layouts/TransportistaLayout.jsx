@@ -41,10 +41,10 @@ const TransportistaLayout = ({children}) => {
                 MaipoGrande</h1></Link>
             {/* Desktop */}
             <div className='sm:flex hidden items-center justify-end  w-2/3 gap-8 '>
-                <div className='flex cursor-pointer'>
+                <NavLink to={'envios'} className='flex cursor-pointer'>
                     <FontAwesomeIcon icon={faTruck} className="text-2xl mr-2 mt-1"/>
                     <p className='text-2xl  '>Mis Envios</p>
-                </div>
+                </NavLink>
                 <NavLink to={'subastas'} className='flex cursor-pointer'>
                     <FontAwesomeIcon icon={faGavel} className="text-2xl mr-2 mt-1"/>
                     <p className='text-2xl  '>Subastas</p>
