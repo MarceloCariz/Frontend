@@ -21,6 +21,7 @@ import Registrar from '../Pages/Registrar'
 import InicioTransportista from '../Pages/Transportistas/InicioTransportista'
 import LoginTransportista from '../Pages/Transportistas/LoginTransportista'
 import PerfilT from '../Pages/Transportistas/PerfilT'
+import EnviosT from '../Pages/Transportistas/EnviosT'
 import Subasta from '../Pages/Transportistas/Subasta'
 
 const AppRouter = () => {
@@ -59,6 +60,7 @@ const AppRouter = () => {
           <Route index element={<InicioTransportista/>}/>
           <Route path='perfil' element={<PerfilT/> } />
           <Route path='subastas' element={<Subasta/>}/>
+          <Route path='envios' element={<EnviosT/>}/>
 
         </Route>
 

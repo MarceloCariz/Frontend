@@ -42,3 +42,35 @@ export const obtenerPerfil  = async(config) =>{
         }
 }
 
+
+export const obtenerEnvios = async(config) =>{
+        try {
+            const {data} = await clienteAxios('/transportista/envios', config);
+            const obj = data.reduce((acc, product)=>{
+                if(!acc[product.REFERENCIA_COMPRA]){
+                    acc[product.REFERENCIA_COMPRA] = []
+                }
+                // console.log(product)
+                acc[product.REFERENCIA_COMPRA].push(product)
+    
+                return acc
+              },[]);
+             
+    
+            return obj
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+export const confirmarEnvioEnviado = async(referencia_compra, config) =>{
+        // referencia_compra = (referencia_compra.toString());
+        // console.log(referencia_compra)
+        console.log(config)
+        try {
+            const {data} =await  clienteAxios.put(`/transportista/envios/enviado/confirmar`, {referencia_compra},config);
+            return data;
+        } catch (error) {
+            console.log(error.response.data.msg)
+        }
+    }
