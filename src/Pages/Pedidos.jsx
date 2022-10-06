@@ -3,7 +3,7 @@ import { faClipboardList, faFileArrowDown } from "@fortawesome/free-solid-svg-ic
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import jsPDF from "jspdf";
 import React, { useEffect, useRef, useState } from "react";
-import { obtenerBoleta, obtenerPedidos } from "../Helpers/getClientes";
+import { obtenerBoleta, obtenerPedidos, traerDatos } from "../Helpers/getClientes";
 import useAuth from "../Hooks/useAuth";
 import { info } from "autoprefixer";
 import autoTable from "jspdf-autotable";
@@ -12,15 +12,18 @@ import autoTable from "jspdf-autotable";
 
 const Pedidos = () => {
   const [pedidos, setPedidos] = useState([]);
+  const [datos, setDatos] = useState({});
   const [show, setShow] = useState(false);
   const { config,auth } = useAuth();
   const idPedido = useRef();
   useEffect(() => {
     const cargarPedidos = async () => {
       const resultado = await obtenerPedidos(config);
+      const respuesta = await traerDatos(config);
       // resultado.map((ele,i)=>(console.log(ele.activos)))
       // console.log(resultado.sort())
       setPedidos(resultado.sort());
+      setDatos(respuesta);
     };
     cargarPedidos();
     // pedidos.map((ele)=>{
@@ -76,7 +79,7 @@ const Pedidos = () => {
   doc.text(`señor : ${auth.NOMBRE}` ,16 ,30)
   doc.text(`Direccion :${e[0].DIRECCION}` ,16 ,40)
   doc.text(`Tipo venta : ${e[0].TIPO_VENTA}` ,16 ,50)
-  doc.text(`Ciudad : ${auth.CIUDAD}` ,16 ,60)
+  doc.text(`Ciudad : ${datos.CIUDAD}` ,16 ,60)
   doc.text(`Correo : ${auth.CORREO}` ,16 ,70 )
     doc.save(`Boleta-${e[0].REFERENCIA_COMPRA}`);
 
