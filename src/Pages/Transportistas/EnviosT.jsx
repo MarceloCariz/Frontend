@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import CardEnvio from '../../Components/productores/CardEnvio';
 import CardEnviado from '../../Components/transportistas/CardEnviado';
 import { obtenerEnvios } from '../../Helpers/getTransportista';
 import useAuth from '../../Hooks/useAuth'

@@ -10,13 +10,16 @@ const Subasta = () => {
 
   let activo = true;
 
-  // const  socket = activo && io('http://localhost:4000', {reconnection: false});
-  const  socket = activo && io('http://168.138.133.24:4000', {reconnection: false});
+  const  socket = activo && io('http://localhost:4000', {reconnection: false});
+  // const  socket = activo && io('http://168.138.133.24:4000', {reconnection: false});
 
   const {auth, config} = useAuth();
   useEffect(() => {
     const cargarSubastas = async()=>{
       const resultado = await obtenerSubastas();
+      resultado.map((e)=>(
+        console.log(e)
+      ))      
       setSubasta(resultado);
       const respuesta = await obtenerPerfil(config);
       setPerfil(respuesta);
@@ -32,8 +35,8 @@ const Subasta = () => {
     <div className="mx-auto container text-center pt-10 ">
       <h1 className="text-3xl font-semibold">Subasta Disponibles</h1>
       <div className="flex justify-center mt-12 gap-2">
-        {subasta.length > 0 ? subasta.map((subasta) =>
-        (<CardSubasta subasta={subasta} auth={auth} socket={socket} perfil={perfil}/>))
+        {subasta.length > 0 ? subasta.map((subasta, key) =>
+        (<CardSubasta  key={key} subasta={subasta} auth={auth} socket={socket} perfil={perfil}/>))
         : 'NO hay Subastas'}
         
 

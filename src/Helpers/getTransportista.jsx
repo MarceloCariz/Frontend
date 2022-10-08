@@ -27,7 +27,17 @@ export const perfilTransportista = async(datos,config)=>{
 export const obtenerSubastas = async() =>{
         try {
                 const {data} = await clienteAxios.get('/transportista/subastas');
-                return data;
+                const obj = data.reduce((acc, product) => {
+                        if (!acc[product.REFERENCIA_COMPRA]) {
+                          acc[product.REFERENCIA_COMPRA] = [];
+                        }
+                        // console.log(product)
+                        acc[product.REFERENCIA_COMPRA].push(product);
+                  
+                        return acc;
+                      }, []);
+                  
+                      return obj;
         } catch (error) {
                 console.log(error)
         }
@@ -43,25 +53,24 @@ export const obtenerPerfil  = async(config) =>{
 }
 
 
-export const obtenerEnvios = async(config) =>{
-        try {
-            const {data} = await clienteAxios('/transportista/envios', config);
-            const obj = data.reduce((acc, product)=>{
-                if(!acc[product.REFERENCIA_COMPRA]){
-                    acc[product.REFERENCIA_COMPRA] = []
-                }
-                // console.log(product)
-                acc[product.REFERENCIA_COMPRA].push(product)
-    
-                return acc
-              },[]);
-             
-    
-            return obj
-        } catch (error) {
-            console.log(error)
-        }
-    }
+export const obtenerEnvios = async (config) => {
+  try {
+    const { data } = await clienteAxios("/transportista/envios", config);
+    const obj = data.reduce((acc, product) => {
+      if (!acc[product.REFERENCIA_COMPRA]) {
+        acc[product.REFERENCIA_COMPRA] = [];
+      }
+      // console.log(product)
+      acc[product.REFERENCIA_COMPRA].push(product);
+
+      return acc;
+    }, []);
+
+    return obj;
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 export const confirmarEnvioEnviado = async(referencia_compra, config) =>{
         // referencia_compra = (referencia_compra.toString());
