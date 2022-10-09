@@ -5,7 +5,7 @@ export const CardTransportistas = ({transportistas, setFormValues, formValues}) 
         setFormValues({...formValues,id_transportista: target.value})
     }
   return (
-    <div style={{marginBottom: 12}}>
+    <div  style={{marginBottom: 12}}>
         <h3>Seleccionar Transportista</h3>
         <select defaultValue="seleccione" onChange={onChange}>
             <option value="seleccione" disabled>---SELECCIONE---</option>

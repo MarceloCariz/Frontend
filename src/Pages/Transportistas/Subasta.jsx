@@ -17,9 +17,7 @@ const Subasta = () => {
   useEffect(() => {
     const cargarSubastas = async()=>{
       const resultado = await obtenerSubastas();
-      resultado.map((e)=>(
-        console.log(e)
-      ))      
+    
       setSubasta(resultado);
       const respuesta = await obtenerPerfil(config);
       setPerfil(respuesta);

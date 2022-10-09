@@ -22,7 +22,6 @@ useEffect(() => {
 
         console.log("stop");
         socket.on("transportista-mensaje", (mensaje, id, idcompra) => {
-            console.log(mensaje, id, idcompra );
             if(id === auth.ID){
                 setResultado({idcompra: idcompra, mensaje: mensaje});
             }

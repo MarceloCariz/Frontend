@@ -11,8 +11,8 @@ const Carrito = () => {
   const { carrito, setCarrito, config, auth } = useAuth();
   const [tokentbk, setTokentbk] = useState({token: '', url:''});
   const [total, setTotal] = useState(0);
-  const [cargando, setCargando] = useState(false)
-  const [formValues, setFormValues] = useState({direccion: '',ciudad: '',pais: '', id_transportista: null });
+  const [cargando, setCargando] = useState(false);
+  const [formValues, setFormValues] = useState({direccion: '',ciudad: '',pais: '', refigeracion:'' ,id_transportista: null });
   const [transportistas, setTransportistas] = useState([])
 
   const {TIPO_CLIENTE} = auth;
@@ -38,6 +38,8 @@ const Carrito = () => {
 
   }, [carrito, config, auth.TIPO_CLIENTE])
 
+  
+  ////////Eliminar producto del carrito
   const handleClick = (e) =>{
         const filtrado = carrito.filter(({ID})=>{
             return  ID !== e.ID  ;
@@ -56,6 +58,7 @@ const Carrito = () => {
 
       e.preventDefault();
 
+
       if(formValues.id_transportista === undefined && TIPO_CLIENTE === 'local'){
         console.log('Seleccione un transportista')
         return
@@ -66,7 +69,8 @@ const Carrito = () => {
       // const id_referencia = TIPO_CLIENTE=== 'local' ? await enviaPedidoLocal(carrito, formValues.direccion, config) : await enviaPedidoExt(carrito, formValues.direccion, config);
       // return;
       if(TIPO_CLIENTE === 'externo'){
-        await enviaPedidoExt(carrito, formValues.direccion, config);
+        if(formValues.refigeracion === undefined)  return;
+        await enviaPedidoExt(carrito, formValues.direccion, formValues.refigeracion ,config);
         setCarrito([]);
         setCargando(false)
         return;
@@ -146,10 +150,23 @@ const Carrito = () => {
        <Link to="/inicio/perfil"  state={location.pathname} className='text-white bg-blue-500 px-4 py-2 mt-2 text-sm'>Actualizar Informacion</Link>
     </div>
     {/* SELECCIONAR TRANSPORTISTA */}
-    {TIPO_CLIENTE === 'local' && (
+    {TIPO_CLIENTE === 'local' ? (
         <CardTransportistas transportistas={transportistas} setFormValues={setFormValues} formValues={formValues} />
 
-    )}
+    ):
+      <div className="mb-12">
+        <h3 className="text-center text-xl font-semibold mb-2">Detalles del envio</h3>
+        <div>
+          <label htmlFor="refigeracion">Tipo de Refigeracion: </label>
+          <select name="refigeracion" id="" defaultValue="seleccione" onChange={(e)=> setFormValues({...formValues,refigeracion: e.target.value})}>
+            <option value="seleccione" disabled>--seleccione--</option>
+            <option value="ACT">ACT</option>
+            <option value="Thermal-Master">Thermal-Master</option>
+          </select>
+        </div>
+      </div>
+  
+    }
     {/* FORM TBK */}
     <form   ref={formAction} onSubmit={handleEnviarPedido}    >
       <input ref={inputtbk} type="hidden"  name="token_ws"   value={`${tokentbk.token}`}/>

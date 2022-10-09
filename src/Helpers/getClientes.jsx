@@ -25,7 +25,7 @@ export const actualizarDatos = async(datos,config)=>{
 }
 
 
-export const enviaPedidoExt = async (productos, direccion, config) =>{
+export const enviaPedidoExt = async (productos, direccion, refigeracion, config) =>{
     const id_referencia = Math.floor(Math.random() * 1000000);
     const fecha = new Date().toLocaleDateString();
 
@@ -35,6 +35,7 @@ export const enviaPedidoExt = async (productos, direccion, config) =>{
     formData.append('fecha', fecha);
     formData.append('id_referencia', id_referencia);
     formData.append('direccion',direccion);
+    formData.append('refigeracion', refigeracion);
 
     const {data} = await clienteAxios.post('/clientes/ingresar/orden', formData, config)
     console.log(data)
