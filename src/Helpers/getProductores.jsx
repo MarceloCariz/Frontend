@@ -100,3 +100,12 @@ export const obtenerContrato = async(config) =>{
         console.log(error)
     }
 }
+
+export const solicitudContrato = async(id_contrato) =>{
+    try {
+        const {data} = await clienteAxios.put(`/productores/contrato/solicitud/${id_contrato}`);
+        return data;
+    } catch (error) {
+        console.log(error)
+    }
+}

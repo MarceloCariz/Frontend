@@ -1,4 +1,4 @@
-import { faEye, faEyeSlash} from "@fortawesome/free-regular-svg-icons";
+import { faCheckCircle, faEye, faEyeSlash} from "@fortawesome/free-regular-svg-icons";
 import { faClipboardList, faFileArrowDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import jsPDF from "jspdf";
@@ -194,6 +194,13 @@ const Pedidos = () => {
                     </div>
 
                   )}
+                  {/* Activar boton de recibido */}
+                  {
+                     ele[0].ESTADO_ENVIO === 'enviado' && 
+                     <button  className="bg-emerald-600 px-4 py-2 text-xl text-white flex items-center gap-2 motion-reduce:animate-pulse">
+                        <FontAwesomeIcon className="animate-pulse" icon={faCheckCircle}/>
+                        confirmar recepcion del pedido</button>
+                  }
                   { ele[0].ESTADO_PAGO !== "RECHAZADO" && (
                       <button onClick={(e)=> generarBoleta(ele,e)} className="mt-2 px-4 py-2 bg-blue-500 text-white flex  items-center gap-2">
                       <FontAwesomeIcon  className="text-xl" icon={faFileArrowDown}  />
