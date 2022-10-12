@@ -27,7 +27,7 @@ const Inicio = () => {
   return (
     <div className="pt-8 container mx-auto">
         <h2 className='text-left text-3xl font-semibold ml-4 sm:ml-0'>Nuestros Productos</h2>
-
+        
         <Productos productos={productos} tipo={auth.TIPO_CLIENTE}/>
     </div>
   )

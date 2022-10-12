@@ -76,8 +76,8 @@ export const obtenerPedidos = async(config)=>{
             return acc
           },[]);
          
-
-        return obj
+        //  console.log( obj.sort((a,b)=> new Date(a[0].FECHA_COMPRA)  - new Date(b[0].FECHA_COMPRA)))
+        return obj.sort((a,b)=> new Date(a[0].FECHA_COMPRA)  - new Date(b[0].FECHA_COMPRA))
     } catch (error) {
         console.log(error)
     }
@@ -118,6 +118,15 @@ export const obtenerBoleta = async(id) =>{
     try {
         const {data} = await clienteAxios(`/clientes/boleta/${id}`);
         return data.MONTO_PAGADO;
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export const confirmarRecepcionLocal = async(referencia_compra) =>{
+    try {
+        const {data} = await clienteAxios.put(`/clientes/pedido/confirmar/${referencia_compra}`);
+        return data;
     } catch (error) {
         console.log(error)
     }
