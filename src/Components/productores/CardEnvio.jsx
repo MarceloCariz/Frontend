@@ -65,7 +65,8 @@ const CardEnvio = ({ ele, config }) => {
                 <div className="flex flex-col gap-2 mt-4">
                   <p>Si sus productos ya estan en bodega favor de confirmar</p>
 
-                      <button disabled={ele[0].ESTADO_ENVIO === 'asignado' ? false : true } onClick={(e) => handleEnviarBodega(ele[0].REFERENCIA_COMPRA, e)} className="text-white bg-yellow-500 h-12 px-2 rounded-lg font-semibold">
+                      <button disabled={ele[0].ESTADO_ENVIO === 'asignado' ? false : true } onClick={(e) => handleEnviarBodega(ele[0].REFERENCIA_COMPRA, e)} 
+                         className={ele[0].ESTADO_ENVIO === 'asignado' ? "text-white bg-yellow-500 h-12 px-2 rounded-lg font-semibold" : "text-white bg-yellow-500/50  h-12 px-2 rounded-lg font-semibold"}>
                         <FontAwesomeIcon className="mr-2" icon={faTruckRampBox}/>
                         {ele[0].ESTADO_ENVIO === 'asignado' ? "Confirmar envio a bodega" : "Productos confirmados" }
                         

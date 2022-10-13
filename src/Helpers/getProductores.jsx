@@ -81,6 +81,15 @@ export const obtenerEnvios = async(config) =>{
     }
 }
 
+export const obtenerEnviosCompletados = async(config) =>{
+    try {
+        const {data} =  await clienteAxios('/productores/envios/completados', config);
+        return data;
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 export const confirmarEnvioBodega = async(referencia_compra, config) =>{
     // referencia_compra = (referencia_compra.toString());
     // console.log(referencia_compra)

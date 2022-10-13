@@ -3,6 +3,7 @@ import React from 'react'
 export const Spinnner = ({color, tamano=5}) => {
     // console.log(color)
     // white and black only
+    console.log(tamano)
   return (
     <svg className={`animate-spin -ml-1 mr-3 h-${tamano} w-${tamano} text-${color}`} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
     <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>

@@ -1,54 +1,38 @@
-import { faFileContract } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 import React, { useEffect, useState } from 'react'
-import { obtenerContrato, solicitudContrato } from '../../Helpers/getProductores';
+import { Contrato } from '../../Components/productores/Contrato';
+import { Ganancias } from '../../Components/productores/Ganancias';
+import { obtenerContrato,  obtenerEnviosCompletados, } from '../../Helpers/getProductores';
 import useAuth from '../../Hooks/useAuth'
 
 const PerfilP = () => {
     const {config} = useAuth(); 
     const [contrato, setContrato] = useState({});
-    const [alerta, setAlerta] = useState('');
+    const [envios, setEnvios] = useState([]);
+    const [cargando, setCargando] = useState(false)
     useEffect(() => {
         const cargarDatos = async() =>{
+            setCargando(true)
             const contratoR = await obtenerContrato(config);
             setContrato(contratoR);
+            const respuesta = await obtenerEnviosCompletados(config);
+            setEnvios(respuesta)
+            setCargando(false)
+            // const recibidos = respuesta.filter((e)=>(e.map(({ESTADO_ENVIO})=>(ESTADO_ENVIO))=== 'recibido'));
+            // console.log(respuesta.filter((e)=>(e.map(({ESTADO_ENVIO})=>(ESTADO_ENVIO))=== 'recibido')));
         }  
         cargarDatos();
     }, [config])
-    const {ID_CONTRATO, FECHA_INICIO, FECHA_TERMINO,  ESTADO, RENOVACION} = contrato;
+    const {SUELDO} = contrato;
+    const ganancia = Number(SUELDO).toLocaleString("es-CL", {style: "currency", currency:"CLP"})
     // date.toLocaleDateString('es-MX', {weekday:'long')
-    const handleSolicitud = async() =>{
-        const  mensaje = await solicitudContrato(ID_CONTRATO);
-        setAlerta(mensaje);
-        setTimeout(() => {
-            setAlerta('');
-        }, 3000);
-    }
+
   return (
-    <div className='flex justify-center '>
-        <div className='border border-1 px-4 py-2 '>
-            <div className='flex items-center justify-center mb-4 gap-2'>
-                <FontAwesomeIcon className='text-3xl' icon={faFileContract} />
-                <h2 className='capitalize text-xl text-center font-semibold '>contrato</h2>
-            </div>
-            {alerta && <p className='bg-green-500 px-4 py-1 text-white text-center'>{alerta}</p>}
-            {contrato ? (
-                <div key={ID_CONTRATO}>
-                    <p>Numero de contrato: #{ID_CONTRATO}</p>
-                    <p>Fecha Inicio : { new Date(FECHA_INICIO).toLocaleDateString('es-MX', {year: 'numeric', month: 'long', day: 'numeric'}) }</p>
-                    <p>Fecha Termino : { new Date(FECHA_TERMINO).toLocaleDateString('es-MX', {year: 'numeric', month: 'long', day: 'numeric'}) }</p>
-                    <p>Estado: {ESTADO === 'TRUE' ? 'ACTIVO' : 'INACTIVO'}</p>
-                    <div className='flex justify-center mt-2'>
-                        <button disabled={ESTADO  === 'TRUE'  ? true : false } onClick={handleSolicitud}
-                            className={ESTADO === 'FALSE' ? ' px-4 py-2 bg-green-500 text-white' : 'px-4 py-2 bg-gray-500/20 text-gray-500'}>
-                            {RENOVACION === 'true' ? 'Renovacion ya solicitada' : 'Solicitar Renovacion'}
-                        </button>
-                    </div>
+    <div className='flex justify-center  items-center flex-col gap-10'>
 
-                </div>
-            ) : 'Cargando'}
-        </div>
+       <Ganancias ganancia={ganancia} envios={envios} sueldo={SUELDO} cargando={cargando}/>
 
+        <Contrato contrato={contrato}/>
     </div>
   )
 }

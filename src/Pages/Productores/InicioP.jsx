@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from 'react'
 import ModalProducto from '../../Components/productores/ModalProducto';
 import Productos from '../../Components/productores/Productos'
+import { Spinnner } from '../../Components/ui/Spinnner';
 import { obtenerProductos } from '../../Helpers/getProductores';
 import useAuth from '../../Hooks/useAuth';
 
@@ -10,13 +11,16 @@ import useAuth from '../../Hooks/useAuth';
 const InicioP = () => {
   const [activeModal, setActiveModal] = useState(false)
   const [reload, setReload] = useState(false);
+  const [cargando, setCargando] = useState(false)
   const {auth,productos,setProductos,  config, setAuth} = useAuth();
 // console.log(auth)
 
   useEffect(() => {
       const cargarProductos= async()=>{
-         const resultado =  await obtenerProductos(config)
-          setProductos(resultado)
+        setCargando(true)
+        const resultado =  await obtenerProductos(config)
+        setProductos(resultado)
+        setCargando(false)
       }
       const fecha = new Date(Date.now());
       const fecha2 = fecha.setMinutes(fecha.getMinutes() + 1);
@@ -44,17 +48,19 @@ const InicioP = () => {
           <FontAwesomeIcon className='sm:mt-1 sm:text-2xl text-2xl ' icon={faCirclePlus}/>
            Agregar Producto</button>
       </div>
+
     {activeModal &&
     
       <ModalProducto handleModal={handleModal} setActiveModal={setActiveModal}/>
     }
 
     <div className='flex justify-center  gap-12 mt-12 flex-wrap'>
-      
+    {cargando && <Spinnner color={'black'} />}
+
       {
-        productos.length > 0 && auth.ID === productos[0].ID_PRODUCTOR ? productos.map((producto, i)=>(
+        productos.length > 0 && !cargando && auth.ID === productos[0].ID_PRODUCTOR ? productos.map((producto, i)=>(
           <Productos key={i}   producto={producto} setReload={setReload} reload={reload}/>      
-        )):'Cargando...'
+        )):cargando ? '' : 'No tienes productos'
       }
     </div>
     </div>
