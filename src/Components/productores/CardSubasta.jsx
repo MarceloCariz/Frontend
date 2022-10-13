@@ -52,15 +52,12 @@ const CardSubasta = ({subasta,  socket,  auth, productos  }) => {
       </p>
       <p className="bg-gray-400 px-2 ">Tus productos Seleccionados</p>
       <div className="flex flex-col  ">
-        {resultado &&
-          // resultado.map((producto) => (
-            <div className="  mb-2 ">
-              <p className="bg-green-500 text-white text-center px-2  rounded-lg"> {resultado.NOMBRE === NOMBRE_PRODUCTO  && 
-              resultado.REFERENCIA_COMPRA === REFERENCIA_COMPRA   ? 
-              
-               resultado.NOMBRE : ''}</p>
-            </div>
-          }
+      { resultado.mensaje.length > 0  && resultado.idcompra === REFERENCIA_COMPRA && resultado.nombre_producto === NOMBRE_PRODUCTO&&
+         <div className="  mb-2 ">
+         <p className="bg-green-500 text-white text-center px-2  rounded-lg"> {resultado.mensaje}</p>
+       </div>
+        }
+
       </div>
     </div>
   );
