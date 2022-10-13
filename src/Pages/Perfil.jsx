@@ -7,7 +7,8 @@ import useAuth from '../Hooks/useAuth'
 
 const Perfil = () => {
     const {auth, config} = useAuth();
-    const {CORREO, NOMBRE} =auth;
+    const {CORREO, NOMBRE, RUT} =auth;
+    console.log(auth)
     const [formValues, setFormValues] = useState(
         {
             direccion: '',
@@ -25,7 +26,7 @@ const Perfil = () => {
             setFormValues({
                 direccion: resp.DIRECCION || '',
                 ciudad: resp.CIUDAD || '',
-                pais: resp.PAIS || ''
+                pais: resp.PAIS || '',
             })
         } 
         cargarDatos();
@@ -65,6 +66,13 @@ const Perfil = () => {
                 <label htmlFor="correo" className='sm:text-xl  text-sm font-bold'>Correo:   </label>
                 <p className='bg-gray-100 px-2 text-sm '>{CORREO}</p>
             </div>
+            {auth.TIPO_CLIENTE === 'local' && (
+                           <div className='flex gap-9 items-center w-32'>
+                           <label htmlFor="correo" className='sm:text-xl  text-sm font-bold'>Rut:   </label>
+                           <p className='bg-gray-100 px-2 text-sm '>{RUT}</p>
+                       </div>
+            )}
+
             <div className='flex gap-3 items-center'>
                 <label htmlFor="direccion" className='sm:text-xl font-bold'>Direccion :</label>
                 <input name='direccion' onChange={handleInputchange} className='bg-gray-100 px-2 ' value={formValues.direccion}/>

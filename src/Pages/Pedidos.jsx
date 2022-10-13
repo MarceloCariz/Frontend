@@ -8,6 +8,7 @@ import { BotonBoleta } from "../Components/clients/pedidos/BotonBoleta";
 import useAuth from "../Hooks/useAuth";
 import { Cabecera } from "../Components/clients/pedidos/Cabecera";
 import { Spinnner } from "../Components/ui/Spinnner";
+import { BotonPagarExt } from "../Components/clients/pedidos/BotonPagarExt";
 
 
 
@@ -71,8 +72,16 @@ const Pedidos = () => {
                   ele[0].ESTADO_ENVIO === 'enviado' && 
                   <BotonRecibido referencia_compra ={ele[0].REFERENCIA_COMPRA}/>
                 }
+                {
+                   ele[0].ESTADO_ENVIO === 'recibido' &&  ele[0].ESTADO_PAGO === 'pendiente' &&
+                   <BotonPagarExt referencia_compra ={ele[0].REFERENCIA_COMPRA} total={ele.reduce((total, i)=>(i.PRECIO * i.CANTIDAD) + total,0)} config={config}/>
+                }
+
+                <p className="text-xl font-semibold ">{ele[0].ESTADO_PAGO === 'PAGADO' ? 'Total Pagado' : 'Total a pagar'}:
+                  {ele.reduce((total, i)=>(i.PRECIO * i.CANTIDAD) + total,0).toLocaleString("es-CL", {style: "currency", currency:"CLP"})}
+                </p>
                   
-                { ele[0].ESTADO_PAGO !== "RECHAZADO" && (
+                { ele[0].ESTADO_PAGO === "PAGADO"   && (
                      <BotonBoleta informacion ={ele} auth={auth} datos={datos}/>
                 )}
 

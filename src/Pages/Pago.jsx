@@ -17,11 +17,10 @@ const Pago = () => {
         const respuesta = await validarPedido(tokenTBK);
         setVoucher(respuesta)
       };
-    console.log('pan')
     // return
     validar();
     // console.log(voucherF.map((v)=>(console.log(v))))
-  }, [tokenTBK])
+  }, [])
   // console.log(voucherF.map((v)=>(console.log(v))))
   const {vci, amount, status, session_id,transaction_date} = voucherF; 
   
@@ -36,7 +35,6 @@ const Pago = () => {
 
     doc.save(`Boleta-${session_id}`);
   }
-  console.log(voucherF)
   return (
     <div className='flex justify-center text-center items-center flex-col gap-8 container mx-auto pt-12'>
        <h2 className='text-xl'>Comprobante de pago</h2>

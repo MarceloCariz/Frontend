@@ -2,7 +2,7 @@
 
 import  { useEffect, useState } from 'react'
 
-const useTime = (finalHora, socket,  auth, referenciaCompra) => {
+const useTime = (finalHora, socket,  auth, referenciaCompra,NOMBRE_PRODUCTO) => {
   const [hora, setHora] = useState('')
   const [minutos, setMinutos] = useState({time:null, estado: false})
   const [resultado, setResultado] = useState([])
@@ -15,7 +15,6 @@ const useTime = (finalHora, socket,  auth, referenciaCompra) => {
           setHora(horaActual.toLocaleTimeString())
             if(finalHora - horaActual > 0){
               const minutosF = (finalHora  - horaActual)/(1000*60)
-              console.log(minutosF);
               setMinutos({...minutos, time: minutosF})
             }
          
@@ -26,12 +25,11 @@ const useTime = (finalHora, socket,  auth, referenciaCompra) => {
 
           setMinutos({time: null,estado: true});
           console.log('stop')
-          socket.emit('subasta:finalizar',true,referenciaCompra)
+          socket.emit('subasta:finalizar',true,referenciaCompra,NOMBRE_PRODUCTO,auth.ID)
           socket.on('client-subasta', (data)=>{
-            const seleccionados = data.filter(({ID_PRODUCTOR})=>(
-                ID_PRODUCTOR === auth.ID
-            ))
-          setResultado(seleccionados)
+            if(data.ID_PRODUCTOR === auth.ID){
+              setResultado(data)
+            }
           })
           return
        }

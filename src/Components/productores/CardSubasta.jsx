@@ -4,9 +4,10 @@ import useTime from "../../Hooks/useTime";
 const CardSubasta = ({subasta,  socket,  auth, productos  }) => {
   const [alerta, setAlerta] = useState({msg:'', id: 0, tipo:null});
 
-  const {ID, NOMBRE_PRODUCTO, REFERENCIA_COMPRA,FECHA_ACTIVACION, } = subasta;
+  const {ID, NOMBRE_PRODUCTO, REFERENCIA_COMPRA,FECHA_ACTIVACION} = subasta;
 
-  const {minutos, hora, resultado, } = useTime( new Date(FECHA_ACTIVACION), socket,  auth, REFERENCIA_COMPRA);
+  const {minutos, hora, resultado, } = useTime( new Date(FECHA_ACTIVACION), socket,  auth, REFERENCIA_COMPRA , NOMBRE_PRODUCTO);
+  console.log(resultado);
   const handleClick = (e) =>{
     console.log(REFERENCIA_COMPRA);
     const existe  = productos.some(({NOMBRE})=>(NOMBRE === NOMBRE_PRODUCTO));
@@ -15,8 +16,10 @@ const CardSubasta = ({subasta,  socket,  auth, productos  }) => {
       return
     }
     setAlerta({msg: 'Postulacion  exitosa', id: ID, tipo: true});
-
-    socket && socket.emit('postular', productos, new Date(FECHA_ACTIVACION), REFERENCIA_COMPRA);
+    // const prodRef = productos.map((ele) => ({...ele, REFERENCIA_COMPRA}));
+    const producto = productos.find(({NOMBRE})=>(NOMBRE === NOMBRE_PRODUCTO));
+    // console.log(producto)
+    socket && socket.emit('postular',{...producto, REFERENCIA_COMPRA}, new Date(FECHA_ACTIVACION), REFERENCIA_COMPRA);
   }
 
 
@@ -49,15 +52,15 @@ const CardSubasta = ({subasta,  socket,  auth, productos  }) => {
       </p>
       <p className="bg-gray-400 px-2 ">Tus productos Seleccionados</p>
       <div className="flex flex-col  ">
-        {resultado.length > 0 &&
-          resultado.map((producto) => (
+        {resultado &&
+          // resultado.map((producto) => (
             <div className="  mb-2 ">
-              <p className="bg-green-500 text-white text-center px-2  rounded-lg"> {producto.NOMBRE === NOMBRE_PRODUCTO ? 
+              <p className="bg-green-500 text-white text-center px-2  rounded-lg"> {resultado.NOMBRE === NOMBRE_PRODUCTO  && 
+              resultado.REFERENCIA_COMPRA === REFERENCIA_COMPRA   ? 
               
-               producto.NOMBRE : ''}</p>
-              {/* <p>Precio_exp: {producto.PRECIO_EXP}</p> */}
+               resultado.NOMBRE : ''}</p>
             </div>
-          ))}
+          }
       </div>
     </div>
   );

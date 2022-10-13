@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { registrar } from '../Helpers/getClientes';
+import { validateRUT } from '../utils/validadorRut';
 
 const Registrar = () => {
-  const [formValues, setFormValues] = useState({ correo: "", password: "", password2:"", nombre: "", tipo: '' });
-  const [alerta, setAlerta] = useState('')
+  const [formValues, setFormValues] = useState({ correo: "", password: "", password2:"", nombre: "", tipo: '', rut: '' });
+  const [alerta, setAlerta] = useState('');
+  const [alertaRut, setAlertaRut] = useState({valido: false, msg: ''})
   const navigate = useNavigate();
 
 
@@ -15,9 +17,15 @@ const Registrar = () => {
     }
   };
 
+  const handleValidarRut = ({target}) =>{
+    setFormValues({...formValues, rut: target.value})
+    const valido = validateRUT(target.value);
+    !valido ? setAlertaRut({valido: false, msg: 'El rut ingresado no es valido'}) : setAlertaRut({valido: true, msg: ''});
+    
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     if ([formValues.correo, formValues.password, formValues.password2, formValues.nombre, formValues.tipo].includes("")) {
       setAlerta("Todos los campos son obligatorios");
       setTimeout(() => {
@@ -25,6 +33,14 @@ const Registrar = () => {
       }, 2000);
       return;
     }
+    if(formValues.tipo === 'local' &&  alertaRut.valido === false){
+      setAlerta("El rut no es valido");
+      setTimeout(() => {
+        setAlerta('')
+      }, 2000);
+      return;
+    }
+
     console.log(formValues)
     if(formValues.password !== formValues.password2){
       setAlerta("Las contraseñas deben ser iguales")
@@ -36,7 +52,8 @@ const Registrar = () => {
         correo: formValues.correo,
         password: formValues.password,
         nombre: formValues.nombre,
-        tipo : formValues.tipo
+        tipo : formValues.tipo,
+        rut: formValues.rut,
 
       }
       await registrar(datos);
@@ -105,6 +122,23 @@ const Registrar = () => {
             onChange={handleOnchange}
           />
         </div>
+
+        {formValues.tipo === 'local' && (
+              <div>
+              {!alertaRut.valido && <p className='bg-red-500 text-white text-center  text-sm w-2/3'>{alertaRut.msg}</p>}
+              <input
+                className="h-12 border px-2 rounded-md mt-2" 
+                  name="rut"
+                  type="text"
+                  maxLength={10}
+                  placeholder="Rut ej: 11111111-k"
+                  value={formValues.rut}
+                  onChange={handleValidarRut}
+                />
+                <p className='text-sm'>Si su rut termina en 0 reemplazelo con una k</p>
+              </div>
+        )}
+
         <div>
           <p>Indique si es un cliente extranjero o nacional</p>
           <div className='flex justify-center text-sm gap-8' >

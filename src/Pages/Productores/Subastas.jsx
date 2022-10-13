@@ -17,7 +17,7 @@ const Subastas = () => {
     let activo = true;
     // let  socket;
     const  socket = activo && io('http://168.138.133.24:4000', {reconnection: false});
-    // const  socket = activo && io('http://localhost:4000', {reconnection: false});
+    // const  socket = activo && io('http://localhost:4000', {reconnection: true});
 
   useEffect(() => {
    
