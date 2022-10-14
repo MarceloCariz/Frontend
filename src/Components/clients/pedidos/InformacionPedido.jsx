@@ -18,7 +18,7 @@ export const InformacionPedido = ({informacion}) => {
             <tr className="flex capitalize sm:gap-32 justify-between sm:justify-start  sm:text-rigth   items-center text-sm">
               <th className="w-32">{e.NOMBRE_PRODUCTO}</th>
               <th>{e.CANTIDAD} kg</th>
-              <th className="pl-4">{(e.PRECIO * e.CANTIDAD).toLocaleString("es-CL", {style: "currency", currency:"CLP"})}</th>
+              <th className="">{(e.PRECIO * e.CANTIDAD).toLocaleString("es-CL", {style: "currency", currency:"CLP"})}</th>
               <th>{e.ESTADO_ENVIO}</th>
             </tr>
           </tbody>

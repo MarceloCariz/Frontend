@@ -1,7 +1,7 @@
 import React from "react";
 import { Spinnner } from "../ui/Spinnner";
 
-export const Ganancias = ({ ganancia, sueldo, envios, cargando }) => {
+export const Ganancias = ({ ganancia, sueldo, envios, cargando, rol }) => {
   return (
     <div className="border border-1  sm:w-1/2 w-auto px-10 py-10 bg-white rounded-lg shadow-md flex items-center flex-col gap-2 ">
       <p className="text-3xl font-semibold flex items-center gap-2">
@@ -16,6 +16,7 @@ export const Ganancias = ({ ganancia, sueldo, envios, cargando }) => {
           {cargando ? (
             <Spinnner />
           ) : (
+
             <table className="sm:table-fixed table-auto sm:text-lg text-sm overflow-scroll w-full">
               <thead>
                 <tr>
@@ -27,7 +28,7 @@ export const Ganancias = ({ ganancia, sueldo, envios, cargando }) => {
                 </tr>
               </thead>
               <tbody className="text-center overflow-y h-12">
-                {envios.length > 0 ? (
+                {rol === 'productor' && envios.length > 0  ?  (
                   envios.map(
                     ({
                       ID,

@@ -12,7 +12,7 @@ const Carrito = () => {
   const [tokentbk, setTokentbk] = useState({token: '', url:''});
   const [total, setTotal] = useState(0);
   const [cargando, setCargando] = useState(false);
-  const [formValues, setFormValues] = useState({direccion: '',ciudad: '',pais: '', refigeracion:'' ,id_transportista: null });
+  const [formValues, setFormValues] = useState({direccion: '',ciudad: '',pais: '', refigeracion:'' ,id_transportista: null , precioT: 0});
   const [transportistas, setTransportistas] = useState([])
 
   const {TIPO_CLIENTE} = auth;
@@ -75,7 +75,7 @@ const Carrito = () => {
         return;
       }
       const id_referencia = await enviaPedidoLocal(carrito, formValues.id_transportista ,formValues.direccion, config);
-      const respuesta =  await pagarPedido(id_referencia , config, total);
+      const respuesta =  await pagarPedido(id_referencia , config, total + (formValues.precioT === undefined ? 0 : formValues.precioT));
       const { token, url} = respuesta;
 
       formAction.current.action = url;
@@ -89,6 +89,7 @@ const Carrito = () => {
 
       formAction.current.submit();
   }
+
   return (
     <div className=" mt-12 flex justify-center flex-col items-center sm:mb-4 mb-60  ">
       {carrito.length > 0 ? (
@@ -134,7 +135,7 @@ const Carrito = () => {
     </table>
     <div className="w-1/2 flex flex-row bg-gray-300 mt-4 px-4 rounded-sm mb-4">
             <p className="w-full">Total</p>
-            <p className="text-right font-semibold"> ${total}</p>
+            <p className="text-right font-semibold"> ${total + (formValues.precioT === undefined ? 0 : formValues.precioT)}</p>
     </div>
     {/* INFORMACION DESPACHO */}
     <div className="mt-4 mb-4 sm:w-1/2 flex flex-col items-center border border-1 border-gray-500 py-2 px-4 sm:px-2 rounded-md">
@@ -150,7 +151,11 @@ const Carrito = () => {
     </div>
     {/* SELECCIONAR TRANSPORTISTA */}
     {TIPO_CLIENTE === 'local' ? (
-        <CardTransportistas transportistas={transportistas} setFormValues={setFormValues} formValues={formValues} />
+        <>
+        <CardTransportistas transportistas={transportistas} setFormValues={setFormValues} formValues={formValues}  />
+        <h3 className="text-2xl font-bold">Total a pagar</h3>
+          <p className="text-right font-semibold text-2xl mb-4"> ${total + (formValues.precioT === undefined ? 0 : formValues.precioT)}</p>
+        </>
 
     ):
       <div className="mb-12">

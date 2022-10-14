@@ -71,7 +71,7 @@ return (
                             <p className='font-bold sm:text-2xl '>precio: ${PRECIO_LOCAL}</p>
                         </>
                     ):
-                        <p className='font-bold sm:text-2xl '>precio: ${PRECIO_EXP}</p>
+                        <p className='font-bold sm:text-2xl '>precio aprox: ${PRECIO_EXP}</p>
                     }
 
                     </div>

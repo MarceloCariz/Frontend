@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react'
 import { Contrato } from '../../Components/productores/Contrato';
 import { Ganancias } from '../../Components/productores/Ganancias';
@@ -8,8 +7,9 @@ import useAuth from '../../Hooks/useAuth'
 const PerfilP = () => {
     const {config} = useAuth(); 
     const [contrato, setContrato] = useState({});
-    const [envios, setEnvios] = useState([]);
     const [cargando, setCargando] = useState(false)
+
+    const [envios, setEnvios] = useState([]);
     useEffect(() => {
         const cargarDatos = async() =>{
             setCargando(true)
@@ -30,7 +30,7 @@ const PerfilP = () => {
   return (
     <div className='flex justify-center  items-center flex-col gap-10'>
 
-       <Ganancias ganancia={ganancia} envios={envios} sueldo={SUELDO} cargando={cargando}/>
+       <Ganancias ganancia={ganancia} envios={envios} sueldo={SUELDO} cargando={cargando} rol="productor"/>
 
         <Contrato contrato={contrato}/>
     </div>

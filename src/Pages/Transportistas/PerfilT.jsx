@@ -1,10 +1,14 @@
 
 import React, { useEffect, useState } from 'react';
-import {traerDatos, perfilTransportista} from '../../Helpers/getTransportista';
+import { Contrato } from '../../Components/productores/Contrato';
+import { Ganancias } from '../../Components/productores/Ganancias';
+import {traerDatos, perfilTransportista, obtenerContrato} from '../../Helpers/getTransportista';
 import useAuth from '../../Hooks/useAuth';
 
 const PerfilT = () => {
     const {auth, config} = useAuth();
+    const [contrato, setContrato] = useState({});
+    const [cargando, setCargando] = useState(false)
     const {CORREO, NOMBRE} = auth;
     const [formValues, setFormValues] = useState(
         {
@@ -21,6 +25,8 @@ const PerfilT = () => {
 
     useEffect(() => {
         const cargarDatos = async() =>{
+            setCargando(true)
+
             const resp = await traerDatos(config);
             setFormValues({
                 tamano: resp.TAMANO || '',
@@ -29,6 +35,11 @@ const PerfilT = () => {
                 refrigeracion: resp.REFRIGERACION || '',
                 precio: resp.PRECIO || ''
             })
+            const contratoR = await obtenerContrato(config);
+            console.log(contratoR);
+            setContrato(contratoR);
+            setCargando(false)
+
         } 
         cargarDatos();
     }, [config])
@@ -51,8 +62,14 @@ const PerfilT = () => {
         }, 2000);
 
     }
+    const {SUELDO} = contrato;
+    const ganancia = Number(SUELDO).toLocaleString("es-CL", {style: "currency", currency:"CLP"})
   return (
     <div className='flex flex-col justify-center items-center pt-4 mb-56 '>
+       <Ganancias ganancia={ganancia}  sueldo={SUELDO} cargando={cargando} rol="transportista"/>
+
+        <Contrato contrato={contrato}/>
+
         <h2 className='text-2xl mb-8 font-bold'>Informacion Personal</h2>
         { mensaje ? <p className='bg-green-500 py-2 px-4 text-white font-semibold mb-2 w-1/4 text-center'>{mensaje}</p> : ''}
         <form onSubmit={handleSubmit} className='bg-white shadow-lg px-12 py-4 flex flex-col sm:w-auto w-6/7 gap-4 '> 
