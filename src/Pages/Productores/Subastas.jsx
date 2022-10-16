@@ -12,12 +12,14 @@ const Subastas = () => {
   const [productos, setProductos] = useState([])
   const [contrato, setContrato] = useState({})
   const [subastas, setSubastas] = useState([])
+  const [resultado, setResultado] = useState([])
   // const [minutos, setMinutos] = useState(0)
 
     let activo = true;
     // let  socket;
-    const  socket = activo && io('http://168.138.133.24:4000', {reconnection: false});
+    // const  socket = activo && io('http://168.138.133.24:4000', {reconnection: false});
     // const  socket = activo && io('http://localhost:4000', {reconnection: true});
+    const  socket = activo && io(process.env.REACT_APP_SOCKET, {reconnection: false});
 
   useEffect(() => {
    
@@ -33,11 +35,8 @@ const Subastas = () => {
     cargarDatos();
 
   }, [config])
-  console.log('1')
-
- 
-
-  // console.log(minutos)
+  const set = new Set(resultado.map(JSON.stringify));
+  const arrSinDuplicaicones = Array.from(set).map(JSON.parse);
   return (
     <div className="mx-auto container text-center pt-10 ">
       <h1 className="text-3xl font-semibold">Subasta Disponibles</h1>
@@ -48,14 +47,27 @@ const Subastas = () => {
           <div className=" flex-1 flex gap-2 items-start flex-wrap ">
             {subastas.length > 0 ? (
               subastas.map((subasta) => (
-                <CardSubasta
+                <div className='flex flex-col' key={subasta.ID}>
+                  { arrSinDuplicaicones.length > 0  && arrSinDuplicaicones.map(({ idSubasta, mensaje})=>(
+                    <div className="  mb-2 " key={idSubasta}>
+                    <p className="bg-green-500 text-white text-center px-2  rounded-lg"> 
+                    { idSubasta === subasta.ID ? mensaje : ""}</p>
+                  </div>))
+                  }
+                  <CardSubasta
                   key={subasta.ID}
                   subasta={subasta}
                   socket={socket}
                   activo={activo}
                   auth={auth}
                   productos={productos}
+                  setResultado={setResultado}
+                  resultado={resultado}
                 />
+                
+
+                </div>
+
               ))
             ) : (
               <p className="text-center mx-auto pl-16 sm:pl-40 capitalize font-semibold">
@@ -80,6 +92,7 @@ const Subastas = () => {
                     <div className="flex flex-col text-left">
                       <p>{producto.NOMBRE}</p>
                       <p> Cantidad: {producto.CANTIDAD}</p>
+                      <p>Precio : {producto.PRECIO_EXP}</p>
                     </div>
 
                     {/* <button onClick={(e)=>handleClick(producto,e)}>Enviar</button> */}

@@ -1,13 +1,16 @@
 import React, {  useState } from "react";
 import useTime from "../../Hooks/useTime";
 
-const CardSubasta = ({subasta,  socket,  auth, productos  }) => {
+const CardSubasta = ({subasta,  socket,  auth, productos, setResultado, resultado  }) => {
   const [alerta, setAlerta] = useState({msg:'', id: 0, tipo:null});
 
   const {ID, NOMBRE_PRODUCTO, REFERENCIA_COMPRA,FECHA_ACTIVACION} = subasta;
 
-  const {minutos, hora, resultado, } = useTime( new Date(FECHA_ACTIVACION), socket,  auth, REFERENCIA_COMPRA , NOMBRE_PRODUCTO);
-  console.log(resultado);
+  const {minutos, hora,  } = useTime( new Date(FECHA_ACTIVACION), socket,  auth, REFERENCIA_COMPRA , NOMBRE_PRODUCTO, resultado, setResultado, ID);
+
+
+
+
   const handleClick = (e) =>{
     console.log(REFERENCIA_COMPRA);
     const existe  = productos.some(({NOMBRE})=>(NOMBRE === NOMBRE_PRODUCTO));
@@ -19,7 +22,7 @@ const CardSubasta = ({subasta,  socket,  auth, productos  }) => {
     // const prodRef = productos.map((ele) => ({...ele, REFERENCIA_COMPRA}));
     const producto = productos.find(({NOMBRE})=>(NOMBRE === NOMBRE_PRODUCTO));
     // console.log(producto)
-    socket && socket.emit('postular',{...producto, REFERENCIA_COMPRA}, new Date(FECHA_ACTIVACION), REFERENCIA_COMPRA);
+    socket && socket.emit('postular',{...producto, REFERENCIA_COMPRA,idSubasta: ID}, new Date(FECHA_ACTIVACION), REFERENCIA_COMPRA);
   }
 
 
@@ -50,15 +53,6 @@ const CardSubasta = ({subasta,  socket,  auth, productos  }) => {
           ? "Subasta Finalizada"
           : minutos.toFixed(0) + " minutos para finalizar"}{" "}
       </p>
-      <p className="bg-gray-400 px-2 ">Tus productos Seleccionados</p>
-      <div className="flex flex-col  ">
-      { resultado.mensaje.length > 0  && resultado.idcompra === REFERENCIA_COMPRA && resultado.nombre_producto === NOMBRE_PRODUCTO&&
-         <div className="  mb-2 ">
-         <p className="bg-green-500 text-white text-center px-2  rounded-lg"> {resultado.mensaje}</p>
-       </div>
-        }
-
-      </div>
     </div>
   );
 };

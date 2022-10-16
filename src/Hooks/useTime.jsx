@@ -2,10 +2,10 @@
 
 import  { useEffect, useState } from 'react'
 
-const useTime = (finalHora, socket,  auth, referenciaCompra,NOMBRE_PRODUCTO) => {
+const useTime = (finalHora, socket,  auth, referenciaCompra,NOMBRE_PRODUCTO, resultado, setResultado, idSubasta) => {
   const [hora, setHora] = useState('')
   const [minutos, setMinutos] = useState({time:null, estado: false})
-  const [resultado, setResultado] = useState({idcompra: 0, mensaje: '',nombre_producto: ''});
+  // const [resultado, setResultado] = useState({});
 
    
 
@@ -26,10 +26,12 @@ const useTime = (finalHora, socket,  auth, referenciaCompra,NOMBRE_PRODUCTO) => 
 
           setMinutos({time: null,estado: true});
           console.log('stop')
-          socket.emit('subasta:finalizar',true,referenciaCompra,NOMBRE_PRODUCTO,auth.ID)
-          socket.on('client-subasta', (mensaje, id, idcompra, nombre_product)=>{
+          socket.emit('subasta:finalizar',true,referenciaCompra,NOMBRE_PRODUCTO,auth.ID, idSubasta)
+          socket.on('client-subasta', (mensaje, id, idcompra, nombre_product, idSubasta)=>{
             if(id === auth.ID){
-              setResultado({idcompra: idcompra, mensaje: mensaje, nombre_producto: nombre_product});
+
+              const obj = {idcompra: idcompra, mensaje: mensaje, nombre_producto: nombre_product, idSubasta:idSubasta};
+              setResultado(resultado => [...resultado, obj ]);
 
             }
           })
