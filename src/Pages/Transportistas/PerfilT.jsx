@@ -2,13 +2,14 @@
 import React, { useEffect, useState } from 'react';
 import { Contrato } from '../../Components/productores/Contrato';
 import { Ganancias } from '../../Components/productores/Ganancias';
-import {traerDatos, perfilTransportista, obtenerContrato} from '../../Helpers/getTransportista';
+import {traerDatos, perfilTransportista, obtenerContrato, obtenerEnviosCompletados} from '../../Helpers/getTransportista';
 import useAuth from '../../Hooks/useAuth';
 
 const PerfilT = () => {
     const {auth, config} = useAuth();
     const [contrato, setContrato] = useState({});
-    const [cargando, setCargando] = useState(false)
+    const [cargando, setCargando] = useState(false);
+    const [envios, setEnvios] = useState([])
     const {CORREO, NOMBRE} = auth;
     const [formValues, setFormValues] = useState(
         {
@@ -36,8 +37,9 @@ const PerfilT = () => {
                 precio: resp.PRECIO || ''
             })
             const contratoR = await obtenerContrato(config);
-            console.log(contratoR);
             setContrato(contratoR);
+            const enviosR = await obtenerEnviosCompletados(config);
+            setEnvios(enviosR);
             setCargando(false)
 
         } 
@@ -65,15 +67,19 @@ const PerfilT = () => {
     const {SUELDO} = contrato;
     const ganancia = Number(SUELDO).toLocaleString("es-CL", {style: "currency", currency:"CLP"})
   return (
-    <div className='flex flex-col justify-center items-center pt-4 mb-56 '>
-       <Ganancias ganancia={ganancia}  sueldo={SUELDO} cargando={cargando} rol="transportista"/>
+    <div className='flex flex-col justify-center items-center pt-4  '>
+        <div className=' flex justify-center gap-2 mb-2'>
+                <Ganancias ganancia={ganancia} envios={envios}  sueldo={SUELDO} cargando={cargando} rol="transportista"/>
 
-        <Contrato contrato={contrato}/>
+                <Contrato contrato={contrato}/>
+        </div>
 
         <h2 className='text-2xl mb-8 font-bold'>Informacion Personal</h2>
+
         { mensaje ? <p className='bg-green-500 py-2 px-4 text-white font-semibold mb-2 w-1/4 text-center'>{mensaje}</p> : ''}
         <form onSubmit={handleSubmit} className='bg-white shadow-lg px-12 py-4 flex flex-col sm:w-auto w-6/7 gap-4 '> 
         {/* 4 */}
+
             <div className='flex gap-6 items-center'>
                 <label htmlFor="nombre" className='sm:text-xl font-bold'>Nombre :</label>
                 <p className='bg-gray-100 px-2'>{NOMBRE}</p>

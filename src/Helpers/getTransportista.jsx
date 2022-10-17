@@ -108,3 +108,12 @@ export const solicitudContrato = async (id_contrato) => {
     console.log(error);
   }
 };
+
+export const obtenerEnviosCompletados = async (config) =>{
+  try {
+    const {data} = await clienteAxios('/transportista/envios/completado', config);
+    return data
+  } catch (error) {
+    console.log(error)
+  }
+}

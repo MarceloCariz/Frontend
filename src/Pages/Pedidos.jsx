@@ -26,7 +26,7 @@ const Pedidos = () => {
       setCargando(true);
       const resultado = await obtenerPedidos(config);
       const respuesta = await traerDatos(config);
-
+      console.log(resultado)
       setPedidos(resultado);
       setDatos(respuesta);
       setCargando(false)
@@ -65,20 +65,20 @@ const Pedidos = () => {
                 </p>
 
                 {show && Number(idPedido.current.id) === i &&
-                  ( <InformacionPedido informacion={ele}/>)
+                  ( <InformacionPedido informacion={ele} total={ele.reduce((total, i)=>((i.PRECIO *Number(i.CANTIDAD)) + total),0)}/>)
                 }
                 
                 {
                   ele[0].ESTADO_ENVIO === 'enviado' && 
-                  <BotonRecibido referencia_compra ={ele[0].REFERENCIA_COMPRA}/>
+                  <BotonRecibido referencia_compra ={ele[0].REFERENCIA_COMPRA} />
                 }
                 {
                    ele[0].ESTADO_ENVIO === 'recibido' &&  ele[0].ESTADO_PAGO === 'pendiente' &&
-                   <BotonPagarExt referencia_compra ={ele[0].REFERENCIA_COMPRA} total={ele.reduce((total, i)=>(i.PRECIO * i.CANTIDAD) + total,0)} config={config}/>
+                   <BotonPagarExt referencia_compra ={ele[0].REFERENCIA_COMPRA} total={ele.reduce((total, i)=>((i.PRECIO *Number(i.CANTIDAD)) + total),ele[0].PRECIOT)} config={config}/>
                 }
 
                 <p className="text-xl font-semibold ">{ele[0].ESTADO_PAGO === 'PAGADO' ? 'Total Pagado' : 'Total a pagar'}:
-                  {ele.reduce((total, i)=>(i.PRECIO * i.CANTIDAD) + total,0).toLocaleString("es-CL", {style: "currency", currency:"CLP"})}
+                  {ele.reduce((total, i)=>((Number(i.PRECIO) * Number(i.CANTIDAD)  ) + total) ,ele[0].PRECIOT).toLocaleString("es-CL", {style: "currency", currency:"CLP"})}
                 </p>
                   
                 { ele[0].ESTADO_PAGO === "PAGADO"   && (
