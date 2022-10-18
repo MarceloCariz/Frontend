@@ -22,10 +22,10 @@ const InicioP = () => {
         setProductos(resultado)
         setCargando(false)
       }
-      const fecha = new Date(Date.now());
-      const fecha2 = fecha.setMinutes(fecha.getMinutes() + 1);
+      // const fecha = new Date(Date.now());
+      // const fecha2 = fecha.setMinutes(fecha.getMinutes() + 1);
+      // // console.log(new Date(fecha2).toISOString())
       // console.log(new Date(fecha2).toISOString())
-      console.log(new Date(fecha2).toISOString())
 
       // console.log(new Date("2022-08-30T20:12:15.925Z"))
       

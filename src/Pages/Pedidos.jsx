@@ -26,7 +26,6 @@ const Pedidos = () => {
       setCargando(true);
       const resultado = await obtenerPedidos(config);
       const respuesta = await traerDatos(config);
-      console.log(resultado)
       setPedidos(resultado);
       setDatos(respuesta);
       setCargando(false)
@@ -36,6 +35,7 @@ const Pedidos = () => {
 
   const onClick = (e) => {
     // console.log(e.i)
+
     idPedido.current.id = e.i;
     setShow(!show);
   };

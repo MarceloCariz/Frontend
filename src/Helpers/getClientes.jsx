@@ -1,4 +1,5 @@
 import clienteAxios from "../config/clienteAxios"
+import { sortBy } from "../utils/sortByDate"
 
 
 export const login = async(datos) =>{
@@ -76,8 +77,8 @@ export const obtenerPedidos = async(config)=>{
             return acc
           },[]);
          
-        //  console.log( obj.sort((a,b)=> new Date(a[0].FECHA_COMPRA)  - new Date(b[0].FECHA_COMPRA)))
-        return obj.sort((a,b)=> new Date(a[0].FECHA_COMPRA)  - new Date(b[0].FECHA_COMPRA))
+        
+        return  obj.sort(sortBy('FECHA_COMPRA'));
     } catch (error) {
         console.log(error)
     }

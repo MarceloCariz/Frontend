@@ -1,4 +1,5 @@
 import clienteAxios from "../config/clienteAxios";
+import { sortBy } from "../utils/sortByDate";
 
 export const login = async (datos) => {
   const { data } = await clienteAxios.post("/usuario/login", {
@@ -68,7 +69,8 @@ export const obtenerEnvios = async (config) => {
       return acc;
     }, []);
 
-    return obj;
+    return  obj.sort(sortBy('FECHA_COMPRA'));
+
   } catch (error) {
     console.log(error);
   }
