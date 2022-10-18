@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 export const CardTransportistas = ({transportistas, setFormValues, formValues,}) => {
 
@@ -12,8 +12,8 @@ export const CardTransportistas = ({transportistas, setFormValues, formValues,})
         setFormValues({...formValues,id_transportista: id, precioT: precio});
     }
   return (
-    <div  style={{marginBottom: 12}}>
-        <h3>Seleccionar Transportista</h3>
+    <div  style={{marginBottom: 20}} className="flex justify-center flex-col gap-4">
+        <h3 className='text-xl font-semibold'>Selecciona a un Transportista</h3>
         <select defaultValue="seleccione" onChange={onChange}>
             <option value="seleccione" disabled>---SELECCIONE---</option>
             {transportistas.map(({NOMBRE, ID, PRECIO})=>(

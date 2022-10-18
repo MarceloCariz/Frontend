@@ -51,13 +51,13 @@ const  generarBoleta = async() =>{
       doc.text(`Ciudad : ${datos.CIUDAD}` ,16 ,50)
       doc.text(`Correo : ${auth.CORREO}` ,16 ,60 )
       doc.text(`Rut : ${auth.RUT}` ,16 ,30 )
-        doc.save(`Boleta-${e[0].REFERENCIA_COMPRA}`);
+        doc.save(`Factura-${e[0].REFERENCIA_COMPRA}`);
     
       }
   return (
     <button onClick={generarBoleta} className="mt-2 px-4 py-2 bg-blue-500 text-white flex  items-center gap-2">
     <FontAwesomeIcon  className="text-xl" icon={faFileArrowDown}  />
-    Descargar Boleta
+    Descargar Factura
     </button>
   )
 }

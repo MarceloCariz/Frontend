@@ -18,17 +18,22 @@ const CardSubasta = ({subasta,  socket,  auth, productos, setResultado, resultad
       setAlerta({msg: 'No tienes este producto', id: ID, tipo: false});
       return
     }
-    setAlerta({msg: 'Postulacion  exitosa', id: ID, tipo: true});
     // const prodRef = productos.map((ele) => ({...ele, REFERENCIA_COMPRA}));
     const producto = productos.find(({NOMBRE})=>(NOMBRE === NOMBRE_PRODUCTO));
+    if(producto.CANTIDAD <= 0){
+      setAlerta({msg: 'No tienes stock de este producto', id: ID, tipo: false});
+
+      return;
+    }
+    setAlerta({msg: 'Postulacion  exitosa', id: ID, tipo: true});
+
     // console.log(producto)
     socket && socket.emit('postular',{...producto, REFERENCIA_COMPRA,idSubasta: ID}, new Date(FECHA_ACTIVACION), REFERENCIA_COMPRA);
   }
-
-
+  // console.log(minutosq)
   return (
     <div className="w-auto bg-white px-4 pt-8 rounded-lg shadow-md">
-      {alerta && alerta.id === ID &&   <p className={alerta.tipo ? "bg-green-500 text-white capitalize" : "bg-red-500 text-white capitalize"}>{alerta.msg}</p>}
+      {alerta && alerta.id === ID &&   <p className={alerta.tipo ? "bg-green-500 text-white capitalize px-2" : "bg-red-500 text-white capitalize px-2"}>{alerta.msg}</p>}
       <p className="text-left font-bold">Numero de Orden #{REFERENCIA_COMPRA}</p>
       <p className="">Productos Necesarios : </p>
       <p className="capitalize font-semibold">{NOMBRE_PRODUCTO}</p>
@@ -51,7 +56,7 @@ const CardSubasta = ({subasta,  socket,  auth, productos, setResultado, resultad
       <p>
         {minutos === null
           ? "Subasta Finalizada"
-          : minutos.toFixed(0) + "Minutos para finalizar"}{" "}
+          : (minutos  > 1? minutos.toFixed(0) : (minutos * 60).toFixed(0)) + " " +(Number(minutos)  > 1 ?  (minutos > 1 && minutos < 2 ? "Minuto restante" : "Minutos restantes") : "segundos restantes")}
       </p>
     </div>
   );

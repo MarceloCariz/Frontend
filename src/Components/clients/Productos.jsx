@@ -68,25 +68,32 @@ return (
                             <p>Stock: {CANTIDAD}</p>
                             <p>calidad: {CALIDAD}</p>
                             <p>proveedor: {PROVEEDOR}</p>
-                            <p className='font-bold sm:text-2xl '>Precio: ${PRECIO_LOCAL}</p>
+                            <p className='font-bold sm:text-2xl '>Precio:{Number(PRECIO_LOCAL).toLocaleString("es-CL", {style: "currency", currency:"CLP"})}</p>
                         </>
                     ):
-                        <p className='font-bold sm:text-2xl '>Precio aprox.: ${PRECIO_EXP}</p>
+                        <p className='font-bold sm:text-xl '>Precio aprox:{Number(PRECIO_EXP).toLocaleString("es-CL", {style: "currency", currency:"CLP"})}</p>
                     }
 
                     </div>
                     <div className='flex justify-center mt-4 ' >
+                    
                     {
-                        activeButton.activo &&  activeButton.id === ID  &&(
-
+                        activeButton.activo &&  activeButton.id === ID  && CANTIDAD > 0 && tipo === 'local' &&(
                             <button onClick={(e) => handleClick({ID,NOMBRE, CANTIDAD, PRECIO: tipo ==='local' ? PRECIO_LOCAL : PRECIO_EXP,IMAGE_URL, ID_PRODUCTOR, unidad: 1},e)} className='font-bold text-white bg-green-500 px-2 py-2 rounded-md'>
                             <FontAwesomeIcon icon={faCartPlus} className="pr-1"/>
-                            
-                            {agregando.cargando && agregando.id === ID    ? "Agregando...": "Agregar al carrito"}
-                        
-                        
-                        </button>
-                    )}                    
+                            {agregando.cargando && agregando.id === ID    ? "Agregando...": "Agregar al carrito"}</button>
+                    )}
+                    {
+                        activeButton.activo &&  activeButton.id === ID   && tipo === 'externo' &&(
+                            <button onClick={(e) => handleClick({ID,NOMBRE, CANTIDAD, PRECIO: tipo ==='local' ? PRECIO_LOCAL : PRECIO_EXP,IMAGE_URL, ID_PRODUCTOR, unidad: 1},e)} className='font-bold text-white bg-green-500 px-2 py-2 rounded-md'>
+                            <FontAwesomeIcon icon={faCartPlus} className="pr-1"/>
+                            {agregando.cargando && agregando.id === ID    ? "Agregando...": "Agregar al carrito"}</button>
+                    )}
+                    {
+                        CANTIDAD <= 0 && tipo === 'local' && (
+                            <p className='bg-gray-500 text-white px-4 py-2'>Producto sin stock</p>
+                        )
+                    }                 
                     </div>
                 </div>
             ))

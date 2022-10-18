@@ -19,10 +19,10 @@ export const Cabecera = ({ i, idPedido, onClick, show, ele }) => {
         }
       >
         {ele[0].ESTADO_PAGO === "RECHAZADO" ? (
-          "Estado de envio: CANCELADO"
+          "Estado de envío: CANCELADO"
         ) : (
           <div className="flex   sm:flex-col sm:gap-1 flex-col gap-1">
-            <p className="text-sm">Estado de envió </p>
+            <p className="text-sm">Estado de envío </p>
             <p
               className={
                 ele.some(({ ESTADO_ENVIO }) => ESTADO_ENVIO === "pendiente")

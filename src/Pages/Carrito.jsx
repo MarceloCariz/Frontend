@@ -13,7 +13,8 @@ const Carrito = () => {
   const [total, setTotal] = useState(0);
   const [cargando, setCargando] = useState(false);
   const [formValues, setFormValues] = useState({direccion: '',ciudad: '',pais: '', refigeracion:'' ,id_transportista: null , precioT: 0});
-  const [transportistas, setTransportistas] = useState([])
+  const [transportistas, setTransportistas] = useState([]);
+  const [alerta, setAlerta] = useState({estado: false, mensaje: ''})
 
   const {TIPO_CLIENTE} = auth;
   const location = useLocation();
@@ -60,6 +61,10 @@ const Carrito = () => {
 
       if(formValues.id_transportista === undefined && TIPO_CLIENTE === 'local'){
         console.log('Seleccione un transportista')
+        setAlerta({estado: true, mensaje:'Seleccione un transportista'})
+        setTimeout(() => {
+          setAlerta({estado: false, mensaje:''})
+        }, 2000);
         return
       }
 
@@ -135,7 +140,7 @@ const Carrito = () => {
     </table>
     <div className="w-1/2 flex flex-row bg-gray-300 mt-4 px-4 rounded-sm mb-4">
             <p className="w-full">Total</p>
-            <p className="text-right font-semibold"> ${total + (formValues.precioT === undefined ? 0 : formValues.precioT)}</p>
+            <p className="text-right font-semibold">{(total + (formValues.precioT === undefined ? 0 : formValues.precioT)).toLocaleString("es-CL", {style: "currency", currency:"CLP"})}</p>
     </div>
     {/* INFORMACION DESPACHO */}
     <div className="mt-4 mb-4 sm:w-1/2 flex flex-col items-center border border-1 border-gray-500 py-2 px-4 sm:px-2 rounded-md">
@@ -150,11 +155,12 @@ const Carrito = () => {
        <Link to="/inicio/perfil"  state={location.pathname} className='text-white bg-blue-500 px-4 py-2 mt-2 text-sm'>Actualizar Informacion</Link>
     </div>
     {/* SELECCIONAR TRANSPORTISTA */}
+    {TIPO_CLIENTE === 'local' && alerta.estado && <p className="bg-red-500 px-4 py-2 text-white mb-4">{alerta.mensaje}</p>}
     {TIPO_CLIENTE === 'local' ? (
         <>
         <CardTransportistas transportistas={transportistas} setFormValues={setFormValues} formValues={formValues}  />
         <h3 className="text-2xl font-bold">Total a pagar</h3>
-          <p className="text-right font-semibold text-2xl mb-4"> ${total + (formValues.precioT === undefined ? 0 : formValues.precioT)}</p>
+          <p className="text-right font-semibold text-2xl mb-4">{(total + (formValues.precioT === undefined ? 0 : formValues.precioT)).toLocaleString("es-CL", {style: "currency", currency:"CLP"})}</p>
         </>
 
     ):
