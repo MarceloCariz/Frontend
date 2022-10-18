@@ -38,9 +38,7 @@ const useTime = (finalHora, socket,  auth, referenciaCompra,NOMBRE_PRODUCTO, res
           return
        }
        
-       if(resultado.length > 0 ){
-         return
-       } 
+
     
           setTimeout(()=>{
             cargarHora();

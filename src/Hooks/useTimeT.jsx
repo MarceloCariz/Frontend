@@ -29,9 +29,7 @@ useEffect(() => {
         return;
     }
 
-    if (resultado.length > 0) {
-        return;
-    }
+
 
     setTimeout(() => {
       cargarHora();
