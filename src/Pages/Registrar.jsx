@@ -109,7 +109,7 @@ const Registrar = () => {
             className="h-12 border px-2 rounded-md"
             name="nombre"
             type="text"
-            placeholder="Nombre"
+            placeholder="Nombre y apellido"
             value={formValues.nombre}
             onChange={handleOnchange}
           />
