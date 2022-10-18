@@ -8,7 +8,6 @@ import useAuth from '../Hooks/useAuth'
 const Perfil = () => {
     const {auth, config} = useAuth();
     const {CORREO, NOMBRE, RUT} =auth;
-    console.log(auth)
     const [formValues, setFormValues] = useState(
         {
             direccion: '',

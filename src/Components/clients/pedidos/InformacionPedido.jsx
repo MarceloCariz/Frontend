@@ -1,6 +1,7 @@
 import React from "react";
 
 export const InformacionPedido = ({informacion, total}) => {
+
   return (
     <div className="flex flex-col gap-12 mt-4   animate__animated animate__fadeIn mb-4   ">
       <table className=" table-fixed w-full ">

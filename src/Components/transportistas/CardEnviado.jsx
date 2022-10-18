@@ -42,7 +42,9 @@ const CardEnviado = ({ ele, config }) => {
           )}
         </div>
       </div>
-
+      <div className="mt-4 font-bold">
+        <p>{ele[0].FECHA_COMPRA}</p>
+      </div>
       <div className="flex gap-4 mt-4  sm:ml-2 animate__animated animate__fadeIn ">
         <table className=" table-fixed w-1/2  ">
           <thead>
