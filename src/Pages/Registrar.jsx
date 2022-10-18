@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { registrar } from '../Helpers/getClientes';
 import { validateRUT } from '../utils/validadorRut';
+import validator from 'validator';
 
 const Registrar = () => {
   const [formValues, setFormValues] = useState({ correo: "", password: "", password2:"", nombre: "", tipo: '', rut: '' });
@@ -12,9 +13,7 @@ const Registrar = () => {
 
   const handleOnchange = ({ target }) => {
     setFormValues({ ...formValues, [target.name]: target.value });
-    if (formValues.correo.length > 8){
-        setAlerta('')
-    }
+
   };
 
   const handleValidarRut = ({target}) =>{
@@ -26,6 +25,8 @@ const Registrar = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const isNombreApellido = formValues.nombre.split(' ');
+  
     if ([formValues.correo, formValues.password, formValues.password2, formValues.nombre, formValues.tipo].includes("")) {
       setAlerta("Todos los campos son obligatorios");
       setTimeout(() => {
@@ -33,6 +34,17 @@ const Registrar = () => {
       }, 2000);
       return;
     }
+    /// Validar Email
+    if(!validator.isEmail(formValues.correo)){
+      setAlerta('Correo Incorrecto')
+      return
+    }
+    // Validar nombre y apellido
+    if(isNombreApellido.length <= 1){
+      setAlerta('Incluya nombre y apellido')
+      return
+    }
+
     if(formValues.tipo === 'local' &&  alertaRut.valido === false){
       setAlerta("El RUT no es válido");
       setTimeout(() => {
@@ -79,7 +91,7 @@ const Registrar = () => {
       <form onSubmit={handleSubmit} className="flex justify-center items-center   gap-8 flex-col px-8 py-6 ">
       {
       alerta && (
-        <p className="text-sm font-bold relative bg-red-500 text-white px-2">{alerta}</p>
+        <p className="text-sm sm:text-xl font-bold relative bg-red-500 text-white px-2">{alerta}</p>
       )
     }
         <div className="">
