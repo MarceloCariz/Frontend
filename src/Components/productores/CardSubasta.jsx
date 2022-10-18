@@ -15,7 +15,7 @@ const CardSubasta = ({subasta,  socket,  auth, productos, setResultado, resultad
     console.log(REFERENCIA_COMPRA);
     const existe  = productos.some(({NOMBRE})=>(NOMBRE === NOMBRE_PRODUCTO));
     if(!existe){
-      setAlerta({msg: 'no tienes este producto', id: ID, tipo: false});
+      setAlerta({msg: 'No tienes este producto', id: ID, tipo: false});
       return
     }
     setAlerta({msg: 'Postulacion  exitosa', id: ID, tipo: true});
@@ -51,7 +51,7 @@ const CardSubasta = ({subasta,  socket,  auth, productos, setResultado, resultad
       <p>
         {minutos === null
           ? "Subasta Finalizada"
-          : minutos.toFixed(0) + " minutos para finalizar"}{" "}
+          : minutos.toFixed(0) + "Minutos para finalizar"}{" "}
       </p>
     </div>
   );

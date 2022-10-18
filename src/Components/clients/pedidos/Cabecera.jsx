@@ -5,7 +5,7 @@ export const Cabecera = ({ i, idPedido, onClick, show, ele }) => {
   return (
     <div className="flex gap-2 sm:text-xl capitalize font-semibold items-center ">
       <p>
-        Numero pedido{" "}
+      Número pedido{" "}
         <span className="text-black font-bold">
           #{ele[0].REFERENCIA_COMPRA}
         </span>{" "}
@@ -22,7 +22,7 @@ export const Cabecera = ({ i, idPedido, onClick, show, ele }) => {
           "Estado de envio: CANCELADO"
         ) : (
           <div className="flex   sm:flex-col sm:gap-1 flex-col gap-1">
-            <p className="text-sm">Estado de envio </p>
+            <p className="text-sm">Estado de envió </p>
             <p
               className={
                 ele.some(({ ESTADO_ENVIO }) => ESTADO_ENVIO === "pendiente")

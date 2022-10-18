@@ -25,7 +25,7 @@ const EnviosT = () => {
 
             ))
             
-        : 'Aun no tiene envios'}
+        : 'Aún no tiene envíos'}
     </div>
   )
 }

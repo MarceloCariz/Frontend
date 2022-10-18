@@ -34,7 +34,7 @@ const CardEnviado = ({ ele, config }) => {
             "Estado de envio: CANCELADO"
           ) : (
             <p className="flex   sm:flex-row sm:gap-0 flex-col gap-1">
-              Estado de envio:{" "}
+              Estado de envió:{" "}
               <span className="ml-2">
                 {ele[0].ESTADO_ENVIO}
               </span>

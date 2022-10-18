@@ -30,7 +30,7 @@ const Envios = () => {
 
             ))
             
-        : cargando ? '' : 'Aun no tienes envios'}
+        : cargando ? '' : 'Aún no tienes envíos'}
     </div>
   )
 }

@@ -13,7 +13,7 @@ const CardSubasta = ({subasta,  socket,  auth,  perfil  }) => {
       return;
      }
      if(perfil.REFRIGERACION !== REFRIGERACION){
-      setAlerta({msg: 'Regfrigeracion no compatible',id: ID, tipo: false});
+      setAlerta({msg: 'Refrigeración no compatible',id: ID, tipo: false});
       return;
      }
     // console.log(REFERENCIA_COMPRA);
@@ -23,7 +23,7 @@ const CardSubasta = ({subasta,  socket,  auth,  perfil  }) => {
   //     setAlerta({msg: 'no tienes este producto', id: ID, tipo: false});
   //     return
   //   }
-    setAlerta({msg: 'Postulacion  exitosa', id: ID, tipo: true});
+    setAlerta({msg: 'Postulación exitosa', id: ID, tipo: true});
 
     socket && socket.emit('postularT', {...perfil, REFERENCIA_COMPRA});
   }
@@ -33,7 +33,7 @@ const CardSubasta = ({subasta,  socket,  auth,  perfil  }) => {
   return (
     <div className="w-auto bg-white px-4 pt-8 rounded-lg shadow-md">
       {alerta && alerta.id === ID &&   <p className={alerta.tipo ? "bg-green-500 text-white capitalize" : "bg-red-500 text-white capitalize px-2"}>{alerta.msg}</p>}
-      <p className="text-left font-bold">Numero de Orden #{REFERENCIA_COMPRA}</p>
+      <p className="text-left font-bold">Número de Orden #{REFERENCIA_COMPRA}</p>
       <p className="">Productos Necesarios : </p>
       {subasta.map((ele, i)=>(
         <div key={i}>
@@ -61,7 +61,7 @@ const CardSubasta = ({subasta,  socket,  auth,  perfil  }) => {
       <p>
         {minutos === null
           ? "Subasta Finalizada"
-          : minutos.toFixed(0) + " minutos para finalizar"}{" "}
+          : minutos.toFixed(0) + " Minutos para finalizar"}{" "}
       </p>
       <div>
         {resultado.mensaje.length > 0  && resultado.idcompra === REFERENCIA_COMPRA &&

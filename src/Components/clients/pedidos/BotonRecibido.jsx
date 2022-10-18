@@ -12,6 +12,6 @@ export const BotonRecibido = ({referencia_compra}) => {
   return (
     <button onClick={confirmarRecepcion}  className="bg-emerald-600 px-4 py-2 text-xl text-white flex items-center gap-2 motion-reduce:animate-pulse">
     <FontAwesomeIcon className="animate-pulse" icon={faCheckCircle}/>
-    confirmar recepcion del pedido</button>
+    Confirmar recepción del pedido</button>
   )
 }

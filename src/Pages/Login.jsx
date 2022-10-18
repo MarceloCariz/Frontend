@@ -77,7 +77,7 @@ const Login = () => {
         <div className="">
         <input className=" cursor-pointer hover:bg-blue-600 text-center rounded-lg bg-blue-500 text-white px-8 py-4" type="submit" value="Iniciar Sesión" />
         </div>
-        <Link className="text-lg text-blue-500" to="registrar">¿No tienes cuenta? Registrate Aqui.</Link>
+        <Link className="text-lg text-blue-500" to="registrar">¿No tienes cuenta? Regístrate Aquí.</Link>
       </form>
     </div>
 

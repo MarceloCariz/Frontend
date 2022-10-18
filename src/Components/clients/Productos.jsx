@@ -65,13 +65,13 @@ return (
                     <p className='font-semibold text-2xl'>{NOMBRE} Kg</p>
                     {tipo === 'local' ? (
                         <>
-                            <p>stock: {CANTIDAD}</p>
+                            <p>Stock: {CANTIDAD}</p>
                             <p>calidad: {CALIDAD}</p>
                             <p>proveedor: {PROVEEDOR}</p>
-                            <p className='font-bold sm:text-2xl '>precio: ${PRECIO_LOCAL}</p>
+                            <p className='font-bold sm:text-2xl '>Precio: ${PRECIO_LOCAL}</p>
                         </>
                     ):
-                        <p className='font-bold sm:text-2xl '>precio aprox: ${PRECIO_EXP}</p>
+                        <p className='font-bold sm:text-2xl '>Precio aprox.: ${PRECIO_EXP}</p>
                     }
 
                     </div>

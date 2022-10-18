@@ -54,7 +54,7 @@ const Perfil = () => {
     }
   return (
     <div className='flex flex-col justify-center items-center pt-4 mb-56 '>
-        <h2 className='text-2xl mb-8 font-bold'>Informacion Personal</h2>
+        <h2 className='text-2xl mb-8 font-bold'>Información Personal</h2>
         { mensaje ? <p className='bg-green-500 py-2 px-4 text-white font-semibold mb-2 w-1/4 text-center'>{mensaje}</p> : ''}
         <form onSubmit={handleSubmit} className='bg-white shadow-lg px-12 py-4 flex flex-col sm:w-auto w-6/7 gap-4 '> 
         {/* 4 */}
@@ -74,7 +74,7 @@ const Perfil = () => {
             )}
 
             <div className='flex gap-3 items-center'>
-                <label htmlFor="direccion" className='sm:text-xl font-bold'>Direccion :</label>
+                <label htmlFor="direccion" className='sm:text-xl font-bold'>Dirección :</label>
                 <input name='direccion' onChange={handleInputchange} className='bg-gray-100 px-2 ' value={formValues.direccion}/>
             </div>
             <div className='flex gap-10 items-center'>
@@ -83,7 +83,7 @@ const Perfil = () => {
             </div>
             {auth.TIPO_CLIENTE === 'externo' && (
                 <div className='flex gap-1 items-center'>
-                    <label htmlFor="pais" className='sm:text-xl font-bold'>Pais:</label>
+                    <label htmlFor="pais" className='sm:text-xl font-bold'>País:</label>
                     <input name='pais' onChange={handleInputchange}  className='ml-16 bg-gray-100 px-2' value={formValues.pais}/>
                 </div>
             )}

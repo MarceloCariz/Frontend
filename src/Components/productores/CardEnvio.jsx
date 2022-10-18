@@ -17,7 +17,7 @@ const CardEnvio = ({ ele, config }) => {
     >
       <div className="flex gap-2 sm:text-xl capitalize font-semibold items-center ">
         <p>
-          Numero pedido{" "}
+        Número pedido{" "}
           <span className="text-black font-bold">
             #{ele[0].REFERENCIA_COMPRA}
           </span>{" "}
@@ -34,7 +34,7 @@ const CardEnvio = ({ ele, config }) => {
             "Estado de envio: CANCELADO"
           ) : (
             <p className="flex   sm:flex-row sm:gap-0 flex-col gap-1">
-              Estado de envio:{" "}
+              Estado de envió:{" "}
               <span className="ml-2">
                 {ele[0].ESTADO_ENVIO}
               </span>
@@ -63,7 +63,7 @@ const CardEnvio = ({ ele, config }) => {
         {
             ele[0].ESTADO_PAGO !== 'RECHAZADO' && (
                 <div className="flex flex-col gap-2 mt-4">
-                  <p>Si sus productos ya estan en bodega favor de confirmar</p>
+                  <p>Si sus productos ya están en bodega favor de confirmar</p>
 
                       <button disabled={ele[0].ESTADO_ENVIO === 'asignado' ? false : true } onClick={(e) => handleEnviarBodega(ele[0].REFERENCIA_COMPRA, e)} 
                          className={ele[0].ESTADO_ENVIO === 'asignado' ? "text-white bg-yellow-500 h-12 px-2 rounded-lg font-semibold" : "text-white bg-yellow-500/50  h-12 px-2 rounded-lg font-semibold"}>

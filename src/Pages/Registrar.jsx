@@ -34,7 +34,7 @@ const Registrar = () => {
       return;
     }
     if(formValues.tipo === 'local' &&  alertaRut.valido === false){
-      setAlerta("El rut no es valido");
+      setAlerta("El RUT no es válido");
       setTimeout(() => {
         setAlerta('')
       }, 2000);
@@ -135,7 +135,7 @@ const Registrar = () => {
                   value={formValues.rut}
                   onChange={handleValidarRut}
                 />
-                <p className='text-sm'>Si su rut termina en 0 reemplazelo con una k</p>
+                <p className='text-sm'>Si su RUT termina en 0 reemplazalo con una k</p>
               </div>
         )}
 

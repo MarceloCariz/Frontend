@@ -2,7 +2,9 @@ import jsPDF from 'jspdf';
 import React, { useEffect, useState } from 'react'
 import {  useLocation} from 'react-router-dom'
 import { validarPedido } from '../Helpers/getClientes';
-
+import maipo from '../Components/clients/img/maipo.PNG';
+import timbre from '../Components/clients/img/timbre.jpg';
+import autoTable from "jspdf-autotable";
 const Pago = () => {
   const location = useLocation();
   const tokenTBK = location.search.substring(0,11) === '?TBK_TOKEN=' ? location.search.replace('?TBK_TOKEN=', '').substring(0,64) :location.search.replace('?token_ws=','') ;
@@ -25,14 +27,23 @@ const Pago = () => {
   const {vci, amount, status, session_id,transaction_date} = voucherF; 
   
   const  generarVoucher = () =>{
-    const doc = new jsPDF();
+    const doc = new jsPDF('p','mm','a5' );
     // 1 - x 200  /////  2- y
-    doc.text('MAIPOGRANDE',10, 10);
-    doc.text(`Boleta #${session_id}`, 150, 10);
-    doc.text(`Monto Pagado: ${amount}`, 50, 40 );
-    doc.text(`Id sesion: ${session_id}`, 50, 50);
-    doc.text(`Fecha Compra: ${transaction_date}`, 50, 60);
-
+    doc.setFontSize(20);
+    doc.addImage(maipo, 'PNG', 0, 0, undefined, false);
+    doc.addImage(timbre, 'JPG', 0, 0, undefined, false);
+    doc.text(`Boleta #${session_id}`, 90, 8);
+    doc.rect(15, 23, 120, 30); 
+    doc.text(`Rut: 99.999.999-9`, 45, 40);
+    doc.text(`Boleta electronica: ${session_id}`, 45, 50);
+    doc.text(`Fecha de Compra: ${transaction_date}`, 10, 75);
+    doc.autoTable({
+      columnStyles: { 0: { halign: 'center', } }, 
+      margin: { top: 80 },
+      head: [["valor"]],
+      body: [[`${amount}`]]
+   
+     } );
     doc.save(`Boleta-${session_id}`);
   }
   return (
@@ -48,7 +59,7 @@ const Pago = () => {
               <p>Fecha de transaccion: {transaction_date}</p>
               {status === 'INITIALIZED' || status === 'FAILED'  ?(
                 <div className='text-center bg-red-500 px-4 py-2 text-white'>
-                  <p>Pedido Candelado</p>
+                  <p>Pedido Cancelado</p>
                 </div>
               ): 
               <div className='flex items-center justify-center mt-12'>

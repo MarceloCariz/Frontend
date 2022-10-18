@@ -71,7 +71,7 @@ const Subastas = () => {
               ))
             ) : (
               <p className="text-center mx-auto pl-16 sm:pl-40 capitalize font-semibold">
-                no hay subastas disponibles
+                No hay subastas disponibles
               </p>
             )}
           </div>
@@ -103,7 +103,7 @@ const Subastas = () => {
 
           </>
       ) : 
-        <Link to="/productor/perfil" className='px-4 py-4 bg-blue-500 text-white'>Solicite aquí la renovacion de su contrato</Link>
+        <Link to="/productor/perfil" className='px-4 py-4 bg-blue-500 text-white'>Solicite aquí la renovación de su contrato</Link>
       }
 
       </div>

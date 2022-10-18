@@ -139,12 +139,12 @@ const Carrito = () => {
     </div>
     {/* INFORMACION DESPACHO */}
     <div className="mt-4 mb-4 sm:w-1/2 flex flex-col items-center border border-1 border-gray-500 py-2 px-4 sm:px-2 rounded-md">
-       <h2 className="text-xl font-semibold text-center">INFORMACION DESPACHO</h2>
+       <h2 className="text-xl font-semibold text-center">INFORMACIÓN DESPACHO</h2>
        <div className="flex flex-col gap-2 mt-2 text-lg sm:w-1/3">
-          <p className="font-medium">Direccion: <span className="capitalize font-normal">{formValues.direccion}</span> </p>
+          <p className="font-medium">Dirección: <span className="capitalize font-normal">{formValues.direccion}</span> </p>
           <p className="font-medium">Ciudad: <span className="capitalize font-normal">{formValues.ciudad}</span></p>
           {TIPO_CLIENTE === 'externo' && (
-            <p className="font-medium">Pais: <span className="capitalize font-normal">{formValues.pais}</span></p>
+            <p className="font-medium">País: <span className="capitalize font-normal">{formValues.pais}</span></p>
           )}
        </div>
        <Link to="/inicio/perfil"  state={location.pathname} className='text-white bg-blue-500 px-4 py-2 mt-2 text-sm'>Actualizar Informacion</Link>
@@ -159,9 +159,9 @@ const Carrito = () => {
 
     ):
       <div className="mb-12">
-        <h3 className="text-center text-xl font-semibold mb-2">Detalles del envio</h3>
+        <h3 className="text-center text-xl font-semibold mb-2">Detalles del envió</h3>
         <div>
-          <label htmlFor="refigeracion">Tipo de Refigeracion: </label>
+          <label htmlFor="refigeracion">Tipo de Refrigeración: </label>
           <select name="refigeracion" id="" defaultValue="seleccione" onChange={(e)=> setFormValues({...formValues,refigeracion: e.target.value})}>
             <option value="seleccione" disabled>--seleccione--</option>
             <option value="ACT">ACT</option>

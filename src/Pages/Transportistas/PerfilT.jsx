@@ -106,7 +106,7 @@ const PerfilT = () => {
             </div> */}
 
             <div>
-                <div className='sm:text-xl font-bold'>Indique Tipo de refrigeracion</div>
+                <div className='sm:text-xl font-bold'>Indique Tipo de refrigeración</div>
                     <div className='flex justify-center text-sm gap-8' >
                         <div className='flex items-center gap-2 text-lg'>
                             <p>Thermal Master</p>

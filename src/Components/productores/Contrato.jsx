@@ -23,7 +23,7 @@ export const Contrato = ({contrato}) => {
     {alerta && <p className='bg-green-500 px-4 py-1 text-white text-center'>{alerta}</p>}
     {contrato ? (
         <div key={ID_CONTRATO}>
-            <p>Numero de contrato: #{ID_CONTRATO}</p>
+            <p>Número de contrato: #{ID_CONTRATO}</p>
             <p>Fecha Inicio : { new Date(FECHA_INICIO).toLocaleDateString('es-MX', {year: 'numeric', month: 'long', day: 'numeric'}) }</p>
             <p>Fecha Termino : { new Date(FECHA_TERMINO).toLocaleDateString('es-MX', {year: 'numeric', month: 'long', day: 'numeric'}) }</p>
             <p>Estado: {ESTADO === 'TRUE' ? 'ACTIVO' : 'INACTIVO'}</p>

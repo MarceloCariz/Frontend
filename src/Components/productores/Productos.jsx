@@ -72,7 +72,7 @@ const Productos = ({ producto, setReload ,reload}) => {
         </div>
 
         <div className="flex flex-col ">
-          <label className="text-left"htmlFor={`${PRECIO_EXP}`}>Precio Exportacion</label>
+          <label className="text-left"htmlFor={`${PRECIO_EXP}`}>Precio Exportación</label>
           <input name="precio_ext" type="number" onChange={handleOnchange} className="bg-gray-50 border-1 pl-1 border-gray-500 border rounded-sm" id={`${PRECIO_EXP}`} value={precio_ext} />
         </div>
 
