@@ -23,11 +23,12 @@ const AuthLayout = () => {
               
             }</Link> */}
             <Link
-              to={"/transportistas"}
-              className={" px-4 py-2 text-white font-semibold bg-gray-700 "}
+              to={"/consultores"}
+              className={" px-4 py-2 text-white font-semibold bg-amber-500 "}
             >
-              Acceso Transportistas
+              Acceso Consultor
             </Link>
+
             <Link
               to={"/productores"}
               className={" px-4 py-2 text-white font-semibold bg-green-600 "}
@@ -39,6 +40,12 @@ const AuthLayout = () => {
               className={" px-4 py-2 text-white font-semibold bg-blue-600 "}
             >
               Acceso Clientes
+            </Link>
+            <Link
+              to={"/transportistas"}
+              className={" px-4 py-2 text-white font-semibold bg-gray-700 "}
+            >
+              Acceso Transportistas
             </Link>
           </ul>
         </nav>

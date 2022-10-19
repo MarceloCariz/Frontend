@@ -23,6 +23,10 @@ import LoginTransportista from '../Pages/Transportistas/LoginTransportista'
 import PerfilT from '../Pages/Transportistas/PerfilT'
 import EnviosT from '../Pages/Transportistas/EnviosT'
 import Subasta from '../Pages/Transportistas/Subasta'
+import RutaProtegidaConsultor from '../Layouts/RutaProtegidaConsultor'
+import LoginConsultor from '../Pages/Consultor/LoginConsultor'
+import InicioConsultor from '../Pages/Consultor/InicioConsultor'
+import Reportes from '../Pages/Consultor/Reportes'
 
 const AppRouter = () => {
   return (
@@ -35,6 +39,7 @@ const AppRouter = () => {
                 <Route path='registrar' element={<Registrar/>}/>
                 <Route path='productores' element={<LoginP/>}/>
                 <Route path='transportistas' element={<LoginTransportista/>}/>
+                <Route path='consultores' element={<LoginConsultor/>}/>
                 <Route path='registrar-productores'element={<RegistrarP/>}/>
             </Route>
 
@@ -63,7 +68,13 @@ const AppRouter = () => {
           <Route path='envios' element={<EnviosT/>}/>
 
         </Route>
+        {/* CONSULTOR */}
+        <Route path='/consultor' element={<RutaProtegidaConsultor/>}>
+          {/* <Route index element={<LoginTransportista/>}/> */}
+          <Route index element={<InicioConsultor/>}/>
+          <Route path='reportes' element={<Reportes/>}/>
 
+        </Route>
 
         </Routes>
 

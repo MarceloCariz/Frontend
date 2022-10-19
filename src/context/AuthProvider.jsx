@@ -74,6 +74,11 @@ const AuthProvider = ({children}) => {
                         navigate('/productor')
                         return
                     }
+                    if(auth.ID_ROL === 4){
+                       
+                        navigate('/consultor')
+                        return
+                    }
               
                 }
        
