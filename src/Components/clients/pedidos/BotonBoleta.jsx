@@ -10,7 +10,7 @@ export const BotonBoleta = ({informacion, auth, datos}) => {
 
 const  generarBoleta = async() =>{
         const e = informacion;
-        const doc = new jsPDF('p', 'mm', 'a5');
+        const doc = new jsPDF('p', 'mm', 'a4');
         doc.page=0;
         console.log(datos);
         var col = [["Nombre producto", "Cantidad", "Precio unidad","Precio total"]];
