@@ -37,13 +37,18 @@ const Pago = () => {
     doc.text(`Rut: 99.999.999-9`, 45, 40);
     doc.text(`Boleta electronica: ${session_id}`, 45, 50);
     doc.text(`Fecha de Compra: ${transaction_date}`, 10, 75);
-    doc.autoTable({
-      columnStyles: { 0: { halign: 'center', } }, 
-      margin: { top: 80 },
-      head: [["valor"]],
-      body: [[`${amount}`]]
-   
-     } );
+    doc.setFontSize(14);
+        doc.text(`Fecha de Compra:${transaction_date} `, 5, 75);
+        doc.text(`precio total pagado:${amount}`, 5, 85);
+        doc.addImage(maipo, 'PNG', 30, 45,80,0, undefined, false);
+        doc.addImage(timbre, 'JPG',10, 140,130,0,undefined,false);
+        doc.rect(30, 5, 90, 30); 
+        doc.setFontSize(18);
+        doc.text(`Rut: 99.999.999-9`, 45, 13);
+        doc.text(`Boleta electronica:${session_id} `, 45, 23);
+        doc.text(`Boleta #${session_id}`, 45, 33);
+        doc.text(`${vci} `, 2, 10);
+
     doc.save(`Boleta-${session_id}`);
   }
   return (
