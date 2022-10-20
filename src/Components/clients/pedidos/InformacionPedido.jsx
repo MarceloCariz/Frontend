@@ -21,8 +21,8 @@ export const InformacionPedido = ({informacion, total}) => {
             <tr className="flex sm:text-xl text-sm justify-between  text-right sm:ml-0   items-center">
               <th className="capitalize">{e.NOMBRE_PRODUCTO}</th>
               <th className="">{e.CANTIDAD} kg</th>
-              <th className="flex gap-2 ">{(e.PRECIO * e.CANTIDAD).toLocaleString("es-CL", {style: "currency", currency:"CLP"})}</th>
-              <th>{(e.PRECIO).toLocaleString("es-CL", {style: "currency", currency:"CLP"})}</th>
+              <th className="flex gap-2 ">{total != 0 ? (e.PRECIO * e.CANTIDAD).toLocaleString("es-CL", {style: "currency", currency:"CLP"}) : 'Pendiente' }</th>
+              <th>{total != 0 ? (e.PRECIO).toLocaleString("es-CL", {style: "currency", currency:"CLP"}) : 'Pendiente'}</th>
 
               <th>{e.ESTADO_ENVIO}</th>
             </tr>

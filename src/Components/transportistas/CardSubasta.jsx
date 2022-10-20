@@ -61,7 +61,7 @@ const CardSubasta = ({subasta,  socket,  auth,  perfil  }) => {
       <p>
         {minutos === null
           ? "Subasta Finalizada"
-          : minutos.toFixed(0) + " Minutos para finalizar"}{" "}
+          : (minutos  > 1? minutos.toFixed(0) : (minutos * 60).toFixed(0)) + " " +(Number(minutos)  > 1 ?  (minutos > 1 && minutos < 2 ? "Minuto restante" : "Minutos restantes") : "segundos restantes")}
       </p>
       <div>
         {resultado.mensaje.length > 0  && resultado.idcompra === REFERENCIA_COMPRA &&

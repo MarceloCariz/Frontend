@@ -67,18 +67,44 @@ const Carrito = () => {
         }, 2000);
         return
       }
+      if([formValues.direccion, formValues.ciudad].includes('') && TIPO_CLIENTE === 'local'){
+        // console.log('Seleccione un transportista')
+        setAlerta({estado: true, mensaje:'Ingrese una direccion valida'})
+        setTimeout(() => {
+          setAlerta({estado: false, mensaje:''})
+        }, 2000);
+        return
+      }
 
-      setCargando(true)
+
 
       // const id_referencia = TIPO_CLIENTE=== 'local' ? await enviaPedidoLocal(carrito, formValues.direccion, config) : await enviaPedidoExt(carrito, formValues.direccion, config);
       // return;
       if(TIPO_CLIENTE === 'externo'){
-        if(formValues.refigeracion === undefined)  return;
+        if(formValues.refigeracion === undefined) {
+          setAlerta({estado: true, mensaje:'Ingrese una Refigeracion'})
+          setTimeout(() => {
+            setAlerta({estado: false, mensaje:''})
+          }, 2000);
+          return;
+        } 
+        if([formValues.direccion, formValues.ciudad, formValues.pais].includes('')){
+          // console.log('Seleccione un transportista')
+          setAlerta({estado: true, mensaje:'Ingrese una direccion valida'})
+          setTimeout(() => {
+            setAlerta({estado: false, mensaje:''})
+          }, 2000);
+          return
+        }
+       setCargando(true)
+
         await enviaPedidoExt(carrito, formValues.direccion, formValues.refigeracion ,config);
         setCarrito([]);
         setCargando(false)
         return;
       }
+      setCargando(true)
+
       const id_referencia = await enviaPedidoLocal(carrito, formValues.id_transportista ,formValues.direccion, config);
       const respuesta =  await pagarPedido(id_referencia , config, total + (formValues.precioT === undefined ? 0 : formValues.precioT));
       const { token, url} = respuesta;
@@ -155,7 +181,7 @@ const Carrito = () => {
        <Link to="/inicio/perfil"  state={location.pathname} className='text-white bg-blue-500 px-4 py-2 mt-2 text-sm'>Actualizar Informacion</Link>
     </div>
     {/* SELECCIONAR TRANSPORTISTA */}
-    {TIPO_CLIENTE === 'local' && alerta.estado && <p className="bg-red-500 px-4 py-2 text-white mb-4">{alerta.mensaje}</p>}
+    { alerta.estado && <p className="bg-red-500 px-4 py-2 text-white mb-4">{alerta.mensaje}</p>}
     {TIPO_CLIENTE === 'local' ? (
         <>
         <CardTransportistas transportistas={transportistas} setFormValues={setFormValues} formValues={formValues}  />
