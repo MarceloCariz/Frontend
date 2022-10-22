@@ -1,4 +1,3 @@
-import axios from "axios"
 import clienteAxios from "../config/clienteAxios"
 import { sortBy } from "../utils/sortByDate"
 
@@ -37,14 +36,9 @@ export const eliminarProducto = async(id, configt) =>{
 
 export const agregarProducto = async(producto, configt) =>{
     try {
-        const {headers} = configt;
-   
-        const {data}= await axios({
-            method: "post",
-            url:  `${process.env.REACT_APP_BACKEND_URL}/productores/productos/nuevo`,
-            data: producto,
-            headers: headers, 
-          });
+        // const {headers} = configt;
+        console.log(producto, configt)
+        const {data}= await clienteAxios.post(`/productores/productos/nuevo`, producto, configt)
         return data
     } catch (error) {
         console.log(error)

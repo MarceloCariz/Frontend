@@ -49,13 +49,13 @@ const handleSubmit = async(e) =>{
 
     const formData = new FormData();
     formData.append('image', selectedFile);
-    formData.set('Nombre', formValues.nombre.toLowerCase() );
-    formData.set('Cantidad', formValues.cantidad);
-    formData.set('Precio_local', formValues.precio_local);
-    formData.set('Precio_ext', formValues.precio_ext);
-    formData.set('Calidad', formValues.calidad);
+    formData.append('nombre', formValues.nombre.toLowerCase() );
+    formData.append('cantidad', formValues.cantidad);
+    formData.append('precio_local', formValues.precio_local);
+    formData.append('precio_ext', formValues.precio_ext);
+    formData.append('calidad', formValues.calidad);
 
-
+    // console.log(formData.)
 
 
     await agregarProducto(formData, config);
