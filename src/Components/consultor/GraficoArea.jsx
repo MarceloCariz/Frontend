@@ -12,6 +12,7 @@ import {
 } from "chart.js";
 import { Line } from "react-chartjs-2";
 import { Spinnner } from "../ui/Spinnner";
+import ChartDataLabels from 'chartjs-plugin-datalabels';
 
 ChartJS.register(
   CategoryScale,
@@ -21,24 +22,37 @@ ChartJS.register(
   Title,
   Tooltip,
   Filler,
-  Legend
+  Legend,
+  ChartDataLabels
 );
 export const GraficoArea = ({ comprasPorMes }) => {
     // console.log(tipoVenta);
     const labels =comprasPorMes?.map(({ MES }) => MES);
     const data =comprasPorMes?.map(({ TOTAL_COMPRAS }) => TOTAL_COMPRAS);
     const options = {
-        responsive: true,
-        plugins: {
-          legend: {
-            position: 'top' ,
-          },
-          title: {
-            display: true,
-            text: 'Chart.js Line Chart',
-          },
+      plugins: {
+        legend: {
+          display: true,
+          align: 'center'
+         
         },
-      };
+        datalabels: {
+          display: true,
+          color: "black",
+          align: "end",
+          padding: {
+            right: 2,
+          },
+          labels: {
+            title: {
+              font: {
+                weight: "bold"
+              }
+            },
+          },
+        }
+      }
+    };
       const dataChart = {
         labels,
         datasets: [

@@ -29,12 +29,36 @@ export const GraficoPie = ({tipoVenta}) => {
     //     data: dataChart,
     //     options: {}
     // };
+    const options = {
+        plugins: {
+          legend: {
+            display: true,
+            align: 'center'
+           
+          },
+          datalabels: {
+            display: true,
+            color: "black",
+            align: "center",
+            padding: {
+              right: 2,
+            },
+            labels: {
+              title: {
+                font: {
+                  weight: "bold"
+                }
+              },
+            },
+          }
+        }
+      };
 
     return (
     <div>
         {datosMemo ?
             <div className='flex flex-col items-center'>
-                <Pie  data={dataChart}  />
+                <Pie  data={dataChart} options={options} />
             </div>
             : <div className='flex items-center justify-center'><Spinnner /></div> 
         }

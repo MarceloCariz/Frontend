@@ -2,6 +2,8 @@ import React, { useEffect,  useState } from 'react'
 import { GraficoArea } from '../../Components/consultor/GraficoArea'
 import { GraficoEstadoPago } from '../../Components/consultor/GraficoEstadoPago'
 import { GraficoPie } from '../../Components/consultor/GraficoPie'
+import GraficoStockProducto from '../../Components/consultor/GraficoStockProducto'
+import GraficoVentasDia from '../../Components/consultor/GraficoVentasDia'
 import { obtenerDatosGraficos } from '../../Helpers/getConsultor'
 
 const InicioConsultor = () => {
@@ -22,7 +24,7 @@ const InicioConsultor = () => {
       <div className='flex items-center justify-end'>
           <button className='px-4 py-2 bg-blue-500 text-white mt-2'>Generar PDF</button>
       </div>
-      <div className='grid sm:grid-cols-3 justify-items-center sm:gap-2 gap-10  pt-12 min-w-full '>
+      <div className='grid sm:grid-cols-3 justify-items-center sm:gap-12 gap-10  pt-12 min-w-full '>
 
         <div className='  w-2/3 '>
           <h2 className='text-center'>Compras por Tipo cliente</h2>
@@ -39,6 +41,15 @@ const InicioConsultor = () => {
         <div className='  w-full   '>
           <h2 className='text-center'>Estados de Pagos</h2>
           <GraficoEstadoPago estadoPago={datos.estadoPago}/>
+        </div>
+        <div className='  w-full   '>
+          <h2 className='text-center'>Compras Por Mes</h2>
+          <GraficoStockProducto stockProductosNombre={datos.stockProductosNombre}/>
+        </div>
+
+        <div className='  w-full   '>
+          <h2 className='text-center'>Compras Por Dia</h2>
+          <GraficoVentasDia comprasPorDia={datos.comprasPorDia}/>
         </div>
         {/* <div className='  w-full   '>
           <h2 className='text-center'>Estados de Pagos</h2>
