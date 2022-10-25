@@ -58,7 +58,7 @@ export const GraficoEstadoPago = ({estadoPago}) => {
             {
                 label: "pagos",
                 data: data,
-                backgroundColor: [ 'rgba(233, 215, 53, 0.8)','rgba(36, 196, 4, 0.8)',
+                backgroundColor: ['rgba(36, 196, 4, 0.8)', 'rgba(233, 215, 53, 0.8)',
                 'rgba(218, 50, 45, 0.8)'],
             },
             // {
