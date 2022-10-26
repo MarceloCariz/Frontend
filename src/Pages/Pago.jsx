@@ -30,16 +30,18 @@ const Pago = () => {
     const doc = new jsPDF('p','mm','a5' );
     // 1 - x 200  /////  2- y
     doc.setFontSize(14);
-        doc.text(`Fecha de Compra:${transaction_date} `, 5, 75);
+        doc.text(`Fecha de Compra:${transaction_date} `, 45, 75);
         doc.text(`precio total pagado:${amount}`, 5, 85);
+        doc.text(`${vci} `, 45, 95);
+        doc.text(`Estado:${status} `, 45, 105);
         doc.addImage(maipo, 'PNG', 30, 45,80,0, undefined, false);
         doc.addImage(timbre, 'JPG',10, 140,130,0,undefined,false);
         doc.rect(30, 5, 90, 30); 
         doc.setFontSize(18);
-        doc.text(`Rut: 99.999.999-9`, 45, 13);
-        doc.text(`Boleta electronica:${session_id} `, 45, 23);
-        doc.text(`Boleta #${session_id}`, 45, 33);
-        doc.text(`${vci} `, 2, 10);
+        doc.text(`Rut: 99.999.999-9`, 35, 15);
+        doc.text(`Boleta electronica:${session_id} `, 35, 30);
+        
+        
 
     doc.save(`Boleta-${session_id}`);
   }
