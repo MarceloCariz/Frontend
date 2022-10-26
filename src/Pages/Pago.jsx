@@ -31,7 +31,7 @@ const Pago = () => {
     // 1 - x 200  /////  2- y
     doc.setFontSize(14);
         doc.text(`Fecha de Compra:${transaction_date} `, 45, 75);
-        doc.text(`precio total pagado:${amount}`, 5, 85);
+        doc.text(`precio total pagado:${amount}`, 45, 85);
         doc.text(`${vci} `, 45, 95);
         doc.text(`Estado:${status} `, 45, 105);
         doc.addImage(maipo, 'PNG', 30, 45,80,0, undefined, false);
