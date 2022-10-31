@@ -46,6 +46,8 @@ export const enviaPedidoLocal = async (productos,id_transportista ,direccion, co
 
 
     const id_referencia = Math.floor(Math.random() * 1000000);
+    // const id_referencia =Date.now();
+
     const fecha = new Date().toLocaleDateString();
 
     let formData = new FormData();
@@ -72,12 +74,12 @@ export const obtenerPedidos = async(config)=>{
               acc[product.REFERENCIA_COMPRA] = []
             }
             // console.log(product)
-            acc[product.REFERENCIA_COMPRA].push(product)
+                acc[product.REFERENCIA_COMPRA].push(product)
+
       
             return acc
           },[]);
          
-        
         return  obj.sort(sortBy('FECHA_COMPRA'));
     } catch (error) {
         console.log(error)

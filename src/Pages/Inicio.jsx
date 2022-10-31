@@ -7,6 +7,10 @@ const Inicio = () => {
   const {auth} = useAuth();
   const [productos, setProductos] = useState({})
   useEffect(()=>{
+
+      const id_referencia =Date.now().toString();
+      console.log(id_referencia.length);
+
       const cargarProductos = async() =>{
         const resultado = await obtenerProductos();
         if(auth.TIPO_CLIENTE === 'externo'){

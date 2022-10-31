@@ -18,11 +18,11 @@ export const InformacionPedido = ({informacion, total}) => {
         </thead>
         {informacion.map((e, i) => (
           <tbody key={i}>
-            <tr className="flex sm:text-xl text-sm justify-between  text-right sm:ml-0   items-center">
+            <tr className="flex sm:text-xl text-sm justify-between  text-left sm:ml-0   items-center">
               <th className="capitalize">{e.NOMBRE_PRODUCTO}</th>
               <th className="">{e.CANTIDAD} kg</th>
-              <th className="flex gap-2 ">{total != 0 ? (e.PRECIO * e.CANTIDAD).toLocaleString("es-CL", {style: "currency", currency:"CLP"}) : 'Pendiente' }</th>
-              <th>{total != 0 ? (e.PRECIO).toLocaleString("es-CL", {style: "currency", currency:"CLP"}) : 'Pendiente'}</th>
+              <th className="flex gap-2 ">{total !== 0 ? (e.PRECIO * e.CANTIDAD).toLocaleString("es-CL", {style: "currency", currency:"CLP"}) : 'Pendiente' }</th>
+              <th>{total !==  0 ? (e.PRECIO).toLocaleString("es-CL", {style: "currency", currency:"CLP"}) : 'Pendiente'}</th>
 
               <th>{e.ESTADO_ENVIO}</th>
             </tr>
