@@ -121,6 +121,27 @@ const Carrito = () => {
       formAction.current.submit();
   }
 
+  // const handleAumentarCantidad = (e) =>{
+  //   const actualizado = carrito.map((ele)=>{
+  //       if(ele.ID === e){
+  //         return {...ele, unidad: ele.unidad + 1, PRECIO: ele.PRECIO * ele.unidad};
+  //       }
+  //       return  ele  ;
+  //   });
+  //   console.log(actualizado)
+  //   setCarrito(actualizado)
+  // }
+
+  // const handleEliminarCantidad= (e) =>{
+  //   const actualizado = carrito.map((ele)=>{
+  //       if(ele.ID === e){
+  //         if(ele.unidad === 1) return handleClick(e);
+  //         return setCarrito([{...ele, unidad: ele.unidad - 1, PRECIO: ele.PRECIO * ele.unidad}]);
+  //       }
+  //       return  setCarrito(ele)  ;
+  //   });
+  //   // setCarrito(actualizado)
+  // }
   return (
     <div className=" mt-12 flex justify-center flex-col items-center sm:mb-4 mb-60  ">
       {carrito.length > 0 ? (
@@ -152,7 +173,9 @@ const Carrito = () => {
                 {/* <td>{CANTIDAD}</td> */}
                 <td>{PRECIO}</td>
                 <td>
+                  {/* <input readOnly onClick={() => handleEliminarCantidad(ID)} value="+1" className="bg-red-500  py-1 w-6 rounded-lg cursor-pointer text-center text-white"/> */}
                   {unidad}  <span className="text-sm">kg</span> 
+                  {/* <input readOnly onClick={() => handleAumentarCantidad(ID)} value="+1" className="bg-blue-500  py-1 w-6 rounded-lg cursor-pointer text-center text-white"/> */}
                   
                   </td>
                 <td className="cursor-pointer bg-red-600 text-white rounde-sm px-2" onClick={(e)=>handleClick({ID},e)}>X</td>
@@ -165,7 +188,7 @@ const Carrito = () => {
 
     </table>
     <div className="w-1/2 flex flex-row bg-gray-300 mt-4 px-4 rounded-sm mb-4">
-            <p className="w-full">Total</p>
+            <p className="w-full font-semibold">Total</p>
             <p className="text-right font-semibold">{(total + (formValues.precioT === undefined ? 0 : formValues.precioT)).toLocaleString("es-CL", {style: "currency", currency:"CLP"})}</p>
     </div>
     {/* INFORMACION DESPACHO */}
@@ -184,9 +207,10 @@ const Carrito = () => {
     { alerta.estado && <p className="bg-red-500 px-4 py-2 text-white mb-4">{alerta.mensaje}</p>}
     {TIPO_CLIENTE === 'local' ? (
         <>
-        <CardTransportistas transportistas={transportistas} setFormValues={setFormValues} formValues={formValues}  />
+        <CardTransportistas total={total} transportistas={transportistas} setFormValues={setFormValues} formValues={formValues}  />
         <h3 className="text-2xl font-bold">Total a pagar</h3>
           <p className="text-right font-semibold text-2xl mb-4">{(total + (formValues.precioT === undefined ? 0 : formValues.precioT)).toLocaleString("es-CL", {style: "currency", currency:"CLP"})}</p>
+      
         </>
 
     ):

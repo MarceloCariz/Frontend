@@ -2,13 +2,17 @@ import { faTruckRampBox } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { confirmarEnvioBodega } from "../../Helpers/getProductores";
+import useConsultas from "../../Hooks/useConsultas";
+import { Spinnner } from "../ui/Spinnner";
 
 const CardEnvio = ({ ele, config }) => {
+  const {cargarEnviosProductor, cargando} = useConsultas();
+
   const handleEnviarBodega = async(e) =>{
 
     const respuesta = await confirmarEnvioBodega(e, config);
     console.log(respuesta)
-    window.location.reload();
+    cargarEnviosProductor();
   }
   return (
     <div
@@ -70,8 +74,8 @@ const CardEnvio = ({ ele, config }) => {
 
                       <button disabled={ele[0].ESTADO_ENVIO === 'asignado' ? false : true } onClick={(e) => handleEnviarBodega(ele[0].REFERENCIA_COMPRA, e)} 
                          className={ele[0].ESTADO_ENVIO === 'asignado' ? "text-white bg-yellow-500 h-12 px-2 rounded-lg font-semibold" : "text-white bg-yellow-500/50  h-12 px-2 rounded-lg font-semibold"}>
-                        <FontAwesomeIcon className="mr-2" icon={faTruckRampBox}/>
-                        {ele[0].ESTADO_ENVIO === 'asignado' ? "Confirmar envio a bodega" : "Productos confirmados" }
+                        {cargando ? <Spinnner/> : <FontAwesomeIcon className="mr-2" icon={faTruckRampBox}/> }
+                        {ele[0].ESTADO_ENVIO === 'asignado' ? (cargando ? "Confirmando envio a bodega ..." : "Confirmar envio a bodega") : "Productos confirmados" }
                         
                       </button>
 

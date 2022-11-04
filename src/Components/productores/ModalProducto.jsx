@@ -1,8 +1,9 @@
-import { faClose } from "@fortawesome/free-solid-svg-icons";
+import { faClose, faFileArrowUp, faImage, faImagePortrait } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
 import { agregarProducto } from "../../Helpers/getProductores";
 import useAuth from "../../Hooks/useAuth";
+import useConsultas from "../../Hooks/useConsultas";
 
 const ModalProducto = ({handleModal, setActiveModal,}) => {
 
@@ -13,10 +14,13 @@ const ModalProducto = ({handleModal, setActiveModal,}) => {
     precio_ext: '',
     calidad: ''
  })
-const {config} = useAuth();
+ const {config} = useAuth();
+  const {  cargarProductosProductor} = useConsultas();
+
  const {nombre, calidad, precio_local, precio_ext, cantidad} = formValues;
  const [alerta, setAlerta] = useState({msg: '', error: false});
  const [selectedFile, setSelectedFile] = useState(null);
+ const [imagenInfo, setImagenInfo] = useState(null)
 //  const [fileInputTitle, setFileInputTitle] = useState("");
  const handleOnChange = ({target}) =>{
     setFormValues({...formValues,
@@ -25,13 +29,16 @@ const {config} = useAuth();
  }
 
  const onChangeInpuFile = (e) => {
-  setSelectedFile(e.target.files[0]);
-  // const inputTitle = e.target.files[0].name;
-//   setFileInputTitle(inputTitle);
+  const imagen = e.target.files[0];
+  setSelectedFile(imagen);
+  const reader = new FileReader();
+  reader.onload = (e) =>{
+    const { result} = e.target;
+    setImagenInfo(result);
+  }
+  reader.readAsDataURL(imagen);
 
-//   console.log(inputTitle);
-// }
- }
+}
 const handleSubmit = async(e) =>{
     e.preventDefault();
 
@@ -62,15 +69,14 @@ const handleSubmit = async(e) =>{
     setAlerta({msg: 'Añadido Correctamente', error: false});
     setTimeout(() => {
         setActiveModal(false)
-        window.location.reload();
-
+        cargarProductosProductor();
     }, 2000);
 }
   return (
     <>
    
     <div className="absolute sm:w-1/4 w-5/6 h-auto top-32 sm:top-40 text-center px-4 py-4 bg-white border-1 border border-gray-500 rounded-xl right-0 left-0 mr-auto ml-auto">
-        <p className="font-bold text-xl mb-4 mt-4 font-sans">Agrega tu Producto</p>
+        <p className="font-semibold text-2xl mb-4 mt-4 font-sans">Agrega tu Producto</p>
         {
           alerta.msg.length > 2 && (<p className={alerta.error === false ?"px-4 py-1 bg-green-500 text-white font-semibold text-lg rounded-lg" :
           "px-4 py-1 bg-red-500 text-white font-semibold text-lg rounded-lg"
@@ -82,13 +88,20 @@ const handleSubmit = async(e) =>{
             Cerrar
         </button>
 
-      <div className="flex flex-col gap-8 items-center">
-      <div className="flex flex-col w-2/3">
-          <label className="text-left">Imagen</label>
-          <input
-        className='file-input sm:w-auto ' type="file" onChange={onChangeInpuFile} 
-          />
-        </div>
+      <div className="flex flex-col gap-8 items-center mt-12">
+            
+              {imagenInfo !== null &&(
+                  <img src={imagenInfo} alt="imagen" width={"100"} />)
+              }
+          <div className="flex  flex-col justify-center text-center">
+
+                <label className="px-4 py-2 bg-slate-600 text-white"  htmlFor="file">
+                  <FontAwesomeIcon className="mr-2" icon={faImage}/>
+                  {selectedFile !== null ? "Imagen subida" : "Haz Click Aqui para subir tu imagen"}</label>
+
+              <input style={{display: 'none'}} id="file" className='file-input sm:w-auto'  type="file" onChange={onChangeInpuFile} />
+          </div>
+
         <div className="flex flex-col ">
           <label className="text-left">Nombre</label>
           <input
@@ -103,7 +116,7 @@ const handleSubmit = async(e) =>{
           <input
             name="cantidad"
             onChange={handleOnChange}
-
+            type="number"
             className="bg-gray-50 border-1 pl-1 border-gray-500 border rounded-sm"
             value={cantidad}
           />
@@ -113,7 +126,7 @@ const handleSubmit = async(e) =>{
           <input
             name="precio_local"
             onChange={handleOnChange}
-
+            type="number"
             className="bg-gray-50 border-1 pl-1 border-gray-500 border rounded-sm"
             value={precio_local}
           />
@@ -122,7 +135,7 @@ const handleSubmit = async(e) =>{
           <label className="text-left">Precio exportacion</label>
           <input
             onChange={handleOnChange}
-
+            type="number"
             name="precio_ext"
             className="bg-gray-50 border-1 pl-1 border-gray-500 border rounded-sm"
             value={precio_ext}

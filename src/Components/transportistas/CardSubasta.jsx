@@ -6,7 +6,8 @@ const CardSubasta = ({subasta,  socket,  auth,  perfil  }) => {
   const {ID, NOMBRE_PRODUCTO, REFERENCIA_COMPRA,FECHA_ACTIVACION, CANTIDAD , REFRIGERACION} = subasta[0];
   const {minutos, hora, resultado } = useTimeT( new Date(FECHA_ACTIVACION), socket,  auth, REFERENCIA_COMPRA, CANTIDAD);
 
-  const cantidadCarga = subasta.reduce((total, actual)=>( Number(actual.CANTIDAD)+ Number(actual.CANTIDAD) ),0);
+  const cantidadCarga = subasta.reduce((total, actual)=>( total+ (Number(actual.CANTIDAD)) ),0);
+  
   const handleClick = (e) =>{
      if(perfil.CARGA < cantidadCarga){
       setAlerta({msg: 'Carga insuficiente', id: ID, tipo: false});
@@ -36,8 +37,10 @@ const CardSubasta = ({subasta,  socket,  auth,  perfil  }) => {
       <p className="text-left font-bold">Número de Orden #{REFERENCIA_COMPRA}</p>
       <p className="">Productos Necesarios : </p>
       {subasta.map((ele, i)=>(
-        <div key={i}>
+        <div key={i} className="flex justify-center gap-2">
           <p className="capitalize font-semibold">{ele.NOMBRE_PRODUCTO}</p>
+          <p className="capitalize font-semibold">{ele.CANTIDAD} Kg</p>
+
         </div>
       ))}
       <p>Total de carga: {cantidadCarga}</p>

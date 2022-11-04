@@ -4,39 +4,22 @@ import React, { useEffect, useState } from 'react'
 import ModalProducto from '../../Components/productores/ModalProducto';
 import Productos from '../../Components/productores/Productos'
 import { Spinnner } from '../../Components/ui/Spinnner';
-import { obtenerProductos } from '../../Helpers/getProductores';
-import useAuth from '../../Hooks/useAuth';
+import useConsultas from '../../Hooks/useConsultas';
 
 
 const InicioP = () => {
   const [activeModal, setActiveModal] = useState(false)
   const [reload, setReload] = useState(false);
-  const [cargando, setCargando] = useState(false)
-  const {auth,productos,setProductos,  config, setAuth} = useAuth();
+  // const [cargando, setCargando] = useState(false)
+  const {  cargarProductosProductor , productosP, cargando} = useConsultas();
 // console.log(auth)
-
+  
   useEffect(() => {
-      const cargarProductos= async()=>{
-        setCargando(true)
-        const resultado =  await obtenerProductos(config)
-        setProductos(resultado)
-        setCargando(false)
-      }
-      // const fecha = new Date(Date.now());
-      // const fecha2 = fecha.setMinutes(fecha.getMinutes() + 1);
-      // // console.log(new Date(fecha2).toISOString())
-      // console.log(new Date(fecha2).toISOString())
 
-      // console.log(new Date("2022-08-30T20:12:15.925Z"))
       
-      cargarProductos();
-      // cargarProductos();
-      // console.log(auth)
-      // if(productos[0].ID_ !== auth.ID){
-          // cargarProductos();
+    cargarProductosProductor();
 
-      // }
-  },[  setAuth, config, setProductos])
+  },[ ])
   const handleModal = () =>{
     setActiveModal(!activeModal)
   }
@@ -58,7 +41,7 @@ const InicioP = () => {
     {cargando && <Spinnner color={'black'} />}
 
       {
-        productos.length > 0 && !cargando && auth.ID === productos[0].ID_PRODUCTOR ? productos.map((producto, i)=>(
+        productosP.length > 0 && !cargando  ? productosP.map((producto, i)=>(
           <Productos key={i}   producto={producto} setReload={setReload} reload={reload}/>      
         )):cargando ? '' : 'No tienes productos'
       }

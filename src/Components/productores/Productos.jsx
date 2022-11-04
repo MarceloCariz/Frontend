@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
 import { actualizarProducto, eliminarProducto } from "../../Helpers/getProductores";
 import useAuth from "../../Hooks/useAuth";
+import useConsultas from "../../Hooks/useConsultas";
 
 const Productos = ({ producto, setReload ,reload}) => {
   const {
@@ -26,6 +27,8 @@ const Productos = ({ producto, setReload ,reload}) => {
     id_producto : ID_PRODUCTO,
   })
   const {nombre, precio_ext, calidad, precio_local, cantidad} = productoActualizado;
+  const {  cargarProductosProductor } = useConsultas();
+
   const handleOnchange = ({target})=>{
     setProductoActualizado({...productoActualizado,
       [target.name]: target.value.toLowerCase() 
@@ -42,7 +45,7 @@ const Productos = ({ producto, setReload ,reload}) => {
     setAlerta(resultado.msg)
     setTimeout(() => {
         setAlerta('')
-      setReload(!reload)
+        cargarProductosProductor();
 
     }, 2000);
   };
@@ -52,7 +55,7 @@ const Productos = ({ producto, setReload ,reload}) => {
     setTimeout(() => {
       setAlerta('')
       // setReload(!reload)
-      window.location.reload();
+      cargarProductosProductor();
   }, 2000);
   };
   return (

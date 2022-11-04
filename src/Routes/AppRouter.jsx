@@ -18,7 +18,7 @@ import PerfilP from '../Pages/Productores/Perfil'
 import RegistrarP from '../Pages/Productores/RegistrarP'
 import Subastas from '../Pages/Productores/Subastas'
 import Registrar from '../Pages/Registrar'
-import InicioTransportista from '../Pages/Transportistas/InicioTransportista'
+// import InicioTransportista from '../Pages/Transportistas/InicioTransportista'
 import LoginTransportista from '../Pages/Transportistas/LoginTransportista'
 import PerfilT from '../Pages/Transportistas/PerfilT'
 import EnviosT from '../Pages/Transportistas/EnviosT'
@@ -27,56 +27,58 @@ import RutaProtegidaConsultor from '../Layouts/RutaProtegidaConsultor'
 import LoginConsultor from '../Pages/Consultor/LoginConsultor'
 import InicioConsultor from '../Pages/Consultor/InicioConsultor'
 import Reportes from '../Pages/Consultor/Reportes'
+import { ClienteProvider } from '../context/ClienteProvider'
 
 const AppRouter = () => {
   return (
     <BrowserRouter>
     <AuthProvider>
+      <ClienteProvider>
 
-        <Routes>
-            <Route path="/"  element={<AuthLayout/>}>
-                <Route index element={<Login/>}/>
-                <Route path='registrar' element={<Registrar/>}/>
-                <Route path='productores' element={<LoginP/>}/>
-                <Route path='transportistas' element={<LoginTransportista/>}/>
-                <Route path='consultores' element={<LoginConsultor/>}/>
-                <Route path='registrar-productores'element={<RegistrarP/>}/>
-            </Route>
+              <Routes>
+                  <Route path="/"  element={<AuthLayout/>}>
+                      <Route index element={<Login/>}/>
+                      <Route path='registrar' element={<Registrar/>}/>
+                      <Route path='productores' element={<LoginP/>}/>
+                      <Route path='transportistas' element={<LoginTransportista/>}/>
+                      <Route path='consultores' element={<LoginConsultor/>}/>
+                      <Route path='registrar-productores'element={<RegistrarP/>}/>
+                  </Route>
+                <Route path='/inicio' element={<RutaProtegida/>}>
+                  <Route index element={<Inicio/>}/>
+                  <Route path='carrito' element={<Carrito/>}/>
+                  <Route path='perfil' element={<Perfil/>}/>
+                  <Route path='pedidos' element={<Pedidos/>}/>
+                  <Route path='pago' element={<Pago/>}/>
+                </Route>
 
-        <Route path='/inicio' element={<RutaProtegida/>}>
-          <Route index element={<Inicio/>}/>
-          <Route path='carrito' element={<Carrito/>}/>
-          <Route path='perfil' element={<Perfil/>}/>
-          <Route path='pedidos' element={<Pedidos/>}/>
-          <Route path='pago' element={<Pago/>}/>
-        </Route>
+              {/* PRODUCTORES */}
+              <Route path='/productor' element={<RutaProtegidaProductor/>}>
+                    <Route index element={<InicioP/>}/>
+                    <Route path='subastas' element={<Subastas/>}/>
+                    <Route path='envios' element={<Envios/>}/>
+                    <Route path='perfil' element={<PerfilP/> } />
+              </Route>
 
-        {/* PRODUCTORES */}
-        <Route path='/productor' element={<RutaProtegidaProductor/>}>
-              <Route index element={<InicioP/>}/>
-              <Route path='subastas' element={<Subastas/>}/>
-              <Route path='envios' element={<Envios/>}/>
-              <Route path='perfil' element={<PerfilP/> } />
-        </Route>
+              {/* TRANSPORTISTA */}
+              <Route path='/transportista' element={<RutaProtegidaTransportista/>}>
+                {/* <Route index element={<LoginTransportista/>}/> */}
+                <Route index element={<PerfilT/>}/>
+                <Route path='perfil' element={<PerfilT/> } />
+                <Route path='subastas' element={<Subasta/>}/>
+                <Route path='envios' element={<EnviosT/>}/>
 
-        {/* TRANSPORTISTA */}
-        <Route path='/transportista' element={<RutaProtegidaTransportista/>}>
-          {/* <Route index element={<LoginTransportista/>}/> */}
-          <Route index element={<InicioTransportista/>}/>
-          <Route path='perfil' element={<PerfilT/> } />
-          <Route path='subastas' element={<Subasta/>}/>
-          <Route path='envios' element={<EnviosT/>}/>
+              </Route>
+              {/* CONSULTOR */}
+              <Route path='/consultor' element={<RutaProtegidaConsultor/>}>
+                {/* <Route index element={<LoginTransportista/>}/> */}
+                <Route index element={<InicioConsultor/>}/>
+                <Route path='reportes' element={<Reportes/>}/>
 
-        </Route>
-        {/* CONSULTOR */}
-        <Route path='/consultor' element={<RutaProtegidaConsultor/>}>
-          {/* <Route index element={<LoginTransportista/>}/> */}
-          <Route index element={<InicioConsultor/>}/>
-          <Route path='reportes' element={<Reportes/>}/>
+              </Route>
 
-        </Route>
-
-        </Routes>
+            </Routes>
+          </ClienteProvider>
 
       </AuthProvider>
 

@@ -12,6 +12,7 @@ export const Contrato = ({contrato}) => {
         setAlerta(mensaje);
         setTimeout(() => {
             setAlerta('');
+            window.location.reload();
         }, 3000);
     }
   return (

@@ -2,13 +2,17 @@ import { faTruckRampBox } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { confirmarEnvioEnviado } from "../../Helpers/getTransportista";
+import useConsultas from "../../Hooks/useConsultas";
+import { Spinnner } from "../ui/Spinnner";
 
 const CardEnviado = ({ ele, config }) => {
-  const handleEnviarAceptado = async(e) =>{
 
+  const {cargarEnviosTransportista, cargando} = useConsultas();
+
+  const handleEnviarAceptado = async(e) =>{
     const respuesta = await confirmarEnvioEnviado(e, config);
     console.log(respuesta)
-    window.location.reload();
+    cargarEnviosTransportista();
   }
   return (
     <div
@@ -71,10 +75,13 @@ const CardEnviado = ({ ele, config }) => {
 
                   <p>{ele.some(({ESTADO_ENVIO})=>(ESTADO_ENVIO === 'asignado')) ? "Aun faltan productos que esten en bodega": "Todos los productos se encuentran en bodega"}</p>
 
-                      <button disabled={(ele.some(({ESTADO_ENVIO})=>(ESTADO_ENVIO === 'asignado' || ESTADO_ENVIO === 'recibido' || ESTADO_ENVIO === 'enviado')))   && true   } 
+                      <button 
+                          disabled={(ele.some(({ESTADO_ENVIO})=>(ESTADO_ENVIO === 'asignado' || ESTADO_ENVIO === 'recibido' || ESTADO_ENVIO === 'enviado')))   && true   } 
                           onClick={(e) => handleEnviarAceptado(ele[0].REFERENCIA_COMPRA, e)} 
                           className={ele.some(({ESTADO_ENVIO})=>(ESTADO_ENVIO === 'bodega' || ESTADO_ENVIO === 'aceptado')) ? "text-white bg-yellow-500 h-12 px-2 rounded-lg font-semibold" : "text-white bg-yellow-500/50  h-12 px-2 rounded-lg font-semibold"}>
-                        <FontAwesomeIcon className="mr-2" icon={faTruckRampBox}/>
+                        
+                        
+                        {cargando ? <Spinnner/> : <FontAwesomeIcon className="mr-2" icon={faTruckRampBox}/>}
                         {ele[0].ESTADO_ENVIO === 'aceptado' || ele[0].ESTADO_ENVIO === 'bodega' ? "Confirmar envio a cliente " : "Productos confirmados  " }
                         
                       </button>

@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const CardTransportistas = ({transportistas, setFormValues, formValues,}) => {
+export const CardTransportistas = ({transportistas, setFormValues, formValues,total}) => {
 
     const onChange = ({target}) =>{
         const index  = target.options.selectedIndex;
@@ -20,7 +20,9 @@ export const CardTransportistas = ({transportistas, setFormValues, formValues,})
                 <option   key={ID} id={ID} value={PRECIO}>{NOMBRE}</option>
             ))}
         </select>
-        <p>Precio del transporte: {formValues.precioT}</p>
+        <p>Precio del transporte: {(formValues.precioT)}</p>
+        <p className="text-left">Precio total Productos: {(total).toLocaleString("es-CL", {style: "currency", currency:"CLP"})}</p>
+        
     </div>
   )
 }
