@@ -81,7 +81,7 @@ const ConsultorLayout = ({children}) => {
         {/* Menu responsive */}
         {
             activeMenu &&
-            <div className=' flex justify-end  text-white text-center'>
+            <div className='right-0  text-white text-center  absolute animate__animated animate__fadeIn animate__faster'>
                 <nav className='bg-stone-800 h-40 w-auto px-4 py-4 flex flex-col justify-between'>
                 <div className='flex cursor-pointer'>
                     <FontAwesomeIcon icon={faTruck} className="text-xl mr-2 mt-1"/>
@@ -89,9 +89,9 @@ const ConsultorLayout = ({children}) => {
                 </div>
                 <div className='flex cursor-pointer'>
                     <FontAwesomeIcon icon={faGavel} className="text-xl mr-2 mt-1"/>
-                    <Link to={'/reportes'} className='text-xl  '>Reportes</Link>
+                    <Link to={'/consultor'} className='text-xl  '>Reportes</Link>
                 </div>
-                <NavLink to={'perfil'} className='flex cursor-pointer' >
+                <NavLink to={'/consultor'} className='flex cursor-pointer' >
                 <FontAwesomeIcon icon={faUser} className="text-xl mr-2 mt-1"/>
 
                     <p className='sm:text-2xl text-xl capitalize'> {auth.NOMBRE}</p>

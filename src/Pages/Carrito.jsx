@@ -247,7 +247,7 @@ const Carrito = () => {
          
     </>): 
       <div className="flex flex-col gap-4 items-center">
-        <h3 className="text-3xl">Agrega productos a tu carrito</h3>
+        <h3 className="sm:text-3xl text-xl">Agrega productos a tu carrito</h3>
         <Link  className="px-4 py-2 text-white bg-slate-600 text-lg" to={'/inicio'}>
           <FontAwesomeIcon className="mr-2" icon={faHandPointRight}/>
           Volver al Inicio

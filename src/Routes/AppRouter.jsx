@@ -28,6 +28,7 @@ import LoginConsultor from '../Pages/Consultor/LoginConsultor'
 import InicioConsultor from '../Pages/Consultor/InicioConsultor'
 import Reportes from '../Pages/Consultor/Reportes'
 import { ClienteProvider } from '../context/ClienteProvider'
+import { Error } from '../Pages/Error'
 
 const AppRouter = () => {
   return (
@@ -44,6 +45,7 @@ const AppRouter = () => {
                       <Route path='consultores' element={<LoginConsultor/>}/>
                       <Route path='registrar-productores'element={<RegistrarP/>}/>
                   </Route>
+                  <Route path='*' element={<Error/>}/>
                 <Route path='/inicio' element={<RutaProtegida/>}>
                   <Route index element={<Inicio/>}/>
                   <Route path='carrito' element={<Carrito/>}/>

@@ -13,7 +13,8 @@ const EnviosT = () => {
     
 
   return (
-    <div className='mx-auto flex flex-col items-center justify-center pt-12'>
+    <div className='mx-auto flex flex-col items-center justify-center pt-4'>
+        <h2 className='mb-4 sm:hidden block text-2xl font-semibold'>Envios</h2>
         {cargando && enviosT.length === 0 && (<Spinnner/>)}
         {enviosT.length > 0 ? 
             enviosT.map((ele)=>(

@@ -67,8 +67,8 @@ const PerfilT = () => {
     const {SUELDO} = contrato;
     const ganancia = Number(SUELDO).toLocaleString("es-CL", {style: "currency", currency:"CLP"})
   return (
-    <div className='flex flex-col justify-center items-center pt-4  '>
-        <div className=' flex justify-center gap-2 mb-2'>
+    <div className='flex flex-col justify-center items-center pt-4 '>
+        <div className=' sm:flex justify-center gap-2 mb-2'>
                 <Ganancias ganancia={ganancia} envios={envios}  sueldo={SUELDO} cargando={cargando} rol="transportista"/>
 
                 <Contrato contrato={contrato}/>

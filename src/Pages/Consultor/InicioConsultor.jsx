@@ -7,6 +7,8 @@ import GraficoStockProducto from '../../Components/consultor/GraficoStockProduct
 import GraficoVentasDia from '../../Components/consultor/GraficoVentasDia'
 import jsPDF from 'jspdf';
 import maipo from '../../Components/clients/img/maipo.PNG';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faDownload } from '@fortawesome/free-solid-svg-icons'
 const InicioConsultor  = ({estadoPago}) => {
   const [datos, setDatos] = useState({})
 
@@ -20,7 +22,7 @@ const InicioConsultor  = ({estadoPago}) => {
     cargarDatosGraficos();
 
   }, [ datos.length]);
-  console.log(datos)
+  // console.log(datos)
 
   const  generarReporte = () =>{
     const doc = new jsPDF('p','mm','a3' );
@@ -110,12 +112,14 @@ const InicioConsultor  = ({estadoPago}) => {
   return (
     <div >
       <h3 className='text-center font-bold text-4xl '>Graficos</h3>
-      <div className='flex items-center justify-end'>
-      <button onClick={generarReporte} className='px-4 py-2 bg-blue-500 text-white mt-2'>Generar PDF</button>
+      <div className='flex justify-center sm:justify-end'>
+      <button onClick={generarReporte} className='px-4 py-2 bg-blue-500 text-white mt-2 flex items-center gap-1'>
+        <FontAwesomeIcon icon={faDownload}/>
+        Generar PDF</button>
       </div>
-      <div className='grid sm:grid-cols-3 justify-items-center sm:gap-12 gap-10  pt-12 min-w-full '>
+      <div className='sm:grid sm:grid-cols-3 sm:justify-items-center sm:gap-12 flex flex-col gap-10  pt-12 sm:min-w-full '>
 
-        <div className='  w-2/3 '>
+        <div className='  sm:w-2/3 '>
           <h2 className='text-center'>Compras por Tipo cliente</h2>
           
             <GraficoPie tipoVenta={datos.tipoVenta}/>

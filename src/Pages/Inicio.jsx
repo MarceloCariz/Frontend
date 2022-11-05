@@ -11,25 +11,6 @@ const Inicio = () => {
   // const [productos, setProductos] = useState({})
   const {cargarProductosCliente, productos, cargando} = useConsultas();
   useEffect(()=>{
-
-      // const id_referencia =Date.now().toString();
-      // console.log(id_referencia.length);
-
-      // const cargarProductos = async() =>{
-      //   const resultado = await obtenerProductos();
-      //   if(auth.TIPO_CLIENTE === 'externo'){
-      //     const unique = resultado.reduce((unique, o) => {
-      //       if(!unique.some(obj => obj.NOMBRE === o.NOMBRE )) {
-      //         unique.push(o);
-      //       }
-      //       return unique;
-      //     },[]);
-      //     setProductos(unique)
-      //     return;
-      //   }
-      //   setProductos(resultado)
-  // }
-
       cargarProductosCliente();
   },[])
   return (

@@ -12,7 +12,8 @@ const Subastas = () => {
   const [productos, setProductos] = useState([])
   const [contrato, setContrato] = useState({})
   const [subastas, setSubastas] = useState([])
-  const [resultado, setResultado] = useState([])
+  const [resultado, setResultado] = useState([]);
+  const [verProductos, setVerProductos] = useState(true);
   // const [minutos, setMinutos] = useState(0)
 
     let activo = true;
@@ -44,7 +45,7 @@ const Subastas = () => {
 
       {contrato && contrato.ESTADO === "TRUE" ? (
         <>
-          <div className=" flex-1 flex gap-2 items-start flex-wrap ">
+          <div className=" flex-1 flex sm:flex-row  gap-2 items-start flex-wrap ">
             {subastas.length > 0 ? (
               subastas.map((subasta) => (
                 <div className='flex flex-col' key={subasta.ID}>
@@ -75,30 +76,36 @@ const Subastas = () => {
               </p>
             )}
           </div>
-          <aside>
-            <p className="text-lg font-semibold">Mis productos</p>
-            <hr className="h-2" />
-            {productos.length > 0
-              ? productos.map((producto) => (
-                  <div
-                    key={producto.ID_PRODUCTO}
-                    className="flex gap-4 mb-4 capitalize items-center"
-                  >
-                    <img
-                      className="object-contain w-12 h-12"
-                      src={producto.IMAGE_URL}
-                      alt=""
-                    />
-                    <div className="flex flex-col text-left">
-                      <p>{producto.NOMBRE}</p>
-                      <p> Cantidad: {producto.CANTIDAD}</p>
-                      <p>Precio : {producto.PRECIO_EXP}</p>
-                    </div>
+          <aside className=''>
+            <button  onClick={()=>setVerProductos(!verProductos)} className='sm:hidden inline-block text-sm bg-blue-500 px-2 py-1 text-white'>
+              {verProductos ? "Ocultar Productos" : "Ver productos"} 
+            </button>
+            <div className={verProductos ? "block" : "hidden"}>
+              <p className="text-lg font-semibold">Mis productos</p>
+              <hr className="h-2" />
+              {productos.length > 0
+                ? productos.map((producto) => (
+                    <div
+                      key={producto.ID_PRODUCTO}
+                      className="flex gap-4 mb-4 capitalize items-center"
+                    >
+                      <img
+                        className="object-contain w-12 h-12"
+                        src={producto.IMAGE_URL}
+                        alt=""
+                      />
+                      <div className="flex flex-col text-left">
+                        <p>{producto.NOMBRE}</p>
+                        <p> Cantidad: {producto.CANTIDAD}</p>
+                        <p>Precio : {producto.PRECIO_EXP}</p>
+                      </div>
 
-                    {/* <button onClick={(e)=>handleClick(producto,e)}>Enviar</button> */}
-                  </div>
-                ))
-              : "no"}
+                      {/* <button onClick={(e)=>handleClick(producto,e)}>Enviar</button> */}
+                    </div>
+                  ))
+                : productos.length === 0 ? "no hay productos" : "...cargando"}
+            </div>
+            
           </aside>
 
           </>

@@ -39,16 +39,16 @@ return (
                     MaipoGrande</h1></Link>
                 {/* Desktop */}
                 <div className='sm:flex hidden items-center justify-end  w-2/3 gap-8 '>
-                    <NavLink to={'envios'} className='flex cursor-pointer'>
+                    <NavLink to={'envios'} className={({isActive})=> isActive ? 'flex cursor-pointer hover:text-gray-50 underline decoration-2 underline-offset-8' : 'flex cursor-pointer hover:text-gray-50'}>
                         <FontAwesomeIcon icon={faTruck} className="text-2xl mr-2 mt-1"/>
                         <p className='text-2xl  '>Mis Envios</p>
                     </NavLink>
-                    <NavLink to={'subastas'} className='flex cursor-pointer'>
+                    <NavLink to={'subastas'} className={({isActive})=> isActive ? 'flex cursor-pointer hover:text-gray-50 underline decoration-2 underline-offset-8' : 'flex cursor-pointer hover:text-gray-50'}>
                         <FontAwesomeIcon icon={faGavel} className="text-2xl mr-2 mt-1"/>
                         <p className='text-2xl  '>Subastas</p>
                     </NavLink>
                     
-                    <NavLink to={'perfil'} className='flex cursor-pointer' >
+                    <NavLink to={'perfil'} className={({isActive})=> isActive ? 'flex cursor-pointer hover:text-gray-50 underline decoration-2 underline-offset-8' : 'flex cursor-pointer hover:text-gray-50'} >
 
                         <FontAwesomeIcon icon={faUser} className="text-2xl mr-2 mt-1"/>
 
@@ -82,16 +82,16 @@ return (
             {/* Menu responsive */}
             {
                 activeMenu &&
-                <div className=' flex justify-end  text-white text-center'>
+                <div  className=' right-0  text-white text-center  absolute animate__animated animate__fadeIn animate__faster'>
                     <nav className='bg-stone-800 h-40 w-auto px-4 py-4 flex flex-col justify-between'>
-                    <div className='flex cursor-pointer'>
+                    <Link to={"/transportista/envios"} className='flex cursor-pointer'>
                         <FontAwesomeIcon icon={faTruck} className="text-xl mr-2 mt-1"/>
                         <p className='text-xl  '>Mis Envios</p>
-                    </div>
-                    <div className='flex cursor-pointer'>
+                    </Link>
+                    <Link to={'/transportista/subastas'} className='flex cursor-pointer'>
                         <FontAwesomeIcon icon={faGavel} className="text-xl mr-2 mt-1"/>
-                        <Link to={'/inicio-productor'} className='text-xl  '>Subastas</Link>
-                    </div>
+                        <p  className='text-xl  '>Subastas</p>
+                    </Link>
                     <NavLink to={'perfil'} className='flex cursor-pointer' >
                     <FontAwesomeIcon icon={faUser} className="text-xl mr-2 mt-1"/>
 
@@ -105,7 +105,7 @@ return (
                 {/* fin responsive */}
 
             {/* CONTENIDO */}
-            <div className='min-h-screen mx-auto  sm:mt-0 mt-4 bg-gray-100 '>
+            <div className='min-h-screen mx-auto  sm:mt-0  bg-gray-100 '>
                 <div className='container mx-auto'>
                     {children}
                 </div>
