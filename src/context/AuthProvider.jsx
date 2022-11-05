@@ -58,8 +58,9 @@ const AuthProvider = ({children}) => {
 
                     if(auth.ID_ROL === 5){
                        
-
-                        setCarrito(local);
+                        if(local){
+                            setCarrito(local);
+                        }
 
                         navigate('/inicio')
                         return
@@ -98,7 +99,7 @@ const AuthProvider = ({children}) => {
     },[navigate, setCarrito, pathname, auth.ID_ROL])
 
   return (
-    <AuthContext.Provider value={{setAuth, auth, cargando, carrito, setCarrito, productos, setProductos, config}}> 
+    <AuthContext.Provider value={{setAuth, auth, cargando, carrito, setCarrito, productos, setProductos, config, setConfig}}> 
         {children}
     </AuthContext.Provider>
   )

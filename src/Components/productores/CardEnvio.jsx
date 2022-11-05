@@ -1,18 +1,21 @@
 import { faTruckRampBox } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
+import React, { useState } from "react";
 import { confirmarEnvioBodega } from "../../Helpers/getProductores";
 import useConsultas from "../../Hooks/useConsultas";
 import { Spinnner } from "../ui/Spinnner";
 
 const CardEnvio = ({ ele, config }) => {
-  const {cargarEnviosProductor, cargando} = useConsultas();
+  const [cargando, setCargando] = useState(false);
+  const {cargarEnviosProductor} = useConsultas();
 
   const handleEnviarBodega = async(e) =>{
-
+    setCargando(true);
     const respuesta = await confirmarEnvioBodega(e, config);
     console.log(respuesta)
     cargarEnviosProductor();
+    setCargando(false);
+
   }
   return (
     <div

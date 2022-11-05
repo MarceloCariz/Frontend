@@ -14,7 +14,7 @@ const EnviosT = () => {
 
   return (
     <div className='mx-auto flex flex-col items-center justify-center pt-12'>
-        {cargando && (<Spinnner/>)}
+        {cargando && enviosT.length === 0 && (<Spinnner/>)}
         {enviosT.length > 0 ? 
             enviosT.map((ele)=>(
                 <CardEnviado key={ele[0].REFERENCIA_COMPRA} ele={ele} config={config}/>

@@ -3,8 +3,10 @@ import { Link, NavLink, useNavigate } from 'react-router-dom';
 import useAuth from '../Hooks/useAuth'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShop, faUser,  faRightFromBracket, faTruck, faBars, faSeedling, faGavel } from '@fortawesome/free-solid-svg-icons'
+import useConsultas from '../Hooks/useConsultas';
 const ProductorLayout = ({children}) => {
     const {auth, setAuth, setProductos} = useAuth();
+    const {setEnviosP} = useConsultas();
     const navigate = useNavigate();
     const [activeMenu, setActiveMenu] = useState(false)
 
@@ -21,19 +23,18 @@ const ProductorLayout = ({children}) => {
 
     const handleLogout = () =>{
         setProductos({});
-
         setAuth({});
-        
         localStorage.clear();
+        setEnviosP([]);
         navigate('/productores')
-      }
+    }
 
-      
+    
 
-      const handleMenu = () =>{
+    const handleMenu = () =>{
         setActiveMenu(!activeMenu)
-      }
-  return (
+    }
+return (
     <div className='#d4d8dd'>
         <nav className=' bg-stone-800'>
           <div className='sm:h-32 h-24 flex sm:justify-between items-center  container mx-auto text-white'>

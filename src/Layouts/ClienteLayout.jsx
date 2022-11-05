@@ -10,13 +10,20 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
 import {  Link, NavLink, useNavigate } from "react-router-dom";
+import { Buscador } from "../Components/clients/layout/Buscador";
+import { CarritoHover } from "../Components/ui/CarritoHover";
 import useAuth from "../Hooks/useAuth";
+import useConsultas from "../Hooks/useConsultas";
+
+
 const ClienteLayout = ({ children }) => {
   const [cantidadCarrito, setCantidadCarrito] = useState(0);
   const [activeMenu, setActiveMenu] = useState(false);
-
-  const navigate = useNavigate();
+  const [hoverCarrito, setHoverCarrito] = useState(false);
   const { auth, carrito, setCarrito } = useAuth();
+  const {setPedidos, setProductos} = useConsultas();
+  const navigate = useNavigate();
+  
   useEffect(() => {
     if (auth.ID_ROL === 5) {
       const cantidad = carrito.reduce((sum, i) => sum + i.unidad, 0);
@@ -30,9 +37,20 @@ const ClienteLayout = ({ children }) => {
   const handleLogout = () => {
     localStorage.clear();
     setCarrito([]);
-
+    setPedidos([]);
+    setProductos([]);
     navigate("/");
   };
+
+  const handleHoverCarrito = () =>{
+    console.log(carrito)
+    setHoverCarrito(true);
+  }
+
+  const leaveCarrito = () =>{
+    setHoverCarrito(false);
+    console.log(false)
+  }
   return (
     <div className="#d4d8dd">
       <nav className=" bg-stone-800">
@@ -45,7 +63,9 @@ const ClienteLayout = ({ children }) => {
               MaipoGrande
             </h1>
           </Link>
-
+          <div className="w-1/3 sm:block hidden">
+            <Buscador />
+          </div>
           <div className="sm:flex hidden items-center gap-4 ">
             <NavLink to="pedidos"  className={({isActive})=> isActive ? 'flex gap-1 cursor-pointer hover:text-gray-50 underline decoration-2 underline-offset-8' : 'flex gap-1 cursor-pointer hover:text-gray-50'}>
               <FontAwesomeIcon icon={faBagShopping} className="text-2xl mt-1" />
@@ -56,13 +76,17 @@ const ClienteLayout = ({ children }) => {
               <p className="sm:text-2xl capitalize"> {auth.NOMBRE}</p>
             </NavLink>
 
-            <div className=" sm:flex gap-2 hidden  transition ease-in duration-300  hover:-translate-y-1">
+            <div onMouseEnter={handleHoverCarrito} onMouseLeave={leaveCarrito} className=" sm:flex gap-2 hidden  transition ease-in duration-300  hover:-translate-y-1">
               <NavLink to="carrito" className={({isActive})=> isActive ? 'flex gap-1 cursor-pointer hover:text-gray-50 underline decoration-2 underline-offset-8' : 'flex gap-1 cursor-pointer hover:text-gray-50'}>
                 <FontAwesomeIcon icon={faCartShopping} className="text-3xl " />
               </NavLink>
             </div>
             <p className="mb-8">{cantidadCarrito}</p>
 
+            {/* HOVER CARRITO */}
+            {hoverCarrito &&
+              <CarritoHover carrito={carrito} handleHoverCarrito={handleHoverCarrito} />
+            }
             {/* <input type="text" onClick={handleLogout} value="Cerrar Sesion" /> */}
             <button
               className="sm:ml-4 bg-red-500 text-white px-4 py-2 absolute sm:relative ml-20 mt-24 sm:mt-0"
@@ -138,7 +162,9 @@ const ClienteLayout = ({ children }) => {
       </div> */}
       {/* fin responsive */}
       {/* CONTENIDO */}
+
       <div className=" min-h-screen mx-auto sm:mt-0 pt-4 bg-gray-100 mb-0 ">
+
         {children}
         </div>
       {/* CONTENIDO FIN */}

@@ -14,7 +14,7 @@ const Envios = () => {
 
   return (
     <div className='mx{-auto flex flex-col items-center justify-center pt-12'>
-        {cargando && <Spinnner/>}
+        {cargando && enviosP.length === 0 && <Spinnner/>}
         {enviosP.length > 0  ? 
             enviosP.map((ele)=>(
 

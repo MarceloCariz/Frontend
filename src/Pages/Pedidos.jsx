@@ -17,7 +17,7 @@ const Pedidos = () => {
   const {pedidos, datos, cargarPedidos, cargando} = useConsultas();
   useEffect(() => {
       cargarPedidos();
-  }, [config]);
+  }, []);
 
 
 
@@ -33,11 +33,11 @@ const Pedidos = () => {
         Pedidos
       </p>
       <div className="flex justify-center flex-col items-center mx-auto pt-12">
-        {cargando &&  <Spinnner color="black" tamano={12}/>}
+        {cargando && pedidos.length === 0 && <Spinnner color="black" tamano={12}/>}
         {
           pedidos.length  > 0
           ? pedidos.map((ele, i) => (
-              <CardPedido  ele={ele} i={i} config={config} auth={auth} datos={datos}/>
+              <CardPedido key={i}  ele={ele} i={i} config={config} auth={auth} datos={datos}/>
             ))
           : !cargando && 'No hay pedidos'}
 

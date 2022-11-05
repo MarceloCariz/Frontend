@@ -34,8 +34,8 @@ export const CardPedido = ({ele,i, config, auth, datos}) => {
                   <BotonRecibido referencia_compra ={ele[0].REFERENCIA_COMPRA} />
                 }
                 {
-                   ele[0].ESTADO_ENVIO === 'recibido' &&  ele[0].ESTADO_PAGO === 'pendiente' &&
-                   <BotonPagarExt referencia_compra ={ele[0].REFERENCIA_COMPRA} total={ele.reduce((total, i)=>((i.PRECIO *Number(i.CANTIDAD)) + total),ele[0].PRECIOT)} config={config}/>
+                  ele[0].ESTADO_ENVIO === 'recibido' &&  ele[0].ESTADO_PAGO === 'pendiente' &&
+                  <BotonPagarExt referencia_compra ={ele[0].REFERENCIA_COMPRA} total={ele.reduce((total, i)=>((i.PRECIO *Number(i.CANTIDAD)) + total),ele[0].PRECIOT)} config={config}/>
                 }
 
                 <p className="text-xl font-semibold ">{ele[0].ESTADO_PAGO === 'PAGADO' ? 'Total Pagado' : 'Total a pagar'}:
@@ -43,7 +43,7 @@ export const CardPedido = ({ele,i, config, auth, datos}) => {
                 </p>
                   
                 { ele[0].ESTADO_PAGO === "PAGADO"   && (
-                     <BotonBoleta informacion ={ele} auth={auth} datos={datos}/>
+                    <BotonBoleta informacion ={ele} auth={auth} datos={datos}/>
                 )}
 
               </div>
