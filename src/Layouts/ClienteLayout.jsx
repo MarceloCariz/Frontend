@@ -45,13 +45,13 @@ const ClienteLayout = ({ children }) => {
   // };
 
   const handleHoverCarrito = () =>{
-    console.log(carrito)
+    // console.log(carrito)
     setHoverCarrito(true);
   }
 
   const leaveCarrito = () =>{
     setHoverCarrito(false);
-    console.log(false)
+    // console.log(false)
   }
   return (
     <div className="#d4d8dd">
@@ -100,7 +100,7 @@ const ClienteLayout = ({ children }) => {
           </div>
           {/* Responsive */}
 
-          <div className="sm:hidden flex justify-between items-center gap-2 w-1/4 ml-12  ">
+          <div className="sm:hidden flex justify-between items-center gap-2 w-1/4 ml-8  ">
           <button
               className="  bg-red-500  text-white px-2    "
               onClick={handleLogout}

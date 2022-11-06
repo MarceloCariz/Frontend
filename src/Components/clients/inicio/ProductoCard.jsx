@@ -44,13 +44,13 @@ export const ProductoCard = ({producto, tipo,handleClick , agregando}) => {
                     
                     {
                         activeButton.activo &&  activeButton.id === ID && ID ===  Number(idCard.current.id) && CANTIDAD > 0 && tipo === 'local' &&(
-                            <button onClick={(e) => handleClick({ID,NOMBRE, CANTIDAD, PRECIO: tipo ==='local' ? PRECIO_LOCAL : PRECIO_EXP,IMAGE_URL, ID_PRODUCTOR, unidad: 1},e)} className='font-bold text-white bg-green-500 px-2 py-2 rounded-md'>
+                            <button onClick={(e) => handleClick({ID,NOMBRE, CANTIDAD, PRECIO: tipo ==='local' ? PRECIO_LOCAL : PRECIO_EXP,IMAGE_URL, ID_PRODUCTOR, CALIDAD, unidad: 1},e)} className='font-bold text-white bg-green-500 px-2 py-2 rounded-md'>
                             <FontAwesomeIcon icon={faCartPlus} className="pr-1"/>
                             {agregando.cargando && agregando.id === ID    ? "Agregando...": "Agregar al carrito"}</button>
                     )}
                     {
                         activeButton.activo &&  activeButton.id === ID   && tipo === 'externo' &&(
-                            <button onClick={(e) => handleClick({ID,NOMBRE, CANTIDAD, PRECIO: tipo ==='local' ? PRECIO_LOCAL : PRECIO_EXP,IMAGE_URL, ID_PRODUCTOR, unidad: 1},e)} className='font-bold text-white bg-green-500 px-2 py-2 rounded-md'>
+                            <button onClick={(e) => handleClick({ID,NOMBRE, CANTIDAD, PRECIO: tipo ==='local' ? PRECIO_LOCAL : PRECIO_EXP,IMAGE_URL, ID_PRODUCTOR, CALIDAD,unidad: 1},e)} className='font-bold text-white bg-green-500 px-2 py-2 rounded-md'>
                             <FontAwesomeIcon icon={faCartPlus} className="pr-1"/>
                             {agregando.cargando && agregando.id === ID    ? "Agregando...": "Agregar al carrito"}</button>
                     )}

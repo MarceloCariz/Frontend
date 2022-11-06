@@ -45,7 +45,7 @@ const Registrar = () => {
       return
     }
 
-    if(formValues.tipo === 'local' &&  alertaRut.valido === false){
+    if((formValues.tipo === 'local' &&  alertaRut.valido === false) || formValues.rut.length < 8){
       setAlerta("El RUT no es válido");
       setTimeout(() => {
         setAlerta('')
@@ -70,7 +70,7 @@ const Registrar = () => {
       }
       await registrar(datos);
 
- 
+
       
       navigate('/')
         

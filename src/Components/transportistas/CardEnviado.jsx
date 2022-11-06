@@ -81,11 +81,12 @@ const CardEnviado = ({ ele, config }) => {
                       <button 
                           disabled={(ele.some(({ESTADO_ENVIO})=>(ESTADO_ENVIO === 'asignado' || ESTADO_ENVIO === 'recibido' || ESTADO_ENVIO === 'enviado')))   && true   } 
                           onClick={(e) => handleEnviarAceptado(ele[0].REFERENCIA_COMPRA, e)} 
-                          className={ele.some(({ESTADO_ENVIO})=>(ESTADO_ENVIO === 'bodega' || ESTADO_ENVIO === 'aceptado')) ? "text-white bg-yellow-500 h-12 px-2 rounded-lg font-semibold" : "text-white bg-yellow-500/50  h-12 px-2 rounded-lg font-semibold"}>
+                          className={(ele.some(({ESTADO_ENVIO})=>(ESTADO_ENVIO === 'asignado' || ESTADO_ENVIO === 'recibido' || ESTADO_ENVIO === 'enviado'))) ? "text-white bg-yellow-500/50  h-12 px-2 rounded-lg font-semibold"  : 
+                          "text-white bg-yellow-500 h-12 px-2 rounded-lg font-semibold"}>
                         
                         
                         {cargando ? <Spinnner/> : <FontAwesomeIcon className="mr-2" icon={faTruckRampBox}/>}
-                        {ele[0].ESTADO_ENVIO === 'aceptado' || ele[0].ESTADO_ENVIO === 'bodega' ? "Confirmar envio a cliente " : "Productos confirmados  " }
+                        {ele[0].ESTADO_ENVIO === 'aceptado' || ele[0].ESTADO_ENVIO === 'bodega' ? "Confirmar envio a cliente " : ele.some(({ESTADO_ENVIO})=>(ESTADO_ENVIO === 'asignado')) ? "Productos faltantes en bodega" :"Productos confirmados" }
                         
                       </button>
 

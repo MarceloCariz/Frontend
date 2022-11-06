@@ -28,7 +28,9 @@ export const actualizarDatos = async(datos,config)=>{
 
 export const enviaPedidoExt = async (productos, direccion, refigeracion, config) =>{
     const id_referencia = Math.floor(Math.random() * 1000000);
-    const fecha = new Date().toLocaleDateString();
+    const fecha = new Date().toLocaleDateString();;
+    // console.log(fecha);
+    // const fecha = new Date().toLocaleDateString("es-CL",{year: "numeric", month:"2-digit", day:"2-digit"}).replace(/-/gi,"/");
 
     let formData = new FormData();
 

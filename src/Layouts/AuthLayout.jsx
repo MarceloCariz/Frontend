@@ -6,7 +6,7 @@ import fondo from './img/fondo.jpg'
 const AuthLayout = () => {
   return (
     <>
-      <main style={{backgroundImage:`url(${fondo})` }} className=" h-screen  ">
+      <main style={{backgroundImage:`url(${fondo})` }} className=" h-screen static ">
 
         <nav className="sm:h-22  py-4  bg-black/50 px-12 flex flex-col sm:flex-row sm:justify-end  justify-center items-center">
         <h2 className="sm:flex  text-white justify-start gap-2  sm:text-3xl text-2xl sm:mb-0 mb-2 w-full items-center  text-center  ">
@@ -18,27 +18,27 @@ const AuthLayout = () => {
     
           </h2>
           {/* <h3>Maipogrande</h3> */}
-          <ul className="sm:text-rigth text-center text-sm sm:text-base flex gap-2 sm:w-3/4 w-full sm:container sm:justify-end justify-center ">
+          <ul className="sm:text-rigth text-center text-sm sm:text-base flex gap-2 sm:w-3/4 w-full  sm:px-0 sm:container sm:justify-end justify-center ">
             {/* <Link to={pathname === '/productores' ? '/' : '/productores'} className={pathname === '/productores' ? "bg-blue-600 px-4 py-2 text-white font-semibold" : "bg-green-600 px-4 py-2 text-white font-semibold"} >
             { pathname ==='/productores' ? "Acceso Clientes": "Acceso Productores" 
               
             }</Link> */}
             <Link
               to={"/consultores"}
-              className={" sm:px-4 sm:py-2 px-2 rounded-md  text-white font-semibold bg-amber-500 "}
+              className={" sm:px-4 sm:py-2 px-1 rounded-md  text-white font-semibold bg-amber-500 "}
             >
               Acceso Consultor
             </Link>
 
             <Link
               to={"/productores"}
-              className={" sm:px-4 sm:py-2 px-2 rounded-md text-white font-semibold bg-green-600 "}
+              className={" sm:px-4 sm:py-2 px-1 rounded-md text-white font-semibold bg-green-600 "}
             >
               Acceso Productores
             </Link>
             <Link
               to={"/"}
-              className={" sm:px-4 sm:py-2 px-2 rounded-md text-white font-semibold bg-blue-600 "}
+              className={" sm:px-4 sm:py-2 px-1 rounded-md text-white font-semibold bg-blue-600 "}
             >
               Acceso Clientes
             </Link>

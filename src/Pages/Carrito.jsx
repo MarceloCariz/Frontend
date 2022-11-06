@@ -19,6 +19,8 @@ const Carrito = () => {
   const {TIPO_CLIENTE} = auth;
   const location = useLocation();
   useEffect(() => {
+        // const fecha = new Date().toLocaleDateString("es-CL",{year: "numeric", month:"2-digit", day:"2-digit"}).replace(/-/gi,"/");
+        // console.log(fecha);
         localStorage.setItem('carrito',JSON.stringify(carrito))
         const montoTotal = carrito.reduce((total, i)=>(i.PRECIO * i.unidad) + total, 0 );
         setTotal(montoTotal)

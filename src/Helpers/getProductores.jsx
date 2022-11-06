@@ -67,7 +67,7 @@ export const obtenerEnvios = async(config) =>{
             acc[product.REFERENCIA_COMPRA].push(product)
 
             return acc
-          },[]);
+        },[]);
          
         //   console.log(obj.map((e)=>(e.sort((a,b)=> new Date(a.FECHA_COMPRA)  - new Date(b.FECHA_COMPRA)))));
         // const prueba =

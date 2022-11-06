@@ -19,6 +19,7 @@ const ClienteProvider = ({children}) => {
     const [productos, setProductos] = useState([]);
     const [productosBackup, setProductosBackup] = useState([]);
     const [cargando, setCargando] = useState(false);
+    const [formValues, setFormValues] = useState({direccion: '', ciudad: '',pais:''})
     /// TRANSPORTISTA
     const [enviosT, setEnviosT] = useState([])
     //PRODUCTOR
@@ -27,7 +28,8 @@ const ClienteProvider = ({children}) => {
 
 
     const {config, auth, setCarrito, setAuth} = useAuth();
-    const navigate = useNavigate();    ///CLIENTE
+    const navigate = useNavigate();   
+     ///CLIENTE
     const cargarPedidos = async () => {
         // if(pedidos.length > 0) return;
         setCargando(true);
@@ -37,6 +39,14 @@ const ClienteProvider = ({children}) => {
         setDatos(respuesta);
         setCargando(false);
     };
+    const cargarDatos = async() =>{
+        const resp = await traerDatos(config);
+        setFormValues({
+            direccion: resp.DIRECCION || '',
+            ciudad: resp.CIUDAD || '',
+            pais: resp.PAIS || '',
+        })
+    } 
 
     const cargarProductosCliente = async() =>{
         setCargando(true);
@@ -65,7 +75,7 @@ const ClienteProvider = ({children}) => {
         // if(enviosT.length > 0) return;
         setCargando(true);
         const respuesta = await obtenerEnvios(config);
-        setEnviosT(respuesta.sort());
+        setEnviosT(respuesta);
         setCargando(false);
     }
 
@@ -73,7 +83,7 @@ const ClienteProvider = ({children}) => {
         // if(enviosP.length > 0) return;
         setCargando(true);
         const respuesta = await obtenerEnviosProductor(config);
-        setEnviosP(respuesta.sort());
+        setEnviosP(respuesta);
         setCargando(false);
     }
     const cargarProductosProductor = async() =>{
@@ -88,13 +98,14 @@ const ClienteProvider = ({children}) => {
         setCarrito([]);
         setPedidos([]);
         setProductos([]);
+        setFormValues({ciudad: "", pais:"", direccion: ""})
         setProductosBackup([]);
         setAuth({});
         navigate("/");
       };
 
     return ( <ClienteContext.Provider value={{
-        datos, pedidos, cargarPedidos, cargando,setPedidos,cargarProductosCliente, productos,setProductos,productosBackup, ///////// CLIENTE
+        datos, pedidos, cargarPedidos, cargando,setPedidos,cargarProductosCliente, productos,setProductos,productosBackup, cargarDatos, setFormValues, formValues, ///////// CLIENTE
         cargarEnviosTransportista, enviosT, setEnviosT  ,    //TRANSPORTISTA
         cargarEnviosProductor, enviosP,setEnviosP ,cargarProductosProductor , productosP ,      /// PRODUCTOR
         handleLogout

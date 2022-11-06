@@ -65,7 +65,7 @@ const ConsultorLayout = ({children}) => {
 
         
             {/* Responsive */}
-            <div className='sm:hidden flex justify-between items-center gap-2 w-1/5  ml-20'>
+            <div className='sm:hidden flex justify-between items-center gap-2 w-1/5  ml-16'>
             <button className='  bg-red-500  text-white px-2 ml-4    '  onClick={handleLogout} >
                     <FontAwesomeIcon icon={faRightFromBracket} className=" "/>
             </button>

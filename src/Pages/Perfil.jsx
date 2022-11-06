@@ -2,35 +2,28 @@ import { faCircleChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom';
-import { actualizarDatos, traerDatos } from '../Helpers/getClientes';
+import { actualizarDatos } from '../Helpers/getClientes';
 import useAuth from '../Hooks/useAuth'
+import useConsultas from '../Hooks/useConsultas';
 
 const Perfil = () => {
     const {auth, config} = useAuth();
+    const {cargarDatos, formValues, setFormValues} = useConsultas();
     const {CORREO, NOMBRE, RUT} =auth;
-    const [formValues, setFormValues] = useState(
-        {
-            direccion: '',
-            ciudad: '',
-            pais: '',
-        }
-    );
+
+    // const [formValues, setFormValues] = useState(
+    //     {
+    //         direccion: '',
+    //         ciudad: '',
+    //         pais: '',
+    //     }
+    // );
     const [activeActualizar, setActiveActualizar] = useState(false)
     const [mensaje, setMensaje] = useState('');
     const location = useLocation();
 
     useEffect(() => {
-        const cargarDatos = async() =>{
-            const resp = await traerDatos(config);
-            setFormValues({
-                direccion: resp.DIRECCION || '',
-                ciudad: resp.CIUDAD || '',
-                pais: resp.PAIS || '',
-            })
-        } 
         cargarDatos();
-
-
     }, [config])
 
     const handleInputchange = ({target})=>{
