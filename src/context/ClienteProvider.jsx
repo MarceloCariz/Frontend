@@ -4,6 +4,7 @@ import { obtenerEnvios } from "../Helpers/getTransportista";
 import { obtenerProductos as obtenerProductosClient } from '../Helpers/getProducts';
 import {obtenerEnvios as obtenerEnviosProductor, obtenerProductos} from '../Helpers/getProductores';
 import useAuth from "../Hooks/useAuth";
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -25,8 +26,8 @@ const ClienteProvider = ({children}) => {
     const [productosP, setProductosP] = useState([])
 
 
-    const {config, auth} = useAuth();
-    ///CLIENTE
+    const {config, auth, setCarrito, setAuth} = useAuth();
+    const navigate = useNavigate();    ///CLIENTE
     const cargarPedidos = async () => {
         // if(pedidos.length > 0) return;
         setCargando(true);
@@ -39,7 +40,7 @@ const ClienteProvider = ({children}) => {
 
     const cargarProductosCliente = async() =>{
         setCargando(true);
-        const resultado = await obtenerProductosClient();
+        const resultado = await obtenerProductosClient(auth);
         if(auth.TIPO_CLIENTE === 'externo'){
             const unique = resultado.reduce((unique, o) => {
                 if(!unique.some(obj => obj.NOMBRE === o.NOMBRE )) {
@@ -49,14 +50,16 @@ const ClienteProvider = ({children}) => {
             },[]);
             setProductos(unique)
             setProductosBackup(unique);
-                setCargando(false);
-                return;
+            setCargando(false);
+            return;
         }
+        // console.log('pase')
+        
         setProductos(resultado);
         setProductosBackup(resultado);
         setCargando(false);
 
-      }
+    }
     /// TRANSPORTISTA
     const cargarEnviosTransportista = async() =>{
         // if(enviosT.length > 0) return;
@@ -80,11 +83,21 @@ const ClienteProvider = ({children}) => {
         setProductosP(resultado)
         setCargando(false)
     }
+    const handleLogout = () => {
+        localStorage.clear();
+        setCarrito([]);
+        setPedidos([]);
+        setProductos([]);
+        setProductosBackup([]);
+        setAuth({});
+        navigate("/");
+      };
 
     return ( <ClienteContext.Provider value={{
         datos, pedidos, cargarPedidos, cargando,setPedidos,cargarProductosCliente, productos,setProductos,productosBackup, ///////// CLIENTE
         cargarEnviosTransportista, enviosT, setEnviosT  ,    //TRANSPORTISTA
-        cargarEnviosProductor, enviosP,setEnviosP ,cargarProductosProductor , productosP       /// PRODUCTOR
+        cargarEnviosProductor, enviosP,setEnviosP ,cargarProductosProductor , productosP ,      /// PRODUCTOR
+        handleLogout
         }}>
         {children}
     </ClienteContext.Provider>)

@@ -29,6 +29,7 @@ import InicioConsultor from '../Pages/Consultor/InicioConsultor'
 import Reportes from '../Pages/Consultor/Reportes'
 import { ClienteProvider } from '../context/ClienteProvider'
 import { Error } from '../Pages/Error'
+import { Resultado } from '../Pages/Resultado'
 
 const AppRouter = () => {
   return (
@@ -52,6 +53,7 @@ const AppRouter = () => {
                   <Route path='perfil' element={<Perfil/>}/>
                   <Route path='pedidos' element={<Pedidos/>}/>
                   <Route path='pago' element={<Pago/>}/>
+                  <Route path='resultado/:nombre' element={<Resultado/>}/>
                 </Route>
 
               {/* PRODUCTORES */}

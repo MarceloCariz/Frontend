@@ -3,16 +3,20 @@
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useState } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
 import useConsultas from '../../../Hooks/useConsultas'
 
 export const Buscador = () => {
     const [terminoBusqueda, setTerminoBusqueda] = useState('');
     const {productos,setProductos,productosBackup} = useConsultas();
+    const {pathname} = useLocation();
+    const navigate = useNavigate();
 
     const onChange = ({target}) =>{
         // filtrar(target.value);
         setTerminoBusqueda(target.value);
-        if( target.value.length === 0) return setProductos(productosBackup);
+        if(pathname !== '/inicio') return;
+        if( target.value === '' ) return setProductos(productosBackup);
         filtrar();
     }
 
@@ -21,19 +25,32 @@ export const Buscador = () => {
         if (!productos) {
             return;
         }
-        let resultadoBusqueda = productos.filter((elemento) => {
-            if (elemento.NOMBRE.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toString().toLowerCase().includes(terminoBusqueda.toLowerCase())) {
-                return elemento
-            }
+        let resultadoBusqueda = productosBackup.filter((elemento) => {
+            // if (elemento.NOMBRE.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toString().toLowerCase().includes(terminoBusqueda.toLowerCase())) {
+            //     return elemento
+            // }
+            const resultado = elemento.NOMBRE.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toString().toLowerCase().includes(terminoBusqueda.toLowerCase())
+            // console.log(elemento)
+            return resultado;
         });
-        if(resultadoBusqueda.length === 0) return;
+        // if(resultadoBusqueda.length === 0 ) return;
         // setResultadoBusqueda(resultadoBusqueda);
         setProductos(resultadoBusqueda);
     }
+    const handleSearch = (e) =>{
+        e.preventDefault();
+        if(pathname === '/inicio' || terminoBusqueda === '') return;
+        // setProductos(resultadoBusqueda);
+        filtrar();
+        navigate(`resultado/${terminoBusqueda}`);
+        setTerminoBusqueda('');
+
+        // if
+    }
   return (
-    <div className='  text-black flex  items-center gap-2 '>
-        <FontAwesomeIcon className='sm:text-white sm:block hidden sm:text-2xl' icon={faSearch}/>
-        <input onChange={onChange} value={terminoBusqueda} type="text" placeholder='Busca tu producto ...' className='w-full  sm:h-10 h-12 pl-2 sm:border-none sm:shadow-none  border  shadow-lg'/>
-    </div>
+        <form className='text-black flex  items-center gap-2' onSubmit={handleSearch}>
+            <FontAwesomeIcon className='sm:text-white sm:block hidden sm:text-2xl' icon={faSearch}/>
+            <input onChange={onChange} value={terminoBusqueda} type="text" placeholder='Busca tu producto ...' className='w-full  sm:h-10 h-12 pl-2 sm:border-none sm:shadow-none  border  shadow-lg'/>
+        </form>
   )
 }

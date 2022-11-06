@@ -1,17 +1,16 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { Buscador } from '../Components/clients/layout/Buscador';
 import Productos from '../Components/clients/Productos'
 import { Spinnner } from '../Components/ui/Spinnner';
-import { obtenerProductos } from '../Helpers/getProducts';
 import useAuth from '../Hooks/useAuth'
 import useConsultas from '../Hooks/useConsultas';
 
 const Inicio = () => {
   const {auth} = useAuth();
   // const [productos, setProductos] = useState({})
-  const {cargarProductosCliente, productos, cargando} = useConsultas();
+  const {cargarProductosCliente,productos, cargando} = useConsultas();
   useEffect(()=>{
-      cargarProductosCliente();
+    cargarProductosCliente();
   },[])
   return (
     <div className="sm:pt-8 container mx-auto">

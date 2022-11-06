@@ -9,7 +9,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
-import {  Link, NavLink, useNavigate } from "react-router-dom";
+import {  Link, NavLink } from "react-router-dom";
 import { Buscador } from "../Components/clients/layout/Buscador";
 import { CarritoHover } from "../Components/ui/CarritoHover";
 import useAuth from "../Hooks/useAuth";
@@ -20,9 +20,11 @@ const ClienteLayout = ({ children }) => {
   const [cantidadCarrito, setCantidadCarrito] = useState(0);
   const [activeMenu, setActiveMenu] = useState(false);
   const [hoverCarrito, setHoverCarrito] = useState(false);
-  const { auth, carrito, setCarrito } = useAuth();
-  const {setPedidos, setProductos} = useConsultas();
-  const navigate = useNavigate();
+
+
+
+  const { auth, carrito } = useAuth();
+  const { handleLogout} = useConsultas();
   
   useEffect(() => {
     if (auth.ID_ROL === 5) {
@@ -34,13 +36,13 @@ const ClienteLayout = ({ children }) => {
   const handleMenu = () => {
     setActiveMenu(!activeMenu);
   };
-  const handleLogout = () => {
-    localStorage.clear();
-    setCarrito([]);
-    setPedidos([]);
-    setProductos([]);
-    navigate("/");
-  };
+  // const handleLogout = () => {
+  //   localStorage.clear();
+  //   setCarrito([]);
+  //   setPedidos([]);
+  //   setProductos([]);
+  //   navigate("/");
+  // };
 
   const handleHoverCarrito = () =>{
     console.log(carrito)
