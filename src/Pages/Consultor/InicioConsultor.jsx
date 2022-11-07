@@ -2,7 +2,7 @@ import React, { useEffect,  useState } from 'react'
 import { GraficoArea } from '../../Components/consultor/GraficoArea'
 import { GraficoEstadoPago } from '../../Components/consultor/GraficoEstadoPago'
 import { GraficoPie } from '../../Components/consultor/GraficoPie'
-import { obtenerDatosGraficos } from '../../Helpers/getConsultor'
+import { generarReporte, obtenerDatosGraficos } from '../../Helpers/getConsultor'
 import GraficoStockProducto from '../../Components/consultor/GraficoStockProducto'
 import GraficoVentasDia from '../../Components/consultor/GraficoVentasDia'
 import jsPDF from 'jspdf';
@@ -24,7 +24,8 @@ const InicioConsultor  = ({estadoPago}) => {
   }, [ datos.length]);
   // console.log(datos)
 
-  const  generarReporte = () =>{
+  const  generarReportePdf = async() =>{
+    await generarReporte(datos);
     const doc = new jsPDF('p','mm','a3' );
     const datosStock = datos.stockProductosNombre
     const datoscomprames = datos.comprasPorMes
@@ -113,7 +114,7 @@ const InicioConsultor  = ({estadoPago}) => {
     <div >
       <h3 className='text-center font-bold text-4xl '>Graficos</h3>
       <div className='flex justify-center sm:justify-end'>
-      <button onClick={generarReporte} className='px-4 py-2 bg-blue-500 text-white mt-2 flex items-center gap-1'>
+      <button onClick={generarReportePdf} className='px-4 py-2 bg-blue-500 text-white mt-2 flex items-center gap-1'>
         <FontAwesomeIcon icon={faDownload}/>
         Generar PDF</button>
       </div>
