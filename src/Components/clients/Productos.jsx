@@ -18,8 +18,19 @@ const Productos = ({productos, tipo}) => {
     }, [carrito])
 
 
-    const handleClick = (producto) =>{        
+    const handleClick = (producto) =>{
+        const verUnidadAgregada = carrito.find(({ID})=>(ID === producto.ID));
+        // console.log(verUnidadAgregada.unidad);
+        // console.log(carrito, producto)
+        /// VALIDAR SI HAY STOCK SUFICIENTE PARA AGREGAR AL CARRITO
+        // console.log(verUnidadAgregada)
+        // console.log(Number(producto.CANTIDAD) < verUnidadAgregada.unidad)
+        if(verUnidadAgregada && Number(producto.CANTIDAD) <= verUnidadAgregada.unidad){
+            alert("Limite de stock alcanzado")
+            return;
+        }
         setAgregando({cargando:true,id: producto.ID})
+
         const existe = carrito.some(p => p.ID === producto.ID);
         if(existe){
             const nuevos = carrito.map(p =>{
