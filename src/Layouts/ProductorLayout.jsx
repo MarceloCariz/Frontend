@@ -72,7 +72,7 @@ return (
                 {/* <input type="text" onClick={handleLogout} value="Cerrar Sesion" /> */}
                 <button className='sm:ml-4 bg-red-500 text-white px-4 py-2 absolute sm:relative ml-20 mt-24 sm:mt-0'  onClick={handleLogout} >
                 <FontAwesomeIcon icon={faRightFromBracket} className="mr-2 "/>
-                    <span className='font-bold '>Cerrar Sesion</span>
+                    <span className='font-bold '>Cerrar Sesión</span>
                     </button>
             </div>
    

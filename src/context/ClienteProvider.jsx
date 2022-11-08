@@ -5,6 +5,7 @@ import { obtenerProductos as obtenerProductosClient } from '../Helpers/getProduc
 import {obtenerEnvios as obtenerEnviosProductor, obtenerProductos} from '../Helpers/getProductores';
 import useAuth from "../Hooks/useAuth";
 import { useNavigate } from "react-router-dom";
+import { listarReportes, obtenerDatosGraficos } from "../Helpers/getConsultor";
 
 
 
@@ -25,6 +26,9 @@ const ClienteProvider = ({children}) => {
     //PRODUCTOR
     const [enviosP, setEnviosP] = useState([])
     const [productosP, setProductosP] = useState([])
+    ///CONSULTOR
+    const [datosGraficos, setDatosGraficos] = useState([]);
+    const [reportes, setReportes] = useState([])
 
 
     const {config, auth, setCarrito, setAuth} = useAuth();
@@ -93,6 +97,16 @@ const ClienteProvider = ({children}) => {
         setProductosP(resultado)
         setCargando(false)
     }
+    ///CONSULTOR
+    const cargarDatosGraficos = async () =>{
+        const respuesta = await obtenerDatosGraficos();
+        setDatosGraficos(respuesta);
+    }
+    const cargarReportes = async()=>{
+        const respuesta = await listarReportes();
+        // console.log(respuesta)
+        setReportes(respuesta);
+    }
     const handleLogout = () => {
         localStorage.clear();
         setCarrito([]);
@@ -108,6 +122,7 @@ const ClienteProvider = ({children}) => {
         datos, pedidos, cargarPedidos, cargando,setPedidos,cargarProductosCliente, productos,setProductos,productosBackup, cargarDatos, setFormValues, formValues, ///////// CLIENTE
         cargarEnviosTransportista, enviosT, setEnviosT  ,    //TRANSPORTISTA
         cargarEnviosProductor, enviosP,setEnviosP ,cargarProductosProductor , productosP ,      /// PRODUCTOR
+        cargarDatosGraficos, datosGraficos,  cargarReportes, reportes,                                       ///CONSULTOR
         handleLogout
         }}>
         {children}

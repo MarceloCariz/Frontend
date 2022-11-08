@@ -95,7 +95,7 @@ const ClienteLayout = ({ children }) => {
               onClick={handleLogout}
             >
               <FontAwesomeIcon icon={faRightFromBracket} className="mr-2 " />
-              <span className="font-bold ">Cerrar Sesion</span>
+              <span className="font-bold ">Cerrar Sesión</span>
             </button>
           </div>
           {/* Responsive */}

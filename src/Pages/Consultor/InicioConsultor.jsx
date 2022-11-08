@@ -2,22 +2,19 @@ import React, { useEffect,  useState } from 'react'
 import { GraficoArea } from '../../Components/consultor/GraficoArea'
 import { GraficoEstadoPago } from '../../Components/consultor/GraficoEstadoPago'
 import { GraficoPie } from '../../Components/consultor/GraficoPie'
-import { generarReporte, obtenerDatosGraficos } from '../../Helpers/getConsultor'
+import { generarReporte } from '../../Helpers/getConsultor'
 import GraficoStockProducto from '../../Components/consultor/GraficoStockProducto'
 import GraficoVentasDia from '../../Components/consultor/GraficoVentasDia'
 import jsPDF from 'jspdf';
 import maipo from '../../Components/clients/img/maipo.PNG';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faDownload } from '@fortawesome/free-solid-svg-icons'
-const InicioConsultor  = ({estadoPago}) => {
-  const [datos, setDatos] = useState({})
-
-
+import {  faChartSimple, faDownload } from '@fortawesome/free-solid-svg-icons'
+import useConsultas from '../../Hooks/useConsultas'
+const InicioConsultor  = () => {
+  const [alerta, setAlerta] = useState('');
+  const {datosGraficos:datos, cargarDatosGraficos} = useConsultas();
   useEffect(() => {
-    const cargarDatosGraficos = async () =>{
-      const respuesta = await obtenerDatosGraficos();
-      setDatos(respuesta);
-    }
+
 
     cargarDatosGraficos();
 
@@ -25,7 +22,9 @@ const InicioConsultor  = ({estadoPago}) => {
   // console.log(datos)
 
   const  generarReportePdf = async() =>{
-    await generarReporte(datos);
+    const mensaje = await generarReporte(datos);
+    setAlerta(mensaje);
+    const fecha =new Date().toLocaleDateString();
     const doc = new jsPDF('p','mm','a3' );
     const datosStock = datos.stockProductosNombre
     const datoscomprames = datos.comprasPorMes
@@ -39,8 +38,7 @@ const InicioConsultor  = ({estadoPago}) => {
 
     var columncompra = [["compras", "mes ",]];
     const datoscompra = datoscomprames.map((element,)  => (
-    [element.TOTAL_COMPRAS, element.MES,])); 
- 
+    [element.TOTAL_COMPRAS, element.MES,]));  
     var columnestado = [["Estado Pago", "Cantidad", ]];
     const datospago = datosestadopago.map((element,)  => (
     [element.ESTADO_PAGO, element.CANTIDAD,])); 
@@ -54,9 +52,10 @@ const InicioConsultor  = ({estadoPago}) => {
     [element.TIPO_VENTA, element.CANTIDAD,]));  
     // info.push([ ...element])});      
       // 1 - x 200  /////  2- y
-      doc.setFontSize(50);
       doc.addImage(maipo, 'PNG', 0, 0,100,0, undefined, false);
-      doc.text(`Reporte General`,80, 50);
+      doc.text(`Fecha de creacion: ${fecha}`, 200, 10).setFontSize(10);
+      doc.setFontSize(50);
+      doc.text(`Reporte General`,80, 50).setFontSize(50);
     
    
       doc.autoTable({
@@ -105,18 +104,28 @@ const InicioConsultor  = ({estadoPago}) => {
              
 
        
-      doc.save('Reporte de venta');
+      doc.save(`Reporte de venta ${fecha}`);
+      setTimeout(() => {
+        setAlerta('');
+      }, 2000);
     }
     
   
 
   return (
     <div >
-      <h3 className='text-center font-bold text-4xl '>Graficos</h3>
+      <h3 className='text-center font-semibold text-4xl '>
+        <FontAwesomeIcon className='pr-2' icon={faChartSimple}/>
+        Gráficos</h3>
+      {alerta && 
+      <div className='flex justify-center mt-2'>
+          <p className='px-4 py-2 bg-green-500 text-white text-center w-1/2'>{alerta}</p>
+      </div>
+      }
       <div className='flex justify-center sm:justify-end'>
-      <button onClick={generarReportePdf} className='px-4 py-2 bg-blue-500 text-white mt-2 flex items-center gap-1'>
+      <button onClick={generarReportePdf} className='px-4 py-2 bg-blue-500 text-white text-xl mt-2 flex items-center gap-1 rounded-md'>
         <FontAwesomeIcon icon={faDownload}/>
-        Generar PDF</button>
+        Generar Reporte</button>
       </div>
       <div className='sm:grid sm:grid-cols-3 sm:justify-items-center sm:gap-12 flex flex-col gap-10  pt-12 sm:min-w-full '>
 
@@ -137,12 +146,12 @@ const InicioConsultor  = ({estadoPago}) => {
           <GraficoEstadoPago estadoPago={datos.estadoPago}/>
         </div>
         <div className='  w-full   '>
-          <h2 className='text-center'>Compras Por Mes</h2>
+          <h2 className='text-center'>Cantidad de productos disponibles</h2>
           <GraficoStockProducto stockProductosNombre={datos.stockProductosNombre}/>
         </div>
 
         <div className='  w-full   '>
-          <h2 className='text-center'>Compras Por Dia</h2>
+          <h2 className='text-center'>Compras Por Día</h2>
           <GraficoVentasDia comprasPorDia={datos.comprasPorDia}/>
         </div>
         {/* <div className='  w-full   '>

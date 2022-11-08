@@ -20,6 +20,7 @@ export const obtenerDatosGraficos = async() =>{
 }
 
 export const generarReporte = async(datos) =>{
+    const fechaReporte = new Date().toLocaleDateString();
     const formData = new FormData();
     // tipoCliente, comprasMes, estadoPagos, cantidadProductos, comprasDias
     formData.append("tipoCliente",JSON.stringify(datos.tipoVenta));
@@ -29,9 +30,11 @@ export const generarReporte = async(datos) =>{
     formData.append("comprasDias", JSON.stringify(datos.comprasPorDia));
     formData.append("topCincoProductos", JSON.stringify(datos.topCincoProductos));
     formData.append("clienteTop", JSON.stringify(datos.clienteMayorVentas));
-    formData.append("usuario", "consultor")
+    formData.append("usuario", "consultor");
+    formData.append("fechaReporte",fechaReporte);
     try {
-        const {data} = await clienteAxios.post('/admin/envios/reporte', formData);        
+        const {data} = await clienteAxios.post('/admin/envios/reporte', formData);
+        return data        
     } catch (error) {
         console.log(error)
     }

@@ -58,7 +58,7 @@ const ConsultorLayout = ({children}) => {
                 {/* <input type="text" onClick={handleLogout} value="Cerrar Sesion" /> */}
                 <button className='sm:ml-4 bg-red-500 text-white px-4 py-2 absolute sm:relative ml-20 mt-24 sm:mt-0'  onClick={handleLogout} >
                 <FontAwesomeIcon icon={faRightFromBracket} className="mr-2 "/>
-                    <span className='font-bold '>Cerrar Sesion</span>
+                    <span className='font-bold '>Cerrar Sesión</span>
                     </button>
             </div>
    
@@ -82,14 +82,10 @@ const ConsultorLayout = ({children}) => {
         {
             activeMenu &&
             <div className='right-0  text-white text-center  absolute animate__animated animate__fadeIn animate__faster'>
-                <nav className='bg-stone-800 h-40 w-auto px-4 py-4 flex flex-col justify-between'>
-                <div className='flex cursor-pointer'>
-                    <FontAwesomeIcon icon={faTruck} className="text-xl mr-2 mt-1"/>
-                    <p className='text-xl  '>Mis Envios</p>
-                </div>
+                <nav className='bg-stone-800 h-auto w-auto px-4 py-4 flex flex-col gap-4 justify-between'>
                 <div className='flex cursor-pointer'>
                     <FontAwesomeIcon icon={faGavel} className="text-xl mr-2 mt-1"/>
-                    <Link to={'/consultor'} className='text-xl  '>Reportes</Link>
+                    <Link to={'/consultor/reportes'} className='text-xl  '>Reportes</Link>
                 </div>
                 <NavLink to={'/consultor'} className='flex cursor-pointer' >
                 <FontAwesomeIcon icon={faUser} className="text-xl mr-2 mt-1"/>
