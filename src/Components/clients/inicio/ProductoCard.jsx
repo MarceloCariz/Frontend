@@ -4,7 +4,7 @@ import React, { useRef, useState } from 'react'
 
 export const ProductoCard = ({producto, tipo,handleClick , agregando}) => {
     const estiloCardLocal= 'flex flex-col items-center max-h-96   hover:max-h-fit bg-white rounded-lg pb-4 shadow-xl text-black sm:w-auto ';
-    const estiloCardExterno = 'flex flex-col items-center h-80  hover:h-fit bg-white rounded-lg pb-4 shadow-xl text-black sm:w-auto ';
+    const estiloCardExterno = 'flex flex-col items-center h-72  hover:h-fit bg-white rounded-lg pb-4 shadow-xl text-black sm:w-auto ';
 
     const [activeButton, setActiveButton] = useState({activo: false,  id: 0})
     
@@ -27,10 +27,9 @@ export const ProductoCard = ({producto, tipo,handleClick , agregando}) => {
 
                     <div className='px-4 text-lg capitalize'>
                     <p className='font-semibold text-2xl'>{NOMBRE} Kg</p>
-                    <p>Stock: {CANTIDAD}</p>
                     {tipo === 'local' ? (
                         <>
-                            {/* <p>Stock: {CANTIDAD}</p> */}
+                            <p>Stock: {CANTIDAD}</p>
                             <p>calidad: {CALIDAD}</p>
                             <p>proveedor: {PROVEEDOR}</p>
                             <p className='font-bold sm:text-2xl '>Precio:{Number(PRECIO_LOCAL).toLocaleString("es-CL", {style: "currency", currency:"CLP"})}</p>

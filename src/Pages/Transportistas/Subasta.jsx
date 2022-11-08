@@ -6,6 +6,7 @@ import { obtenerContrato, obtenerPerfil, obtenerSubastas } from '../../Helpers/g
 import useAuth from '../../Hooks/useAuth';
 
 const Subasta = () => {
+  const [cargando, setCargando] = useState(false)
   const [subasta, setSubasta] = useState([]);
   const [contrato, setContrato] = useState({});
   const [perfil, setPerfil] = useState({});
@@ -19,12 +20,15 @@ const Subasta = () => {
   const {auth, config} = useAuth();
   useEffect(() => {
     const cargarSubastas = async()=>{
+      setCargando(true)
       const resultado = await obtenerSubastas();
       setSubasta(resultado);
       const respuesta = await obtenerPerfil(config);
       setPerfil(respuesta);
       const contrato = await obtenerContrato(config);
       setContrato(contrato);
+      setCargando(false)
+
     }
 
 
@@ -37,13 +41,13 @@ const Subasta = () => {
     <div className="mx-auto container text-center pt-10 ">
       <h1 className="text-3xl font-semibold">Subasta Disponibles</h1>
       <div className="flex justify-center mt-12 gap-2">
-        {contrato.ESTADO === "TRUE" ? (
+        {contrato.ESTADO === "TRUE"  && !cargando ? (
         <>
           {subasta.length > 0 ? subasta.map((subasta, key) =>
           (<CardSubasta  key={key} subasta={subasta} auth={auth} socket={socket} perfil={perfil}/>))
-          : 'NO hay Subastas'}
+          : 'No hay Subastas'}
         </>
-        ): <Link to="/transportista/perfil" className='px-4 py-4 bg-blue-500 text-white'>Solicite aquí la renovación de su contrato</Link>}
+        ): !cargando && <Link to="/transportista/perfil" className='px-4 py-4 bg-blue-500 text-white'>Solicite aquí la renovación de su contrato</Link>}
         
 
       </div>

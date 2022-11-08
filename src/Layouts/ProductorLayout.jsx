@@ -50,7 +50,7 @@ return (
                 </NavLink>
                 <NavLink to="envios" className={({isActive})=> isActive ? 'flex cursor-pointer hover:text-gray-50 underline decoration-2 underline-offset-8' : 'flex cursor-pointer hover:text-gray-50'}>
                     <FontAwesomeIcon icon={faTruck} className="text-2xl mr-2 mt-1 "/>
-                    <p className='text-2xl  '>Mis Envios</p>
+                    <p className='text-2xl  '>Mis Envíos</p>
                 </NavLink>
                 <NavLink to={ "/productor/" }  className={({isActive})=> isActive ? 'flex cursor-pointer hover:text-gray-50 underline decoration-2 underline-offset-8' : 'flex cursor-pointer hover:text-gray-50'}>
                     <FontAwesomeIcon icon={faShop} className="text-2xl mr-2 mt-1 "/>
@@ -99,7 +99,7 @@ return (
                 <nav className='bg-stone-800  h-48 w-auto px-4 py-4 flex flex-col justify-between'>
                 <Link  onClick={()=> setActiveMenu(false)} to={'envios'} className='flex cursor-pointer'>
                     <FontAwesomeIcon icon={faTruck} className="text-xl mr-2 mt-1"/>
-                    <p className='text-xl  '>Mis Envios</p>
+                    <p className='text-xl  '>Mis Envíos</p>
                 </Link>
                 <div  onClick={()=> setActiveMenu(false)} className='flex cursor-pointer'>
                     <FontAwesomeIcon icon={faGavel} className="text-xl mr-2 mt-1"/>

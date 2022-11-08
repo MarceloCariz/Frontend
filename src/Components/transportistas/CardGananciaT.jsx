@@ -2,7 +2,9 @@ import React from 'react'
 
 export const CardGananciaT = ({envios}) => {
   return (
-    <table className="sm:table-fixed w-2/3 ">
+    <div className='overflow-y-auto sm:h-72 h-52 '>
+
+    <table className="sm:table-fixed w-full ">
     <thead>
       <tr>
         <th>Fecha Compra</th>
@@ -32,5 +34,6 @@ export const CardGananciaT = ({envios}) => {
         
     </tbody>
   </table>
+  </div>
   )
 }

@@ -2,13 +2,14 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 import io from 'socket.io-client'
 import CardSubasta from '../../Components/productores/CardSubasta';
+import { Spinnner } from '../../Components/ui/Spinnner';
 import { obtenerContrato, obtenerProductos, obtenerSubastasActivas } from '../../Helpers/getProductores';
 import useAuth from '../../Hooks/useAuth';
 
 const Subastas = () => {
   const { auth, config} = useAuth();
   // const [hora, setHora] = useState('')
-
+  const [cargando, setCargando] = useState(false)
   const [productos, setProductos] = useState([])
   const [contrato, setContrato] = useState({})
   const [subastas, setSubastas] = useState([])
@@ -26,12 +27,14 @@ const Subastas = () => {
    
   
     const cargarDatos = async() =>{
+      setCargando(true);
       const contract = await obtenerContrato(config);
       setContrato(contract);
       const products = await obtenerProductos(config);
       setProductos(products);
       const resultado = await  obtenerSubastasActivas();
       setSubastas(resultado);
+      setCargando(false);
     }
     cargarDatos();
 
@@ -42,8 +45,8 @@ const Subastas = () => {
     <div className="mx-auto container text-center pt-10 ">
       <h1 className="text-3xl font-semibold">Subasta Disponibles</h1>
       <div className="flex justify-center mt-12 gap-2">
-
-      {contrato && contrato.ESTADO === "TRUE" ? (
+      {cargando && <Spinnner/>}
+      {contrato && contrato.ESTADO === "TRUE" && !cargando ? (
         <>
           <div className=" flex-1 flex sm:flex-row  gap-2 items-start flex-wrap ">
             {subastas.length > 0 ? (
@@ -110,7 +113,7 @@ const Subastas = () => {
 
           </>
       ) : 
-        <Link to="/productor/perfil" className='px-4 py-4 bg-blue-500 text-white'>Solicite aquí la renovación de su contrato</Link>
+      !cargando && <Link to="/productor/perfil" className='px-4 py-4 bg-blue-500 text-white'>Solicite aquí la renovación de su contrato</Link>
       }
 
       </div>

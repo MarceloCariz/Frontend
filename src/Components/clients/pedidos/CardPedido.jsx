@@ -38,8 +38,8 @@ export const CardPedido = ({ele,i, config, auth, datos}) => {
                   <BotonPagarExt referencia_compra ={ele[0].REFERENCIA_COMPRA} total={ele.reduce((total, i)=>((i.PRECIO *Number(i.CANTIDAD)) + total),ele[0].PRECIOT)} config={config}/>
                 }
 
-                <p className="text-xl font-semibold ">{ele[0].ESTADO_PAGO === 'PAGADO' ? 'Total Pagado' : 'Total a pagar'}:
-                  {ele.reduce((total, i)=>((Number(i.PRECIO) * Number(i.CANTIDAD)  ) + total) ,ele[0].PRECIOT).toLocaleString("es-CL", {style: "currency", currency:"CLP"})}
+                <p className="text-xl font-semibold ">{ele[0].ESTADO_PAGO === 'PAGADO' ? 'Total Pagado: ' : ele[0].ESTADO_PAGO === 'pendiente' ? "Total a pagar: " : ""}
+                  {ele[0].ESTADO_PAGO === 'PAGADO' || ele[0].ESTADO_PAGO === 'pendiente' ?  ele.reduce((total, i)=>((Number(i.PRECIO) * Number(i.CANTIDAD)  ) + total) ,ele[0].PRECIOT).toLocaleString("es-CL", {style: "currency", currency:"CLP"}) : "Rechazado"}
                 </p>
                   
                 { ele[0].ESTADO_PAGO === "PAGADO"   && (

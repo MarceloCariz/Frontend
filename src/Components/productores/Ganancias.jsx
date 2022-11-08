@@ -15,7 +15,7 @@ export const Ganancias = ({ ganancia, sueldo, envios, cargando, rol }) => {
       </p>
       <div className="w-full ">
         <h3 className="text-center text-xl">Pedidos Completados</h3>
-        <div className="flex items-center  flex-col mt-2  overflow-x ">
+        <div className="flex items-center  flex-col mt-2   ">
           {cargando && (
             <Spinnner />
           ) }

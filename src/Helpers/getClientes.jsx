@@ -44,7 +44,7 @@ export const enviaPedidoExt = async (productos, direccion, refigeracion, config)
     console.log(data)
     return id_referencia
 }
-export const enviaPedidoLocal = async (productos,id_transportista ,direccion, config) =>{
+export const enviaPedidoLocal = async (productos,id_transportista ,direccion, config,precio_transporte) =>{
 
 
     const id_referencia = Math.floor(Math.random() * 1000000);
@@ -59,6 +59,7 @@ export const enviaPedidoLocal = async (productos,id_transportista ,direccion, co
     formData.append('id_referencia', id_referencia);
     formData.append('direccion',direccion);
     formData.append('id_transportista', id_transportista);
+    formData.append('precio_transporte',precio_transporte);
 
     const {data} = await clienteAxios.post('/clientes/ingresar/orden/local', formData, config)
     console.log(data)

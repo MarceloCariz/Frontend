@@ -107,7 +107,7 @@ const Carrito = () => {
       }
       setCargando(true)
 
-      const id_referencia = await enviaPedidoLocal(carrito, formValues.id_transportista ,formValues.direccion, config);
+      const id_referencia = await enviaPedidoLocal(carrito, formValues.id_transportista ,formValues.direccion, config, formValues.precioT);
       const respuesta =  await pagarPedido(id_referencia , config, total + (formValues.precioT === undefined ? 0 : formValues.precioT));
       const { token, url} = respuesta;
 

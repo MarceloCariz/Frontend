@@ -67,18 +67,18 @@ const PerfilT = () => {
     const {SUELDO} = contrato;
     const ganancia = Number(SUELDO).toLocaleString("es-CL", {style: "currency", currency:"CLP"})
   return (
-    <div className='flex flex-col justify-center items-center pt-4 '>
-        <div className=' sm:flex justify-center gap-2 mb-2'>
+    <div className='flex flex-col justify-center items-center pt-4 mb-12 '>
+        <div className=' sm:flex justify-center items-center gap-2 mb-2'>
                 <Ganancias ganancia={ganancia} envios={envios}  sueldo={SUELDO} cargando={cargando} rol="transportista"/>
 
                 <Contrato contrato={contrato}/>
         </div>
 
-        <h2 className='text-2xl mb-8 font-bold'>Informacion Personal</h2>
 
         { mensaje ? <p className='bg-green-500 py-2 px-4 text-white font-semibold mb-2 w-1/4 text-center'>{mensaje}</p> : ''}
         <form onSubmit={handleSubmit} className='bg-white shadow-lg px-12 py-4 flex flex-col sm:w-auto w-6/7 gap-4 '> 
         {/* 4 */}
+            <h2 className='text-2xl mb-8 font-bold text-center'>Información Personal</h2>
 
             <div className='flex gap-6 items-center'>
                 <label htmlFor="nombre" className='sm:text-xl font-bold'>Nombre :</label>

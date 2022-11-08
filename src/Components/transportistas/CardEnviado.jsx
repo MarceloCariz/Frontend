@@ -67,7 +67,9 @@ const CardEnviado = ({ ele, config }) => {
               <tr className="text-center ">
                 <th>{e.NOMBRE_PRODUCTO}</th>
                 <th>{e.CANTIDAD} kg</th>
-                <th className={e.ESTADO_ENVIO === 'asignado' ? "bg-red-500 text-white rounded-lg  " : "bg-green-500 text-white rounded-lg text-sm"}>{e.ESTADO_ENVIO}</th>
+                <th >
+                    <p className={e.ESTADO_ENVIO === 'asignado' || e.ESTADO_ENVIO === 'RECHAZADO'  ? 
+                  "bg-red-500 block text-sm text-white rounded-lg   " :"bg-green-500 text-white rounded-lg text-sm"}>{e.ESTADO_ENVIO}</p></th>
               </tr>
             </tbody>
           ))}

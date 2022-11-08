@@ -25,7 +25,7 @@ const Productos = ({productos, tipo}) => {
         /// VALIDAR SI HAY STOCK SUFICIENTE PARA AGREGAR AL CARRITO
         // console.log(verUnidadAgregada)
         // console.log(Number(producto.CANTIDAD) < verUnidadAgregada.unidad)
-        if(verUnidadAgregada && Number(producto.CANTIDAD) <= verUnidadAgregada.unidad){
+        if(verUnidadAgregada && Number(producto.CANTIDAD) <= verUnidadAgregada.unidad && tipo==="local"){
             alert("Limite de stock alcanzado")
             return;
         }
