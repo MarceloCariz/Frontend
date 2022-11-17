@@ -56,7 +56,7 @@ function GraficoStockProducto({stockProductosNombre}) {
     <div>
     {DataS ?
         <div className='flex flex-col items-center'>
-              <Bar style={{width: 600, height: 600}} data={data}  options={options} />;
+              <Bar style={{width: 600, height: 600}} data={data}  options={options} />
 
         </div>
         : <div className='flex items-center justify-center'><Spinnner /></div> 
