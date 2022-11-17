@@ -16,8 +16,8 @@ export const GraficoPie = ({tipoVenta}) => {
         datasets:[{
             label: "Compras por Tipo cliente",
             backgroundColor: [
-                'rgba(255, 99, 132, 0.8)',
-                'rgba(54, 162, 235, 0.8)',
+                'rgba(150, 99, 220, 0.8)',
+                'rgba(54, 190, 205, 0.8)',
             ],
             borderColor: 'rgb(253, 253, 253)',
             borderWidth: 1,
