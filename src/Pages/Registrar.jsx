@@ -22,13 +22,15 @@ const Registrar = () => {
   }
 
   const handleSubmit = async (values) => {
-    const isNombreApellido = values.nombre.split(' ');
+    const isNombreApellido = values.nombre.trim().split(' ');
 
     if(isNombreApellido.length <= 1){
       setAlerta('Incluya nombre y apellido')
+      setTimeout(() => {
+        setAlerta("");
+      }, 3000);
       return
     }
-
     if(values.tipo === "local"){
       console.log(![values.rut].includes("-"), values.rut.split(''))
       if(!values.rut.split('').includes("-")) return setAlerta("El rut debe contener un -")
