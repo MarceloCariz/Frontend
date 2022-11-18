@@ -2,70 +2,47 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { registrar } from '../Helpers/getClientes';
 import { validateRUT } from '../utils/validadorRut';
-import validator from 'validator';
+import { Form, Formik } from 'formik';
+import * as Yup from 'yup';
+import { MyTextInput } from '../Components/formik/MyTextInput';
+import { MyRadioButton } from '../Components/formik/MyRadioButton';
 
 const Registrar = () => {
-  const [formValues, setFormValues] = useState({ correo: "", password: "", password2:"", nombre: "", tipo: '', rut: '' });
   const [alerta, setAlerta] = useState('');
-  const [alertaRut, setAlertaRut] = useState({valido: false, msg: ''})
   const navigate = useNavigate();
 
 
-  const handleOnchange = ({ target }) => {
-    setFormValues({ ...formValues, [target.name]: target.value });
 
-  };
 
-  const handleValidarRut = ({target}) =>{
-    setFormValues({...formValues, rut: target.value})
-    const valido = validateRUT(target.value);
-    !valido ? setAlertaRut({valido: false, msg: 'El rut ingresado no es valido'}) : setAlertaRut({valido: true, msg: ''});
-    
+  const handleValidarRut = (rut) =>{
+    // setFormValues({...formValues, rut: target.value})
+    const valido = validateRUT(rut);
+    // !valido ? setAlertaRut({valido: false, msg: 'El rut ingresado no es valido'}) : setAlertaRut({valido: true, msg: ''});
+    return  valido;
   }
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const isNombreApellido = formValues.nombre.split(' ');
-  
-    if ([formValues.correo, formValues.password, formValues.password2, formValues.nombre, formValues.tipo].includes("")) {
-      setAlerta("Todos los campos son obligatorios");
-      setTimeout(() => {
-        setAlerta('')
-      }, 2000);
-      return;
-    }
-    /// Validar Email
-    if(!validator.isEmail(formValues.correo)){
-      setAlerta('Correo Incorrecto')
-      return
-    }
-    // Validar nombre y apellido
+  const handleSubmit = async (values) => {
+    const isNombreApellido = values.nombre.split(' ');
+
     if(isNombreApellido.length <= 1){
       setAlerta('Incluya nombre y apellido')
       return
     }
 
-    if((formValues.tipo === 'local' &&  alertaRut.valido === false) || formValues.rut.length < 8){
-      setAlerta("El RUT no es válido");
-      setTimeout(() => {
-        setAlerta('')
-      }, 2000);
-      return;
-    }
-
-    console.log(formValues)
-    if(formValues.password !== formValues.password2){
-      setAlerta("Las contraseñas deben ser iguales")
-      return
+    if(values.tipo === "local"){
+      console.log(![values.rut].includes("-"), values.rut.split(''))
+      if(!values.rut.split('').includes("-")) return setAlerta("El rut debe contener un -")
+      const isValidRut = handleValidarRut(values.rut);
+      if(!isValidRut && values.tipo === "local") return setAlerta("rut no valido");
     }
 
     try {
       const datos ={
-        correo: formValues.correo,
-        password: formValues.password,
-        nombre: formValues.nombre,
-        tipo : formValues.tipo,
-        rut: formValues.rut,
+        correo: values.correo,
+        password: values.password,
+        nombre: values.nombre,
+        tipo : values.tipo,
+        rut: values.tipo === "externo" ? "" : values.rut,
 
       }
       await registrar(datos);
@@ -83,92 +60,65 @@ const Registrar = () => {
 
   };
   return (
-    <div className="text-xl">
-    <h1 className="flex justify-center items-center  bg-blue-800 text-center text-white h-14">Registro Clientes</h1>
- 
-    <div className="border border-1 shadow-lg bg-white border-gray-300 rounded-lg flex justify-center items-center mt-4">
+    <div className='flex flex-col sm:w-1/3 -mt-16'>
+      <h1 className="flex justify-center items-center text-xl bg-blue-800 text-center text-white h-14">Registro Clientes</h1>
 
-      <form onSubmit={handleSubmit} className="flex justify-center items-center   gap-8 flex-col px-8 py-6 ">
-      {
-      alerta && (
-        <p className="text-sm sm:text-xl font-bold relative bg-red-500 text-white px-2">{alerta}</p>
-      )
-    }
-        <div className="">
-          <input
-            className="h-12 border px-2 rounded-md"
-            name="correo"
-            type="email"
-            placeholder="Correo"
-            value={formValues.correo}
-            onChange={handleOnchange}
-          />
-        </div>
-        <div className="">
-          <input
-            className="h-12 border px-2 rounded-md"
-            name="nombre"
-            type="text"
-            placeholder="Nombre y apellido"
-            value={formValues.nombre}
-            onChange={handleOnchange}
-          />
-        </div>
-        <div>
-          <input
-          className="h-12 border px-2 rounded-md" 
-            name="password"
-            type="password"
-            placeholder="Contraseña"
-            value={formValues.password}
-            onChange={handleOnchange}
-          />
-        </div>
-        <div>
-          <input
-          className="h-12 border px-2 rounded-md" 
-            name="password2"
-            type="password"
-            placeholder="Repetir Contraseña"
-            value={formValues.password2}
-            onChange={handleOnchange}
-          />
-        </div>
+      <div className=" border border-1 shadow-lg bg-white border-gray-300 rounded-lg flex justify-center items-center mt-4">
 
-        {formValues.tipo === 'local' && (
-              <div>
-              {!alertaRut.valido && <p className='bg-red-500 text-white text-center  text-sm w-2/3'>{alertaRut.msg}</p>}
-              <input
-                className="h-12 border px-2 rounded-md mt-2" 
-                  name="rut"
-                  type="text"
-                  maxLength={10}
-                  placeholder="Rut ej: 11111111-k"
-                  value={formValues.rut}
-                  onChange={handleValidarRut}
-                />
-                <p className='text-sm'>Si su RUT termina en 0 reemplazalo con una k</p>
-              </div>
-        )}
+      <Formik 
+        initialValues={{
+          correo: '', password: '', password2:'', nombre: '', tipo: '', rut: '' 
+        }}
+        onSubmit={(values) => handleSubmit(values)}
+        validationSchema={
+          Yup.object({
+            nombre : Yup.string().min(5, "Nombre demasiado corto").matches(/^([A-Za-z\u00C0-\u00D6\u00D8-\u00f6\u00f8-\u00ff\s]*)$/g ,'El nombre solo debe contener letras.').max(25, 'Nombre demasiado largo')
+                    .required("Este campo es necesario"),
+            correo: Yup.string().email("El correo no  es valido").required("Este campo es necesario"),
+            password: Yup.string().min(6,"La contraseña debe ser de 6 caracteres o mas").required("Este campo es necesario"),
+            password2: Yup.string().oneOf([Yup.ref('password'), null], 'Las contraseñas deben coincidir').required("Este campo es necesario"),
+            tipo: Yup.string().required("Este campo es necesario"),
+            rut: Yup.string().when("tipo", {
+              is: "local",
+              then: Yup.string().max(10).required("Debe ingresar el rut")
+            })
+          })
+        }
+      >
+            {
+              ({handleReset, values})=>(
+                <Form className="flex justify-center items-center   gap-8 flex-col px-8 py-6 ">
+                  {
+                    alerta && (
+                    <p className="text-sm sm:text-xl font-bold relative bg-red-500 text-white px-2">{alerta}</p>
+                  )}
+                  <div className='flex flex-col gap-4 w-full'>
+                  <MyTextInput label={"Nombre"} name="nombre"  placeholder="Nombre"/>
+                  <MyTextInput label={"Correo"} name="correo"  placeholder="Correo"/>
+                  <MyTextInput label={"Contraseña"} name="password"  type="password" placeholder="Contraseña"/>
+                  <MyTextInput label={"Confirmar Contraseña"} name="password2" type="password"  placeholder="Confirmar Contraseña "/>
+                  </div>
 
-        <div>
-          <p>Indique si es un cliente extranjero o nacional</p>
-          <div className='flex justify-center text-sm gap-8' >
-            <div className='flex items-center gap-2'>
-                <p>Local</p>
-                <input name='tipo' type="radio" value="local"  onChange={handleOnchange} checked={formValues.tipo === "local"}/>
-            </div>
-            <div className='flex items-center gap-2'>
-                <p>Externo</p>
-                <input name='tipo' type="radio" value="externo" onChange={handleOnchange}  checked={formValues.tipo === "externo" }/>
-            </div>
-          </div>
-        </div>
-        <div className="">
-        <input className="cursor-pointer hover:bg-blue-600  text-center rounded-lg bg-blue-500 text-white px-8 py-4" type="submit" value="Registrar" />
-        </div>
-      </form>
+                  <p className='text-center'>Indique si es un cliente extranjero(externo) o nacional(local)</p>
+                  <div className='flex gap-12'>
+                    <MyRadioButton name="tipo" label={"Local"} value="local"/>
+                    <MyRadioButton name="tipo" label={"Externo"} value="externo"/>
+                  </div>
+                  {values.tipo === "local" && (
+                    <>
+                      <MyTextInput label={"Rut"} name="rut" maxLength={10}  placeholder="Rut ej: 11111111-k"/>
+                      <p className='text-sm'>Si su RUT termina en 0 reemplazalo con una k</p>
+                    </>
+                  )}        
+                  <button className="cursor-pointer hover:bg-blue-600  text-center rounded-lg bg-blue-500 text-white px-8 py-4" type='submit'>Registrar</button>
+
+                </Form>
+              )
+            }
+      </Formik>
     </div>
+    
+    
     </div>
   )
 }

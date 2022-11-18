@@ -59,7 +59,7 @@ const Perfil = () => {
                 <p className='bg-gray-100 px-2 text-sm '>{CORREO}</p>
             </div>
             {auth.TIPO_CLIENTE === 'local' && (
-                           <div className='flex gap-9 items-center w-32'>
+                           <div className='flex gap-9 items-center w-full'>
                            <label htmlFor="correo" className='sm:text-xl  text-sm font-bold'>Rut:   </label>
                            <p className='bg-gray-100 px-2 text-sm '>{RUT}</p>
                        </div>

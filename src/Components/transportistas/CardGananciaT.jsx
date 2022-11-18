@@ -2,17 +2,17 @@ import React from 'react'
 
 export const CardGananciaT = ({envios}) => {
   return (
-    <div className='overflow-y-auto sm:h-72 h-52 '>
+    <div className='overflow-y-auto sm:max-h-72 h-52  '>
 
-    <table className="sm:table-fixed w-full ">
+    <table className="sm:table-fixed w-full  border-collapse border border-slate-400">
     <thead>
       <tr>
-        <th>Fecha Compra</th>
-        <th>Precio</th>
-        <th>Referencia Compra</th>
+        <th className='border border-slate-300'>Fecha Compra</th>
+        <th className='border border-slate-300'>Precio</th>
+        <th className='border border-slate-300'>Referencia Compra</th>
       </tr>
     </thead>
-    <tbody className="text-center overflow-y h-12">
+    <tbody className="text-center overflow-y sm:max-h-12">
       {
         envios.length > 0  ?
         envios.map(
@@ -22,9 +22,9 @@ export const CardGananciaT = ({envios}) => {
             PRECIOT
           }) => (
             <tr key={REFERENCIA_COMPRA}>
-              <td>{FECHA_COMPRA}</td>
-              <td>{PRECIOT}</td>
-              <td className="">#{REFERENCIA_COMPRA}</td>
+              <td className='border border-slate-300'>{FECHA_COMPRA}</td>
+              <td className='border border-slate-300'>{PRECIOT}</td>
+              <td className='border border-slate-300' >#{REFERENCIA_COMPRA}</td>
             </tr>
           )): (
             <tr>

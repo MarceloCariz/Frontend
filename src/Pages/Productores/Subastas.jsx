@@ -42,7 +42,7 @@ const Subastas = () => {
   const set = new Set(resultado.map(JSON.stringify));
   const arrSinDuplicaicones = Array.from(set).map(JSON.parse);
   return (
-    <div className="mx-auto container text-center pt-10 ">
+    <div className="mx-auto container text-center pt-10 px-1">
       <h1 className="text-3xl font-semibold">Subasta Disponibles</h1>
       <div className="flex justify-center mt-12 gap-2">
       {cargando && <Spinnner/>}
@@ -90,7 +90,7 @@ const Subastas = () => {
                 ? productos.map((producto) => (
                     <div
                       key={producto.ID_PRODUCTO}
-                      className="flex gap-4 mb-4 capitalize items-center"
+                      className="flex gap-4 mb-4 capitalize items-center sm:text-xl"
                     >
                       <img
                         className="object-contain w-12 h-12"

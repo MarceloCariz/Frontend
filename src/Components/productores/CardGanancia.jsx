@@ -2,16 +2,16 @@ import React from 'react'
 
 export const CardGanancia = ({envios}) => {
   return (
-    <div className='overflow-y-auto sm:h-72 h-52 '>
-      <table className="sm:table-fixed table-auto sm:text-lg text-sm  sm:w-full ">
+    <div className='overflow-y-auto sm:max-h-72 h-52 '>
+      <table className="sm:table-fixed table-auto sm:text-lg text-sm  sm:w-full border-collapse border border-slate-400 ">
       <thead>
         <tr>
-          <th>ID</th>
-          <th>NOMBRE</th>
-          <th>CANTIDAD</th>
-          <th>PRECIO</th>
-          <th>PRECIO TOTAL</th>
-          <th>ID COMPRA</th>
+          <th className='border border-slate-300'>ID</th>
+          <th className='border border-slate-300'>NOMBRE</th>
+          <th className='border border-slate-300'>CANTIDAD</th>
+          <th className='border border-slate-300'>PRECIO</th>
+          <th className='border border-slate-300'>PRECIO TOTAL</th>
+          <th className='border border-slate-300'>ID COMPRA</th>
         </tr>
       </thead>
 
@@ -29,22 +29,22 @@ export const CardGanancia = ({envios}) => {
               CANTIDAD,
             }) => (
               <tr key={ID}>
-                <td>{ID_PRODUCTO}</td>
-                <td>{NOMBRE_PRODUCTO}</td>
-                <td>{CANTIDAD}</td>
-                <td>
+                <td className='border border-slate-300'>{ID_PRODUCTO}</td>
+                <td className='border border-slate-300'>{NOMBRE_PRODUCTO}</td>
+                <td className='border border-slate-300'>{CANTIDAD}</td>
+                <td className='border border-slate-300'>
                   {Number(PRECIO).toLocaleString("es-CL", {
                     style: "currency",
                     currency: "CLP",
                   })}
                 </td>
-                <td>
+                <td className='border border-slate-300'> 
                   {(PRECIO * Number(CANTIDAD)).toLocaleString("es-CL", {
                     style: "currency",
                     currency: "CLP",
                   })}
                 </td>
-                <td className="">#{REFERENCIA_COMPRA}</td>
+                <td className='border border-slate-300'>#{REFERENCIA_COMPRA}</td>
               </tr>
             )): (
               <tr>

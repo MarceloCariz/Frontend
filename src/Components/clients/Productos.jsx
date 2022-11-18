@@ -57,10 +57,10 @@ const Productos = ({productos, tipo}) => {
 
 
 return (
-    <div  className='mt-4 grid md:grid-cols-6 sm:gap-7 justify-center  gap-2 grid-cols-2 sm:px-0 px-4 pb-24'>
+    <div  className='mt-4 grid md:grid-cols-6 md:gap-4 gap-y-2 grid-cols-2  justify-center       sm:px-2 px-4 pb-24'>
         {productos.length > 0 && 
             productos.map((producto)=>(
-                <ProductoCard key={producto.ID_PRODUCTO} agregando={agregando}  producto={producto} handleClick={handleClick}tipo={tipo}/>
+                <ProductoCard  key={producto.ID_PRODUCTO} agregando={agregando}  producto={producto} handleClick={handleClick}tipo={tipo}/>
             ))
         }
     </div>

@@ -3,8 +3,8 @@ import { faCartPlus } from '@fortawesome/free-solid-svg-icons'
 import React, { useRef, useState } from 'react'
 
 export const ProductoCard = ({producto, tipo,handleClick , agregando}) => {
-    const estiloCardLocal= 'flex flex-col items-center max-h-96   hover:max-h-fit bg-white rounded-lg pb-4 shadow-xl text-black sm:w-auto ';
-    const estiloCardExterno = 'flex flex-col items-center h-72  hover:h-fit bg-white rounded-lg pb-4 shadow-xl text-black sm:w-auto ';
+    const estiloCardLocal= 'flex flex-col items-center h-full    bg-white rounded-lg pb-4 shadow-xl text-black sm:w-auto ';
+    const estiloCardExterno = 'flex flex-col items-center h-full  hover:h-fit bg-white rounded-lg pb-4 shadow-xl text-black sm:w-auto ';
 
     const [activeButton, setActiveButton] = useState({activo: false,  id: 0})
     
@@ -41,19 +41,39 @@ export const ProductoCard = ({producto, tipo,handleClick , agregando}) => {
                     </div>
                     
                     <div className='flex justify-center mt-4 ' >
-                    
                     {
+                        tipo === "local" ?(
+                            <button  
+                            onClick={(e) => handleClick({ID,NOMBRE, CANTIDAD, PRECIO: tipo ==='local' ? PRECIO_LOCAL : PRECIO_EXP,IMAGE_URL, ID_PRODUCTOR, CALIDAD, unidad: 1},e)}
+                            className={`${activeButton.activo &&  activeButton.id === ID && ID ===  Number(idCard.current.id) && CANTIDAD > 0 && tipo === 'local' ? "font-bold text-white bg-green-500 px-2 py-2 rounded-md" : "invisible px-2 py-2"}`} >
+                                <FontAwesomeIcon icon={faCartPlus} className="pr-1"/>
+                                {agregando.cargando && agregando.id === ID    ? "Agregando...": "Agregar al carrito"}
+                            </button>
+                        ):
+                        (
+                        <button  
+                            onClick={(e) => handleClick({ID,NOMBRE, CANTIDAD, PRECIO: tipo ==='local' ? PRECIO_LOCAL : PRECIO_EXP,IMAGE_URL, ID_PRODUCTOR, CALIDAD, unidad: 1},e)}
+                            className={`${activeButton.activo &&  activeButton.id === ID   && tipo === 'externo' ? "font-bold text-white bg-green-500 px-2 py-2 rounded-md" : "invisible px-2 py-2"}`} >
+                                <FontAwesomeIcon icon={faCartPlus} className="pr-1"/>
+                                {agregando.cargando && agregando.id === ID    ? "Agregando...": "Agregar al carrito"}
+                        </button>
+                        )
+                    }
+
+                    {/* {
                         activeButton.activo &&  activeButton.id === ID && ID ===  Number(idCard.current.id) && CANTIDAD > 0 && tipo === 'local' &&(
-                            <button onClick={(e) => handleClick({ID,NOMBRE, CANTIDAD, PRECIO: tipo ==='local' ? PRECIO_LOCAL : PRECIO_EXP,IMAGE_URL, ID_PRODUCTOR, CALIDAD, unidad: 1},e)} className='font-bold text-white bg-green-500 px-2 py-2 rounded-md'>
+                            <button onClick={(e) => handleClick({ID,NOMBRE, CANTIDAD, PRECIO: tipo ==='local' ? PRECIO_LOCAL : PRECIO_EXP,IMAGE_URL, ID_PRODUCTOR, CALIDAD, unidad: 1},e)}  className='font-bold text-white bg-green-500 px-2 py-2 rounded-md'>
                             <FontAwesomeIcon icon={faCartPlus} className="pr-1"/>
                             {agregando.cargando && agregando.id === ID    ? "Agregando...": "Agregar al carrito"}</button>
-                    )}
-                    {
+                    )} */}
+
+
+                    {/* {
                         activeButton.activo &&  activeButton.id === ID   && tipo === 'externo' &&(
                             <button onClick={(e) => handleClick({ID,NOMBRE, CANTIDAD, PRECIO: tipo ==='local' ? PRECIO_LOCAL : PRECIO_EXP,IMAGE_URL, ID_PRODUCTOR, CALIDAD,unidad: 1},e)} className='font-bold text-white bg-green-500 px-2 py-2 rounded-md'>
                             <FontAwesomeIcon icon={faCartPlus} className="pr-1"/>
                             {agregando.cargando && agregando.id === ID    ? "Agregando...": "Agregar al carrito"}</button>
-                    )}
+                    )} */}
                     {
                         CANTIDAD <= 0 && tipo === 'local' && (
                             <p className='bg-gray-500 text-white px-4 py-2'>Producto sin stock</p>

@@ -82,23 +82,23 @@ const PerfilT = () => {
 
             <div className='flex gap-6 items-center'>
                 <label htmlFor="nombre" className='sm:text-xl font-bold'>Nombre :</label>
-                <p className='bg-gray-100 px-2'>{NOMBRE}</p>
+                <p className='bg-gray-100 px-2 h-8'>{NOMBRE}</p>
             </div>
             <div className='flex gap-9 items-center w-32'>
-                <label htmlFor="correo" className='sm:text-xl  text-sm font-bold'>Correo:   </label>
-                <p className='bg-gray-100 px-1 text-sm '>{CORREO}</p>
+                <label htmlFor="correo" className='sm:text-xl   font-bold '>Correo:   </label>
+                <p className='bg-gray-100 px-1 text-sm h-8'>{CORREO}</p>
             </div>
-            <div className='flex gap-3 items-center'>
+            <div className='flex gap-3 items-center w-full'>
                 <label htmlFor="tamano" className='sm:text-xl font-bold'>Tamaño :</label>
-                <input name='tamano' onChange={handleInputchange} className='bg-gray-100 px-2 ' value={formValues.tamano}/>
+                <input name='tamano' onChange={handleInputchange} className='bg-white rounded-lg px-2 h-8 border ' value={formValues.tamano}/>
             </div>
-            <div className='flex gap-3 items-center'>
+            <div className='flex gap-2 items-center w-full'>
                 <label htmlFor="capacidad" className='sm:text-xl font-bold'>Capacidad :</label>
-                <input name='capacidad' onChange={handleInputchange} className='bg-gray-100 px-2 ' value={formValues.capacidad}/>
+                <input name='capacidad' onChange={handleInputchange} className='bg-white rounded-lg px-2 h-8 border sm:w-auto w-2/3' value={formValues.capacidad}/>
             </div>
-            <div className='flex gap-10 items-center'>
+            <div className='flex gap-2 items-center'>
                 <label htmlFor="carga" className='sm:text-xl font-bold'>Carga :</label>
-                <input name='carga' onChange={handleInputchange}  className='bg-gray-100 px-2' value={formValues.carga}/>
+                <input name='carga' onChange={handleInputchange}  className='bg-white rounded-lg px-2 h-8 border sm:w-auto w-2/3' value={formValues.carga}/>
             </div>
             {/* <div className='flex gap-10 items-center'>
                 <label htmlFor="refrigeracion" className='sm:text-xl font-bold'>Refrigeracion :</label>
@@ -119,9 +119,9 @@ const PerfilT = () => {
                      </div>
             </div>
 
-            <div className='flex gap-10 items-center'>
+            <div className='flex gap-2 items-center'>
                 <label htmlFor="precio" className='sm:text-xl font-bold'>Precio :</label>
-                <input name='precio' onChange={handleInputchange}  className='bg-gray-100 px-2' value={formValues.precio}/>
+                <input id="precio" name='precio' onChange={handleInputchange}  className='bg-gray-100 px-2 bg-white rounded-lg px-2 h-8 border sm:w-auto w-2/3' value={formValues.precio}/>
             </div>
 
             <div className='flex justify-center'>

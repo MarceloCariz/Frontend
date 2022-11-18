@@ -17,6 +17,7 @@
     "chartjs-plugin-datalabels": "^2.1.0",
     "dotenv": "^16.0.1",
     "faker": "^6.6.6",
+    "formik": "^2.2.9",
     "index.js": "^0.0.3",
     "jspdf": "^2.5.1",
     "jspdf-autotable": "^3.5.25",
@@ -39,7 +40,8 @@
     "workbox-range-requests": "^6.5.4",
     "workbox-routing": "^6.5.4",
     "workbox-strategies": "^6.5.4",
-    "workbox-streams": "^6.5.4"
+    "workbox-streams": "^6.5.4",
+    "yup": "^0.32.11"
   },
   "scripts": {
     "start": "react-scripts start",

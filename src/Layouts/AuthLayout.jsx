@@ -6,7 +6,7 @@ import fondo from './img/fondo.jpg'
 const AuthLayout = () => {
   return (
     <>
-      <main style={{backgroundImage:`url(${fondo})` }} className=" h-screen static ">
+      <main style={{backgroundImage:`url(${fondo})`}} className=" min-h-screen static bg-no-repeat bg-cover  ">
 
         <nav className="sm:h-22  py-4  bg-black/50 px-12 flex flex-col sm:flex-row sm:justify-end  justify-center items-center">
         <h2 className="sm:flex  text-white justify-start gap-2  sm:text-3xl text-2xl sm:mb-0 mb-2 w-full items-center  text-center  ">
