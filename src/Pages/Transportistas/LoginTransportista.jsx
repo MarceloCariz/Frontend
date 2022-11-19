@@ -1,3 +1,5 @@
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useState } from 'react'
 import {  useNavigate } from 'react-router-dom'
 import CardBienvenido from '../../Components/login/ui/CardBienvenido';
@@ -7,7 +9,8 @@ import useAuth from '../../Hooks/useAuth';
 
 const LoginTransportista= () => {
   const [formValues, setFormValues] = useState({ correo: "", password: "" });
-  const [alerta, setAlerta] = useState('')
+  const [alerta, setAlerta] = useState('');
+  const [showPassword, setShowPassword] = useState(false)
   const { setAuth } = useAuth();
   const navigate = useNavigate();
   const handleOnchange = ({ target }) => {
@@ -62,8 +65,23 @@ const LoginTransportista= () => {
             value={formValues.correo}
             onChange={handleOnchange}
           />
+        </div>        
+        <div className="flex flex-col">
+          {showPassword ? (
+                        <FontAwesomeIcon icon={faEye} onClick={() => setShowPassword(!showPassword)} className="absolute   ml-56  md:ml-56 lg:ml-52 mt-3 cursor-pointer text-2xl"/>
+                      ) :
+                        <FontAwesomeIcon icon={faEyeSlash} onClick={() => setShowPassword(!showPassword)} className="absolute text-gray-500  ml-56  md:ml-56 lg:ml-52 mt-3 cursor-pointer text-2xl"/>
+          }
+          <input
+          className="h-12 border px-2 rounded-md" 
+            name="password"
+            type={!showPassword ? "password" : "text" } 
+            placeholder="contraseña"
+            value={formValues.password}
+            onChange={handleOnchange}
+          />
         </div>
-        <div>
+        {/* <div>
           <input
           className="h-12 border px-2 rounded-md" 
             name="password"
@@ -72,7 +90,7 @@ const LoginTransportista= () => {
             value={formValues.password}
             onChange={handleOnchange}
           />
-        </div>
+        </div> */}
         <div className="">
         <input className=" cursor-pointer hover:bg-gray-700  text-center rounded-lg bg-gray-600 text-white px-8 py-4" type="submit" value="Ingresar" />
         </div>

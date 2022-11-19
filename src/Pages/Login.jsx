@@ -1,4 +1,6 @@
 
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import CardBienvenido from "../Components/login/ui/CardBienvenido";
@@ -8,7 +10,8 @@ import useAuth from "../Hooks/useAuth";
 
 const Login = () => {
   const [formValues, setFormValues] = useState({ correo: "", password: "" });
-  const [alerta, setAlerta] = useState('')
+  const [alerta, setAlerta] = useState('');
+  const [showPassword, setShowPassword] = useState(false)
   const { setAuth } = useAuth();
   const navigate = useNavigate();
   const handleOnchange = ({ target }) => {
@@ -64,11 +67,16 @@ const Login = () => {
             onChange={handleOnchange}
           />
         </div>
-        <div>
+        <div className="flex flex-col">
+          {showPassword ? (
+                        <FontAwesomeIcon icon={faEye} onClick={() => setShowPassword(!showPassword)} className="absolute   ml-56  md:ml-56 lg:ml-52 mt-3 cursor-pointer text-2xl"/>
+                      ) :
+                        <FontAwesomeIcon icon={faEyeSlash} onClick={() => setShowPassword(!showPassword)} className="absolute text-gray-500  ml-56  md:ml-56 lg:ml-52 mt-3 cursor-pointer text-2xl"/>
+          }
           <input
           className="h-12 border px-2 rounded-md" 
             name="password"
-            type="password"
+            type={!showPassword ? "password" : "text" } 
             placeholder="contraseña"
             value={formValues.password}
             onChange={handleOnchange}

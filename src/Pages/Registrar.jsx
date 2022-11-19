@@ -6,9 +6,13 @@ import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import { MyTextInput } from '../Components/formik/MyTextInput';
 import { MyRadioButton } from '../Components/formik/MyRadioButton';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 const Registrar = () => {
+
   const [alerta, setAlerta] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
 
@@ -62,10 +66,10 @@ const Registrar = () => {
 
   };
   return (
-    <div className='flex flex-col sm:w-1/3 -mt-16'>
-      <h1 className="flex justify-center items-center text-xl bg-blue-800 text-center text-white h-14">Registro Clientes</h1>
+    <div className='flex flex-col   md:w-3/4 lg:w-1/3  md:-mt-24 -mt-12'>
+        <h1 className="flex justify-center items-center text-xl bg-blue-800 w-full text-center text-white h-14">Registro Clientes</h1>
 
-      <div className=" border border-1 shadow-lg bg-white border-gray-300 rounded-lg flex justify-center items-center mt-4">
+      <div className=" border border-1 shadow-lg bg-white border-gray-300 rounded-lg flex  justify-center items-center mt-4">
 
       <Formik 
         initialValues={{
@@ -95,13 +99,20 @@ const Registrar = () => {
                     <p className="text-sm sm:text-xl font-bold relative bg-red-500 text-white px-2">{alerta}</p>
                   )}
                   <div className='flex flex-col gap-4 w-full'>
-                  <MyTextInput label={"Nombre"} name="nombre"  placeholder="Nombre"/>
-                  <MyTextInput label={"Correo"} name="correo"  placeholder="Correo"/>
-                  <MyTextInput label={"Contraseña"} name="password"  type="password" placeholder="Contraseña"/>
-                  <MyTextInput label={"Confirmar Contraseña"} name="password2" type="password"  placeholder="Confirmar Contraseña "/>
+                    <MyTextInput label={"Nombre"} name="nombre"  placeholder="Nombre"/>
+                    <MyTextInput label={"Correo"} name="correo"  placeholder="Correo"/>
+                    <div className='flex flex-col '>
+                      {showPassword ? (
+                        <FontAwesomeIcon icon={faEye} onClick={() => setShowPassword(!showPassword)} className="absolute ml-60  md:ml-80  lg:ml-72 2xl:ml-80 mt-10 cursor-pointer text-2xl"/>
+                      ) :
+                        <FontAwesomeIcon icon={faEyeSlash} onClick={() => setShowPassword(!showPassword)} className="absolute  text-gray-500 ml-60  md:ml-80 lg:ml-72  2xl:ml-80 mt-10 cursor-pointer text-2xl"/>
+                      }
+                       <MyTextInput label={"Contraseña"} name="password"  type={!showPassword ? "password" : "text" } placeholder="Contraseña"/>
+                    </div>
+                    <MyTextInput label={"Confirmar Contraseña"} name="password2" type="password"  placeholder="Confirmar Contraseña "/>
                   </div>
 
-                  <p className='text-center'>Indique si es un cliente extranjero(externo) o nacional(local)</p>
+                  <p className='text-center text-sm'>Indique si es un cliente extranjero(externo) o nacional(local)</p>
                   <div className='flex gap-12'>
                     <MyRadioButton name="tipo" label={"Local"} value="local"/>
                     <MyRadioButton name="tipo" label={"Externo"} value="externo"/>

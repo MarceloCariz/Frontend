@@ -54,7 +54,7 @@ const ClienteLayout = ({ children }) => {
   }
   return (
     <div className="#d4d8dd">
-      <nav className=" bg-stone-800">
+      <nav className=" bg-stone-800 xl:px-4 2xl:px-0">
         <div className="sm:h-32 h-24 2xl:px-0 px-2 flex sm:justify-between items-center   sm:container  mx-auto text-white">
           <Link to="/inicio">
 

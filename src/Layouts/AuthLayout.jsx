@@ -1,12 +1,15 @@
 import { faSeedling } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
-import { Outlet, Link } from "react-router-dom";
+import { Outlet, Link, useLocation } from "react-router-dom";
 import fondo from './img/fondo.jpg'
 const AuthLayout = () => {
+   
+  const {pathname} = useLocation();
+  console.log(pathname)
   return (
     <>
-      <main style={{backgroundImage:`url(${fondo})`}} className=" min-h-screen static bg-no-repeat bg-cover  ">
+      <main style={{backgroundImage:`url(${fondo})`,height: pathname === '/registrar' ? "140vh" : "100vh"}} className="overflow-y-hidden  bg-no-repeat bg-cover">
 
         <nav className="sm:h-22  py-4  bg-black/50  sm:px-4 2xl:px-12 flex flex-col sm:flex-row sm:justify-end w-full justify-center items-center">
 
