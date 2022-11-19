@@ -158,7 +158,7 @@ const Carrito = () => {
           {/* <th>Stock</th> */}
           <th className="sm:mr-0 mr-2">Precio</th>
           <th className="sm:mr-0 mr-2">Cantidad (kg)</th>
-          <th className="">Eliminar</th>
+          <th className="sm:block hidden">Eliminar</th>
 
 
         </tr>
@@ -194,16 +194,16 @@ const Carrito = () => {
             <p className="text-right font-semibold">{(total + (formValues.precioT === undefined ? 0 : formValues.precioT)).toLocaleString("es-CL", {style: "currency", currency:"CLP"})}</p>
     </div>
     {/* INFORMACION DESPACHO */}
-    <div className="mt-4 mb-4 sm:w-1/2 flex flex-col items-center border border-1 border-gray-500 py-2 px-4 sm:px-2 rounded-md">
-       <h2 className="text-xl font-semibold text-center">INFORMACIÓN DESPACHO</h2>
-       <div className="flex flex-col gap-2 mt-2 text-lg sm:w-1/3">
+    <div className="mt-4 mb-4 lg:w-1/2  md:w-2/3 flex flex-col items-center border border-1 border-gray-500 py-2 px-4 sm:px-2 rounded-md">
+      <h2 className="text-xl font-semibold text-center">INFORMACIÓN DESPACHO</h2>
+      <div className="flex flex-col gap-2 mt-2 text-lg lg:w-1/2 w-2/3 items-center">
           <p className="font-medium">Dirección: <span className="capitalize font-normal">{formValues.direccion}</span> </p>
           <p className="font-medium">Ciudad: <span className="capitalize font-normal">{formValues.ciudad}</span></p>
           {TIPO_CLIENTE === 'externo' && (
             <p className="font-medium">País: <span className="capitalize font-normal">{formValues.pais}</span></p>
           )}
-       </div>
-       <Link to="/inicio/perfil"  state={location.pathname} className='text-white bg-blue-500 px-4 py-2 mt-2 text-sm'>Actualizar Informacion</Link>
+      </div>
+      <Link to="/inicio/perfil"  state={location.pathname} className='text-white bg-blue-500 px-4 py-2 mt-2 text-sm'>Actualizar Informacion</Link>
     </div>
     {/* SELECCIONAR TRANSPORTISTA */}
     { alerta.estado && <p className="bg-red-500 px-4 py-2 text-white mb-4">{alerta.mensaje}</p>}

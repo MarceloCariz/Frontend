@@ -22,7 +22,7 @@ export const Cabecera = ({ i, idPedido, onClick, show, ele }) => {
           "Estado de envío: CANCELADO"
         ) : (
           <div className="flex   sm:flex-col sm:gap-1 flex-col gap-1">
-            <p className="text-sm">Estado de envío </p>
+            <p className="">Estado de envío </p>
             <p
               className={
                 ele.some(({ ESTADO_ENVIO }) => ESTADO_ENVIO === "pendiente")

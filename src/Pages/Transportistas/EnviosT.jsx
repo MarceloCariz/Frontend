@@ -16,7 +16,7 @@ const EnviosT = () => {
 
   return (
     <div className='container'>
-    <h3 className='text-center sm:mb-12 pb-2 pt-10  font-semibold text-4xl'>
+    <h3 className='text-center sm:mb-4 pb-2 pt-10  font-semibold text-4xl'>
       <FontAwesomeIcon className='pr-2' icon={faTruck}/>
       Envíos </h3>
     <div className='mx-auto flex flex-col items-center justify-center pt-4'>

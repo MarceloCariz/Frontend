@@ -17,7 +17,7 @@ export const CardPedido = ({ele,i, config, auth, datos}) => {
         setShow(!show);
       };
   return (
-    <div key={ele[0].REFERENCIA_COMPRA} className="sm:w-2/5 flex flex-col text-left justify-center items-center mb-4 rounded-lg bg-white shadow-xl px-4 py-4">
+    <div key={ele[0].REFERENCIA_COMPRA} className=" 2xl:w-3/6 lg:w-4/6 lg:mx-0 md:mx-12 flex flex-col text-left justify-center items-center mb-4 rounded-lg bg-white shadow-xl px-4 py-4">
                 <Cabecera i={i} idPedido={idPedido} onClick={onClick} show={show} ele={ele}/>
 
 

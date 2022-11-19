@@ -14,11 +14,11 @@ const Inicio = () => {
   },[])
   return (
     <div className="sm:pt-8 container mx-auto">
-        <h2 className='text-left text-3xl font-semibold ml-4 sm:ml-0'>Nuestros Productos</h2>
-        <div className="w-full px-2 border border-1 sm:hidden mt-2">
+        <h2 className='text-left text-3xl font-semibold ml-4 sm:ml-4 2xl:ml-0'>Nuestros Productos</h2>
+        <div className="w-full px-2 border border-1 lg:hidden mt-2">
               <Buscador />
         </div>
-        {cargando && productos.length === 0 && <Spinnner/>}
+        {cargando && productos.length === 0 && (<div className='flex justify-center items-center mt-12'><Spinnner/></div>) }
         {productos.length > 0 ? 
           <Productos productos={productos} tipo={auth.TIPO_CLIENTE}/>
           : !cargando && 'No hay productos'

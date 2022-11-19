@@ -20,7 +20,7 @@ const CardEnviado = ({ ele, config }) => {
   return (
     <div
       key={ele[0].REFERENCIA_COMPRA}
-      className="sm:w-2/5 flex flex-col text-left justify-center items-center mb-4 rounded-lg bg-white shadow-xl px-4 py-4"
+      className="lg:w-3/5  md:w-auto md:mx-4 lg:mx-0 mx-0 flex flex-col text-left justify-center items-center mb-4 rounded-lg bg-white shadow-xl px-4 py-4"
     >
       <div className="flex gap-2 sm:text-xl capitalize font-semibold items-center ">
         <p>

@@ -49,8 +49,8 @@ export const Buscador = () => {
     }
   return (
         <form className='text-black flex  items-center gap-2' onSubmit={handleSearch}>
-            <FontAwesomeIcon className='sm:text-white sm:block hidden sm:text-2xl' icon={faSearch}/>
-            <input onChange={onChange} value={terminoBusqueda} type="text" placeholder='Busca tu producto ...' className='w-full  sm:h-10 h-12 pl-2 sm:border-none sm:shadow-none  border  shadow-lg'/>
+            <FontAwesomeIcon className='sm:text-white lg:block hidden lg:text-2xl ' icon={faSearch}/>
+            <input onChange={onChange} value={terminoBusqueda} type="text" placeholder='Busca tu producto...' className='w-full  lg:h-10 lg:text-base md:text-2xl md:h-20 h-12 pl-2 sm:border-none sm:shadow-none  border  shadow-lg'/>
         </form>
   )
 }

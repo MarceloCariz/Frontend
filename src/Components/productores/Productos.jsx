@@ -59,7 +59,7 @@ const Productos = ({ producto, setReload ,reload}) => {
   }, 2000);
   };
   return (
-    <div className="sm:w-auto  px-2 py-4 rounded-md shadow-xl  flex flex-col items-center justify-center bg-white">
+    <div className="lg:w-auto md:w-56 w-auto px-2 py-4 rounded-md shadow-xl  flex flex-col items-center justify-center bg-white">
       {alerta && (<p className="px-4 py-1 bg-green-500 text-white font-semibold text-lg rounded-lg">{alerta}</p>)}
       
       <div className="flex flex-col gap-4">
@@ -113,9 +113,9 @@ const Productos = ({ producto, setReload ,reload}) => {
         </div>
 
       </div>
-      <div className="flex gap-4 mt-4">
+      <div className="flex md:flex-col lg:flex-row gap-4 mt-4">
             <form onSubmit={handleEditar}>
-            <button className={` hover:-translate-y-1 hover:bg-blue-600 px-4 py-2 text-white flex gap-1 items-center justify-center rounded-lg ${activeEditar}`} onClick={handleEditar}>
+            <button className={`md:w-full lg:w-auto hover:-translate-y-1 hover:bg-blue-600 px-4 py-2 text-white flex gap-1 items-center justify-center rounded-lg ${activeEditar}`} onClick={handleEditar}>
             <FontAwesomeIcon className="text-white" icon={faPencil}/>
             Editar</button>
             </form>

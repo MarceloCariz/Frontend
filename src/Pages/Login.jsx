@@ -42,11 +42,11 @@ const Login = () => {
 
   };
   return (
-    <div  className="text-xl flex sm:flex-row  justify-center sm:w-auto  r   mt-4 ">
+    <div  className="text-xl flex sm:flex-row justify-center sm:w-auto  r   lg:mx-0  mt-4 ">
       <CardBienvenido/>
     <div className="    shadow-lg sm:rounded-r-lg  sm:rounded-none  rounded-lg bg-white   flex justify-center items-center ">
 
-      <form onSubmit={handleSubmit} className="flex justify-center items-center sm:w-96   gap-8 flex-col px-4 py-6  ">
+      <form onSubmit={handleSubmit} className="flex justify-center items-center md:w-80  lg:w-96   gap-8 flex-col px-4 py-6  ">
       <TituloLogin acceso={'clientes'}/>
         
       {
@@ -78,7 +78,7 @@ const Login = () => {
         <input className=" cursor-pointer hover:bg-blue-600 text-center rounded-lg bg-blue-500 text-white px-8 py-4" type="submit" value="Iniciar Sesión" />
         </div>
         <Link  to="registrar">
-          <p className="text-lg text-blue-500 hover:font-semibold">¿No tienes cuenta? Regístrate Aquí.</p>
+          <p className="lg:text-lg text-sm text-blue-500 hover:font-semibold">¿No tienes cuenta? Regístrate Aquí.</p>
          </Link>
       </form>
     </div>

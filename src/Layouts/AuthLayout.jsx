@@ -8,8 +8,9 @@ const AuthLayout = () => {
     <>
       <main style={{backgroundImage:`url(${fondo})`}} className=" min-h-screen static bg-no-repeat bg-cover  ">
 
-        <nav className="sm:h-22  py-4  bg-black/50 px-12 flex flex-col sm:flex-row sm:justify-end  justify-center items-center">
-        <h2 className="sm:flex  text-white justify-start gap-2  sm:text-3xl text-2xl sm:mb-0 mb-2 w-full items-center  text-center  ">
+        <nav className="sm:h-22  py-4  bg-black/50  sm:px-4 2xl:px-12 flex flex-col sm:flex-row sm:justify-end w-full justify-center items-center">
+
+        <h2 className="sm:flex  text-white justify-start gap-2  lg:text-3xl text-2xl sm:mb-0 mb-2 w-full items-center  text-center  ">
             <FontAwesomeIcon
               className="font-bold animate-pulse"
               icon={faSeedling}
@@ -18,7 +19,7 @@ const AuthLayout = () => {
     
           </h2>
           {/* <h3>Maipogrande</h3> */}
-          <ul className="sm:text-rigth text-center text-sm sm:text-base flex gap-2 sm:w-3/4 w-full  sm:px-0 sm:container sm:justify-end justify-center ">
+          <ul className="sm:text-rigth text-center text-sm sm:text-base flex gap-2 2xl:w-3/4 w-full  sm:px-0 sm:container sm:justify-end justify-center ">
             {/* <Link to={pathname === '/productores' ? '/' : '/productores'} className={pathname === '/productores' ? "bg-blue-600 px-4 py-2 text-white font-semibold" : "bg-green-600 px-4 py-2 text-white font-semibold"} >
             { pathname ==='/productores' ? "Acceso Clientes": "Acceso Productores" 
               
@@ -50,7 +51,7 @@ const AuthLayout = () => {
             </Link>
           </ul>
         </nav>
-        <div className=" sm:w-auto  container mx-auto pt-20 md:pt-32 p-5 flex justify-center  ">
+        <div className="  mx-auto  container  pt-20 md:pt-32 p-5 flex justify-center  ">
           <Outlet />
         </div>
       </main>

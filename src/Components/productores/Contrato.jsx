@@ -16,7 +16,7 @@ export const Contrato = ({contrato}) => {
         }, 3000);
     }
   return (
-    <div className='border border-1 px-10 py-10 bg-white rounded-lg shadow-md  '>
+    <div className='border border-1   2xl:w-auto md:w-2/4 px-10 py-10 bg-white rounded-lg shadow-md  '>
     <div className='flex items-center justify-center mb-4 gap-2'>
         <FontAwesomeIcon className='text-4xl' icon={faFileContract} />
         <h2 className='capitalize text-2xl text-center font-semibold '>contrato</h2>

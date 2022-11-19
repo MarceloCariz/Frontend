@@ -3,7 +3,7 @@ import React from 'react'
 export const CardGanancia = ({envios}) => {
   return (
     <div className='overflow-y-auto sm:max-h-72 h-52 '>
-      <table className="sm:table-fixed table-auto sm:text-lg text-sm  sm:w-full border-collapse border border-slate-400 ">
+      <table className="sm:table-fixed table-auto lg:text-lg text-sm  w-full border-collapse border border-slate-400 ">
       <thead>
         <tr>
           <th className='border border-slate-300'>ID</th>

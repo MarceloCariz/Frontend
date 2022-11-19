@@ -43,7 +43,6 @@ const ClienteLayout = ({ children }) => {
   //   setProductos([]);
   //   navigate("/");
   // };
-
   const handleHoverCarrito = () =>{
     // console.log(carrito)
     setHoverCarrito(true);
@@ -56,26 +55,27 @@ const ClienteLayout = ({ children }) => {
   return (
     <div className="#d4d8dd">
       <nav className=" bg-stone-800">
-        <div className="sm:h-32 h-24 flex sm:justify-between items-center   sm:container  mx-auto text-white">
+        <div className="sm:h-32 h-24 2xl:px-0 px-2 flex sm:justify-between items-center   sm:container  mx-auto text-white">
           <Link to="/inicio">
 
-            <h1 className="sm:text-4xl text-2xl text-white font-semibold sm:pl-0 pl-2 flex sm:gap-2 items-center ">
+            <h1 className="lg:text-4xl md:text-3xl text-2xl text-white font-semibold  flex sm:gap-2 items-center ">
             <FontAwesomeIcon icon={faSeedling }/>
 
               MaipoGrande
             </h1>
           </Link>
-          <div className="w-1/3 sm:block hidden">
+          <div className="w-1/3 lg:block hidden">
             <Buscador />
           </div>
-          <div className="sm:flex hidden items-center gap-4 ">
+          {/* DEsktop  */}
+          <div className="sm:flex hidden items-center gap-2  lg:gap-4 ">
             <NavLink to="pedidos"  className={({isActive})=> isActive ? 'flex gap-1 cursor-pointer hover:text-gray-50 underline decoration-2 underline-offset-8' : 'flex gap-1 cursor-pointer hover:text-gray-50'}>
               <FontAwesomeIcon icon={faBagShopping} className="text-2xl mt-1" />
               <p className="sm:text-2xl capitalize">pedidos</p>
             </NavLink>
             <NavLink to={'perfil'} className={({isActive})=> isActive ? 'flex gap-1 cursor-pointer hover:text-gray-50 underline decoration-2 underline-offset-8' : 'flex gap-1 cursor-pointer hover:text-gray-50'}>
               <FontAwesomeIcon icon={faUser} className="text-2xl  mt-1" />
-              <p className="sm:text-2xl capitalize"> {auth.NOMBRE}</p>
+              <p className="sm:text-2xl capitalize"> {auth.NOMBRE ? (auth.NOMBRE.split(' ').length === 1 ?  auth.NOMBRE : auth.NOMBRE.split(' ')[0]) : ''}</p>
             </NavLink>
 
             <div onMouseEnter={handleHoverCarrito} onMouseLeave={leaveCarrito} className=" sm:flex gap-2 hidden  transition ease-in duration-300  hover:-translate-y-1">
@@ -91,7 +91,7 @@ const ClienteLayout = ({ children }) => {
             }
             {/* <input type="text" onClick={handleLogout} value="Cerrar Sesion" /> */}
             <button
-              className="sm:ml-4 bg-red-500 text-white px-4 py-2 absolute sm:relative ml-20 mt-24 sm:mt-0"
+              className="sm:ml-4 rounded-md bg-red-500 text-white px-4 py-2 absolute sm:relative ml-20 mt-24 sm:mt-0"
               onClick={handleLogout}
             >
               <FontAwesomeIcon icon={faRightFromBracket} className="mr-2 " />

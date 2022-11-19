@@ -46,10 +46,10 @@ const Perfil = () => {
     }
   return (
     <div className='flex flex-col justify-center items-center pt-4 mb-56 '>
-        <h2 className='text-2xl mb-8 font-bold'>Información Personal</h2>
         { mensaje ? <p className='bg-green-500 py-2 px-4 text-white font-semibold mb-2 w-1/4 text-center'>{mensaje}</p> : ''}
         <form onSubmit={handleSubmit} className='bg-white shadow-lg px-12 py-4 flex flex-col sm:w-auto w-6/7 gap-4 '> 
         {/* 4 */}
+            <h2 className='text-2xl mb-8 font-bold text-center'>Información Personal</h2>
             <div className='flex gap-6 items-center'>
                 <label htmlFor="correo" className='sm:text-xl font-bold'>Nombre :</label>
                 <p className='bg-gray-100 px-2'>{NOMBRE}</p>
@@ -59,10 +59,10 @@ const Perfil = () => {
                 <p className='bg-gray-100 px-2 text-sm '>{CORREO}</p>
             </div>
             {auth.TIPO_CLIENTE === 'local' && (
-                           <div className='flex gap-9 items-center w-full'>
-                           <label htmlFor="correo" className='sm:text-xl  text-sm font-bold'>Rut:   </label>
-                           <p className='bg-gray-100 px-2 text-sm '>{RUT}</p>
-                       </div>
+                        <div className='flex gap-9 items-center w-full'>
+                        <label htmlFor="correo" className='sm:text-xl  text-sm font-bold'>Rut:   </label>
+                        <p className='bg-gray-100 px-2 text-sm '>{RUT}</p>
+                        </div>
             )}
 
             <div className='flex gap-3 items-center'>

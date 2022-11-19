@@ -48,7 +48,7 @@ const LoginP = () => {
       <CardBienvenido/>
     <div className="    shadow-lg sm:rounded-r-lg  sm:rounded-none  rounded-lg bg-white   flex justify-center items-center ">
 
-      <form onSubmit={handleSubmit} className="flex justify-center items-center sm:w-96   gap-8 flex-col px-4 py-6  ">
+      <form onSubmit={handleSubmit} className="flex justify-center items-center md:w-80  lg:w-96  gap-8 flex-col px-4 py-6  ">
       <TituloLogin acceso={'productores'}/>
       {
       alerta && (

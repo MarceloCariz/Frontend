@@ -33,33 +33,33 @@ const TransportistaLayout = ({children}) => {
 return (
         <div className='#d4d8dd'>
             <nav className=' bg-stone-800'>
-            <div className='sm:h-32 h-24 flex sm:justify-between items-center  container mx-auto text-white'>
-                <Link to="/transportista"><h1 className='sm:text-4xl text-2xl text-white font-semibold flex items-center gap-1 ml-2 '>
+            <div className='sm:h-32 h-24 flex sm:justify-between items-center  container md:px-2 2xl:px-0 mx-auto text-white'>
+                <Link to="/transportista"><h1 className='lg:text-4xl md:text-3xl text-2xl text-white font-semibold flex items-center gap-1 ml-2 '>
                     <FontAwesomeIcon icon={faSeedling}/>
                     MaipoGrande</h1></Link>
                 {/* Desktop */}
-                <div className='sm:flex hidden items-center justify-end  w-2/3 gap-8 '>
+                <div className='sm:flex hidden items-center justify-end  w-2/3 lg:gap-8 gap-4'>
                     <NavLink to={'envios'} className={({isActive})=> isActive ? 'flex cursor-pointer hover:text-gray-50 underline decoration-2 underline-offset-8' : 'flex cursor-pointer hover:text-gray-50'}>
-                        <FontAwesomeIcon icon={faTruck} className="text-2xl mr-2 mt-1"/>
-                        <p className='text-2xl  '>Mis Envios</p>
+                        <FontAwesomeIcon icon={faTruck} className="lg:text-2xl mr-2 mt-1"/>
+                        <p className='lg:text-2xl md:text-lg '>Mis Envios</p>
                     </NavLink>
                     <NavLink to={'subastas'} className={({isActive})=> isActive ? 'flex cursor-pointer hover:text-gray-50 underline decoration-2 underline-offset-8' : 'flex cursor-pointer hover:text-gray-50'}>
-                        <FontAwesomeIcon icon={faGavel} className="text-2xl mr-2 mt-1"/>
-                        <p className='text-2xl  '>Subastas</p>
+                        <FontAwesomeIcon icon={faGavel} className="lg:text-2xl mr-2 mt-1"/>
+                        <p className='lg:text-2xl md:text-lg '>Subastas</p>
                     </NavLink>
                     
                     <NavLink to={'perfil'} className={({isActive})=> isActive ? 'flex cursor-pointer hover:text-gray-50 underline decoration-2 underline-offset-8' : 'flex cursor-pointer hover:text-gray-50'} >
 
-                        <FontAwesomeIcon icon={faUser} className="text-2xl mr-2 mt-1"/>
+                        <FontAwesomeIcon icon={faUser} className="lg:text-2xl mr-2 mt-1"/>
 
-                        <p className='sm:text-2xl capitalize'> {auth.NOMBRE}</p>
+                        <p className='lg:text-2xl md:text-lg  capitalize'> {auth.NOMBRE}</p>
                     </NavLink>
         
         
                     {/* <input type="text" onClick={handleLogout} value="Cerrar Sesion" /> */}
-                    <button className='sm:ml-4 bg-red-500 text-white px-4 py-2 absolute sm:relative ml-20 mt-24 sm:mt-0'  onClick={handleLogout} >
+                    <button className='md:ml-2 lg:ml-4 bg-red-500 text-white px-4 py-2  mt-24 sm:mt-0 rounded-lg'  onClick={handleLogout} >
                     <FontAwesomeIcon icon={faRightFromBracket} className="mr-2 "/>
-                        <span className='font-bold '>Cerrar Sesión</span>
+                        <span className='font-bold lg:inline-block md:hidden '>Cerrar Sesión</span>
                         </button>
                 </div>
     

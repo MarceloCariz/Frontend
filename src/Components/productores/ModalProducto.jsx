@@ -75,8 +75,8 @@ const handleSubmit = async(e) =>{
   return (
     <>
    
-    <div className="absolute sm:w-1/4 w-5/6 h-auto top-32 sm:top-40 text-center px-4 py-4 bg-white border-1 border border-gray-500 rounded-xl right-0 left-0 mr-auto ml-auto">
-        <p className="font-semibold text-2xl mb-4 mt-4 font-sans">Agrega tu Producto</p>
+    <div className="absolute 2xl:w-1/4 lg:w-2/4 md:w-3/5 w-5/6 h-auto top-32 sm:top-40 text-center px-4 py-4 bg-white border-1 border border-gray-500 rounded-xl right-0 left-0 mr-auto ml-auto">
+        <p className="font-semibold text-2xl mb-4 mt-12 font-sans md:mt-4 ">Agrega tu Producto</p>
         {
           alerta.msg.length > 2 && (<p className={alerta.error === false ?"px-4 py-1 bg-green-500 text-white font-semibold text-lg rounded-lg" :
           "px-4 py-1 bg-red-500 text-white font-semibold text-lg rounded-lg"
