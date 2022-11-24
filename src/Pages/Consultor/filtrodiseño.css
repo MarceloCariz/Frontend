@@ -1,0 +1,11 @@
+.item-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 10px;
+    border: 1px solid black;
+  }
+  .item-label {
+    font-weight: 600;
+    margin-right: 8px;
+  }

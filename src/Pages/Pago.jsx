@@ -50,7 +50,7 @@ const Pago = () => {
        <h2 className='text-xl'>Comprobante de pago</h2>
         <div >
         {voucherF.status ?
-            <div className='text-left flex flex-col gap-4 '>
+            <div className='text-left flex flex-col gap-4 background-attachment: fixed; 	background-size: contain;'>
               <p>{vci}</p>
               <p>Estado: {status === 'INITIALIZED' || status === 'FAILED' ? 'ANULADO' : status}</p>
               <p>Monto Pagado: {amount}</p>

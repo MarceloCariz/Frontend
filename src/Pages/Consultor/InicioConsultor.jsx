@@ -172,7 +172,7 @@ const InicioConsultor  = () => {
         doc.autoTable({
           theme: 'striped',
              columnStyles: { 0: { halign: 'left',valign: 'middle', } }, 
-             margin: { top: 70  },
+             margin: { top: 50  },
              head: columndia,
              body: datocompra
           
@@ -298,7 +298,7 @@ const InicioConsultor  = () => {
         <div className='  sm:w-2/3 '>
           <h2 className='text-center'>Compras por Tipo cliente</h2>
             <GraficoPie tipoVenta={datos.tipoVenta}/>
-            <div className=' justify-center sm:justify-end absolute inset-x-80 bottom-100 h-16'>
+            <div className=' justify-center sm:justify-end flex inset-x-80 bottom-100 h-16'>
       <button onClick={Tipocliente} className='px-4 py-2 bg-blue-500 text-white text-xl mt-2 flex items-center gap-1 rounded-md inset-x-100'>
         <FontAwesomeIcon icon={faDownload}/>
         Generar Tipo cliente</button>
@@ -308,7 +308,7 @@ const InicioConsultor  = () => {
         <div className='w-full h-full'>
           <h2 className='text-center'>Compras por Mes</h2>
             <GraficoArea comprasPorMes={datos.comprasPorMes}/>
-            <div className=' justify-center sm:justify-end absolute inset-x-170 bottom-70 h-11'>
+            <div className=' justify-center sm:justify-end flex inset-x-170 bottom-70 h-11'>
       <button onClick={Comprapormes} className='px-4 py-2 bg-blue-500 text-white text-xl mt-2 flex items-center gap-1 rounded-md inset-x-100'>
         <FontAwesomeIcon icon={faDownload}/>
         Generar Compra por mes</button>
@@ -318,7 +318,7 @@ const InicioConsultor  = () => {
         <div className='  w-full   '>
           <h2 className='text-center'>Estados de Pagos</h2>
           <GraficoEstadoPago estadoPago={datos.estadoPago}/>
-          <div className=' justify-center sm:justify-end absolute  h-16'>
+          <div className=' justify-center sm:justify-end flex  h-16'>
       <button onClick={Estadopago} className='px-4 py-2 bg-blue-500 text-white text-xl mt-2 flex items-center gap-1 rounded-md inset-x-100'>
         <FontAwesomeIcon icon={faDownload}/>
         Generar Estado Pago</button>
@@ -327,7 +327,7 @@ const InicioConsultor  = () => {
         <div className=' w-full '>
           <h2 className='text-center'>Cantidad de productos disponibles</h2>
           <GraficoStockProducto stockProductosNombre={datos.stockProductosNombre}/>
-          <div className=' justify-center sm:justify-end absolute   top-50 h-12'>
+          <div className=' justify-center sm:justify-end flex   top-50 h-12'>
       <button onClick={pdfdatosstock} className='px-4 py-2 bg-blue-500 text-white text-xl mt-2 flex items-center gap-1 rounded-md inset-x-100'>
         <FontAwesomeIcon icon={faDownload}/>
         Generar Productos disponibles</button>
@@ -337,7 +337,7 @@ const InicioConsultor  = () => {
         <div className='  w-full   '>
           <h2 className='text-center'>Compras Por Día</h2>
           <GraficoVentasDia comprasPorDia={datos.comprasPorDia}/>
-          <div className=' justify-center sm:justify-end absolute   top-50 h-12'>
+          <div className=' justify-center sm:justify-end flex   top-50 h-12'>
       <button onClick={Comprapordia} className='px-4 py-2 bg-blue-500 text-white text-xl mt-2 flex items-center gap-1 rounded-md inset-x-100'>
         <FontAwesomeIcon icon={faDownload}/>
         Generar Compras por dia</button>
