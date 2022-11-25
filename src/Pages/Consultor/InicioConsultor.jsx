@@ -21,7 +21,7 @@ const InicioConsultor  = () => {
   }, [ datos.length]);
   // console.log(datos)
   const  Tipocliente = async() =>{
-    const mensaje = await generarReporte(datos);
+    const mensaje = await generarReporte({tipoVenta:datos.tipoVenta});
     setAlerta(mensaje);
     const fecha =new Date().toLocaleDateString();
     const doc = new jsPDF('p','mm','a4' );
@@ -54,7 +54,7 @@ const InicioConsultor  = () => {
     }
 
     const  Comprapormes = async() =>{
-      const mensaje = await generarReporte(datos);
+      const mensaje = await generarReporte( {comprasPorMes:datos.comprasPorMes});
       setAlerta(mensaje);
       const fecha =new Date().toLocaleDateString();
       const doc = new jsPDF('p','mm','a4' );
@@ -86,7 +86,7 @@ const InicioConsultor  = () => {
       }
 
       const  Estadopago = async() =>{
-        const mensaje = await generarReporte(datos);
+        const mensaje = await generarReporte({estadoPago: datos.estadoPago});
         setAlerta(mensaje);
         const fecha =new Date().toLocaleDateString();
         const doc = new jsPDF('p','mm','a4' );
@@ -105,12 +105,11 @@ const InicioConsultor  = () => {
           doc.text(`Estado de pedidos`,50, 65).setFontSize(10);
         
           doc.autoTable({
-            theme: 'striped',
-               columnStyles: { 0: { halign: 'left',valign: 'middle', } }, 
-               margin: { top: 70  },
-               head: columnestado,
-               body: datospago
-            
+                theme: 'striped',
+                columnStyles: { 0: { halign: 'left',valign: 'middle', } }, 
+                margin: { top: 70  },
+                head: columnestado,
+                body: datospago
               } );
     
           doc.save(`Estado de pedidos${fecha}`);
@@ -120,13 +119,13 @@ const InicioConsultor  = () => {
         }
 
   const  pdfdatosstock = async() =>{
-    const mensaje = await generarReporte(datos);
+    const mensaje = await generarReporte({stockProductosNombre: datos.stockProductosNombre});
     setAlerta(mensaje);
     const fecha =new Date().toLocaleDateString();
     const doc = new jsPDF('p','mm','a4' );
     const datosStock = datos.stockProductosNombre
  
-     var columnstock = [["Nombre producto", "total de producto",]];
+    const columnstock = [["Nombre producto", "total de producto",]];
     const datosStocktable = datosStock.map((element,)  => (
     [element.NOMBRE, element.TOTAL,]));   
 
@@ -139,10 +138,10 @@ const InicioConsultor  = () => {
    
       doc.autoTable({
         theme: 'striped',
-           columnStyles: { 0: { halign: 'left',valign: 'middle', } }, 
-           margin: { top: 50  },
-           head: columnstock,
-           body: datosStocktable
+          columnStyles: { 0: { halign: 'left',valign: 'middle', } }, 
+          margin: { top: 50  },
+          head: columnstock,
+          body: datosStocktable
           } );
       doc.save(`Venta de productos ${fecha}`);
       setTimeout(() => {
@@ -151,7 +150,7 @@ const InicioConsultor  = () => {
     }
 
     const  Comprapordia = async() =>{
-      const mensaje = await generarReporte(datos);
+      const mensaje = await generarReporte({comprasPorDia: datos.comprasPorDia});
       setAlerta(mensaje);
       const fecha =new Date().toLocaleDateString();
       const doc = new jsPDF('p','mm','a4' );
@@ -171,10 +170,10 @@ const InicioConsultor  = () => {
       
         doc.autoTable({
           theme: 'striped',
-             columnStyles: { 0: { halign: 'left',valign: 'middle', } }, 
-             margin: { top: 50  },
-             head: columndia,
-             body: datocompra
+            columnStyles: { 0: { halign: 'left',valign: 'middle', } }, 
+            margin: { top: 50  },
+            head: columndia,
+            body: datocompra
           
             } );
   
@@ -224,50 +223,48 @@ const InicioConsultor  = () => {
    
       doc.autoTable({
         theme: 'striped',
-           columnStyles: { 0: { halign: 'left',valign: 'middle', } }, 
-           margin: { top: 75  },
-           head: columntipoven,
-           body: datostipoven
+          columnStyles: { 0: { halign: 'left',valign: 'middle', } }, 
+          margin: { top: 75  },
+          head: columntipoven,
+          body: datostipoven
         
           } );
 
           doc.autoTable({
             theme: 'striped',
-               columnStyles: { 0: { halign: 'left',valign: 'middle', } }, 
-               margin: { top: 20  },
-               head: columnestado,
-               body: datospago
+              columnStyles: { 0: { halign: 'left',valign: 'middle', } }, 
+              margin: { top: 20  },
+              head: columnestado,
+              body: datospago
             
               } );
 
           doc.autoTable({
             theme: 'striped',
-               columnStyles: { 0: { halign: 'left',valign: 'middle', } }, 
-               margin: { top: 30  },
-               head: columndia,
-               body: datocompra
+              columnStyles: { 0: { halign: 'left',valign: 'middle', } }, 
+              margin: { top: 30  },
+              head: columndia,
+              body: datocompra
             
               } );
 
                 doc.autoTable({
                   theme: 'striped',
-                     columnStyles: { 0: { halign: 'left',valign: 'middle', } }, 
-                     margin: { top: 40  },
-                     head: columncompra,
-                     body: datoscompra
+                    columnStyles: { 0: { halign: 'left',valign: 'middle', } }, 
+                    margin: { top: 40  },
+                    head: columncompra,
+                    body: datoscompra
                     } );
 
           doc.autoTable({
             theme: 'striped',
-               columnStyles: { 0: { halign: 'left',valign: 'middle', } }, 
-               margin: { top: 50  },
-               head: columnstock,
-               body: datosStocktable
+              columnStyles: { 0: { halign: 'left',valign: 'middle', } }, 
+              margin: { top: 50  },
+              head: columnstock,
+              body: datosStocktable
             
               } );
-             
-
-       
+          
       doc.save(`Reporte de venta ${fecha}`);
       setTimeout(() => {
         setAlerta('');
@@ -277,80 +274,82 @@ const InicioConsultor  = () => {
   
 
   return (
-    <div >
+    <div className='mb-20 flex flex-col  justify-center items-center'  >
       <h3 className='text-center font-semibold text-4xl '>
         <FontAwesomeIcon className='pr-2' icon={faChartSimple}/>
         Gráficos</h3>
       {alerta && 
       <div className='flex justify-center mt-2'>
-          <p className='px-4 py-2 bg-green-500 text-white text-center w-1/2'>{alerta}</p>
+          <p className='px-4 py-2 bg-green-500 text-white text-center w-auto rounded-md'>{alerta}</p>
       </div>
       }
-     
-      <div className='flex justify-center sm:justify-end '>
-      <button onClick={generarReportePdf} className='px-4 py-2 bg-blue-500 text-white text-xl mt-2 flex items-center gap-1 rounded-md inset-x-100'>
-        <FontAwesomeIcon icon={faDownload}/>
-        Generar Reporte General</button>
+      <div className='bg-white w-full mt-4 shadow-inner rounded-md'>
+              <div className='flex justify-center sm:justify-center pt-4'>
+              <button onClick={generarReportePdf} className='px-4 py-2 bg-blue-500 text-white text-xl mt-2 flex items-center gap-1 rounded-md inset-x-100'>
+                <FontAwesomeIcon icon={faDownload}/>
+                Generar Reporte General</button>
+              </div>
+
+              <div className='mt-2 px-4 sm:grid sm:grid-cols-2 sm:grid-rows-1 sm:justify-items-center sm:gap-0 flex flex-col gap-12   pt-12 pb-12'>
+
+                <div className='  sm:w-2/4 sm:justify-self-center sm:self-center bg-white py-4 px-4 rounded-md'>
+                  <h2 className='text-center'>Compras por Tipo cliente</h2>
+                    <GraficoPie tipoVenta={datos.tipoVenta}/>
+                    <div className=' justify-center  flex inset-x-80 bottom-100 h-16'>
+                      <button onClick={Tipocliente} className='px-4 py-2 bg-blue-500 text-white text-xl mt-2 flex items-center gap-1 rounded-md inset-x-100'>
+                        <FontAwesomeIcon icon={faDownload}/>
+                        Generar Tipo cliente</button>
+                    </div>
+                </div>
+
+                {/* CONTENEDOR DE 4 GRAFICOS */}
+                <div className='w-full  sm:grid sm:grid-cols-2 sm:grid-rows-2 sm:gap-12     flex flex-col gap-12'>
+
+                    <div className=' w-full  py-4 px-4 rounded-md '>
+                      <h2 className='text-center'>Compras por Mes</h2>
+                        <GraficoArea comprasPorMes={datos.comprasPorMes}/>
+                        <div className=' justify-center  flex inset-x-170 bottom-70 h-11'>
+                          <button onClick={Comprapormes} className='px-4 py-2 bg-blue-500 text-white text-lg mt-2 flex items-center gap-1 rounded-md '>
+                            <FontAwesomeIcon icon={faDownload}/>
+                            Generar Compra por mes</button>
+                        </div>
+                    </div>
+
+                    <div className='  w-full   '>
+                      <h2 className='text-center'>Estados de Pagos</h2>
+                      <GraficoEstadoPago estadoPago={datos.estadoPago}/>
+                      <div className=' justify-center  flex  h-11'>
+                        <button onClick={Estadopago} className='px-4 py-2 bg-blue-500 text-white text-lg mt-2 flex items-center gap-1 rounded-md '>
+                          <FontAwesomeIcon icon={faDownload}/>
+                          Generar Estado de Pago</button>
+                      </div>
+                    </div>
+
+                      <div className=' w-full  '>
+                        <h2 className='text-center'>Cantidad de productos disponibles</h2>
+                        <GraficoStockProducto stockProductosNombre={datos.stockProductosNombre}/>
+                        <div className=' justify-center  flex    h-12'>
+                          <button onClick={pdfdatosstock} className='px-4 py-2 bg-blue-500 text-white text-lg mt-2 flex items-center gap-1 rounded-md '>
+                            <FontAwesomeIcon icon={faDownload}/>
+                            Generar Productos disponibles</button>
+                        </div>
+                      </div>
+
+                    <div className='  w-full   '>
+                      <h2 className='text-center'>Compras Por Día</h2>
+                      <GraficoVentasDia comprasPorDia={datos.comprasPorDia}/>
+                      <div className=' justify-center  flex    h-12'>
+                        <button onClick={Comprapordia} className='px-4 py-2 bg-blue-500 text-white text-lg mt-2 flex items-center gap-1 rounded-md '>
+                          <FontAwesomeIcon icon={faDownload}/>
+                          Generar Compras por dia</button>
+                      </div>
+                    </div>
+                </div>
+                
+                
+              </div>
       </div>
-
-      <div className='sm:grid sm:grid-cols-3 sm:justify-items-center sm:gap-12 flex flex-col gap-10  pt-12 sm:min-w-full '>
-
-        <div className='  sm:w-2/3 '>
-          <h2 className='text-center'>Compras por Tipo cliente</h2>
-            <GraficoPie tipoVenta={datos.tipoVenta}/>
-            <div className=' justify-center sm:justify-end flex inset-x-80 bottom-100 h-16'>
-      <button onClick={Tipocliente} className='px-4 py-2 bg-blue-500 text-white text-xl mt-2 flex items-center gap-1 rounded-md inset-x-100'>
-        <FontAwesomeIcon icon={faDownload}/>
-        Generar Tipo cliente</button>
-      </div>
-        </div>
-
-        <div className='w-full h-full'>
-          <h2 className='text-center'>Compras por Mes</h2>
-            <GraficoArea comprasPorMes={datos.comprasPorMes}/>
-            <div className=' justify-center sm:justify-end flex inset-x-170 bottom-70 h-11'>
-      <button onClick={Comprapormes} className='px-4 py-2 bg-blue-500 text-white text-xl mt-2 flex items-center gap-1 rounded-md inset-x-100'>
-        <FontAwesomeIcon icon={faDownload}/>
-        Generar Compra por mes</button>
-        </div>
-        </div>
-
-        <div className='  w-full   '>
-          <h2 className='text-center'>Estados de Pagos</h2>
-          <GraficoEstadoPago estadoPago={datos.estadoPago}/>
-          <div className=' justify-center sm:justify-end flex  h-16'>
-      <button onClick={Estadopago} className='px-4 py-2 bg-blue-500 text-white text-xl mt-2 flex items-center gap-1 rounded-md inset-x-100'>
-        <FontAwesomeIcon icon={faDownload}/>
-        Generar Estado Pago</button>
-      </div>
-        </div>
-        <div className=' w-full '>
-          <h2 className='text-center'>Cantidad de productos disponibles</h2>
-          <GraficoStockProducto stockProductosNombre={datos.stockProductosNombre}/>
-          <div className=' justify-center sm:justify-end flex   top-50 h-12'>
-      <button onClick={pdfdatosstock} className='px-4 py-2 bg-blue-500 text-white text-xl mt-2 flex items-center gap-1 rounded-md inset-x-100'>
-        <FontAwesomeIcon icon={faDownload}/>
-        Generar Productos disponibles</button>
-      </div>
-        </div>
-
-        <div className='  w-full   '>
-          <h2 className='text-center'>Compras Por Día</h2>
-          <GraficoVentasDia comprasPorDia={datos.comprasPorDia}/>
-          <div className=' justify-center sm:justify-end flex   top-50 h-12'>
-      <button onClick={Comprapordia} className='px-4 py-2 bg-blue-500 text-white text-xl mt-2 flex items-center gap-1 rounded-md inset-x-100'>
-        <FontAwesomeIcon icon={faDownload}/>
-        Generar Compras por dia</button>
-      </div>
-        </div>
-        {/* <div className='  w-full   '>
-          <h2 className='text-center'>Estados de Pagos</h2>
-          <GraficoEstadoPago estadoPago={datos.estadoPago}/>
-
-
-        </div> */}
-        
-      </div>
+      
     </div>
   )
 }

@@ -29,6 +29,7 @@ const ClienteProvider = ({children}) => {
     ///CONSULTOR
     const [datosGraficos, setDatosGraficos] = useState([]);
     const [reportes, setReportes] = useState([])
+    const [reportesBackup, setReportesBackup] = useState([])
 
 
     const {config, auth, setCarrito, setAuth} = useAuth();
@@ -105,6 +106,7 @@ const ClienteProvider = ({children}) => {
     const cargarReportes = async()=>{
         const respuesta = await listarReportes();
         // console.log(respuesta)
+        setReportesBackup(respuesta);
         setReportes(respuesta);
     }
     const handleLogout = () => {
@@ -122,7 +124,7 @@ const ClienteProvider = ({children}) => {
         datos, pedidos, cargarPedidos, cargando,setPedidos,cargarProductosCliente, productos,setProductos,productosBackup, cargarDatos, setFormValues, formValues, ///////// CLIENTE
         cargarEnviosTransportista, enviosT, setEnviosT  ,    //TRANSPORTISTA
         cargarEnviosProductor, enviosP,setEnviosP ,cargarProductosProductor , productosP ,      /// PRODUCTOR
-        cargarDatosGraficos, datosGraficos,  cargarReportes, reportes,                                       ///CONSULTOR
+        cargarDatosGraficos, datosGraficos,  cargarReportes, reportes,   setReportes,  reportesBackup,                                  ///CONSULTOR
         handleLogout
         }}>
         {children}
