@@ -129,9 +129,9 @@ export const obtenerBoleta = async(id) =>{
     }
 }
 
-export const confirmarRecepcionLocal = async(referencia_compra) =>{
+export const confirmarRecepcionLocal = async(referencia_compra, nombre, correo) =>{
     try {
-        const {data} = await clienteAxios.put(`/clientes/pedido/confirmar/${referencia_compra}`);
+        const {data} = await clienteAxios.put(`/clientes/pedido/confirmar/${referencia_compra}`,{nombre, correo});
         return data;
     } catch (error) {
         console.log(error)
