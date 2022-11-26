@@ -37,7 +37,7 @@ const Registrar = () => {
     }
     if(values.tipo === "local"){
       console.log(![values.rut].includes("-"), values.rut.split(''))
-      if(!values.rut.split('').includes("-")) return setAlerta("El rut debe contener un -")
+      if(!values.rut.split('').includes("-")) return setAlerta("El rut debe contener un guion (-)")
       const isValidRut = handleValidarRut(values.rut);
       if(!isValidRut && values.tipo === "local") return setAlerta("rut no valido");
     }

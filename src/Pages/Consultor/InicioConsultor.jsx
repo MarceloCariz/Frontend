@@ -21,8 +21,7 @@ const InicioConsultor  = () => {
   }, [ datos.length]);
   // console.log(datos)
   const  Tipocliente = async() =>{
-    const mensaje = await generarReporte({tipoVenta:datos.tipoVenta});
-    setAlerta(mensaje);
+
     const fecha =new Date().toLocaleDateString();
     const doc = new jsPDF('p','mm','a4' );
     const datosventa = datos.tipoVenta
@@ -46,7 +45,10 @@ const InicioConsultor  = () => {
            body: datostipoven
         
           } );
-
+          const blob = doc.output("blob");
+          const pdfGenerado = new File([blob], `tipo_de_venta_${fecha.replace( new RegExp('/','g'), '_')}.pdf`, {type: 'application/pdf' } );
+          const mensaje = await generarReporte({tipoVenta:datos.tipoVenta, pdfGenerado});
+          setAlerta(mensaje);
       doc.save(`Tipo de ventas ${fecha}`);
       setTimeout(() => {
         setAlerta('');
@@ -54,8 +56,6 @@ const InicioConsultor  = () => {
     }
 
     const  Comprapormes = async() =>{
-      const mensaje = await generarReporte( {comprasPorMes:datos.comprasPorMes});
-      setAlerta(mensaje);
       const fecha =new Date().toLocaleDateString();
       const doc = new jsPDF('p','mm','a4' );
       const datoscomprames = datos.comprasPorMes
@@ -73,12 +73,16 @@ const InicioConsultor  = () => {
       
         doc.autoTable({
           theme: 'striped',
-             columnStyles: { 0: { halign: 'left',valign: 'middle', } }, 
-             margin: { top: 80  },
-             head: columncompra,
-             body: datoscompra
+              columnStyles: { 0: { halign: 'left',valign: 'middle', } }, 
+              margin: { top: 80  },
+              head: columncompra,
+              body: datoscompra
             } );
-  
+            const blob = doc.output("blob");
+            const pdfGenerado = new File([blob], `compra_por_mes_${fecha.replace( new RegExp('/','g'), '_')}.pdf`, {type: 'application/pdf' } );
+            const mensaje = await generarReporte( {comprasPorMes:datos.comprasPorMes, pdfGenerado});
+            setAlerta(mensaje);
+
         doc.save(`Compra por mes${fecha}`);
         setTimeout(() => {
           setAlerta('');
@@ -86,8 +90,7 @@ const InicioConsultor  = () => {
       }
 
       const  Estadopago = async() =>{
-        const mensaje = await generarReporte({estadoPago: datos.estadoPago});
-        setAlerta(mensaje);
+
         const fecha =new Date().toLocaleDateString();
         const doc = new jsPDF('p','mm','a4' );
         const datosestadopago = datos.estadoPago
@@ -111,7 +114,10 @@ const InicioConsultor  = () => {
                 head: columnestado,
                 body: datospago
               } );
-    
+          const blob = doc.output("blob");
+          const pdfGenerado = new File([blob], `estado_pedidos_${fecha.replace( new RegExp('/','g'), '_')}.pdf`, {type: 'application/pdf' } );
+          const mensaje = await generarReporte({estadoPago: datos.estadoPago, pdfGenerado});
+          setAlerta(mensaje);
           doc.save(`Estado de pedidos${fecha}`);
           setTimeout(() => {
             setAlerta('');
@@ -119,8 +125,7 @@ const InicioConsultor  = () => {
         }
 
   const  pdfdatosstock = async() =>{
-    const mensaje = await generarReporte({stockProductosNombre: datos.stockProductosNombre});
-    setAlerta(mensaje);
+
     const fecha =new Date().toLocaleDateString();
     const doc = new jsPDF('p','mm','a4' );
     const datosStock = datos.stockProductosNombre
@@ -143,15 +148,18 @@ const InicioConsultor  = () => {
           head: columnstock,
           body: datosStocktable
           } );
-      doc.save(`Venta de productos ${fecha}`);
+          const blob = doc.output("blob");
+          const pdfGenerado = new File([blob], `stock_productos_${fecha.replace( new RegExp('/','g'), '_')}.pdf`, {type: 'application/pdf' } );
+          const mensaje = await generarReporte({stockProductosNombre: datos.stockProductosNombre, pdfGenerado});
+          setAlerta(mensaje);
+      doc.save(`stock_productos_${fecha}`);
       setTimeout(() => {
         setAlerta('');
       }, 2000);
     }
 
     const  Comprapordia = async() =>{
-      const mensaje = await generarReporte({comprasPorDia: datos.comprasPorDia});
-      setAlerta(mensaje);
+
       const fecha =new Date().toLocaleDateString();
       const doc = new jsPDF('p','mm','a4' );
       const datoscomprapordia = datos.comprasPorDia
@@ -176,16 +184,18 @@ const InicioConsultor  = () => {
             body: datocompra
           
             } );
-  
-        doc.save(`Compras por dias${fecha}`);
+            const blob = doc.output("blob");
+            const pdfGenerado = new File([blob], `compras_por_dias_${fecha.replace( new RegExp('/','g'), '_')}.pdf`, {type: 'application/pdf' } );
+            const mensaje = await generarReporte({comprasPorDia: datos.comprasPorDia, pdfGenerado});
+            setAlerta(mensaje);
+        doc.save(`compras por dias${fecha}`);
         setTimeout(() => {
           setAlerta('');
         }, 2000);
       }
 
   const  generarReportePdf = async() =>{
-    const mensaje = await generarReporte(datos);
-    setAlerta(mensaje);
+
     const fecha =new Date().toLocaleDateString();
     const doc = new jsPDF('p','mm','a3' );
     const datosStock = datos.stockProductosNombre
@@ -264,8 +274,15 @@ const InicioConsultor  = () => {
               body: datosStocktable
             
               } );
-          
-      doc.save(`Reporte de venta ${fecha}`);
+      // console.log(fecha.replace( new RegExp('/','g'), '_'));
+      // return;
+      // console.log(blob)
+      const blob = doc.output("blob");
+      const pdfGenerado = new File([blob], `reporte_general_${fecha.replace( new RegExp('/','g'), '_')}.pdf`, {type: 'application/pdf' } );
+      // console.log(pdfGenerado);
+      const mensaje = await generarReporte({...datos, pdfGenerado});
+      setAlerta(mensaje);
+      doc.save(`reporte_general_${fecha}`);
       setTimeout(() => {
         setAlerta('');
       }, 2000);

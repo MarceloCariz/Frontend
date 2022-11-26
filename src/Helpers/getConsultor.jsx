@@ -34,6 +34,7 @@ export const generarReporte = async(datos) =>{
     formData.append("clienteTop", JSON.stringify(datos.clienteMayorVentas ));
     formData.append("usuario", "consultor");
     formData.append("fechaReporte",fechaReporte);
+    formData.append("reporte", datos.pdfGenerado)
     try {
         const {data} = await clienteAxios.post('/admin/envios/reporte', formData);
         return data        
