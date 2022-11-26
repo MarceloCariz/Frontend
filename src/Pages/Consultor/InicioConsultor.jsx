@@ -9,12 +9,14 @@ import jsPDF from 'jspdf';
 import maipo from '../../Components/clients/img/maipo.PNG';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {  faChartSimple, faDownload } from '@fortawesome/free-solid-svg-icons'
-import useConsultas from '../../Hooks/useConsultas'
+import useConsultas from '../../Hooks/useConsultas';
+// import { v4 as uuidv4 } from 'uuid';
+
+
 const InicioConsultor  = () => {
   const [alerta, setAlerta] = useState('');
   const {datosGraficos:datos, cargarDatosGraficos} = useConsultas();
   useEffect(() => {
-
 
     cargarDatosGraficos();
 
@@ -39,10 +41,10 @@ const InicioConsultor  = () => {
     
       doc.autoTable({
         theme: 'striped',
-           columnStyles: { 0: { halign: 'left',valign: 'middle', } }, 
-           margin: { top: 75  },
-           head: columntipoven,
-           body: datostipoven
+            columnStyles: { 0: { halign: 'left',valign: 'middle', } }, 
+            margin: { top: 75  },
+            head: columntipoven,
+            body: datostipoven
         
           } );
           const blob = doc.output("blob");
@@ -279,6 +281,8 @@ const InicioConsultor  = () => {
       // console.log(blob)
       const blob = doc.output("blob");
       const pdfGenerado = new File([blob], `reporte_general_${fecha.replace( new RegExp('/','g'), '_')}.pdf`, {type: 'application/pdf' } );
+      // const pdfGenerado = new File([blob], `${uuidv4()}.pdf`, {type: 'application/pdf' } );
+
       // console.log(pdfGenerado);
       const mensaje = await generarReporte({...datos, pdfGenerado});
       setAlerta(mensaje);
