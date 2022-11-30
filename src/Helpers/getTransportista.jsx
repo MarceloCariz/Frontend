@@ -69,7 +69,7 @@ export const obtenerEnvios = async (config) => {
       return acc;
     }, []);
 
-    return  obj.sort(sortBy('FECHA_COMPRA'));
+    return  obj.sort(sortBy('ID'));
 
   } catch (error) {
     console.log(error);
