@@ -68,14 +68,14 @@ export const obtenerEnvios = async(config) =>{
 
             return acc
         },[]);
-         
+        
         //   console.log(obj.map((e)=>(e.sort((a,b)=> new Date(a.FECHA_COMPRA)  - new Date(b.FECHA_COMPRA)))));
         // const prueba =
         // console.log(prueba)
         
         //  console.log( obj.sort((a,b)=> new Date(a[0].FECHA_COMPRA)  + new Date(b[0].FECHA_COMPRA)))
 
-        return  obj.sort(sortBy('FECHA_COMPRA'));
+        return  obj.sort(sortBy('ID'));
     } catch (error) {
         console.log(error)
     }

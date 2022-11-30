@@ -107,7 +107,7 @@ const Registrar = () => {
                       ) :
                         <FontAwesomeIcon icon={faEyeSlash} onClick={() => setShowPassword(!showPassword)} className="absolute  text-gray-500 ml-60  md:ml-80 lg:ml-72  2xl:ml-80 mt-10 cursor-pointer text-2xl"/>
                       }
-                       <MyTextInput label={"Contraseña"} name="password"  type={!showPassword ? "password" : "text" } placeholder="Contraseña"/>
+                      <MyTextInput label={"Contraseña"} name="password"  type={!showPassword ? "password" : "text" } placeholder="Contraseña"/>
                     </div>
                     <MyTextInput label={"Confirmar Contraseña"} name="password2" type="password"  placeholder="Confirmar Contraseña "/>
                   </div>

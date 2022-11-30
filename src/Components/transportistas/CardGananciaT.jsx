@@ -23,7 +23,12 @@ export const CardGananciaT = ({envios}) => {
           }) => (
             <tr key={REFERENCIA_COMPRA}>
               <td className='border border-slate-300'>{FECHA_COMPRA}</td>
-              <td className='border border-slate-300'>{PRECIOT}</td>
+              <td className='border border-slate-300'>{
+                 Number(PRECIOT).toLocaleString("es-CL", {
+                  style: "currency",
+                  currency: "CLP",
+                })
+              }</td>
               <td className='border border-slate-300' >#{REFERENCIA_COMPRA}</td>
             </tr>
           )): (
