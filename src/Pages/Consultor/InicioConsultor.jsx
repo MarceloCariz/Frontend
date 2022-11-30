@@ -34,11 +34,16 @@ const InicioConsultor  = () => {
 
   
       // 1 - x 200  /////  2- y
-      doc.addImage(maipo, 'PNG', 0, 0,50,0, undefined, false);
-      doc.text(`Fecha de creacion: ${fecha}`, 130, 7).setFontSize(25);
-      doc.setFontSize(30);
-      doc.text(`Tipo de venta`,60, 65).setFontSize(10);
-    
+      doc.addImage(maipo, 'PNG', 0, 0,60,0, undefined, false);
+      doc.setFontSize(20);
+      doc.text(`Fecha de creacion: ${fecha}`, 110 , 8);
+      doc.setFontSize(45);
+      doc.text(`Tipos de ventas`,45, 65)
+      doc.setFontSize(20);
+      doc.text(`Hecho por: Consultor`,4, 18)
+      doc.setFontSize(20);
+      doc.text(`http://www.maipogrande.ml/`,1, 230)
+      doc.rect(20, 50, 170, 20); 
       doc.autoTable({
         theme: 'striped',
             columnStyles: { 0: { halign: 'left',valign: 'middle', } }, 
@@ -68,10 +73,16 @@ const InicioConsultor  = () => {
   
     
         // 1 - x 200  /////  2- y
-        doc.addImage(maipo, 'PNG', 0, 0,50,0, undefined, false);
-        doc.text(`Fecha de creacion: ${fecha}`, 130, 7).setFontSize(25);
-        doc.setFontSize(30);
-        doc.text(`Compra hecha por mes`,50, 65).setFontSize(10);
+        doc.addImage(maipo, 'PNG', 0, 0,60,0, undefined, false);
+      doc.setFontSize(20);
+      doc.text(`Fecha de creacion: ${fecha}`, 110 , 8);
+      doc.setFontSize(45);
+      doc.text(`Compras hechas por mes`,15, 65)
+      doc.setFontSize(20);
+      doc.text(`Hecho por: Consultor`,4, 18)
+      doc.setFontSize(20);
+      doc.text(`http://www.maipogrande.ml/`,1, 230)
+      doc.rect(10, 50, 190, 20); 
       
         doc.autoTable({
           theme: 'striped',
@@ -104,15 +115,21 @@ const InicioConsultor  = () => {
     
       
           // 1 - x 200  /////  2- y
-          doc.addImage(maipo, 'PNG', 0, 0,50,0, undefined, false);
-          doc.text(`Fecha de creacion: ${fecha}`, 130, 7).setFontSize(25);
-          doc.setFontSize(30);
-          doc.text(`Estado de pedidos`,50, 65).setFontSize(10);
+          doc.addImage(maipo, 'PNG', 0, 0,60,0, undefined, false);
+      doc.setFontSize(20);
+      doc.text(`Fecha de creacion: ${fecha}`, 110 , 8);
+      doc.setFontSize(45);
+      doc.text(`Estado de las compras`,15, 65)
+      doc.setFontSize(20);
+      doc.text(`Hecho por: Consultor`,4, 18)
+      doc.setFontSize(20);
+      doc.text(`http://www.maipogrande.ml/`,1, 230)
+      doc.rect(12, 50, 170, 20); 
         
           doc.autoTable({
                 theme: 'striped',
                 columnStyles: { 0: { halign: 'left',valign: 'middle', } }, 
-                margin: { top: 70  },
+                margin: { top: 80  },
                 head: columnestado,
                 body: datospago
               } );
@@ -137,16 +154,22 @@ const InicioConsultor  = () => {
     [element.NOMBRE, element.TOTAL,]));   
 
       // 1 - x 200  /////  2- y
-      doc.addImage(maipo, 'PNG', 0, 0,50,0, undefined, false);
-      doc.text(`Fecha de creacion: ${fecha}`, 130, 7).setFontSize(25);
-      doc.setFontSize(30);
-      doc.text(`Stock Disponible`,55, 45).setFontSize(10);
+      doc.addImage(maipo, 'PNG', 0, 0,60,0, undefined, false);
+      doc.setFontSize(20);
+      doc.text(`Fecha de creacion: ${fecha}`, 110 , 8);
+      doc.setFontSize(45);
+      doc.text(`Productos disponibles`,15, 65)
+      doc.setFontSize(20);
+      doc.text(`Hecho por: Consultor`,4, 18)
+      doc.setFontSize(20);
+      doc.text(`http://www.maipogrande.ml/`,1, 230)
+      doc.rect(12, 50, 170, 20); 
     
    
       doc.autoTable({
         theme: 'striped',
           columnStyles: { 0: { halign: 'left',valign: 'middle', } }, 
-          margin: { top: 50  },
+          margin: { top: 80  },
           head: columnstock,
           body: datosStocktable
           } );
@@ -173,15 +196,21 @@ const InicioConsultor  = () => {
   
     
         // 1 - x 200  /////  2- y
-        doc.addImage(maipo, 'PNG', 0, 0,50,0, undefined, false);
-        doc.text(`Fecha de creacion: ${fecha}`, 130, 7).setFontSize(25);
-        doc.setFontSize(30);
-        doc.text(`Compras por dias`,50, 65).setFontSize(10);
+        doc.addImage(maipo, 'PNG', 0, 0,60,0, undefined, false);
+        doc.setFontSize(20);
+        doc.text(`Fecha de creacion: ${fecha}`, 110 , 8);
+        doc.setFontSize(45);
+        doc.text(`Compras por dia`,15, 65)
+        doc.setFontSize(20);
+        doc.text(`Hecho por: Consultor`,4, 18)
+        doc.setFontSize(20);
+        doc.text(`http://www.maipogrande.ml/`,1, 230)
+        doc.rect(12, 50, 170, 20); 
       
         doc.autoTable({
           theme: 'striped',
             columnStyles: { 0: { halign: 'left',valign: 'middle', } }, 
-            margin: { top: 50  },
+            margin: { top: 80  },
             head: columndia,
             body: datocompra
           
@@ -227,10 +256,16 @@ const InicioConsultor  = () => {
     [element.TIPO_VENTA, element.CANTIDAD,]));  
     // info.push([ ...element])});      
       // 1 - x 200  /////  2- y
-      doc.addImage(maipo, 'PNG', 0, 0,100,0, undefined, false);
-      doc.text(`Fecha de creacion: ${fecha}`, 200, 10).setFontSize(10);
-      doc.setFontSize(50);
-      doc.text(`Reporte General`,80, 50).setFontSize(50);
+      doc.addImage(maipo, 'PNG', 0, 0,60,0, undefined, false);
+      doc.setFontSize(20);
+      doc.text(`Fecha de creacion: ${fecha}`, 200 , 8);
+      doc.setFontSize(45);
+      doc.text(`Reporte General`,70, 65)
+      doc.setFontSize(20);
+      doc.text(`Hecho por: Consultor`,4, 18)
+      doc.setFontSize(20);
+      doc.text(`http://www.maipogrande.ml/`,1, 410)
+      doc.rect(50, 50, 170, 20);
     
    
       doc.autoTable({
