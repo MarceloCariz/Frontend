@@ -1,7 +1,8 @@
-import { faClose, faFileArrowUp, faImage, faImagePortrait } from "@fortawesome/free-solid-svg-icons";
+import { faClose, faImage } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
-import { agregarProducto } from "../../Helpers/getProductores";
+import { useEffect } from "react";
+import { agregarProducto, listarNombresProductos } from "../../Helpers/getProductores";
 import useAuth from "../../Hooks/useAuth";
 import useConsultas from "../../Hooks/useConsultas";
 
@@ -14,6 +15,15 @@ const ModalProducto = ({handleModal, setActiveModal,}) => {
     precio_ext: '',
     calidad: ''
  })
+
+ const [nombres, setNombres] = useState([]);
+  useEffect(()=>{
+    const cargarNombres= async() =>{
+      const resp = await listarNombresProductos();
+      setNombres(resp);
+    }
+    cargarNombres();
+  },[])
  const {config} = useAuth();
   const {  cargarProductosProductor} = useConsultas();
 
@@ -103,13 +113,21 @@ const handleSubmit = async(e) =>{
           </div>
 
         <div className="flex flex-col ">
-          <label className="text-left">Nombre</label>
-          <input
+          <label className="text-left font-semibold">Nombre</label>
+          {/* <input
             name="nombre"
             onChange={handleOnChange}
             className="bg-gray-50 border-1 pl-1 border-gray-500 border rounded-sm"
             value={nombre}
-          />
+          /> */}
+          <select name="nombre" onChange={handleOnChange} className="w-52 h-12" defaultValue={""}>
+              <option  value=""> Seleccione </option>
+              {
+                nombres.length > 0  && nombres.map(({ID, NOMBRE})=>(
+                  <option key={ID} value={NOMBRE}>{NOMBRE}</option>
+                ))
+              }
+          </select>
         </div>
         <div className="flex flex-col ">
           <label className="text-left">Cantidad</label>

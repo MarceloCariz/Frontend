@@ -66,7 +66,7 @@ const Productos = ({ producto, setReload ,reload}) => {
         <img className="object-contain w-52 h-52" src={IMAGE_URL} alt="imagen" />
         <div className="flex flex-col ">
           <label className="text-left" htmlFor={`${nombre}`}>Nombre</label>
-          <input name='nombre' onChange={handleOnchange} className="bg-gray-50 border-1 pl-1 border-gray-500 border rounded-sm" id={`${nombre}`} value={nombre} />
+          <input disabled name='nombre' onChange={handleOnchange} className="bg-gray-50  border rounded-sm" id={`${nombre}`} value={nombre} />
         </div>
 
         <div className="flex flex-col ">

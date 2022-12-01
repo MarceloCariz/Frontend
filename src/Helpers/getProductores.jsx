@@ -37,9 +37,17 @@ export const eliminarProducto = async(id, configt) =>{
 export const agregarProducto = async(producto, configt) =>{
     try {
         // const {headers} = configt;
-        console.log(producto, configt)
         const {data}= await clienteAxios.post(`/productores/productos/nuevo`, producto, configt)
         return data
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export const listarNombresProductos = async() =>{
+    try {
+        const {data} = await clienteAxios('/admin/producto/nombre/lista');
+        return data;
     } catch (error) {
         console.log(error)
     }
