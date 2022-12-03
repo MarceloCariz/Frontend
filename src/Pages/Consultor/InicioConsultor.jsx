@@ -346,12 +346,12 @@ const InicioConsultor  = () => {
                 Generar Reporte General</button>
               </div>
 
-              <div className='mt-2 px-4 sm:grid sm:grid-cols-2 sm:grid-rows-1 sm:justify-items-center sm:gap-0 flex flex-col gap-12   pt-12 pb-12'>
+              <div className='mt-2 px-4 lg:grid lg:grid-cols-2 lg:grid-rows-1 lg:justify-items-center md:gap-12 lg:gap-0 flex flex-col gap-12   pt-12 pb-12'>
 
                 <div className='  sm:w-2/4 sm:justify-self-center sm:self-center bg-white py-4 px-4 rounded-md'>
                   <h2 className='text-center'>Compras por Tipo cliente</h2>
                     <GraficoPie tipoVenta={datos.tipoVenta}/>
-                    <div className=' justify-center  flex inset-x-80 bottom-100 h-16'>
+                    <div className=' justify-center  flex'>
                       <button onClick={Tipocliente} className='px-4 py-2 bg-blue-500 text-white text-xl mt-2 flex items-center gap-1 rounded-md inset-x-100'>
                         <FontAwesomeIcon icon={faDownload}/>
                         Generar Tipo cliente</button>
@@ -359,13 +359,13 @@ const InicioConsultor  = () => {
                 </div>
 
                 {/* CONTENEDOR DE 4 GRAFICOS */}
-                <div className='w-full  sm:grid sm:grid-cols-2 sm:grid-rows-2 sm:gap-12     flex flex-col gap-12'>
+                <div className='w-full   lg:grid lg:grid-cols-2  lg:grid-rows-2 2xl:gap-12   md:gap-12  flex flex-col gap-12'>
 
                     <div className=' w-full  py-4 px-4 rounded-md '>
                       <h2 className='text-center'>Compras por Mes</h2>
                         <GraficoArea comprasPorMes={datos.comprasPorMes}/>
-                        <div className=' justify-center  flex inset-x-170 bottom-70 h-11'>
-                          <button onClick={Comprapormes} className='px-4 py-2 bg-blue-500 text-white text-lg mt-2 flex items-center gap-1 rounded-md '>
+                        <div className=' justify-center  flex '>
+                          <button onClick={Comprapormes} className='px-4 py-2 bg-blue-500 text-white  xl:text-md 2xl:text-lg  mt-2 flex items-center gap-1 rounded-md '>
                             <FontAwesomeIcon icon={faDownload}/>
                             Generar Compra por mes</button>
                         </div>
@@ -374,8 +374,8 @@ const InicioConsultor  = () => {
                     <div className='  w-full   '>
                       <h2 className='text-center'>Estados de Pagos</h2>
                       <GraficoEstadoPago estadoPago={datos.estadoPago}/>
-                      <div className=' justify-center  flex  h-11'>
-                        <button onClick={Estadopago} className='px-4 py-2 bg-blue-500 text-white text-lg mt-2 flex items-center gap-1 rounded-md '>
+                      <div className=' justify-center  flex  '>
+                        <button onClick={Estadopago} className='px-4 py-2 bg-blue-500 text-white xl:text-md 2xl:text-lg mt-2 flex items-center gap-1 rounded-md '>
                           <FontAwesomeIcon icon={faDownload}/>
                           Generar Estado de Pago</button>
                       </div>
@@ -384,8 +384,8 @@ const InicioConsultor  = () => {
                       <div className=' w-full  '>
                         <h2 className='text-center'>Cantidad de productos disponibles</h2>
                         <GraficoStockProducto stockProductosNombre={datos.stockProductosNombre}/>
-                        <div className=' justify-center  flex    h-12'>
-                          <button onClick={pdfdatosstock} className='px-4 py-2 bg-blue-500 text-white text-lg mt-2 flex items-center gap-1 rounded-md '>
+                        <div className=' justify-center  flex    '>
+                          <button onClick={pdfdatosstock} className='px-4 py-2 bg-blue-500 text-white xl:text-md 2xl:text-lg mt-2 flex items-center gap-1 rounded-md '>
                             <FontAwesomeIcon icon={faDownload}/>
                             Generar Productos disponibles</button>
                         </div>
@@ -394,8 +394,8 @@ const InicioConsultor  = () => {
                     <div className='  w-full   '>
                       <h2 className='text-center'>Compras Por Día</h2>
                       <GraficoVentasDia comprasPorDia={datos.comprasPorDia}/>
-                      <div className=' justify-center  flex    h-12'>
-                        <button onClick={Comprapordia} className='px-4 py-2 bg-blue-500 text-white text-lg mt-2 flex items-center gap-1 rounded-md '>
+                      <div className=' justify-center  flex    '>
+                        <button onClick={Comprapordia} className='px-4 py-2 bg-blue-500 text-white xl:text-md 2xl:text-lg mt-2 flex items-center gap-1 rounded-md '>
                           <FontAwesomeIcon icon={faDownload}/>
                           Generar Compras por dia</button>
                       </div>

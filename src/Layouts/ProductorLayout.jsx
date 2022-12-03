@@ -5,8 +5,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShop, faUser,  faRightFromBracket, faTruck, faBars, faSeedling, faGavel } from '@fortawesome/free-solid-svg-icons'
 import useConsultas from '../Hooks/useConsultas';
 const ProductorLayout = ({children}) => {
-    const {auth, setAuth, setProductos} = useAuth();
-    const {setEnviosP} = useConsultas();
+    const {auth, setAuth, setProductos, setConfig} = useAuth();
+    const {setEnviosP, setEnviosCompletadosP, setContratoP} = useConsultas();
     const navigate = useNavigate();
     const [activeMenu, setActiveMenu] = useState(false)
 
@@ -24,6 +24,9 @@ const ProductorLayout = ({children}) => {
     const handleLogout = () =>{
         setProductos({});
         setAuth({});
+        setConfig({});
+        setEnviosCompletadosP([]);
+        setContratoP({});
         localStorage.clear();
         setEnviosP([]);
         navigate('/productores')

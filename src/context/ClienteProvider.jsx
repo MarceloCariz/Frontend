@@ -1,8 +1,8 @@
 import { createContext, useState } from "react";
 import {  obtenerPedidos, traerDatos } from "../Helpers/getClientes";
-import { obtenerEnvios } from "../Helpers/getTransportista";
+import { obtenerContrato as obtenerContratoT , obtenerEnvios , obtenerEnviosCompletados as obtenerEnviosCompletadosT} from "../Helpers/getTransportista";
 import { obtenerProductos as obtenerProductosClient } from '../Helpers/getProducts';
-import {obtenerEnvios as obtenerEnviosProductor, obtenerProductos} from '../Helpers/getProductores';
+import {obtenerEnvios as obtenerEnviosProductor, obtenerProductos, obtenerContrato as obtenerContratoP , obtenerEnviosCompletados  as obtenerEnviosCompletadosP} from '../Helpers/getProductores';
 import useAuth from "../Hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import { listarReportes, obtenerDatosGraficos } from "../Helpers/getConsultor";
@@ -22,10 +22,14 @@ const ClienteProvider = ({children}) => {
     const [cargando, setCargando] = useState(false);
     const [formValues, setFormValues] = useState({direccion: '', ciudad: '',pais:''})
     /// TRANSPORTISTA
-    const [enviosT, setEnviosT] = useState([])
+    const [enviosT, setEnviosT] = useState([]);
+    const [contratoT, setContratoT] = useState({});
+    const [enviosCompletadosT, setEnviosCompletadosT] = useState([])
     //PRODUCTOR
     const [enviosP, setEnviosP] = useState([])
     const [productosP, setProductosP] = useState([])
+    const [contratoP, setContratoP] = useState({});
+    const [enviosCompletadosP, setEnviosCompletadosP] = useState([])
     ///CONSULTOR
     const [datosGraficos, setDatosGraficos] = useState([]);
     const [reportes, setReportes] = useState([])
@@ -84,6 +88,19 @@ const ClienteProvider = ({children}) => {
         setCargando(false);
     }
 
+    const cargarDatosTransportistas = async() =>{
+        setCargando(true)
+        const contratoR = await obtenerContratoT(config);
+        console.log(contratoR)
+        setContratoT(contratoR);
+        const enviosR = await obtenerEnviosCompletadosT(config);
+        setEnviosCompletadosT(enviosR);
+        setCargando(false)
+
+    } 
+
+    /// PRODUCTOR
+
     const cargarEnviosProductor = async() =>{
         // if(enviosP.length > 0) return;
         setCargando(true);
@@ -98,6 +115,16 @@ const ClienteProvider = ({children}) => {
         setProductosP(resultado)
         setCargando(false)
     }
+
+    const cargarDatosProductor = async() =>{
+        setCargando(true)
+        const contratoR = await obtenerContratoP(config);
+        setContratoP(contratoR);
+        const enviosR = await obtenerEnviosCompletadosP(config);
+        setEnviosCompletadosP(enviosR);
+        setCargando(false)
+
+    } 
     ///CONSULTOR
     const cargarDatosGraficos = async () =>{
         const respuesta = await obtenerDatosGraficos();
@@ -118,12 +145,12 @@ const ClienteProvider = ({children}) => {
         setProductosBackup([]);
         setAuth({});
         navigate("/");
-      };
+    };
 
     return ( <ClienteContext.Provider value={{
         datos, pedidos, cargarPedidos, cargando,setPedidos,cargarProductosCliente, productos,setProductos,productosBackup, cargarDatos, setFormValues, formValues, ///////// CLIENTE
-        cargarEnviosTransportista, enviosT, setEnviosT  ,    //TRANSPORTISTA
-        cargarEnviosProductor, enviosP,setEnviosP ,cargarProductosProductor , productosP ,      /// PRODUCTOR
+        cargarEnviosTransportista, enviosT, setEnviosT  ,  cargarDatosTransportistas, contratoT, enviosCompletadosT, setEnviosCompletadosT, setContratoT , //TRANSPORTISTA
+        cargarEnviosProductor, enviosP,setEnviosP ,cargarProductosProductor , productosP , cargarDatosProductor, contratoP, enviosCompletadosP,setEnviosCompletadosP, setContratoP,      /// PRODUCTOR
         cargarDatosGraficos, datosGraficos,  cargarReportes, reportes,   setReportes,  reportesBackup,                                  ///CONSULTOR
         handleLogout
         }}>

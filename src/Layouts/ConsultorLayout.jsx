@@ -34,13 +34,15 @@ const ConsultorLayout = ({children}) => {
       }
   return (
     <div className='#d4d8dd'>
-        <nav className=' bg-stone-800'>
+        <nav className=' bg-stone-800 xl:px-4'>
           <div className='sm:h-32 h-24 flex sm:justify-between items-center  container mx-auto text-white'>
-            <Link to="/consultor"><h1 className='sm:text-4xl text-2xl text-white font-semibold flex items-center gap-1 ml-2 '>
+            <Link to="/consultor"><h1 className='xl:text-4xl md:text-3xl text-2xl text-white font-semibold flex items-center gap-1 ml-2 '>
                 <FontAwesomeIcon icon={faSeedling}/>
-                MaipoGrande</h1></Link>
+                MaipoGrande</h1>
+            </Link>
+
             {/* Desktop */}
-            <div className='sm:flex hidden items-center justify-end  w-2/3 gap-8 '>
+            <div className='sm:flex hidden items-center justify-end  xl:w-2/3 xl:gap-8  gap-2'>
                 <NavLink to={'reportes'}  className={({isActive})=> isActive ? 'flex cursor-pointer hover:text-gray-50 underline decoration-2 underline-offset-8' : 'flex cursor-pointer hover:text-gray-50'}>
                     <FontAwesomeIcon icon={faTruck} className="text-2xl mr-2 mt-1"/>
                     <p className='text-2xl  '>Reportes</p>

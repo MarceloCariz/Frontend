@@ -1,6 +1,6 @@
 import { faFileArchive } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useEffect, useState } from 'react'
+import { useEffect} from 'react'
 import { CardReporte } from '../../Components/consultor/CardReporte';
 import useConsultas from '../../Hooks/useConsultas';
 const Reportes = () => {
@@ -48,7 +48,7 @@ const Reportes = () => {
       </div>
 
 
-      <div className='sm:grid sm:grid-cols-5 flex  flex-col  gap-5  sm:w-full sm:px-0 px-12 justify-items-center  '>
+      <div className='sm:grid md:grid-cols-3 lg:grid-cols-5 flex  flex-col  gap-5  sm:w-full px-12 sm:px-4 2xl:px-0   justify-items-center  '>
       {/* <div className='grid grid-cols-4   '> */}
           {reportes.length > 0 ? reportes.map((reporte)=>(
             <CardReporte key={reporte.ID_REPORTE} {...reporte} />

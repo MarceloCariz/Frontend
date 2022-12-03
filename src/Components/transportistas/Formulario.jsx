@@ -62,7 +62,7 @@ export const Formulario = ({auth, config}) => {
         >
             {
                 ({values})=> (
-                    <Form  className='bg-white shadow-lg px-12 py-4 flex flex-col sm:w-1/3 w-6/7 gap-4 '>
+                    <Form  className='bg-white shadow-lg px-12 py-4 flex flex-col md:w-2/3 xl:w-1/3 w-6/7 gap-4 '>
                         { mensaje ? <p className='bg-green-500 py-2 px-4 text-white font-semibold mb-2 text-center'>{mensaje}</p> : ''}
                         <h3 className='text-2xl mb-2 font-bold text-center'>Información Personal</h3>
                         <div className='grid grif-cols-2 gap-6'>

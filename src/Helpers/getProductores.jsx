@@ -92,7 +92,7 @@ export const obtenerEnvios = async(config) =>{
 export const obtenerEnviosCompletados = async(config) =>{
     try {
         const {data} =  await clienteAxios('/productores/envios/completados', config);
-        return data;
+        return data
     } catch (error) {
         console.log(error)
     }

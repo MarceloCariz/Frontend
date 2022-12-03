@@ -10,8 +10,8 @@ import useConsultas from '../Hooks/useConsultas';
 
 
 const TransportistaLayout = ({children}) => {
-    const {auth, setAuth} = useAuth();
-    const {setEnviosT} = useConsultas();
+    const {auth, setAuth, setConfig} = useAuth();
+    const {setEnviosT, setEnviosCompletadosT, setContratoT} = useConsultas();
 
     const navigate = useNavigate();
     const [activeMenu, setActiveMenu] = useState(false)
@@ -19,9 +19,12 @@ const TransportistaLayout = ({children}) => {
 
     const handleLogout = () =>{
 
-        setAuth({});
-        localStorage.clear();
+        setEnviosCompletadosT([]);
+        setContratoT({});
         setEnviosT([]);
+        setAuth({});
+        setConfig({});
+        localStorage.clear();
         navigate('/transportistas')
     }
 

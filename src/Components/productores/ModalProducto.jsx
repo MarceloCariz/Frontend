@@ -64,6 +64,8 @@ const handleSubmit = async(e) =>{
 
 
 
+
+
     const formData = new FormData();
     formData.append('image', selectedFile);
     formData.append('nombre', formValues.nombre.toLowerCase() );
@@ -135,6 +137,7 @@ const handleSubmit = async(e) =>{
             name="cantidad"
             onChange={handleOnChange}
             type="number"
+            maxLength={10}
             className="bg-gray-50 border-1 pl-1 border-gray-500 border rounded-sm"
             value={cantidad}
           />
