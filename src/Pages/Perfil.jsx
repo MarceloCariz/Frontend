@@ -80,7 +80,7 @@ const Perfil = () => {
                 </div>
             )}
             <div className='flex justify-center'>
-                <button type="submit" className={ activeActualizar ? 'text-white bg-green-500 px-4 py-2 mt-2 w-auto '  : 'text-white bg-blue-500 px-4 py-2 mt-2 w-1/2 '}>
+                <button type="submit" className={ activeActualizar ? 'text-white bg-green-500 px-4 py-2 mt-2 w-auto '  : 'text-white bg-blue-500 px-4 py-2 mt-2 w-1/2 rounded-md'}>
                 {activeActualizar ? "Guardar Cambios" : "Actualizar"}</button>
             </div>
         </form>
