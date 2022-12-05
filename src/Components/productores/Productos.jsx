@@ -101,7 +101,7 @@ const Productos = ({ producto, setReload ,reload}) => {
                         <option value="alta">Alta</option>
                       </>
             }
-             {calidad === 'alta' && 
+            {calidad === 'alta' && 
                       <>
                         <option value="baja">Baja</option>
                         <option value="media">Media</option>

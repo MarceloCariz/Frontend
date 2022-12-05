@@ -8,82 +8,88 @@ import useConsultas from "../../Hooks/useConsultas";
 
 const ModalProducto = ({handleModal, setActiveModal,}) => {
 
- const [formValues, setFormValues] = useState({
-    nombre: '',
-    cantidad: '',
-    precio_local: '',
-    precio_ext: '',
-    calidad: ''
- })
+  const [formValues, setFormValues] = useState({
+      nombre: '',
+      cantidad: '',
+      precio_local: '',
+      precio_ext: '',
+      calidad: ''
+  })
 
- const [nombres, setNombres] = useState([]);
-  useEffect(()=>{
-    const cargarNombres= async() =>{
-      const resp = await listarNombresProductos();
-      setNombres(resp);
-    }
-    cargarNombres();
-  },[])
- const {config} = useAuth();
-  const {  cargarProductosProductor} = useConsultas();
+  const [nombres, setNombres] = useState([]);
+    useEffect(()=>{
+      const cargarNombres= async() =>{
+        const resp = await listarNombresProductos();
+        setNombres(resp);
+      }
+      cargarNombres();
+    },[])
+  const {config} = useAuth();
+    const {  cargarProductosProductor} = useConsultas();
 
- const {nombre, calidad, precio_local, precio_ext, cantidad} = formValues;
- const [alerta, setAlerta] = useState({msg: '', error: false});
- const [selectedFile, setSelectedFile] = useState(null);
- const [imagenInfo, setImagenInfo] = useState(null)
-//  const [fileInputTitle, setFileInputTitle] = useState("");
- const handleOnChange = ({target}) =>{
-    setFormValues({...formValues,
-        [target.name]: target.value
-    })
- }
-
- const onChangeInpuFile = (e) => {
-  const imagen = e.target.files[0];
-  setSelectedFile(imagen);
-  const reader = new FileReader();
-  reader.onload = (e) =>{
-    const { result} = e.target;
-    setImagenInfo(result);
+  const {nombre, calidad, precio_local, precio_ext, cantidad} = formValues;
+  const [alerta, setAlerta] = useState({msg: '', error: false});
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [imagenInfo, setImagenInfo] = useState(null)
+  //  const [fileInputTitle, setFileInputTitle] = useState("");
+  const handleOnChange = ({target}) =>{
+      setFormValues({...formValues,
+          [target.name]: target.value
+      })
   }
-  reader.readAsDataURL(imagen);
 
-}
-const handleSubmit = async(e) =>{
-    e.preventDefault();
+  const onChangeInpuFile = (e) => {
+    const imagen = e.target.files[0];
+    setSelectedFile(imagen);
+    const reader = new FileReader();
+    reader.onload = (e) =>{
+      const { result} = e.target;
+      setImagenInfo(result);
+    }
+    reader.readAsDataURL(imagen);
 
-    if([nombre, calidad, precio_ext, precio_local, cantidad, ].includes("") || selectedFile === null){
-      setAlerta({msg: 'Por favor llenar todos los campos', error: true});
+  }
+  const handleSubmit = async(e) =>{
+      e.preventDefault();
+
+      if([nombre, calidad, precio_ext, precio_local, cantidad, ].includes("") || selectedFile === null){
+        setAlerta({msg: 'Por favor llenar todos los campos', error: true});
+        setTimeout(() => {
+          setAlerta({msg: '', error: false});   
+        }, 2000);
+        return
+      };
+
+      if(cantidad > 100000  || precio_ext > 100000 || precio_local > 100000){
+        setAlerta({msg: 'Valores muy alto de Cantidad, Precio Local o Precio Ext', error: true});
+        setTimeout(() => {
+          setAlerta({msg: '', error: false});   
+        }, 2000);
+        return;
+      }
+
+
+
+
+
+      const formData = new FormData();
+      formData.append('image', selectedFile);
+      formData.append('nombre', formValues.nombre.toLowerCase() );
+      formData.append('cantidad', formValues.cantidad);
+      formData.append('precio_local', formValues.precio_local);
+      formData.append('precio_ext', formValues.precio_ext);
+      formData.append('calidad', formValues.calidad);
+
+      // console.log(formData.)
+
+
+      await agregarProducto(formData, config);
+      setAlerta({msg: 'Añadido Correctamente', error: false});
       setTimeout(() => {
-        setAlerta({msg: '', error: false});   
-
-    }, 2000);
-      return
-    };
-
-
-
-
-
-
-    const formData = new FormData();
-    formData.append('image', selectedFile);
-    formData.append('nombre', formValues.nombre.toLowerCase() );
-    formData.append('cantidad', formValues.cantidad);
-    formData.append('precio_local', formValues.precio_local);
-    formData.append('precio_ext', formValues.precio_ext);
-    formData.append('calidad', formValues.calidad);
-
-    // console.log(formData.)
-
-
-    await agregarProducto(formData, config);
-    setAlerta({msg: 'Añadido Correctamente', error: false});
-    setTimeout(() => {
-        setActiveModal(false)
-        cargarProductosProductor();
-    }, 2000);
-}
+          setActiveModal(false)
+          cargarProductosProductor();
+      }, 2000);
+    }
   return (
     <>
    
