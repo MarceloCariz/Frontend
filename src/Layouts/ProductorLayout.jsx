@@ -130,10 +130,15 @@ return (
         </div>
         {/* CONTENIDO FIN */}
         <footer className=' bottom-0 text-center  items-center flex justify-center w-full    h-32 bg-stone-800'>
-            <Link to="/inicio"><h1 className='sm:text-4xl text-2xl text-white font-semibold flex items-center gap-1 '>
-            <FontAwesomeIcon icon={faSeedling}/>
-                
-                MaipoGrande</h1></Link>
+            <div className="flex flex-col gap-2">
+                <Link to="/inicio"><h1 className='sm:text-4xl text-2xl text-white font-semibold flex items-center gap-1 '>
+                    <FontAwesomeIcon icon={faSeedling }/>
+                        MaipoGrande</h1>
+                </Link>
+                <p className="text-white text-sm">
+                © TODOS LOS DERECHOS RESERVADOS
+                </p>
+            </div>
 
         </footer>
     </div>
