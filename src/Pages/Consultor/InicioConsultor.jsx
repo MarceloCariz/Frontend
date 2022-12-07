@@ -34,28 +34,29 @@ const InicioConsultor  = () => {
 
   
       // 1 - x 200  /////  2- y
-      doc.addImage(maipo, 'PNG', 0, 0,60,0, undefined, false);
+      doc.addImage(maipo, 'PNG', 2, 3,58,0, undefined, false);
       doc.setFontSize(20);
-      doc.text(`Fecha de creacion: ${fecha}`, 110 , 8);
+      doc.text(`Fecha de creacion: ${fecha}`, 110 , 11);
       doc.setFontSize(45);
       doc.text(`Tipos de ventas`,45, 65)
       doc.setFontSize(20);
-      doc.text(`Hecho por: Consultor`,4, 18)
+      doc.text(`Hecho por: Consultor`,6, 21)
       doc.setFontSize(20);
-      doc.text(`http://www.maipogrande.ml/`,1, 230)
+      doc.text(`http://www.maipogrande.ml/`,1, 220)
       doc.rect(20, 50, 170, 20); 
       doc.autoTable({
         theme: 'striped',
-            columnStyles: { 0: { halign: 'left',valign: 'middle', } }, 
-            margin: { top: 75  },
+            columnStyles: { 0: { halign: 'left',valign: 'middle', fontSize: 20 } }, 
+            RowStyles: {0:{ halign: 'left',valign: 'middle', fontSize: 20 } }, 
+            margin: { top: 75   },
             head: columntipoven,
             body: datostipoven
         
-          } );
-          const blob = doc.output("blob");
-          const pdfGenerado = new File([blob], `tipo_de_venta_${fecha.replace( new RegExp('/','g'), '_')}.pdf`, {type: 'application/pdf' } );
-          const mensaje = await generarReporte({tipoVenta:datos.tipoVenta, pdfGenerado});
-          setAlerta(mensaje);
+          });
+           const blob = doc.output("blob");
+            const pdfGenerado = new File([blob], `tipo_de_venta_${fecha.replace( new RegExp('/','g'), '_')}.pdf`, {type: 'application/pdf' } );
+         const mensaje = await generarReporte({tipoVenta:datos.tipoVenta, pdfGenerado});
+            setAlerta(mensaje);
       doc.save(`Tipo de ventas ${fecha}`);
       setTimeout(() => {
         setAlerta('');
@@ -73,15 +74,15 @@ const InicioConsultor  = () => {
   
     
         // 1 - x 200  /////  2- y
-        doc.addImage(maipo, 'PNG', 0, 0,60,0, undefined, false);
-      doc.setFontSize(20);
-      doc.text(`Fecha de creacion: ${fecha}`, 110 , 8);
-      doc.setFontSize(45);
-      doc.text(`Compras hechas por mes`,15, 65)
-      doc.setFontSize(20);
-      doc.text(`Hecho por: Consultor`,4, 18)
-      doc.setFontSize(20);
-      doc.text(`http://www.maipogrande.ml/`,1, 230)
+        doc.addImage(maipo, 'PNG', 2, 3,58,0, undefined, false);
+        doc.setFontSize(20);
+        doc.text(`Fecha de creacion: ${fecha}`, 110 , 11);
+        doc.setFontSize(45);
+        doc.text(`Compra hechas por mes`,45, 65)
+        doc.setFontSize(20);
+        doc.text(`Hecho por: Consultor`,6, 21)
+        doc.setFontSize(20);
+        doc.text(`http://www.maipogrande.ml/`,1, 220)
       doc.rect(10, 50, 190, 20); 
       
         doc.autoTable({
@@ -115,20 +116,20 @@ const InicioConsultor  = () => {
     
       
           // 1 - x 200  /////  2- y
-          doc.addImage(maipo, 'PNG', 0, 0,60,0, undefined, false);
-      doc.setFontSize(20);
-      doc.text(`Fecha de creacion: ${fecha}`, 110 , 8);
-      doc.setFontSize(45);
-      doc.text(`Estado de las compras`,15, 65)
-      doc.setFontSize(20);
-      doc.text(`Hecho por: Consultor`,4, 18)
-      doc.setFontSize(20);
-      doc.text(`http://www.maipogrande.ml/`,1, 230)
+          doc.addImage(maipo, 'PNG', 2, 3,58,0, undefined, false);
+          doc.setFontSize(20);
+          doc.text(`Fecha de creacion: ${fecha}`, 110 , 11);
+          doc.setFontSize(45);
+          doc.text(`Estado de compras`,45, 65)
+          doc.setFontSize(20);
+          doc.text(`Hecho por: Consultor`,6, 21)
+          doc.setFontSize(20);
+          doc.text(`http://www.maipogrande.ml/`,1, 220)
       doc.rect(12, 50, 170, 20); 
         
           doc.autoTable({
                 theme: 'striped',
-                columnStyles: { 0: { halign: 'left',valign: 'middle', } }, 
+                columnStyles: { 0: { halign: 'left',valign: 'middle',fontSize: 20 } }, 
                 margin: { top: 80  },
                 head: columnestado,
                 body: datospago
@@ -154,15 +155,15 @@ const InicioConsultor  = () => {
     [element.NOMBRE, element.TOTAL,]));   
 
       // 1 - x 200  /////  2- y
-      doc.addImage(maipo, 'PNG', 0, 0,60,0, undefined, false);
+      doc.addImage(maipo, 'PNG', 2, 3,58,0, undefined, false);
       doc.setFontSize(20);
-      doc.text(`Fecha de creacion: ${fecha}`, 110 , 8);
+      doc.text(`Fecha de creacion: ${fecha}`, 110 , 11);
       doc.setFontSize(45);
-      doc.text(`Productos disponibles`,15, 65)
+      doc.text(`Productos disponibles`,45, 65)
       doc.setFontSize(20);
-      doc.text(`Hecho por: Consultor`,4, 18)
+      doc.text(`Hecho por: Consultor`,6, 21)
       doc.setFontSize(20);
-      doc.text(`http://www.maipogrande.ml/`,1, 230)
+      doc.text(`http://www.maipogrande.ml/`,1, 220)
       doc.rect(12, 50, 170, 20); 
     
    
@@ -196,15 +197,15 @@ const InicioConsultor  = () => {
   
     
         // 1 - x 200  /////  2- y
-        doc.addImage(maipo, 'PNG', 0, 0,60,0, undefined, false);
+        doc.addImage(maipo, 'PNG', 2, 3,58,0, undefined, false);
         doc.setFontSize(20);
-        doc.text(`Fecha de creacion: ${fecha}`, 110 , 8);
+        doc.text(`Fecha de creacion: ${fecha}`, 110 , 11);
         doc.setFontSize(45);
-        doc.text(`Compras por dia`,15, 65)
+        doc.text(`Compras por dia`,45, 65)
         doc.setFontSize(20);
-        doc.text(`Hecho por: Consultor`,4, 18)
+        doc.text(`Hecho por: Consultor`,6, 21)
         doc.setFontSize(20);
-        doc.text(`http://www.maipogrande.ml/`,1, 230)
+        doc.text(`http://www.maipogrande.ml/`,1, 220)
         doc.rect(12, 50, 170, 20); 
       
         doc.autoTable({
@@ -256,15 +257,15 @@ const InicioConsultor  = () => {
     [element.TIPO_VENTA, element.CANTIDAD,]));  
     // info.push([ ...element])});      
       // 1 - x 200  /////  2- y
-      doc.addImage(maipo, 'PNG', 0, 0,60,0, undefined, false);
+      doc.addImage(maipo, 'PNG', 2, 3,58,0, undefined, false);
       doc.setFontSize(20);
-      doc.text(`Fecha de creacion: ${fecha}`, 200 , 8);
+      doc.text(`Fecha de creacion: ${fecha}`, 110 , 11);
       doc.setFontSize(45);
-      doc.text(`Reporte General`,70, 65)
+      doc.text(`Reporte General`,45, 65)
       doc.setFontSize(20);
-      doc.text(`Hecho por: Consultor`,4, 18)
+      doc.text(`Hecho por: Consultor`,6, 21)
       doc.setFontSize(20);
-      doc.text(`http://www.maipogrande.ml/`,1, 410)
+      doc.text(`http://www.maipogrande.ml/`,1, 220)
       doc.rect(50, 50, 170, 20);
     
    
