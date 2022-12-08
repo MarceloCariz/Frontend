@@ -42,21 +42,21 @@ const InicioConsultor  = () => {
       doc.setFontSize(20);
       doc.text(`Hecho por: Consultor`,6, 21)
       doc.setFontSize(20);
-      doc.text(`http://www.maipogrande.ml/`,1, 220)
-      doc.rect(20, 50, 170, 20); 
+      doc.text(`http://www.maipogrande.ml/`,9, 220)
+      doc.rect(12, 50, 185, 20); 
       doc.autoTable({
         theme: 'striped',
-            columnStyles: { 0: { halign: 'left',valign: 'middle', fontSize: 20 } }, 
-            RowStyles: {0:{ halign: 'left',valign: 'middle', fontSize: 20 } }, 
+            columnStyles: { 0: { halign: 'left',valign: 'middle' } }, 
+            RowStyles: {0:{ halign: 'left',valign: 'middle' } }, 
             margin: { top: 75   },
             head: columntipoven,
             body: datostipoven
         
           });
-           const blob = doc.output("blob");
-            const pdfGenerado = new File([blob], `tipo_de_venta_${fecha.replace( new RegExp('/','g'), '_')}.pdf`, {type: 'application/pdf' } );
-         const mensaje = await generarReporte({tipoVenta:datos.tipoVenta, pdfGenerado});
-            setAlerta(mensaje);
+            const blob = doc.output("blob");
+         const pdfGenerado = new File([blob], `tipo_de_venta_${fecha.replace( new RegExp('/','g'), '_')}.pdf`, {type: 'application/pdf' } );
+          const mensaje = await generarReporte({tipoVenta:datos.tipoVenta, pdfGenerado});
+             setAlerta(mensaje);
       doc.save(`Tipo de ventas ${fecha}`);
       setTimeout(() => {
         setAlerta('');
@@ -78,11 +78,11 @@ const InicioConsultor  = () => {
         doc.setFontSize(20);
         doc.text(`Fecha de creacion: ${fecha}`, 110 , 11);
         doc.setFontSize(45);
-        doc.text(`Compra hechas por mes`,45, 65)
+        doc.text(`Compra hechas por mes`,20, 65)
         doc.setFontSize(20);
         doc.text(`Hecho por: Consultor`,6, 21)
         doc.setFontSize(20);
-        doc.text(`http://www.maipogrande.ml/`,1, 220)
+        doc.text(`http://www.maipogrande.ml/`,9, 220)
       doc.rect(10, 50, 190, 20); 
       
         doc.autoTable({
@@ -92,10 +92,10 @@ const InicioConsultor  = () => {
               head: columncompra,
               body: datoscompra
             } );
-            const blob = doc.output("blob");
-            const pdfGenerado = new File([blob], `compra_por_mes_${fecha.replace( new RegExp('/','g'), '_')}.pdf`, {type: 'application/pdf' } );
-            const mensaje = await generarReporte( {comprasPorMes:datos.comprasPorMes, pdfGenerado});
-            setAlerta(mensaje);
+             const blob = doc.output("blob");
+             const pdfGenerado = new File([blob], `compra_por_mes_${fecha.replace( new RegExp('/','g'), '_')}.pdf`, {type: 'application/pdf' } );
+             const mensaje = await generarReporte( {comprasPorMes:datos.comprasPorMes, pdfGenerado});
+             setAlerta(mensaje);
 
         doc.save(`Compra por mes${fecha}`);
         setTimeout(() => {
@@ -120,24 +120,24 @@ const InicioConsultor  = () => {
           doc.setFontSize(20);
           doc.text(`Fecha de creacion: ${fecha}`, 110 , 11);
           doc.setFontSize(45);
-          doc.text(`Estado de compras`,45, 65)
+          doc.text(`Estado de compras`,35, 65)
           doc.setFontSize(20);
           doc.text(`Hecho por: Consultor`,6, 21)
           doc.setFontSize(20);
-          doc.text(`http://www.maipogrande.ml/`,1, 220)
-      doc.rect(12, 50, 170, 20); 
+          doc.text(`http://www.maipogrande.ml/`,9, 220)
+          doc.rect(12, 50, 185, 20); ; 
         
           doc.autoTable({
                 theme: 'striped',
-                columnStyles: { 0: { halign: 'left',valign: 'middle',fontSize: 20 } }, 
+                columnStyles: { 0: { halign: 'left',valign: 'middle' } }, 
                 margin: { top: 80  },
                 head: columnestado,
                 body: datospago
               } );
           const blob = doc.output("blob");
-          const pdfGenerado = new File([blob], `estado_pedidos_${fecha.replace( new RegExp('/','g'), '_')}.pdf`, {type: 'application/pdf' } );
-          const mensaje = await generarReporte({estadoPago: datos.estadoPago, pdfGenerado});
-          setAlerta(mensaje);
+        const pdfGenerado = new File([blob], `estado_pedidos_${fecha.replace( new RegExp('/','g'), '_')}.pdf`, {type: 'application/pdf' } );
+           const mensaje = await generarReporte({estadoPago: datos.estadoPago, pdfGenerado});
+           setAlerta(mensaje);
           doc.save(`Estado de pedidos${fecha}`);
           setTimeout(() => {
             setAlerta('');
@@ -159,12 +159,12 @@ const InicioConsultor  = () => {
       doc.setFontSize(20);
       doc.text(`Fecha de creacion: ${fecha}`, 110 , 11);
       doc.setFontSize(45);
-      doc.text(`Productos disponibles`,45, 65)
+      doc.text(`Productos disponibles`,30, 65)
       doc.setFontSize(20);
       doc.text(`Hecho por: Consultor`,6, 21)
       doc.setFontSize(20);
-      doc.text(`http://www.maipogrande.ml/`,1, 220)
-      doc.rect(12, 50, 170, 20); 
+      doc.text(`http://www.maipogrande.ml/`,9, 220)
+      doc.rect(12, 50, 185, 20); 
     
    
       doc.autoTable({
@@ -173,11 +173,11 @@ const InicioConsultor  = () => {
           margin: { top: 80  },
           head: columnstock,
           body: datosStocktable
-          } );
-          const blob = doc.output("blob");
+        } );
+           const blob = doc.output("blob");
           const pdfGenerado = new File([blob], `stock_productos_${fecha.replace( new RegExp('/','g'), '_')}.pdf`, {type: 'application/pdf' } );
-          const mensaje = await generarReporte({stockProductosNombre: datos.stockProductosNombre, pdfGenerado});
-          setAlerta(mensaje);
+     const mensaje = await generarReporte({stockProductosNombre: datos.stockProductosNombre, pdfGenerado});
+           setAlerta(mensaje);
       doc.save(`stock_productos_${fecha}`);
       setTimeout(() => {
         setAlerta('');
@@ -205,8 +205,8 @@ const InicioConsultor  = () => {
         doc.setFontSize(20);
         doc.text(`Hecho por: Consultor`,6, 21)
         doc.setFontSize(20);
-        doc.text(`http://www.maipogrande.ml/`,1, 220)
-        doc.rect(12, 50, 170, 20); 
+        doc.text(`http://www.maipogrande.ml/`,9, 220)
+        doc.rect(12, 50, 185, 20); 
       
         doc.autoTable({
           theme: 'striped',
@@ -216,10 +216,10 @@ const InicioConsultor  = () => {
             body: datocompra
           
             } );
-            const blob = doc.output("blob");
-            const pdfGenerado = new File([blob], `compras_por_dias_${fecha.replace( new RegExp('/','g'), '_')}.pdf`, {type: 'application/pdf' } );
-            const mensaje = await generarReporte({comprasPorDia: datos.comprasPorDia, pdfGenerado});
-            setAlerta(mensaje);
+             const blob = doc.output("blob");
+             const pdfGenerado = new File([blob], `compras_por_dias_${fecha.replace( new RegExp('/','g'), '_')}.pdf`, {type: 'application/pdf' } );
+             const mensaje = await generarReporte({comprasPorDia: datos.comprasPorDia, pdfGenerado});
+             setAlerta(mensaje);
         doc.save(`compras por dias${fecha}`);
         setTimeout(() => {
           setAlerta('');
@@ -259,14 +259,14 @@ const InicioConsultor  = () => {
       // 1 - x 200  /////  2- y
       doc.addImage(maipo, 'PNG', 2, 3,58,0, undefined, false);
       doc.setFontSize(20);
-      doc.text(`Fecha de creacion: ${fecha}`, 110 , 11);
+      doc.text(`Fecha de creacion: ${fecha}`, 200 , 11);
       doc.setFontSize(45);
-      doc.text(`Reporte General`,45, 65)
+      doc.text(`Reporte General`,65, 65)
       doc.setFontSize(20);
       doc.text(`Hecho por: Consultor`,6, 21)
       doc.setFontSize(20);
-      doc.text(`http://www.maipogrande.ml/`,1, 220)
-      doc.rect(50, 50, 170, 20);
+      doc.text(`http://www.maipogrande.ml/`,15, 220)
+      doc.rect(50, 50, 185, 20); 
     
    
       doc.autoTable({
@@ -315,13 +315,13 @@ const InicioConsultor  = () => {
       // console.log(fecha.replace( new RegExp('/','g'), '_'));
       // return;
       // console.log(blob)
-      const blob = doc.output("blob");
-      const pdfGenerado = new File([blob], `reporte_general_${fecha.replace( new RegExp('/','g'), '_')}.pdf`, {type: 'application/pdf' } );
+     //  const blob = doc.output("blob");
+     //  const pdfGenerado = new File([blob], `reporte_general_${fecha.replace( new RegExp('/','g'), '_')}.pdf`, {type: 'application/pdf' } );
       // const pdfGenerado = new File([blob], `${uuidv4()}.pdf`, {type: 'application/pdf' } );
 
       // console.log(pdfGenerado);
-      const mensaje = await generarReporte({...datos, pdfGenerado});
-      setAlerta(mensaje);
+     //  const mensaje = await generarReporte({...datos, pdfGenerado});
+      // setAlerta(mensaje);
       doc.save(`reporte_general_${fecha}`);
       setTimeout(() => {
         setAlerta('');
