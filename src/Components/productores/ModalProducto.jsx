@@ -1,20 +1,16 @@
 import { faClose, faImage } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Form, Formik } from 'formik';
+import * as Yup from 'yup';
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { agregarProducto, listarNombresProductos } from "../../Helpers/getProductores";
 import useAuth from "../../Hooks/useAuth";
 import useConsultas from "../../Hooks/useConsultas";
+import { MySelect } from "../formik/MySelect";
+import { MyTextInput } from "../formik/MyTextInput";
 
 const ModalProducto = ({handleModal, setActiveModal,}) => {
-
-  const [formValues, setFormValues] = useState({
-      nombre: '',
-      cantidad: '',
-      precio_local: '',
-      precio_ext: '',
-      calidad: ''
-  })
 
   const [nombres, setNombres] = useState([]);
     useEffect(()=>{
@@ -25,18 +21,12 @@ const ModalProducto = ({handleModal, setActiveModal,}) => {
       cargarNombres();
     },[])
   const {config} = useAuth();
-    const {  cargarProductosProductor} = useConsultas();
+  const {  cargarProductosProductor} = useConsultas();
 
-  const {nombre, calidad, precio_local, precio_ext, cantidad} = formValues;
   const [alerta, setAlerta] = useState({msg: '', error: false});
   const [selectedFile, setSelectedFile] = useState(null);
   const [imagenInfo, setImagenInfo] = useState(null)
-  //  const [fileInputTitle, setFileInputTitle] = useState("");
-  const handleOnChange = ({target}) =>{
-      setFormValues({...formValues,
-          [target.name]: target.value
-      })
-  }
+
 
   const onChangeInpuFile = (e) => {
     const imagen = e.target.files[0];
@@ -49,36 +39,22 @@ const ModalProducto = ({handleModal, setActiveModal,}) => {
     reader.readAsDataURL(imagen);
 
   }
-  const handleSubmit = async(e) =>{
-      e.preventDefault();
+  const handleSubmit = async(values, resetForm) =>{
 
-      if([nombre, calidad, precio_ext, precio_local, cantidad, ].includes("") || selectedFile === null){
-        setAlerta({msg: 'Por favor llenar todos los campos', error: true});
+      if(selectedFile === null){
+        setAlerta({msg:"Por favor seleccione una imagen", error: true})
         setTimeout(() => {
-          setAlerta({msg: '', error: false});   
-        }, 2000);
-        return
-      };
-
-      if(cantidad > 100000  || precio_ext > 100000 || precio_local > 100000){
-        setAlerta({msg: 'Valores muy alto de Cantidad, Precio Local o Precio Ext', error: true});
-        setTimeout(() => {
-          setAlerta({msg: '', error: false});   
+          setAlerta({msg: '', error: false}); 
         }, 2000);
         return;
       }
-
-
-
-
-
       const formData = new FormData();
       formData.append('image', selectedFile);
-      formData.append('nombre', formValues.nombre.toLowerCase() );
-      formData.append('cantidad', formValues.cantidad);
-      formData.append('precio_local', formValues.precio_local);
-      formData.append('precio_ext', formValues.precio_ext);
-      formData.append('calidad', formValues.calidad);
+      formData.append('nombre', values.nombre.toLowerCase() );
+      formData.append('cantidad', values.cantidad);
+      formData.append('precio_local', values.precio_local);
+      formData.append('precio_ext', values.precio_ext);
+      formData.append('calidad', values.calidad);
 
       // console.log(formData.)
 
@@ -86,7 +62,11 @@ const ModalProducto = ({handleModal, setActiveModal,}) => {
       await agregarProducto(formData, config);
       setAlerta({msg: 'Añadido Correctamente', error: false});
       setTimeout(() => {
-          setActiveModal(false)
+          // setActiveModal(false)
+          setImagenInfo(null);
+          setSelectedFile(null);
+          setAlerta({msg: '', error: false}); 
+          resetForm();
           cargarProductosProductor();
       }, 2000);
     }
@@ -107,7 +87,7 @@ const ModalProducto = ({handleModal, setActiveModal,}) => {
         </button>
 
       <div className="flex flex-col gap-8 items-center mt-12">
-            
+            {/* FOTO */}
               {imagenInfo !== null &&(
                   <img src={imagenInfo} alt="imagen" width={"100"} />)
               }
@@ -119,75 +99,53 @@ const ModalProducto = ({handleModal, setActiveModal,}) => {
 
               <input style={{display: 'none'}} id="file" className='file-input sm:w-auto'  type="file" onChange={onChangeInpuFile} />
           </div>
+            {/* FIN FOTO */}
 
-        <div className="flex flex-col ">
-          <label className="text-left font-semibold">Nombre</label>
-          {/* <input
-            name="nombre"
-            onChange={handleOnChange}
-            className="bg-gray-50 border-1 pl-1 border-gray-500 border rounded-sm"
-            value={nombre}
-          /> */}
-          <select name="nombre" onChange={handleOnChange} className="w-52 h-12" defaultValue={""}>
-              <option  value=""> Seleccione </option>
-              {
-                nombres.length > 0  && nombres.map(({ID, NOMBRE})=>(
-                  <option key={ID} value={NOMBRE}>{NOMBRE}</option>
-                ))
-              }
-          </select>
-        </div>
-        <div className="flex flex-col ">
-          <label className="text-left">Cantidad</label>
-          <input
-            name="cantidad"
-            onChange={handleOnChange}
-            type="number"
-            maxLength={10}
-            className="bg-gray-50 border-1 pl-1 border-gray-500 border rounded-sm"
-            value={cantidad}
-          />
-        </div>
-        <div className="flex flex-col ">
-          <label className="text-left">Precio Local</label>
-          <input
-            name="precio_local"
-            onChange={handleOnChange}
-            type="number"
-            className="bg-gray-50 border-1 pl-1 border-gray-500 border rounded-sm"
-            value={precio_local}
-          />
-        </div>
-        <div className="flex flex-col ">
-          <label className="text-left">Precio exportacion</label>
-          <input
-            onChange={handleOnChange}
-            type="number"
-            name="precio_ext"
-            className="bg-gray-50 border-1 pl-1 border-gray-500 border rounded-sm"
-            value={precio_ext}
-          />
-        </div>
-        <div className="flex flex-col ">
-          <label className="text-left">Calidad</label>
-          {/* <input
-            onChange={handleOnChange}
+            {/* FORMIK */}
+        <Formik 
+            initialValues={{nombre: '', cantidad: 0, precio_local: 0, precio_ext: 0, calidad: ''}}
+            onSubmit={(values,{resetForm}) => handleSubmit(values, resetForm)}
+            validationSchema={
+              Yup.object({
+                nombre: Yup.string().oneOf(nombres.map(({NOMBRE})=>(NOMBRE))).required('Este campo es requerido'),
+                cantidad: Yup.number("Debe ser numeros").min(1,"Debe ser mayor a cero").max(100000,"El valor debe ser menos de 100.000" ).required("Este campo es requerido"),
+                precio_local: Yup.number("Debe ser numeros").min(1,"Debe ser mayor a cero").max(100000,"El valor debe ser menos de 100.000" ).required("Este campo es requerido"),
+                precio_ext: Yup.number("Debe ser numeros").min(1,"Debe ser mayor a cero").max(100000,"El valor debe ser menos de 100.000" ).required("Este campo es requerido"),
+                calidad: Yup.string().oneOf(["alta","media","baja"]).required("Este campo es requerido")
 
-            name="calidad"
-            className="bg-gray-50 border-1 pl-1 border-gray-500 border rounded-sm"
-            value={calidad}
-          /> */}
-          <select className="mr-12" name="calidad" id="calidad" onChange={handleOnChange}>
-            <option value="">---Seleccione---</option>
-            <option value="baja">Baja</option>
-            <option value="media">Media</option>
-            <option value="alta">Alta</option>
-          </select>
-        </div>
-        <form className="mt-14" onSubmit={handleSubmit} action="">
-            <button className=' bg-blue-500 text-white w-auto sm:px-12 sm:py-4 px-4 py-2 font-semibold'>Agregar Producto</button>
+              })
+            }
+          >
+          {()=>(
+            <Form>
+              <MySelect name="nombre" label="Nombre">
+                  <option  value=""> Seleccione </option>
+                  {
+                    nombres.length > 0  && nombres.map(({ID, NOMBRE})=>(
+                      <option key={ID} value={NOMBRE}>{NOMBRE}</option>
+                    ))
+                  }
+              </MySelect>
+              <div className="flex flex-col">
+                <MyTextInput name="cantidad" label="Cantidad"  type="number" />
+              </div>
+              <div className="flex flex-col">
+                <MyTextInput name="precio_local" label="Precio local" type="number"/>
+              </div>
+              <div className="flex flex-col">
+                <MyTextInput name="precio_ext" label="Precio Externo" type="number"/>
+              </div>
 
-        </form>
+              <MySelect name="calidad" label="Calidad">
+                <option value="">---Seleccione---</option>
+                <option value="baja">Baja</option>
+                <option value="media">Media</option>
+                <option value="alta">Alta</option>
+              </MySelect>
+              <button className=' bg-blue-500 text-white w-auto sm:px-12 sm:py-4 px-4 py-2 font-semibold mt-12'>Agregar Producto</button>
+            </Form>
+          )}
+        </Formik>
       </div>
     </div>
     </>
