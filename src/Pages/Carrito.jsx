@@ -98,16 +98,16 @@ const Carrito = () => {
           }, 2000);
           return
         }
-       setCargando(true)
+        setCargando(true)
 
-        await enviaPedidoExt(carrito, formValues.direccion, formValues.refigeracion ,config);
+        await enviaPedidoExt(carrito, formValues ,config);
         setCarrito([]);
         setCargando(false)
         return;
       }
       setCargando(true)
 
-      const id_referencia = await enviaPedidoLocal(carrito, formValues.id_transportista ,formValues.direccion, config, formValues.precioT);
+      const id_referencia = await enviaPedidoLocal(carrito, formValues.id_transportista ,formValues.direccion, formValues.ciudad, config, formValues.precioT);
       const respuesta =  await pagarPedido(id_referencia , config, total + (formValues.precioT === undefined ? 0 : formValues.precioT));
       const { token, url} = respuesta;
 

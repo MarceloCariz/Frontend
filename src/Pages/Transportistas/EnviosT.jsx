@@ -29,7 +29,7 @@ const EnviosT = () => {
             ))
             
         : !cargando && 'Aún no tiene envíos'}
-         </div>
+        </div>
     </div>
   )
 }

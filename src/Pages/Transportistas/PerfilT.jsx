@@ -11,7 +11,6 @@ const PerfilT = () => {
     const {auth, config} = useAuth();
 
     const {cargarDatosTransportistas, contratoT:contrato, enviosCompletadosT:envios, cargando} = useConsultas();
-    console.log(contrato)
 
     useEffect(() => {
         cargarDatosTransportistas();

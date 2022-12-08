@@ -13,7 +13,7 @@ const Inicio = () => {
     cargarProductosCliente();
   },[])
   return (
-    <div className="sm:pt-8 container mx-auto">
+    <div className="sm:pt-8 container mx-auto sm:pb-0 pb-32">
         <h2 className='text-left text-3xl font-semibold ml-4 sm:ml-4 2xl:ml-0'>Nuestros Productos</h2>
         <div className="w-full px-2 border border-1 lg:hidden mt-2">
               <Buscador />

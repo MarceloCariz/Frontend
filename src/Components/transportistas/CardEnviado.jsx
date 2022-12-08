@@ -49,8 +49,11 @@ const CardEnviado = ({ ele, config }) => {
           )}
         </div>
       </div>
-      <div className="mt-4 font-bold">
+      <div className="mt-4 font-bold flex flex-col items-center">
         <p>{ele[0].FECHA_COMPRA}</p>
+        <p>Dirección: {ele[0].DIRECCION}</p>
+        <p>Ciudad: {ele[0].CIUDAD}</p>
+        <p>País: {ele[0].PAIS ? ele[0].PAIS : 'Chile' }</p>
       </div>
       <div className="sm:flex gap-4 mt-4  sm:ml-2 animate__animated animate__fadeIn ">
         <table className=" table-fixed sm:w-1/2  ">
