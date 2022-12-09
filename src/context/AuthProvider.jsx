@@ -48,7 +48,7 @@ const AuthProvider = ({children}) => {
 
                 }
 
-                if(pathname !== '/' && auth.ID_ROL === 5 && local.length > 0){
+                if(pathname !== '/' && auth.ID_ROL === 5 && local && local.length > 0){
                     setCarrito(local);
                     return
                 }

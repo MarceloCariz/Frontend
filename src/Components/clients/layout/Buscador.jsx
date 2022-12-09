@@ -3,14 +3,21 @@
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useState } from 'react'
+import { useEffect } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import useConsultas from '../../../Hooks/useConsultas'
 
 export const Buscador = () => {
     const [terminoBusqueda, setTerminoBusqueda] = useState('');
-    const {productos,setProductos,productosBackup} = useConsultas();
+    const {productos,setProductos,productosBackup,cargarProductosCliente} = useConsultas();
     const {pathname} = useLocation();
     const navigate = useNavigate();
+
+    useEffect(() => {
+        cargarProductosCliente();
+        // console.log('s')
+    }, [])
+    
 
     const onChange = ({target}) =>{
         // filtrar(target.value);

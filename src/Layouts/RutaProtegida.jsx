@@ -4,7 +4,6 @@ import ClienteLayout from './ClienteLayout';
 const RutaProtegida = () => {
 
   const {auth, cargando} = useAuth();
-
   if(cargando) return ''
   return (
     <>
