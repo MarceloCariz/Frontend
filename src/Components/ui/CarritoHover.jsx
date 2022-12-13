@@ -31,7 +31,7 @@ export const CarritoHover = ({carrito,handleHoverCarrito}) => {
           {auth.TIPO_CLIENTE === "externo" ? "Total aprox:" : "Total"} {carrito.reduce((total, i)=>(i.PRECIO * i.unidad) + total, 0 ).toLocaleString("es-CL", {style: "currency", currency:"CLP"})}</p>
     </div>
     </>
-    ): <p className="px-2">Carrito Vacio</p>}
+    ): <p className="px-2">Carrito Vacío</p>}
 </div>
 
   )

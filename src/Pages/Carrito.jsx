@@ -203,7 +203,7 @@ const Carrito = () => {
             <p className="font-medium">País: <span className="capitalize font-normal">{formValues.pais}</span></p>
           )}
       </div>
-      <Link to="/inicio/perfil"  state={location.pathname} className='text-white bg-blue-500 px-4 py-2 mt-2 text-sm'>Actualizar Informacion</Link>
+      <Link to="/inicio/perfil"  state={location.pathname} className='text-white bg-blue-500 px-4 py-2 mt-2 text-sm'>Actualizar Información</Link>
     </div>
     {/* SELECCIONAR TRANSPORTISTA */}
     { alerta.estado && <p className="bg-red-500 px-4 py-2 text-white mb-4">{alerta.mensaje}</p>}

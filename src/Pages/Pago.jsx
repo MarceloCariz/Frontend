@@ -49,15 +49,15 @@ const Pago = () => {
   }
   return (
     <div className='flex justify-center text-center items-center flex-col gap-8 container mx-auto pt-12'>
-          <div className='bg-white px-4 py-4 w-1/4 flex justify-center rounded-xl shadow-xl'>
+          <div className='bg-white px-4 py-4 w-1/2 lg:w-1/4 flex justify-center rounded-xl shadow-xl'>
           {voucherF.status ?
               <div className='text-left flex flex-col gap-10 background-attachment: fixed; 	background-size: contain;'>
                 <h2 className='text-xl font-semibold'>Comprobante de pago</h2>
                 <p>{vci}</p>
                 <p>Estado: {status === 'INITIALIZED' || status === 'FAILED' ? 'ANULADO' : status}</p>
                 <p>Monto Pagado: {amount}</p>
-                <p>Numero de sesion: {session_id}</p>
-                <p>Fecha de transaccion: {new Date(transaction_date).toLocaleDateString()}</p>
+                <p>Numero de sesión: {session_id}</p>
+                <p>Fecha de transacción: {new Date(transaction_date).toLocaleDateString()}</p>
                 {status === 'INITIALIZED' || status === 'FAILED'  ?(
                   <div className='text-center bg-red-500 px-4 py-2 text-white'>
                     <p>Pedido Cancelado</p>

@@ -15,7 +15,7 @@ const PerfilP = () => {
     // date.toLocaleDateString('es-MX', {weekday:'long')
 
   return (
-    <div className='flex justify-center  items-center flex-col gap-10'>
+    <div className='flex justify-center  items-center flex-col gap-10 pb-12'>
         {cargando ? <Spinnner/> : (contrato) &&
         <>
                 <Ganancias ganancia={ganancia} envios={envios} sueldo={SUELDO} cargando={cargando} rol="productor"/>

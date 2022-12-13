@@ -80,7 +80,7 @@ export const Formulario = ({auth, config}) => {
                         <div className='grid grif-cols-2 gap-6'>
                             <MyTextInput label="Carga" type="number"  name="CARGA" />
                         </div>
-                        <label htmlFor="" className='font-semibold text-lg'>Tipo de refrigeracion</label>
+                        <label htmlFor="" className='font-semibold text-lg'>Tipo de refrigeración</label>
                         <div className='flex gap-12'>
                             <MyRadioButton name="REFRIGERACION" checked={values.REFRIGERACION === "Thermal-Master"} label={"Thermal-Master"} value="Thermal-Master"/>
                             <MyRadioButton name="REFRIGERACION" checked={values.REFRIGERACION === "ACT"} label={"ACT"} value="ACT"/>

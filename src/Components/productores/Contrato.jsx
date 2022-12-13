@@ -26,12 +26,12 @@ export const Contrato = ({contrato}) => {
         <div key={ID_CONTRATO}>
             <p>Número de contrato: #{ID_CONTRATO}</p>
             <p>Fecha Inicio : { new Date(FECHA_INICIO).toLocaleDateString('es-MX', {year: 'numeric', month: 'long', day: 'numeric'}) }</p>
-            <p>Fecha Termino : { new Date(FECHA_TERMINO).toLocaleDateString('es-MX', {year: 'numeric', month: 'long', day: 'numeric'}) }</p>
+            <p>Fecha Término : { new Date(FECHA_TERMINO).toLocaleDateString('es-MX', {year: 'numeric', month: 'long', day: 'numeric'}) }</p>
             <p>Estado: {ESTADO === 'TRUE' ? 'ACTIVO' : 'INACTIVO'}</p>
             <div className='flex justify-center mt-2'>
                 <button disabled={ESTADO  === 'TRUE'  ? true : false } onClick={handleSolicitud}
                     className={ESTADO === 'FALSE' ? ' px-4 py-2 bg-green-500 text-white' : 'px-4 py-2 bg-gray-500/20 text-gray-500'}>
-                    {RENOVACION === 'true' ? 'Renovacion ya solicitada' : 'Solicitar Renovacion'}
+                    {RENOVACION === 'true' ? 'Renovación ya solicitada' : 'Solicitar Renovación'}
                 </button>
             </div>
 
